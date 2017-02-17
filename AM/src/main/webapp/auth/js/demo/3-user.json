@@ -1,0 +1,23 @@
+
+[
+    {
+      	"ORG_UUID":"000001",
+		"USER_ID":"05520212",
+		"USER_NAME":"Tony",
+		"ROLES":"ftpadmin",   
+		"USER_PHONE":"18701350431",
+		"USER_EMAIL":"1812421@qq.com" 
+ 
+    } ,
+     {
+      	"ORG_UUID":"000002",
+		"USER_ID":"05520213",
+		"USER_NAME":"Killer",
+		"ROLES":"rpmadmin",   
+		"USER_PHONE":"12601354431",
+		"USER_EMAIL":"13442451@qq.com" 
+ 
+    } 
+    
+    
+]

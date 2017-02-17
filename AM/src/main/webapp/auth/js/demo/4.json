@@ -1,0 +1,13 @@
+
+[
+    {	
+    	"sysName":"FTP",
+        "roleId": "FTP_ADMIN",
+        "name": "FTP系统配置人员"
+    },
+    {	
+    	"sysName":"RPM",
+        "roleId": "RPM_ADMIN",
+        "name": "RPM系统配置人员"
+    }
+]

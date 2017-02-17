@@ -1,0 +1,38 @@
+
+[
+    {
+        "ORG_UNIT_ID": "00000000",
+        "ORG_UNIT_NAME": "总行",
+        "ORG_UP_UUID": "-1",
+        "IS_ENABLE": "Y"
+        
+    },
+    {
+        "ORG_UNIT_ID": "10000000",
+        "ORG_UNIT_NAME": "江北分行",
+        "ORG_UP_UUID": "00000000",
+        "IS_ENABLE": "Y"
+        
+    },
+    {
+        "ORG_UNIT_ID": "10100000",
+        "ORG_UNIT_NAME": "鲤鱼池支行",
+        "ORG_UP_UUID": "10000000",
+        "IS_ENABLE": "Y"
+        
+    },
+    {
+        "ORG_UNIT_ID": "10200000",
+        "ORG_UNIT_NAME": "观音桥支行",
+        "ORG_UP_UUID": "10000000",
+        "IS_ENABLE": "Y"
+        
+    },
+    {
+        "ORG_UNIT_ID": "10300000",
+        "ORG_UNIT_NAME": "黄泥磅支行",
+        "ORG_UP_UUID": "10000000",
+        "IS_ENABLE": "Y"
+        
+    }
+]

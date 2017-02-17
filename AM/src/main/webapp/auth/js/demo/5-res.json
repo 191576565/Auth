@@ -1,0 +1,81 @@
+
+[
+    {
+      		"RES_ID": "01"               ,
+			"RES_NAME": "基础配置"        ,
+			"RES_UP_UUID:": "#"          ,
+			"RES_URL": "XXX/BIN"         ,
+			"RES_TYPE": "主菜单"         ,
+			"RES_CLASS": "panel-body"    ,
+			"RES_COLOR": "red"           ,
+			"RES_ICON": "xxx/x.icon"     ,
+			"SORT_ID": "1"                
+    },   
+     {
+      		"RES_ID": "0101"               ,
+			"RES_NAME": "系统管理"        ,
+			"RES_UP_UUID:": "#"          ,
+			"RES_URL": "XXX/sys"         ,
+			"RES_TYPE": "子菜单"         ,
+			"RES_CLASS": "panel-body"    ,
+			"RES_COLOR": "red"           ,
+			"RES_ICON": "xxx/x.icon"     ,
+			"SORT_ID": "2"                
+    },   
+     {
+      		"RES_ID": "0102"               ,
+			"RES_NAME": "机构管理"        ,
+			"RES_UP_UUID:": "#"          ,
+			"RES_URL": "XXX/org"         ,
+			"RES_TYPE": "子菜单"         ,
+			"RES_CLASS": "panel-body"    ,
+			"RES_COLOR": "red"           ,
+			"RES_ICON": "xxx/x.icon"     ,
+			"SORT_ID": "3"                
+    },
+    {
+      		"RES_ID": "02"               ,
+			"RES_NAME": "用户权限"        ,
+			"RES_UP_UUID:": "#"          ,
+			"RES_URL": "XXX/pri"         ,
+			"RES_TYPE": "主菜单"         ,
+			"RES_CLASS": "panel-body"    ,
+			"RES_COLOR": "red"           ,
+			"RES_ICON": "xxx/x.icon"     ,
+			"SORT_ID": "4"                
+    },   
+     {
+      		"RES_ID": "0201"               ,
+			"RES_NAME": "用户管理"        ,
+			"RES_UP_UUID:": "#"          ,
+			"RES_URL": "XXX/user"         ,
+			"RES_TYPE": "子菜单"         ,
+			"RES_CLASS": "panel-body"    ,
+			"RES_COLOR": "red"           ,
+			"RES_ICON": "xxx/x.icon"     ,
+			"SORT_ID": "5"                
+    },   
+     {
+      		"RES_ID": "0202"              ,
+			"RES_NAME": "角色管理"        ,
+			"RES_UP_UUID:": "#"          ,
+			"RES_URL": "XXX/role"         ,
+			"RES_TYPE": "子菜单"         ,
+			"RES_CLASS": "panel-body"    ,
+			"RES_COLOR": "red"           ,
+			"RES_ICON": "xxx/x.icon"     ,
+			"SORT_ID": "6"                
+    },   
+     {
+      		"RES_ID": "0203"               ,
+			"RES_NAME": "资源管理"        ,
+			"RES_UP_UUID:": "#"          ,
+			"RES_URL": "XXX/role"         ,
+			"RES_TYPE": "子菜单"         ,
+			"RES_CLASS": "panel-body"    ,
+			"RES_COLOR": "red"           ,
+			"RES_ICON": "xxx/x.icon"     ,
+			"SORT_ID": "7"                
+    }
+    
+]

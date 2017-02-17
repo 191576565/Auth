@@ -1,0 +1,17 @@
+
+[
+    {
+        "id": "001",
+        "sys_name":"FTP",
+        "gp_code": "FTP1",
+        "gp_name": "FTP数据权限组1",
+        "bl_user":"U001,U002,U003,U004,U005,U006,U007"
+    },
+    {
+        "id": "002",
+        "sys_name":"RPM",
+        "gp_code": "RPM1",
+        "gp_name": "RPM数据权限组1",
+        "bl_user":"U001,U002,U003,U004"
+    }
+]
