@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 用户sql -->
+<sql-statement namespace="tianjian.oplog">
+
+	<sql id="all">
+		<![CDATA[ 
+        	select * from sys_log 
+    	]]>
+	</sql>
+	<sql id="tcheck">
+	<![CDATA[ 
+			<% if(db_type == "mysql" || db_type == "postgresql"){ %>        	
+        		select * from pt_operator order by ids asc limit ? offset ? 
+        	<% } %>
+	]]>
+	</sql>
+</sql-statement>

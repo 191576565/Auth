@@ -38,75 +38,74 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configConstant(Constants me) {
 		// TODO Auto-generated method stub
-		//me.setBaseViewPath("/auth");
+		// me.setBaseViewPath("/auth");
 		PropKit.use("init.properties");
 		me.setViewType(ViewType.JSP);
 		PropKit.getBoolean("config.devMode");
 		me.setDevMode(PropKit.getBoolean("config.devMode"));
-		
+
 	}
 
 	@Override
 	public void configRoute(Routes me) {
 		// TODO Auto-generated method stub
-		//me.add("/log", OpLogController.class);
+		// me.add("/log", OpLogController.class);
+		// me.setBaseViewPath("/WEB-INF/auth");
+
 		me.add(new LoginRoutes());
+		// me.add(new roleroo());
 	}
 
 	@Override
 	public void configPlugin(Plugins me) {
-		
+		// 鑾峰彇鏁版嵁搴撹繛鎺ヤ俊鎭�
 		DataBase db = ToolDataBase.getDbInfo();
 		String driverClass = db.getDriverClass();
 		String jdbcUrl = db.getJdbcUrl();
 		String username = db.getUserName();
 		String password = db.getPassWord();
 
-		
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		System.out.println("db_type:"+db_type);
-		C3p0Plugin c3p0Plugin = new C3p0Plugin(jdbcUrl, username, password,driverClass);
-		
+		System.out.println("db_type:" + db_type);
+		C3p0Plugin c3p0Plugin = new C3p0Plugin(jdbcUrl, username, password, driverClass);
 
-		//ORM 
+		// ORM
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		arp.setShowSql(true);
-		
-		arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 大小写不敏感
 
-		if(db_type.equals(ConstantInit.db_type_postgresql)){
+		arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 澶у皬鍐欎笉鏁忔劅
+		// 鏍规嵁鏁版嵁搴撶被鍨嬮厤缃柟瑷�
+		if (db_type.equals(ConstantInit.db_type_postgresql)) {
 			arp.setDialect(new PostgreSqlDialect());
-			
-		}else if(db_type.equals(ConstantInit.db_type_mysql)){
+
+		} else if (db_type.equals(ConstantInit.db_type_mysql)) {
 			System.out.println("mysql init");
 			arp.setDialect(new MysqlDialect());
-			
-		}else if(db_type.equals(ConstantInit.db_type_oracle)){
+
+		} else if (db_type.equals(ConstantInit.db_type_oracle)) {
 			arp.setDialect(new OracleDialect());
-			
-		}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
+
+		} else if (db_type.equals(ConstantInit.db_type_sqlserver)) {
 			arp.setDialect(new SqlServerDialect());
-			
-		}else if(db_type.equals(ConstantInit.db_type_db2)){
+
+		} else if (db_type.equals(ConstantInit.db_type_db2)) {
 			arp.setDialect(new AnsiSqlDialect());
 		}
-		
-		
-		arp.addMapping("SYS_SEC_USER", Login.class);
-		//arp.addMapping("SYS_OP_LOGS",OpLog.class);
+
+		// 娣诲姞琛ㄦ槧灏�
+		arp.addMapping("SYS_LOG", OpLog.class);
 		me.add(c3p0Plugin);
-		
+
 		me.add(arp);
-		// 配置cache
+		// 閰嶇疆encache
 		System.out.println(ToolCache.getCacheType());
 		if (ToolCache.getCacheType().equals(ConstantCache.cache_type_ehcache)) {
 			me.add(new EhCachePlugin());
 		}
-		// 配置sql解析
+		// 閰嶇疆sql瑙ｆ瀽
 		me.add(new SqlXmlPlugin());
 		// -----
-		
-		
+
 	}
 
 	@Override
@@ -117,8 +116,8 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configHandler(Handlers me) {
 		// TODO Auto-generated method stub
-		//me.add(new ContextPathHandler("ctx"));   
-		//me.add(new ContextPathHandler("cxty"));
+		// me.add(new ContextPathHandler("ctx"));
+		//me.add(new ContextPathHandler("contextPath"));
 	}
 
 	public static void main(String[] args) {
@@ -128,9 +127,7 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configEngine(Engine me) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	
+	}
 
 }

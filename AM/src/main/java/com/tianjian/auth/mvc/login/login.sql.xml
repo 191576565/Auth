@@ -5,7 +5,7 @@
 
 	<sql id="ucheck">
 		<![CDATA[ 
-        	select * from SYS_SEC_USER where user_id=?
+        	select user_pwd from SYS_USER_INFO where user_id=?
     	]]>
 	</sql>
 	<sql id="tcheck">

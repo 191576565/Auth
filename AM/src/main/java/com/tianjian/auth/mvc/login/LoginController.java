@@ -9,7 +9,10 @@ public class LoginController extends Controller {
 		log.info("welcome to login");
 		
 		//renderJsp("auth/login.html");
+		///render("WEB-INF/auth/login_v2.html");
+		//render("AAA.jsp");
 		render("login_v2.html");
+
 	}
 	public void validLogin() {
 		

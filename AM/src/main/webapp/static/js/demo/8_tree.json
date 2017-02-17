@@ -1,0 +1,76 @@
+[
+    {
+    	"text": "天健总行",
+    	"icon": "glyphicon glyphicon-home",
+        "nodes": [
+        	{
+	        	"text": "用户1",
+	        	"icon": "glyphicon glyphicon-unchecked"
+	        },
+	        {
+	        	"text": "用户2",
+	        	"icon": "glyphicon glyphicon-unchecked"
+	        },
+	        {
+	        	"text": "渝中分行",
+	        	"icon": "glyphicon glyphicon-calendar",
+	        	"nodes": [
+	        		{
+	        			"text": "用户1",
+	        			"icon": "glyphicon glyphicon-unchecked"
+	        		},
+	        		{
+	        			"text": "用户2",
+	        			"icon": "glyphicon glyphicon-unchecked"
+	        		},
+		        	{
+		        		"text": "大溪沟支行",
+		        		"icon": "glyphicon glyphicon-equalizer",
+		        		"nodes": [
+		        			{
+		        				"text": "用户1",
+		        				"icon": "glyphicon glyphicon-unchecked"
+		        			},
+		        			{
+		        				"text": "用户2",
+		        				"icon": "glyphicon glyphicon-unchecked"
+		        			}
+	        			]
+		        	},
+		        	{
+		        		"text": "解放碑支行",
+		        		"icon": "glyphicon glyphicon-equalizer"
+		        	}
+	        	]
+	        },
+	        {
+	        	"text": "渝北分行",
+	        	"icon": "glyphicon glyphicon-calendar",
+	        	"nodes": [
+	        		{
+	        			"text": "用户1",
+	        			"icon": "glyphicon glyphicon-unchecked"
+	        		},
+	        		{
+	        			"text": "用户2",
+	        			"icon": "glyphicon glyphicon-unchecked"
+	        		}
+	        	]
+	        },
+	        {
+	        	"text": "江北分行",
+	        	"icon": "glyphicon glyphicon-calendar",
+	        	"nodes": [
+	        		{
+	        			"text": "用户1",
+	        			"icon": "glyphicon glyphicon-unchecked"
+	        		},
+	        		{
+	        			"text": "用户2",
+	        			"icon": "glyphicon glyphicon-unchecked"
+	        		}
+	        	]
+	        }
+        ]
+    }
+]
