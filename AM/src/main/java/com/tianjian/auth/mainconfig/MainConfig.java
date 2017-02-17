@@ -51,14 +51,14 @@ public class MainConfig extends JFinalConfig {
 		// TODO Auto-generated method stub
 		// me.add("/log", OpLogController.class);
 		// me.setBaseViewPath("/WEB-INF/auth");
-
+//添加路由
 		me.add(new LoginRoutes());
 		// me.add(new roleroo());
 	}
 
 	@Override
 	public void configPlugin(Plugins me) {
-		// 鑾峰彇鏁版嵁搴撹繛鎺ヤ俊鎭�
+		//获取数据库连接信息
 		DataBase db = ToolDataBase.getDbInfo();
 		String driverClass = db.getDriverClass();
 		String jdbcUrl = db.getJdbcUrl();
@@ -74,7 +74,7 @@ public class MainConfig extends JFinalConfig {
 		arp.setShowSql(true);
 
 		arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 澶у皬鍐欎笉鏁忔劅
-		// 鏍规嵁鏁版嵁搴撶被鍨嬮厤缃柟瑷�
+		// 数据库类型
 		if (db_type.equals(ConstantInit.db_type_postgresql)) {
 			arp.setDialect(new PostgreSqlDialect());
 
@@ -92,17 +92,17 @@ public class MainConfig extends JFinalConfig {
 			arp.setDialect(new AnsiSqlDialect());
 		}
 
-		// 娣诲姞琛ㄦ槧灏�
+		// 添加表映射
 		arp.addMapping("SYS_LOG", OpLog.class);
 		me.add(c3p0Plugin);
 
 		me.add(arp);
-		// 閰嶇疆encache
+		// 启动encache
 		System.out.println(ToolCache.getCacheType());
 		if (ToolCache.getCacheType().equals(ConstantCache.cache_type_ehcache)) {
 			me.add(new EhCachePlugin());
 		}
-		// 閰嶇疆sql瑙ｆ瀽
+		//配置sql解析
 		me.add(new SqlXmlPlugin());
 		// -----
 
