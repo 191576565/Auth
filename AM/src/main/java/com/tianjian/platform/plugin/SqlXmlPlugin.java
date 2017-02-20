@@ -45,7 +45,7 @@ public class SqlXmlPlugin implements IPlugin {
 	public SqlXmlPlugin() {
 	}
 
-	@Override
+	//@Override
 	public boolean start() {
 		 initByPath(true); // 根据绝对路径查找，使用普通构建项目
 
@@ -54,7 +54,7 @@ public class SqlXmlPlugin implements IPlugin {
 		return true;
 	}
 
-	@Override
+	//@Override
 	public boolean stop() {
 		return true;
 	}

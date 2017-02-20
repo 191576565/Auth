@@ -21,8 +21,10 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.tianjian.auth.mvc.handler.GlobalHandler;
 import com.tianjian.auth.mvc.login.Login;
 import com.tianjian.auth.mvc.login.LoginController;
+import com.tianjian.auth.mvc.model.User;
 import com.tianjian.auth.mvc.oplog.OpLog;
 import com.tianjian.auth.mvc.oplog.OpLogController;
 import com.tianjian.platform.constant.ConstantCache;
@@ -69,7 +71,7 @@ public class MainConfig extends JFinalConfig {
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		arp.setShowSql(true);
 
-		arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 澶у皬鍐欎笉鏁忔劅
+		arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));//
 		// 数据库类型
 		if (db_type.equals(ConstantInit.db_type_postgresql)) {
 			arp.setDialect(new PostgreSqlDialect());
@@ -90,6 +92,7 @@ public class MainConfig extends JFinalConfig {
 
 		// 添加表映射
 		arp.addMapping("SYS_LOG", OpLog.class);
+		arp.addMapping("SYS_USER_INFO", User.class);
 		me.add(c3p0Plugin);
 
 		me.add(arp);
@@ -114,10 +117,11 @@ public class MainConfig extends JFinalConfig {
 		// TODO Auto-generated method stub
 		// me.add(new ContextPathHandler("ctx"));
 		// me.add(new ContextPathHandler("contextPath"));
+		me.add(new GlobalHandler()); 
 	}
 
 	public static void main(String[] args) {
-		JFinal.start("WebRoot", 80, "/", 5);
+		JFinal.start("WebRoot", 8080, "/", 5);
 	}
 
 	@Override

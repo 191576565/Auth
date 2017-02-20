@@ -55,6 +55,8 @@ public abstract class ToolSqlXml {
 		}
 		return false;
 	}
+	
+	
 
 	/**
 	 * 获取SQL，固定SQL
