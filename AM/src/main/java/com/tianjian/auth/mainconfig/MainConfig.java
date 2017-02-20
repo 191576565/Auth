@@ -39,7 +39,7 @@ public class MainConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		// TODO Auto-generated method stub
 		// me.setBaseViewPath("/auth");
-		PropKit.use("init.properties");
+		PropKit.use("authconfig.properties");
 		me.setViewType(ViewType.JSP);
 		PropKit.getBoolean("config.devMode");
 		me.setDevMode(PropKit.getBoolean("config.devMode"));
