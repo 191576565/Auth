@@ -72,7 +72,7 @@
                         	<span class="nav-label"></span></a>
                     </li>   
                     <li>
-                        <a class="J_menuItem" href="dpgMgmt.html"><i class="fa fa-desktop"></i> 
+                        <a class="J_menuItem" href="dpgMgmt"><i class="fa fa-desktop"></i> 
                         	<span class="nav-label">数据权限组管理</span>
                         	<span class="nav-label"></span></a>
                     </li>

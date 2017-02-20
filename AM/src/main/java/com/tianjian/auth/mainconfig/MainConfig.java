@@ -29,6 +29,7 @@ import com.tianjian.platform.constant.ConstantCache;
 import com.tianjian.platform.constant.ConstantInit;
 import com.tianjian.platform.dto.DataBase;
 import com.tianjian.platform.plugin.SqlXmlPlugin;
+import com.tianjian.platform.routes.DpgMgmtRoutes;
 import com.tianjian.platform.routes.LoginRoutes;
 import com.tianjian.platform.routes.ResMgmtRoutes;
 import com.tianjian.platform.routes.RolMgmtRoutes;
@@ -58,6 +59,7 @@ public class MainConfig extends JFinalConfig {
 		me.add(new UsrMgmtRoutes());
 		me.add(new RolMgmtRoutes());
 		me.add(new ResMgmtRoutes());
+		me.add(new DpgMgmtRoutes());
 	}
 
 	@Override
