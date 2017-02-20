@@ -12,7 +12,7 @@ public class LoginService {
 
 	public boolean validUser(String username, String password) {
 		return true;
-/*
+/*              test
 		String sql = ToolGetSql.getSqlByDbtype("tianjian.login.ucheck");
 
 		List<Record> loginuser = Db.find(sql, username);
