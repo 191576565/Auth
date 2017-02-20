@@ -38,10 +38,9 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configConstant(Constants me) {
 		// TODO Auto-generated method stub
-		// me.setBaseViewPath("/auth");
 		PropKit.use("authconfig.properties");
 		me.setViewType(ViewType.JSP);
-		PropKit.getBoolean("config.devMode");
+		//设置开发模式
 		me.setDevMode(PropKit.getBoolean("config.devMode"));
 
 	}
@@ -49,16 +48,13 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configRoute(Routes me) {
 		// TODO Auto-generated method stub
-		// me.add("/log", OpLogController.class);
-		// me.setBaseViewPath("/WEB-INF/auth");
-//添加路由
+		// 添加路由
 		me.add(new LoginRoutes());
-		// me.add(new roleroo());
 	}
 
 	@Override
 	public void configPlugin(Plugins me) {
-		//获取数据库连接信息
+		// 获取数据库连接信息
 		DataBase db = ToolDataBase.getDbInfo();
 		String driverClass = db.getDriverClass();
 		String jdbcUrl = db.getJdbcUrl();
@@ -102,7 +98,7 @@ public class MainConfig extends JFinalConfig {
 		if (ToolCache.getCacheType().equals(ConstantCache.cache_type_ehcache)) {
 			me.add(new EhCachePlugin());
 		}
-		//配置sql解析
+		// 配置sql解析
 		me.add(new SqlXmlPlugin());
 		// -----
 
@@ -117,7 +113,7 @@ public class MainConfig extends JFinalConfig {
 	public void configHandler(Handlers me) {
 		// TODO Auto-generated method stub
 		// me.add(new ContextPathHandler("ctx"));
-		//me.add(new ContextPathHandler("contextPath"));
+		// me.add(new ContextPathHandler("contextPath"));
 	}
 
 	public static void main(String[] args) {

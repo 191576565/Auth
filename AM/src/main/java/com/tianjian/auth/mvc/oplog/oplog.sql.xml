@@ -7,11 +7,25 @@
         	select * from sys_log 
     	]]>
 	</sql>
-	<sql id="tcheck">
+	<sql id="search">
 	<![CDATA[ 
-			<% if(db_type == "mysql" || db_type == "postgresql"){ %>        	
-        		select * from pt_operator order by ids asc limit ? offset ? 
-        	<% } %>
+		select * from sys_log 
+		where 1=1
+		<% if(!isEmpty(user_uuid)){ %>
+		 and user_uuid like #'%$user_uuid$%'#
+		<% } %>
+		
+		<% if(!isEmpty(op_type)){ %>
+		 and op_type like #'%$op_type$%'#
+		<% } %>	
+		
+		<% if(!isEmpty(startdate_start)){ %>
+			and s.startdate >= to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:ss') 
+		<% } %>
+			
+		<% if(!isEmpty(startdate_end)){ %>
+			and s.startdate <= to_timestamp(#'$startdate_end$'#, 'YYYY-MM-DD HH24:MI:ss')
+		<% } %>
 	]]>
 	</sql>
 </sql-statement>
