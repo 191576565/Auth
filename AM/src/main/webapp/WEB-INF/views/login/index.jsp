@@ -62,7 +62,7 @@
                         	<span class="nav-label"></span></a>                       
                     </li>
                     <li>
-                        <a class="J_menuItem" href="rolMgmt.html"><i class="fa fa-desktop"></i> 
+                        <a class="J_menuItem" href="rolMgmt"><i class="fa fa-desktop"></i> 
                         	<span class="nav-label">角色管理</span>
                         	<span class="nav-label"></span></a>
                     </li>
