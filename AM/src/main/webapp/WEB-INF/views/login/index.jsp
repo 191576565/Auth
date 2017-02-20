@@ -56,7 +56,7 @@
                         <span class="ng-scope">用户权限</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="usrMgmt.html">
+                        <a class="J_menuItem" href="usrMgmt">
                         	<i class="fa fa-desktop"></i> 
                         	<span class="nav-label">用户管理 </span>
                         	<span class="nav-label"></span></a>                       

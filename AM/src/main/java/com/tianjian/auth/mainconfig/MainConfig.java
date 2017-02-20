@@ -31,6 +31,7 @@ import com.tianjian.platform.dto.DataBase;
 import com.tianjian.platform.plugin.SqlXmlPlugin;
 import com.tianjian.platform.routes.LoginRoutes;
 import com.tianjian.platform.routes.SysMgmtRoutes;
+import com.tianjian.platform.routes.UsrMgmtRoutes;
 import com.tianjian.platform.tools.ToolCache;
 import com.tianjian.platform.tools.ToolDataBase;
 
@@ -52,6 +53,7 @@ public class MainConfig extends JFinalConfig {
 		// 添加路由
 		me.add(new LoginRoutes());
 		me.add(new SysMgmtRoutes());
+		me.add(new UsrMgmtRoutes());
 	}
 
 	@Override
