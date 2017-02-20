@@ -112,7 +112,7 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configHandler(Handlers me) {
 		// TODO Auto-generated method stub
-		// me.add(new ContextPathHandler("ctx"));
+		 me.add(new ContextPathHandler("ctxPath"));
 		// me.add(new ContextPathHandler("contextPath"));
 	}
 

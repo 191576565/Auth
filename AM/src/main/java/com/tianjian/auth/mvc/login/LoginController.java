@@ -21,7 +21,7 @@ public class LoginController extends Controller {
 		System.out.println("login000"+username+password);
 		boolean b=loginservice.validUser(username,password);
 		if (b){
-			render("index.html");
+			render("index.jsp");
 		}else{
 			render("login_v2.html");
 		}
