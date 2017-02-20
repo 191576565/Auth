@@ -47,8 +47,7 @@
                         <span class="ng-scope">基础配置</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="sysMgmt.html">
-                            <i class="fa fa-desktop"></i>
+                        <a class="J_menuItem" href="sysMgmt"><i class="fa fa-desktop"></i>
                             <span class="nav-label">系统管理</span>
                         </a>
                     </li>
