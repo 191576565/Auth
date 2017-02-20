@@ -201,12 +201,13 @@ public abstract class ToolSqlXml {
 						val = val.replace("_", "\\_");
 					}
 				}
-				
-				String clounm4 = clounm.replace("#", "").replace("'", "").replace(clounm2, val);
+				//.replace("'", "")
+				String clounm4 = clounm.replace("#", "").replace(clounm2, val);
 				
 				list.add(clounm4); // 预处理值
+				sql = sql.replace(clounm, clounm4);
 
-				sql = sql.replace(clounm, "?");
+				//sql = sql.replace(clounm, "?");
 			}
 		}
 

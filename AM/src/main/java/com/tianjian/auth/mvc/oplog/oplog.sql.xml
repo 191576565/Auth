@@ -2,14 +2,24 @@
 <!-- 用户sql -->
 <sql-statement namespace="tianjian.oplog">
 
-	<sql id="all">
+	<sql id="pageAllSelect">
 		<![CDATA[ 
-        	select * from sys_log 
+        	select * 
     	]]>
 	</sql>
-	<sql id="search">
+	<sql id="pageAllFrom">
+		<![CDATA[ 
+        	 from sys_log 
+    	]]>
+	</sql>
+	<sql id="pageSearchSelect">
+		<![CDATA[ 
+        	select * 
+    	]]>
+	</sql>
+	<sql id="pageSearchFrom">
 	<![CDATA[ 
-		select * from sys_log 
+		from sys_log 
 		where 1=1
 		<% if(!isEmpty(user_uuid)){ %>
 		 and user_uuid like #'%$user_uuid$%'#
@@ -20,7 +30,7 @@
 		<% } %>	
 		
 		<% if(!isEmpty(startdate_start)){ %>
-			and s.startdate >= to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:ss') 
+			and s.startdate >= to_timestamp(#$startdate_start$#, 'YYYY-MM-DD HH24:MI:ss') 
 		<% } %>
 			
 		<% if(!isEmpty(startdate_end)){ %>
