@@ -83,28 +83,31 @@
 				</div>
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeName.$valid }">
 					<label>用户名称</label> 
-					<input name="scopeName" 
+					<input name="usrName" 
 						   type="text" 
 						   class="form-control" 
 						   placeholder="请输入用户名称"
-						   ng-model="userdata.scopeName"
+						   ng-model="userdata.usrName"
 						   ng-minlength="1"
 						   ng-maxlength="30"
 						   ng-pattern="/^[A-Za-z0-9]+$/"
 						   required
 					/>
 					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.scopeName.$valid"></p>
-					<p class="error" ng-if="signUpForm.scopeName.$error.required &&
-						signUpForm.scopeName.$touched">
+						ng-if="signUpForm.usrName.$valid"></p>
+					<p class="error" ng-if="signUpForm.usrName.$error.required &&
+						signUpForm.usrName.$touched">
 					不可为空</p>
-					<p class="error" ng-if="(signUpForm.scopeName.$error.minlength ||
-						signUpForm.scopeName.$error.maxlength) && 
-						signUpForm.scopeName.$touched">
+					<p class="error" ng-if="(signUpForm.usrName.$error.minlength ||
+						signUpForm.usrName.$error.maxlength) && 
+						signUpForm.usrName.$touched">
 				 	长度应在1~30位之间</p>
-				 	<p class="error" ng-if="signUpForm.scopeName.$error.pattern &&
-						signUpForm.scopeName.$touched">
+				 	<p class="error" ng-if="signUpForm.usrName.$error.pattern &&
+						signUpForm.usrName.$touched">
 					只能是字母/数字组合</p>
+				</div>
+				<div class="form-group">
+					<input name="usrName" style="display:none"/>
 				</div>
 				<div class="form-group">
 					<label>所属域</label>
