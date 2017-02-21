@@ -73,6 +73,6 @@ public class LoginController extends Controller {
 		}
 //    	List<User> users = User.dao.find("select * from user");
 // 		setAttr("users", users);
-		render("/");
+		render("login_v2.html");
 	}
 }

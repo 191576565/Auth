@@ -115,7 +115,7 @@ admin
                                 <li class="divider"></li>
                                 <li>
                                     <div class="text-center link-block">
-                                        <a class="J_menuItem" href="login_v2.html">
+                                        <a class="J_menuItem" href="ulogin">
                                             <i class="fa fa-bell-slash"></i> <strong> 退出登录</strong>
                                         </a>
                                     </div>
