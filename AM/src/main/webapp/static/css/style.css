@@ -7946,3 +7946,20 @@ body.skin-3 {
     font-size: 0;
     background-color: #131e26;
 }
+
+/*
+ * yeqc
+ * 前端验证样式
+ */
+
+.red {
+	background: #a30;
+}
+
+.error {
+	color: #a10;
+}
+
+input.error {
+	border: 1px solid #a10;
+}

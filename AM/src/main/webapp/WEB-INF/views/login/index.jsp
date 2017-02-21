@@ -106,7 +106,7 @@
                             <ul class="dropdown-menu yeqc-size">                               
                                 <li>
                                     <div class="text-center link-block">
-                                        <a class="J_menuItem" href="uptPwd.html">
+                                        <a class="J_menuItem" href="uptPwd">
                                             <i class="fa fa-cog"></i> <strong> 修改密码</strong>
                                         </a>
                                     </div>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 用户sql -->
+<sql-statement namespace="tianjian.usrMgmt">
+
+	<sql id="defaultSelect">
+		<![CDATA[ 
+        	SELECT A.*, B.ORG_UNIT_ID, B.ORG_UNIT_DESC
+			  FROM SYS_USER_INFO A
+			  LEFT JOIN SYS_ORG_INFO B
+			    ON A.ORG_UUID = B.UUID
+			 ORDER BY ORG_UUID, A.UUID
+    	]]>
+	</sql>
+</sql-statement>

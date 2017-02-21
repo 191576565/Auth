@@ -25,6 +25,14 @@
 		<!-- Sweet Alert -->
 		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 		<link href="${ctxPath }/static/css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
+		<style type="text/css">
+			.input_result {
+				position: relative;
+				top: -27px;
+				left: 570px;
+			}
+		</style>
+		
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
  		<div class="row">
@@ -55,19 +63,82 @@
 			</div>
  		</div>
  		<table id="table"></table>
- 		<div id="sys_add_div" style="display:none;">
- 			<form id="form"></br>
-				<label>域编码</label> <input type="text" placeholder="请输入域编码" name="CustCode"></br></br>
-				<label>域名称</label> <input type="text" placeholder="请输入域名称" name="CustName"></br></br>
-				<label>排&nbsp;&nbsp;&nbsp;&nbsp;序</label> <input type="text" placeholder="请输入排序" name="CustName"></br></br></br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" class="btn btn-default">关闭</button>&nbsp;&nbsp;
-				<button type="button" class="btn btn-info ladda-button save">保存</button>
+ 		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
+ 			<form id="form" name="signUpForm" ng-submit="submitForm()">
+ 				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
+					<label>域编码</label> 
+					<input name="scopeCode" 
+						   type="text" 
+						   class="form-control" 
+						   placeholder="2~32位数字/字母"
+						   ng-model="userdata.scopeCode"
+						   ng-minlength="2"
+						   ng-maxlength="32"
+						   ng-pattern="/^[A-Za-z0-9]+$/"
+						   required
+					/>
+					<p class="fa fa-check input_result success"
+						ng-if="signUpForm.scopeCode.$valid"></p>
+					<p class="error" ng-if="signUpForm.scopeCode.$error.required &&
+						signUpForm.scopeCode.$touched">
+					域编码不可为空</p>
+					<p class="error" ng-if="(signUpForm.scopeCode.$error.minlength ||
+						signUpForm.scopeCode.$error.maxlength) && 
+						signUpForm.scopeCode.$touched">
+					域编码长度应在2~32位之间</p>
+					<p class="error" ng-if="signUpForm.scopeCode.$error.pattern &&
+						signUpForm.scopeCode.$touched">
+					只能是字母/数字组合</p>
+				</div>
+				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeName.$valid }">
+					<label>域名称</label> 
+					<input name="scopeName" 
+						   type="text" 
+						   class="form-control" 
+						   placeholder="请输入域名称"
+						   ng-model="userdata.scopeName"
+						   ng-minlength="2"
+						   ng-maxlength="32"
+						   required
+					/>
+					<p class="fa fa-check input_result success"
+						ng-if="signUpForm.scopeName.$valid"></p>
+					<p class="error" ng-if="signUpForm.scopeName.$error.required &&
+						signUpForm.scopeName.$touched">
+					域名称不可为空</p>
+					<p class="error" ng-if="(signUpForm.scopeName.$error.minlength ||
+						signUpForm.scopeName.$error.maxlength) && 
+						signUpForm.scopeName.$touched">
+					域编码长度应在2~32位之间</p>
+				</div>
+				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeName.$valid }">
+					<label>排序</label> 
+					<input name="scopeSort"
+						   class="form-control" 
+						   type="number"
+						   ng-model="userdata.scopeSort"
+						   ng-minlength="1"
+						   ng-maxlength="5"
+						   required
+					/>
+					<p class="error" ng-if="signUpForm.scopeSort.$error.required &&
+						signUpForm.scopeSort.$touched">
+					排序不可为空</p>
+					<p class="error" ng-if="(signUpForm.scopeSort.$error.minlength ||
+						signUpForm.scopeSort.$error.maxlength) && 
+						signUpForm.scopeSort.$touched">
+					域编码长度应在1~5位之间</p>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary">保存</button>
+				</div>
  			</form>
  		</div>
+
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="${ctxPath }/static/js/angular.min.js"></script>
 
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>
