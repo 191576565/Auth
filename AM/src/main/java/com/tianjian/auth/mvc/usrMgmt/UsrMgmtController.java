@@ -6,11 +6,15 @@ import com.tianjian.auth.mvc.usrMgmt.UsrMgmtController;
 
 public class UsrMgmtController extends Controller {
 	
+	private UsrMgmtService ums = new UsrMgmtService();
 	private static final Log log = Log.getLog(UsrMgmtController.class);
 	
 	public void index() {
 		log.info("jump to usrMgmt");
 		render("usrMgmt.jsp");
-
+	}
+	
+	public void defaultSelect(){
+		renderJson(ums.defaultSelect());
 	}
 }
