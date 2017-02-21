@@ -17,16 +17,16 @@ $('#table').bootstrapTable({
 // 	cardView: false, //是否显示详细视图
 
     columns: [{
-        field: 'domian_uuid',
+        field: 'domain_name',
         title: '域名称'
     }, {
-        field: 'org_uuid',
+        field: 'org_unit_desc',
         title: '机构名称'
     },{
-        field: 'role_uuid',
+        field: 'role_name',
         title: '角色名称'
     }, {
-        field: 'user_uuid',
+        field: 'user_name',
         title: '用户名'
     }, {
         field: 'op_type',
