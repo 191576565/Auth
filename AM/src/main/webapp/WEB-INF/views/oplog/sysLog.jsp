@@ -46,22 +46,24 @@
  				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>-->
  			</div>
  			<div class="col-xs-9 text-right">
+ 			<form id="searchform">
 				<div class="form-inline">
 					<div class="form-group">
-						<input type="text" placeholder="请输入账号搜索" style="width: 180px;" id="search" class="form-control">
+						<input type="text" placeholder="请输入账号搜索" style="width: 180px;" id="searchid" name="user_uuid" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="text" placeholder="操作类型" style="width: 180px;" id="search" class="form-control">
+						<input type="text" placeholder="操作类型" style="width: 180px;" id="searchoptype" name="op_type" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="text" placeholder="操作时间起" style="width: 180px;" class="form-control layer-date" id="start">
+						<input type="text" placeholder="操作时间起" style="width: 180px;" class="form-control layer-date" id="startdate" name="startdate_start">
 					</div>
 					~
 					<div class="form-group">
-						<input type="text" placeholder="操作时间止" style="width: 180px;" class="form-control layer-date" id="end">
+						<input type="text" placeholder="操作时间止" style="width: 180px;" class="form-control layer-date" id="endate" name="startdate_end">
 					</div>
-					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
+					<button class="btn btn-default search" id="logsearch" type="button"><i class="fa fa-search"></i></button>
 				</div><br/>
+				</form>
 			</div>
  		</div>
  		<table id="table"></table>

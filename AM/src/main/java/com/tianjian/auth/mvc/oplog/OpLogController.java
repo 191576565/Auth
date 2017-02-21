@@ -48,7 +48,6 @@ public class OpLogController extends Controller {
 		mpara.put("op_type", op_type);
 		mpara.put("startdate_start",startdate_start );
 		mpara.put("startdate_end", startdate_end);
-
 		String sql = ToolGetSql.getSql("tianjian.oplog.search",mpara);
 		List<OpLog> logsearch = OpLog.dao.find(sql);
 		System.out.println("logsearch:"+logsearch);
@@ -66,6 +65,7 @@ public class OpLogController extends Controller {
 		mpara.put("op_type", op_type);
 		mpara.put("startdate_start",startdate_start );
 		mpara.put("startdate_end", startdate_end);
+		System.out.println("getpara:"+mpara);
 
 		String sqlselect = ToolGetSql.getSql("tianjian.oplog.pageSearchSelect");
 		String sqlfrom = ToolGetSql.getSql("tianjian.oplog.pageSearchFrom",mpara);
