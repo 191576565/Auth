@@ -7,7 +7,7 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    	<title> - Bootstrap Table</title>
+    	<title> - 系统日志</title>
     	<meta name="keywords" content="">
     	<meta name="description" content="">
 
@@ -34,7 +34,7 @@
 						<a href="${ctxPath }/static/welcome.jsp">首页</a>
 					</li>
 					<li>
-						<a href="rolMgmt">角色管理</a>	
+						<a href="syslog">系统日志</a>
 					</li>
 				</ol>
 			</div>
@@ -42,13 +42,23 @@
 		<br/><br/><br/><br/>
  		<div class="row">
  			<div class="col-xs-4">
- 				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
- 				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>
+ 				<!--<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
+ 				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>-->
  			</div>
- 			<div class="col-xs-8 text-right">
+ 			<div class="col-xs-9 text-right">
 				<div class="form-inline">
 					<div class="form-group">
-						<input type="text" placeholder="请输入角色名称" style="width: 200px;" id="search" class="form-control">
+						<input type="text" placeholder="请输入账号搜索" style="width: 180px;" id="search" class="form-control">
+					</div>
+					<div class="form-group">
+						<input type="text" placeholder="操作类型" style="width: 180px;" id="search" class="form-control">
+					</div>
+					<div class="form-group">
+						<input type="text" placeholder="操作时间起" style="width: 180px;" class="form-control layer-date" id="start">
+					</div>
+					~
+					<div class="form-group">
+						<input type="text" placeholder="操作时间止" style="width: 180px;" class="form-control layer-date" id="end">
 					</div>
 					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
 				</div><br/>
@@ -56,20 +66,7 @@
  		</div>
  		<table id="table"></table>
  		<div id="sys_add_div" style="display:none;">
- 			<form id="form"></br>
-				<label>角色编码</label> <input type="text" placeholder="1~30位字母/数字/下划线" name="CustCode"></br></br><!--字母和数字(1~30位) -->
-				<label>角色名称</label> <input type="text" placeholder="请输入角色名" name="CustName"></br></br>
-				<label>所&nbsp;&nbsp;属&nbsp;&nbsp;域</label> 
-				<select style="width: 120px;">
-					<option value="FTP">FTP</option>
-					<option value="RPM">RPM</option>
-				</select>
-				</br></br>
-				<!--<label>排&nbsp;&nbsp;&nbsp;&nbsp;序</label> <input type="text" placeholder="请输入排序" name="CustName"></br></br></br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-				<button type="button" class="btn btn-default">关闭</button>&nbsp;&nbsp;
-				<button type="button" class="btn btn-info ladda-button save">保存</button>
- 			</form>
+ 			新增test用户
  		</div>
  		
 	<!-- 全局js -->
@@ -86,7 +83,6 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 
     <!-- Peity -->
-    <script src="${ctxPath }/static/js/demo/bootstrap-table-demo.js"></script>
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
@@ -95,6 +91,20 @@
     	时间：2017-02-09
     	描述：页面js
     -->
-    <script src="${ctxPath }/static/js/rolMgmt.js"></script>
+    <script src="${ctxPath }/static/js/sysLog.js"></script>
+    
+    <!-- layerDate plugin javascript -->
+    <script src="${ctxPath }/static/js/plugins/layer/laydate/laydate.js"></script>
+    <script>
+        //外部js调用
+        laydate({
+            elem: '#start', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+        });
+        laydate({
+            elem: '#end', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+        });
+    </script>
 	</body>
 </html>

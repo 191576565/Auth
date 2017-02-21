@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class OpLogController extends Controller {
 	public void index() {
-		render("sysLog.html");
+		render("sysLog.jsp");
 	}
 
 	public void logdata1() {
