@@ -9,7 +9,6 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseModel;
-import com.tianjian.platform.plugin.ParamInitPlugin;
 import com.tianjian.platform.tools.ToolCache;
 
 /**
