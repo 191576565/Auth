@@ -10,7 +10,7 @@ public class RolMgmtController extends Controller {
 	
 	public void index() {
 		log.info("jump to sysMgmt");
-		render("rolMgmt.html");
+		render("rolMgmt.jsp");
 
 	}
 }

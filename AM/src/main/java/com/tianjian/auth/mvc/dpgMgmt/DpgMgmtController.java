@@ -10,7 +10,7 @@ public class DpgMgmtController extends Controller {
 	
 	public void index() {
 		log.info("jump to dpgMgmt");
-		render("dpgMgmt.html");
+		render("dpgMgmt.jsp");
 
 	}
 }

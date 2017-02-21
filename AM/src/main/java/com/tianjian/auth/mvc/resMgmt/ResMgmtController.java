@@ -10,7 +10,7 @@ public class ResMgmtController extends Controller {
 	
 	public void index() {
 		log.info("jump to resMgmt");
-		render("resMgmt.html");
+		render("resMgmt.jsp");
 
 	}
 }

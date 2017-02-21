@@ -9,7 +9,7 @@ public class SysMgmtController extends Controller {
 	
 	public void index() {
 		log.info("jump to sysMgmt");
-		render("sysMgmt.html");
+		render("sysMgmt.jsp");
 
 	}
 }

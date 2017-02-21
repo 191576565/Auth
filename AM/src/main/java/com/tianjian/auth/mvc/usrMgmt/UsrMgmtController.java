@@ -10,7 +10,7 @@ public class UsrMgmtController extends Controller {
 	
 	public void index() {
 		log.info("jump to usrMgmt");
-		render("usrMgmt.html");
+		render("usrMgmt.jsp");
 
 	}
 }
