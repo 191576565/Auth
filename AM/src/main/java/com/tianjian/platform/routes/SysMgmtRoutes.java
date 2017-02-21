@@ -1,6 +1,7 @@
 package com.tianjian.platform.routes;
 
 import com.jfinal.config.Routes;
+import com.tianjian.auth.mvc.sysMgmt.OrgMgmtController;
 import com.tianjian.auth.mvc.sysMgmt.SysMgmtController;
 
 public class SysMgmtRoutes extends Routes {
@@ -12,6 +13,7 @@ public class SysMgmtRoutes extends Routes {
 		setBaseViewPath("/WEB-INF/views");
 
 		add("sysMgmt", SysMgmtController.class,"sysMgmt");
+		add("orgMgmt", OrgMgmtController.class,"sysMgmt");
 	}
 
 }

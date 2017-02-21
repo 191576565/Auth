@@ -40,7 +40,7 @@ $('#table').bootstrapTable({
 		formatter: function(value, row, index) {
 			var e = '<a href="#" class="btn btn-info update edit">编辑</a> ';
 			var d = '<a href="#" class="btn btn-danger delete">删除</a> ';
-			var f = '<a href="orgMgmt.html" class="btn btn-success">机构</a> ';
+			var f = '<a href="orgMgmt" class="btn btn-success">机构</a> ';
 			return e + d + f;
 		}
 	}, ]
