@@ -52,7 +52,7 @@ public class LoginController extends Controller {
 			//用户交互数据命令生成
 				render("index.jsp");
 		}else{
-				render("/login_v2.html");
+				render("login_v2.html");
 		}
 	}
 	
