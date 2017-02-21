@@ -22,7 +22,7 @@
 		from sys_log 
 		where 1=1
 		<% if(!isEmpty(user_uuid)){ %>
-		 and user_uuid like #'%$user_uuid$%'#
+		 and user_name like #'%$user_uuid$%'#
 		<% } %>
 		
 		<% if(!isEmpty(op_type)){ %>
@@ -30,11 +30,11 @@
 		<% } %>	
 		
 		<% if(!isEmpty(startdate_start)){ %>
-			and s.startdate >= to_timestamp(#$startdate_start$#, 'YYYY-MM-DD HH24:MI:ss') 
+			and op_date >= to_timestamp(#$startdate_start$#, 'YYYY-MM-DD HH24:MI:ss') 
 		<% } %>
 			
 		<% if(!isEmpty(startdate_end)){ %>
-			and s.startdate <= to_timestamp(#'$startdate_end$'#, 'YYYY-MM-DD HH24:MI:ss')
+			and op_date <= to_timestamp(#'$startdate_end$'#, 'YYYY-MM-DD HH24:MI:ss')
 		<% } %>
 	]]>
 	</sql>

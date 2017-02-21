@@ -62,11 +62,9 @@ public class OpLogController extends Controller {
 
 		// List<OpLog> logall = OpLog.dao.find(sql);
 		Page<OpLog> logall = OpLog.dao.paginate(1, 2, sqlselect, sqlfrom);
-		// Page<Record> logall = Db.paginate(1, 2, sqlselect, sqlfrom);
-		// logall.getTotalRow();
-		List<OpLog> rows = logall.getList();
-		System.out.println(logall);
-		renderJson(logall);
+		PageJson myjson=new PageJson();
+		myjson.buildJson(logall);
+		renderJson(myjson);
 	}
 
 	public void search1() {
@@ -106,7 +104,8 @@ public class OpLogController extends Controller {
 
 		// Page<OpLog> logsearch = OpLog.dao.paginate(1, 2, sqlselect, sqlfrom);
 		Page<Record> logsearch = Db.paginate(1, 2, sqlselect, sqlfrom);
-		System.out.println("logsearch:" + logsearch);
-		renderJson(logsearch);
+		PageJson myjson=new PageJson();
+		myjson.buildJson(logsearch);
+		renderJson(myjson);
 	}
 }
