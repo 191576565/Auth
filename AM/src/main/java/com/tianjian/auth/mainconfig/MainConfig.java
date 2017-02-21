@@ -36,6 +36,7 @@ import com.tianjian.platform.routes.LoginRoutes;
 import com.tianjian.platform.routes.ResMgmtRoutes;
 import com.tianjian.platform.routes.RolMgmtRoutes;
 import com.tianjian.platform.routes.SysMgmtRoutes;
+import com.tianjian.platform.routes.UptPwdRoutes;
 import com.tianjian.platform.routes.UsrMgmtRoutes;
 import com.tianjian.platform.tools.ToolCache;
 import com.tianjian.platform.tools.ToolDataBase;
@@ -62,6 +63,7 @@ public class MainConfig extends JFinalConfig {
 		me.add(new RolMgmtRoutes());
 		me.add(new ResMgmtRoutes());
 		me.add(new DpgMgmtRoutes());
+		me.add(new UptPwdRoutes());
 	}
 
 	@Override
