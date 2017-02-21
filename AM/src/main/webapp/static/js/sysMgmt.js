@@ -51,10 +51,8 @@ $('#sys_add').on('click', function() {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		skin: 'layui-layer-molv',
 		title: '系统信息',
-		area: ['400px', '300px'],
-		//		maxmin: true	
+		area: ['640px', '360px'],
 	});
 });
 
@@ -62,9 +60,21 @@ $('#table').on('click', '.edit', function() {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		skin: 'layui-layer-molv',
 		title: '系统信息',
-		area: ['500px', '300px']
+		area: ['640px', '360px']
 	});
 	return false;
 });
+
+angular.module('myApp', [])
+.controller('SignUpController',function($scope){
+	$scope.userdata = {};
+	$scope.submitForm = function(){
+		console.log($scope.userdata)
+		if($scope.signUpForm.$invalid)
+			alert('请检查您的信息!');
+		else
+			window.location.href='sysMgmt.html';
+//			alert('提交成功!');
+	}
+})
