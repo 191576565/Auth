@@ -103,7 +103,7 @@ public class MainConfig extends JFinalConfig {
 		}
 
 		// 添加表映射
-		arp.addMapping("SYS_LOG", OpLog.class);
+		arp.addMapping("SYS_LOG","UUID" ,OpLog.class);
 		arp.addMapping("SYS_USER_INFO", User.class);
 		me.add(c3p0Plugin);
 
@@ -129,7 +129,7 @@ public class MainConfig extends JFinalConfig {
 		// TODO Auto-generated method stub
 		 me.add(new ContextPathHandler("ctxPath"));
 		// me.add(new ContextPathHandler("contextPath"));
-		me.add(new GlobalHandler()); 
+		//me.add(new GlobalHandler()); 
 	}
 
 	public static void main(String[] args) {
