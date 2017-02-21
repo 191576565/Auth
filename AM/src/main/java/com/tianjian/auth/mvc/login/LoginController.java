@@ -7,6 +7,15 @@ import javax.servlet.ServletException;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.tianjian.auth.mvc.base.BaseSessionController;
+
+/** 
+ *@Company  重庆天健金管科技股份有限公司
+ *@Function   用户登录控制器            
+ *@Declare     1.用户登录进行控制 2.对外部系统进行交互 
+ *@Author      谢涛
+ */
+
 public class LoginController extends Controller {
 	private LoginService loginservice=new LoginService();
 	private static final Log log = Log.getLog(LoginController.class);
