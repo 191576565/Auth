@@ -40,10 +40,42 @@ $('#table').bootstrapTable({
     	field: 'opt',                                                                                                         
     	title: '操 作',                                                                                                         
     	formatter:function(value,row,index){                                                                                  
-    	var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ row.id + '\')">编辑</a> ';                                                      
+    	var e = '<a href="#" class="btn btn-info update edit" onclick="edit(\''+ row.id + '\')">编辑</a> ';                                                      
     	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';                                                        
     	var f = '<a href="#" class="btn btn-primary create" onclick="del(\''+ row.id +'\')">角色</a> ';                                                   
     	return e+d+f;                                                                                                           
     	}                                                                                                                     
     },]                                                                                                                       
-});                                                                                                                           
+});
+
+$('#btn_add').on('click', function() {
+	layer.open({
+		type: 1,
+		content: $('#sys_add_div'),
+		title: '用户信息',
+		area: ['960px', '540px'],
+	});
+});
+
+$('#table').on('click', '.edit', function(value,row,index) {
+	layer.open({
+		type: 1,
+		content: $('#sys_add_div'),
+		title: '用户信息',
+		area: ['960px', '540px'],
+	});
+	return false;
+});
+
+angular.module('myApp', [])
+	.controller('SignUpController',function($scope){
+		$scope.userdata = {};
+		$scope.submitForm = function(){
+			console.log($scope.userdata)
+			if($scope.signUpForm.$invalid)
+				alert('请检查您的信息!');
+			else
+				window.location.href='usrMgmt';
+//				alert('提交成功!');
+		}
+	})
