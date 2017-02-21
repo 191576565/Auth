@@ -1,5 +1,5 @@
 $('#table').bootstrapTable({
-    url: 'js/demo/8.json',
+    url: 'static/js/demo/8.json',
 // 	toolbar: '#toolbar', //工具按钮用哪个容器
  	striped: true, //是否显示行间隔色
  	pagination: true, //是否显示分页（*）

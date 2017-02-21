@@ -31,7 +31,12 @@ import com.tianjian.platform.constant.ConstantCache;
 import com.tianjian.platform.constant.ConstantInit;
 import com.tianjian.platform.dto.DataBase;
 import com.tianjian.platform.plugin.SqlXmlPlugin;
+import com.tianjian.platform.routes.DpgMgmtRoutes;
 import com.tianjian.platform.routes.LoginRoutes;
+import com.tianjian.platform.routes.ResMgmtRoutes;
+import com.tianjian.platform.routes.RolMgmtRoutes;
+import com.tianjian.platform.routes.SysMgmtRoutes;
+import com.tianjian.platform.routes.UsrMgmtRoutes;
 import com.tianjian.platform.tools.ToolCache;
 import com.tianjian.platform.tools.ToolDataBase;
 
@@ -52,6 +57,11 @@ public class MainConfig extends JFinalConfig {
 		// TODO Auto-generated method stub
 		// 添加路由
 		me.add(new LoginRoutes());
+		me.add(new SysMgmtRoutes());
+		me.add(new UsrMgmtRoutes());
+		me.add(new RolMgmtRoutes());
+		me.add(new ResMgmtRoutes());
+		me.add(new DpgMgmtRoutes());
 	}
 
 	@Override
@@ -115,7 +125,7 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configHandler(Handlers me) {
 		// TODO Auto-generated method stub
-		// me.add(new ContextPathHandler("ctx"));
+		 me.add(new ContextPathHandler("ctxPath"));
 		// me.add(new ContextPathHandler("contextPath"));
 		me.add(new GlobalHandler()); 
 	}
