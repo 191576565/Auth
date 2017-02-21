@@ -1,5 +1,6 @@
 package com.tianjian.auth.mvc.login;
 
+
 import java.io.IOException;
 import java.util.List;
 
@@ -49,9 +50,9 @@ public class LoginController extends Controller {
 				e.printStackTrace();
 			}
 			//用户交互数据命令生成
-				render("index.html");
+				render("index.jsp");
 		}else{
-				render("login_v2.html");
+				render("/login_v2.html");
 		}
 	}
 	
@@ -72,6 +73,6 @@ public class LoginController extends Controller {
 		}
 //    	List<User> users = User.dao.find("select * from user");
 // 		setAttr("users", users);
-        render("list.jsp");
+		render("/");
 	}
 }
