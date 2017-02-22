@@ -1,5 +1,5 @@
 $('#table').bootstrapTable({                                                                                                  
-    url: 'usrMgmt/defSel',
+    url: 'usrMgmt/defaultSelect',
 	method: 'get', 					//请求方式（*）                                                                                                
  	toolbar: '#toolbar', //工具按钮用哪个容器                       
 	striped: false, 					//是否显示行间隔色
@@ -82,4 +82,16 @@ angular.module('myApp', [])
 				window.location.href='usrMgmt';
 //				alert('提交成功!');
 		}
+	});
+
+$("#scopeCode").blur(function(){
+	$.ajax({
+		type:"post",
+		url:"usrMgmt/checkUserId",
+		data: {"scopeCode":$("#scopeCode").val()},
+		success: function(data) {
+			alert(data);
+        }
 	})
+});
+
