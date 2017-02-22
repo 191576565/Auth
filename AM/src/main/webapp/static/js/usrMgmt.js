@@ -21,8 +21,8 @@ $('#table').bootstrapTable({
  	cardView: false, //是否显示详细视图                                                                                               
                                                                                                                               
    columns: [ {                                                                                                                      
-        field: 'org_unit_id',                                                                                                        
-        title: '机构编码'                                                                                                        
+        field: 'org_unit_desc',                                                                                                        
+        title: '机 构'                                                                                                        
     },{        	
         field: 'user_id',                                                                                                      
         title: '用户编码'                                                                                                         
@@ -82,4 +82,16 @@ angular.module('myApp', [])
 				window.location.href='usrMgmt';
 //				alert('提交成功!');
 		}
+	});
+
+$("#scopeCode").blur(function(){
+	$.ajax({
+		type:"post",
+		url:"usrMgmt/checkUserId",
+		data: {"scopeCode":$("#scopeCode").val()},
+		success: function(data) {
+			alert(data);
+        }
 	})
+});
+

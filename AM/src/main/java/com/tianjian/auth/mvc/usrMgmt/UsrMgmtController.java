@@ -14,7 +14,13 @@ public class UsrMgmtController extends Controller {
 		render("usrMgmt.jsp");
 	}
 	
+	public void checkUserId(){
+		String userId = getPara("scopeCode");
+		renderJson(ums.checkUserId(userId));
+	}
+	
 	public void defaultSelect(){
 		renderJson(ums.defaultSelect());
 	}
+	
 }
