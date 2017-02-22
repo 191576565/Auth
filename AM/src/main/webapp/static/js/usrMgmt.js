@@ -21,8 +21,8 @@ $('#table').bootstrapTable({
  	cardView: false, //是否显示详细视图                                                                                               
                                                                                                                               
    columns: [ {                                                                                                                      
-        field: 'org_unit_id',                                                                                                        
-        title: '机构编码'                                                                                                        
+        field: 'org_unit_desc',                                                                                                        
+        title: '机 构'                                                                                                        
     },{        	
         field: 'user_id',                                                                                                      
         title: '用户编码'                                                                                                         
