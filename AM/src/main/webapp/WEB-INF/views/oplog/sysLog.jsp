@@ -52,25 +52,21 @@
 		</div>
 		<br/><br/><br/><br/>
  		<div class="row">
- 			<div class="col-xs-4">
- 				<!--<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
- 				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>-->
- 			</div>
- 			<div class="col-xs-9 text-right">
+ 			<div class="col-xs-9">
  			<form id="searchform">
 				<div class="form-inline">
 					<div class="form-group">
-						<input type="text" placeholder="请输入账号搜索" style="width: 180px;" id="searchid" name="user_uuid" class="form-control">
+						<input type="text" placeholder="请输入账号搜索" style="width: 170px;" id="searchid" name="user_uuid" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="text" placeholder="操作类型" style="width: 180px;" id="searchoptype" name="op_type" class="form-control">
+						<input type="text" placeholder="操作类型" style="width: 170px;" id="searchoptype" name="op_type" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="text" placeholder="操作时间起" style="width: 180px;" class="form-control layer-date datepicker" id="startdate" name="startdate_start">
+						<input type="text" placeholder="操作时间起" style="width: 170px;" class="form-control layer-date datepicker" id="startdate" name="startdate_start">
 					</div>
 					~
 					<div class="form-group">
-						<input type="text" placeholder="操作时间止" style="width: 180px;" class="form-control layer-date datetimepicker" id="endate" name="startdate_end">
+						<input type="text" placeholder="操作时间止" style="width: 170px;" class="form-control layer-date datetimepicker" id="endate" name="startdate_end">
 					</div>
 					<button class="btn btn-default search" id="logsearch" type="button"><i class="fa fa-search"></i></button>
 				</div><br/>
