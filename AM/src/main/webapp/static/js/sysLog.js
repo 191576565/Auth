@@ -58,40 +58,24 @@ function initsyslogtable(){
 	    	title: '操 作',
 	    	formatter:function(value,row,index){
 	    		
-	    		var e = '<a href="#" class="btn btn-info update edit" >操作明细</a> ';
+	    		var e = '<a href="#" class="btn btn-info update edit" onclick="onMore(\''+ row.op_content +'\')">操作明细</a> ';
 	    		return e;
 	    	}
 	    },],
 	    pagination: true
 	});
-}
+};
 
-
-
-
-//yeqc
-//layer弹出自定义div
-$("#syslogtable").on('click', '.edit',function(e, value, row, index){
-	console.log(row);
+function onMore(name) {
 	layer.open({
 		type: 1,
-		content: row.op_content,
+		content: name,
 		skin: 'layui-layer-molv',
 		title: '操作信息',
 		area: ['500px', '300px']
 	});
-});
-//$('#syslogtable').on('click.bs.table', '.edit', function(e,row,ele) {
-//	console.log(row)
-//	layer.open({
-//		type: 1,
-//		content: row.op_content,
-//		skin: 'layui-layer-molv',
-//		title: '操作信息',
-//		area: ['500px', '300px']
-//	});
-//	return false;
-//});
+};
+
 
 //------------
 $("#logsearch_old").click(function() {
