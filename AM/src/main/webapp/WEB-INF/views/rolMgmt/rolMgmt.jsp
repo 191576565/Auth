@@ -25,6 +25,13 @@
 		<!-- Sweet Alert -->
 		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 		<link href="${ctxPath }/static/css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
+		<style type="text/css">
+			.input_result {
+				position: relative;
+				top: -27px;
+				left: 570px;
+			}
+		</style>
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
  		<div class="row">
@@ -55,26 +62,65 @@
 			</div>
  		</div>
  		<table id="table"></table>
- 		<div id="sys_add_div" style="display:none;">
- 			<form id="form"></br>
-				<label>角色编码</label> <input type="text" placeholder="1~30位字母/数字/下划线" name="CustCode"></br></br><!--字母和数字(1~30位) -->
-				<label>角色名称</label> <input type="text" placeholder="请输入角色名" name="CustName"></br></br>
-				<label>所&nbsp;&nbsp;属&nbsp;&nbsp;域</label> 
-				<select style="width: 120px;">
-					<option value="FTP">FTP</option>
-					<option value="RPM">RPM</option>
-				</select>
-				</br></br>
-				<!--<label>排&nbsp;&nbsp;&nbsp;&nbsp;序</label> <input type="text" placeholder="请输入排序" name="CustName"></br></br></br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-				<button type="button" class="btn btn-default">关闭</button>&nbsp;&nbsp;
-				<button type="button" class="btn btn-info ladda-button save">保存</button>
+ 		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
+ 			<form id="form" name="signUpForm" ng-submit="submitForm()">
+ 				<div class="form-group" ng-class="{ 'has-success': signUpForm.CustCode.$valid }">
+ 					<label>角色编码</label> 
+ 					<input name="CustCode" 
+ 						   type="text" 
+ 						   class="form-control"
+ 						   placeholder="1~30位字母/数字"
+ 						   ng-model="userdata.scopeCode"
+						   ng-minlength="1"
+						   ng-maxlength="30"
+						   ng-pattern="/^[A-Za-z0-9]+$/"
+						   required
+ 					/>
+ 					<p class="fa fa-check input_result success"
+						ng-if="signUpForm.CustCode.$valid"></p>
+					<p class="error" ng-if="signUpForm.CustCode.$error.required &&
+						signUpForm.CustCode.$touched">
+					不可为空</p>
+					<p class="error" ng-if="(signUpForm.CustCode.$error.minlength ||
+						signUpForm.CustCode.$error.maxlength) && 
+						signUpForm.CustCode.$touched">
+					长度应在1~30位之间</p>
+					<p class="error" ng-if="signUpForm.CustCode.$error.pattern &&
+						signUpForm.CustCode.$touched">
+					只能是字母/数字组合</p>
+ 				</div>
+				<div class="form-group" ng-class="{ 'has-success': signUpForm.CustName.$valid }">
+					<label>角色名称</label> 
+					<input name="CustName" 
+						   type="text" 
+						   class="form-control"
+						   placeholder="请输入角色名"
+						   ng-model="userdata.CustName"
+						   required		   
+					/>
+					<p class="fa fa-check input_result success"
+						ng-if="signUpForm.CustName.$valid"></p>
+					<p class="error" ng-if="signUpForm.CustName.$error.required &&
+						signUpForm.CustName.$touched">
+					不可为空</p>
+				</div>
+				<div class="form-group">
+					<label>所属域</label> 
+					<select class="form-control">
+						<option value="FTP">FTP</option>
+						<option value="RPM">RPM</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-info ladda-button save">保存</button>
+				</div>
  			</form>
  		</div>
  		
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="${ctxPath }/static/js/angular.min.js"></script>
 
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>
@@ -84,9 +130,6 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
-    <!-- Peity -->
-    <script src="${ctxPath }/static/js/demo/bootstrap-table-demo.js"></script>
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
