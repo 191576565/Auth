@@ -14,7 +14,8 @@ public class UsrMgmtController extends Controller {
 		render("usrMgmt.jsp");
 	}
 	
-	public void defaultSelect(){
+	public void defSel(){
 		renderJson(ums.defaultSelect());
 	}
+	
 }
