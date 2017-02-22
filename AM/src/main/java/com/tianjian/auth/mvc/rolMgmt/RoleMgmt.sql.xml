@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 用户sql -->
+<sql-statement namespace="tianjian.roleMgmt">
+
+	<sql id="defaultSelect">
+		<![CDATA[ 
+          Select Domain.Domain_Name,Ro.Role_Id,Ro.Role_Name From Sys_Role_Info Ro
+  		  Left Join Sys_Domain_Info Domain 
+  		  On Ro.Domian_Uuid=Domain.Uuid
+    	]]>
+	</sql>
+</sql-statement>

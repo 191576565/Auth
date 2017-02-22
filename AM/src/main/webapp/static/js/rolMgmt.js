@@ -1,6 +1,7 @@
 $('#table').bootstrapTable({
-    url: 'static/js/demo/4.json',
+    url: 'rolMgmt/showRol',
 // 	toolbar: '#toolbar', //工具按钮用哪个容器
+	method: 'post', 					//请求方式（*）    
  	striped: true, //是否显示行间隔色
  	pagination: true, //是否显示分页（*）
  	sortable: false, //是否启用排序
@@ -21,13 +22,13 @@ $('#table').bootstrapTable({
         title: '域 ID',
         checkbox: true
     }, {
-        field: 'sysName',
+        field: 'domain_name',
         title: '域名称'
     }, {
-        field: 'roleId',
+        field: 'role_id',
         title: '角色ID'
     }, {
-        field: 'name',
+        field: 'role_name',
         title: '角色名称'
     }, {
     	field: 'opt',

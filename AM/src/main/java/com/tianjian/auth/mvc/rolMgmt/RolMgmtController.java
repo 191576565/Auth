@@ -13,4 +13,8 @@ public class RolMgmtController extends Controller {
 		render("rolMgmt.jsp");
 
 	}
+	
+	public void showRol() {
+		renderJson(new RoleMgmtService().defaultSelect());
+	}
 }
