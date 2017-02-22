@@ -9,11 +9,29 @@
 	</sql>
 	<sql id="pageAllFrom">
 		<![CDATA[ 
+		from sys_log 
+		where 1=1
 		<% if(domain_name == "ROOT"){ %>
-        	 from sys_log 
-        <% } else { %>
-        	 from sys_log where domain_name=#'$domain_name$'#
+       	 
+        <% } else if(!isEmpty(domain_name)){%>
+        and domain_name=#'$domain_name$'#
         <% } %>
+        
+        <% if(!isEmpty(user_uuid)){ %>
+		 and user_name like #'%$user_uuid$%'#
+		<% } %>
+		
+		<% if(!isEmpty(op_type)){ %>
+		 and op_type like #'%$op_type$%'#
+		<% } %>	
+		
+		<% if(!isEmpty(startdate_start)){ %>
+			and op_date >= to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:ss') 
+		<% } %>
+			
+		<% if(!isEmpty(startdate_end)){ %>
+			and op_date <= to_timestamp(#'$startdate_end$'#, 'YYYY-MM-DD HH24:MI:ss')
+		<% } %>
     	]]>
 	</sql>
 	<sql id="pageSearchSelect">
@@ -28,6 +46,7 @@
 		<% if(domain_name != "ROOT"){ %>
 		 and domain_name=#'$domain_name$'#
 		<% } %>
+		
 		<% if(!isEmpty(user_uuid)){ %>
 		 and user_name like #'%$user_uuid$%'#
 		<% } %>

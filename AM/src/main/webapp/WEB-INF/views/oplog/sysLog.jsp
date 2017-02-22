@@ -25,8 +25,19 @@
 		<!-- Sweet Alert -->
 		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 		<link href="${ctxPath }/static/css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
+		<!-- datetimepicker -->
+		<link href="${ctxPath }/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
+	
+	<!--
+    	作者：yeqc
+    	时间：2017-02-09
+    	描述：页面js
+    -->
+    
+	
  		<div class="row">
 			<div class="col-lg-12">
 					<ol class="breadcrumb">
@@ -55,18 +66,18 @@
 						<input type="text" placeholder="操作类型" style="width: 180px;" id="searchoptype" name="op_type" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="text" placeholder="操作时间起" style="width: 180px;" class="form-control layer-date" id="startdate" name="startdate_start">
+						<input type="text" placeholder="操作时间起" style="width: 180px;" class="form-control layer-date datepicker" id="startdate" name="startdate_start">
 					</div>
 					~
 					<div class="form-group">
-						<input type="text" placeholder="操作时间止" style="width: 180px;" class="form-control layer-date" id="endate" name="startdate_end">
+						<input type="text" placeholder="操作时间止" style="width: 180px;" class="form-control layer-date datetimepicker" id="endate" name="startdate_end">
 					</div>
 					<button class="btn btn-default search" id="logsearch" type="button"><i class="fa fa-search"></i></button>
 				</div><br/>
 				</form>
 			</div>
  		</div>
- 		<table id="table"></table>
+ 		<table id="syslogtable"></table>
  		<div id="sys_add_div" style="display:none;">
  			新增test用户
  		</div>
@@ -83,30 +94,28 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
+	<!-- Bootstrap datetimepicker -->
+	 <script src="${ctxPath }/static/js/bootstrap-datetimepicker.min.js"></script>
+	 <script src="${ctxPath }/static/js/bootstrap-datetimepicker.zh-CN.js"></script>
+	
     <!-- Peity -->
-    
+    <script src="${ctxPath }/static/js/sysLog.js"></script>
+    <script type="text/javascript"> 
+	$(document).ready(function () { 
+		 initsyslogtable();
+		 $("#logsearch").bind("click", initsyslogtable);
+		})
+	</script>
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
-    <!--
-    	作者：yeqc
-    	时间：2017-02-09
-    	描述：页面js
-    -->
-    <script src="${ctxPath }/static/js/sysLog.js"></script>
+    
     
     <!-- layerDate plugin javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/laydate/laydate.js"></script>
     <script>
         //外部js调用
-        laydate({
-            elem: '#start', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
-        });
-        laydate({
-            elem: '#end', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
-        });
+       
+      
     </script>
 	</body>
 </html>
