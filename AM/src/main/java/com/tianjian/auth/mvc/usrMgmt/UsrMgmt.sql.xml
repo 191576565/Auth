@@ -3,7 +3,7 @@
 <!-- 用户sql -->
 <sql-statement namespace="tianjian.usrMgmt">
 
-	<sql id="defSel">
+	<sql id="defaultSelect">
 		<![CDATA[ 
         	SELECT A.*, B.ORG_UNIT_ID, B.ORG_UNIT_DESC
 			  FROM SYS_USER_INFO A
@@ -12,19 +12,25 @@
 			 ORDER BY ORG_UUID, A.UUID
     	]]>
 	</sql>
-	<sql id="selDomain">
+	<sql id="checkUserId">
+		<![CDATA[ 
+        	SELECT * FROM SYS_USER_INFO WHERE USER_ID=?
+    	]]>
+	</sql>
+	<sql id="selectDomain">
 		<![CDATA[ 
         	SELECT uuid,DOMAIN_ID,DOMAIN_NAME FROM SYS_DOMAIN_INFO
     	]]>
 	</sql>
-	<sql id="selOrg">
+	<sql id="selectOrg">
 		<![CDATA[ 
         	SELECT uuid,ORG_UNIT_ID,ORG_UNIT_DESC FROM SYS_ORG_INFO WHERE DOMAIN_UUID=?
     	]]>
 	</sql>
-	<sql id="selRole">
+	<sql id="selectRole">
 		<![CDATA[ 
         	SELECT uuid,ROLE_ID,ROLE_NAME FROM SYS_ROLE_INFO WHERE DOMAIN_UUID=?
     	]]>
 	</sql>
+	
 </sql-statement>
