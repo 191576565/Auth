@@ -10,26 +10,32 @@ import com.tianjian.platform.tools.ToolGetSql;
 
 public class UsrMgmtService {
 	public List<Record> defaultSelect(){
-		String sql = ToolGetSql.getSql("tianjian.usrMgmt.defSel");
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.defaultSelect");
 		List<Record> list = Db.find(sql);
 		return list;
 	} 
-	public List<Record> getDomain(){
-		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selDomain");
+	public boolean checkUserId(String userId){
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.checkUserId");
+		System.out.println(sql);
+		boolean chkRst = Db.find(sql, userId).isEmpty();
+		return chkRst;
+	}
+	public List<Record> selectDomain(){
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectDomain");
 		List<Record> list = Db.find(sql);
 		return list;
 	}
-	public List<Record> getOrg(String domainUUID){
+	public List<Record> selectOrg(String domainUUID){
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("domain_uuid", domainUUID);
-		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selDomain", param);
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectOrg", param);
 		List<Record> list = Db.find(sql);
 		return list;
 	}
-	public List<Record> getRole(String domainUUID){
+	public List<Record> selectRole(String domainUUID){
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("domain_uuid", domainUUID);
-		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selRole", param);
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectRole", param);
 		List<Record> list = Db.find(sql);
 		return list;
 	}
