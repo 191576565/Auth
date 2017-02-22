@@ -3,10 +3,18 @@ package com.tianjian.platform.pjson;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Page;
-//hujian 2017.2.21
+/** 
+ *@Company  重庆天健金管科技股份有限公司
+ *@Function   Json 封装的方法            
+ *@Declare     
+ *@Author    hujian
+ */
 public class PageJson<T> {
+	//总行数
 	private int total;
+	//数据
 	private List<T> rows;
+	//用jfinal的page函数返回值封装PageJson类
 	public void buildJson(Page<T> p){
 		this.rows=p.getList();
 		this.total=p.getTotalRow();
