@@ -35,7 +35,7 @@ $('#table').bootstrapTable({
     	formatter:function(value,row,index){
     	var e = '<a href="#" class="btn btn-info update edit">编辑</a> ';
     	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';
-    	var f = '<a href="funList.html" class="btn btn-primary create" onclick="del(\''+ row.id +'\')">功能</a> ';
+    	var f = '<a href="funList" class="btn btn-primary create" onclick="del(\''+ row.id +'\')">功能</a> ';
     	return e+d+f;
     	}
     },]
@@ -49,7 +49,7 @@ $('#sys_add').on('click', function(){
 		content: $('#sys_add_div'),
 //		skin: 'layui-layer-molv',
 		title:'角色信息',
-		area: ['400px', '240px'],
+		area: ['640px', '360px'],
 //		maxmin: true	
 	});
 });
@@ -60,7 +60,21 @@ $('#table').on('click', '.edit', function() {
 		content: $('#sys_add_div'),
 //		skin: 'layui-layer-molv',
 		title: '角色信息',
-		area: ['500px', '300px']
+		area: ['640px', '360px']
 	});
 	return false;
 });
+
+angular.module('myApp', [])
+.controller('SignUpController',function($scope){
+	$scope.userdata = {};
+	$scope.submitForm = function(){
+		if($scope.signUpForm.$invalid)
+			alert('请检查您的信息!');
+		else{
+			console.log($scope.userdata);
+			window.location.href='rolMgmt';
+//			alert('提交成功!');
+		}
+	}
+})
