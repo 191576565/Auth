@@ -59,6 +59,7 @@
  				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
 					<label>用户编码</label> 
 					<input name="scopeCode" 
+						   id="scopeCode"
 						   type="text" 
 						   class="form-control" 
 						   placeholder="1~30位数字/字母"
