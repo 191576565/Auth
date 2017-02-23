@@ -133,7 +133,7 @@ public class MainConfig extends JFinalConfig {
 		// TODO Auto-generated method stub
 		 me.add(new ContextPathHandler("ctxPath"));
 		// me.add(new ContextPathHandler("contextPath"));
-		//me.add(new GlobalHandler()); 
+		me.add(new GlobalHandler()); 
 	}
 
 	public static void main(String[] args) {
