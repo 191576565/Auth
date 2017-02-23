@@ -1,5 +1,5 @@
 $('#table').bootstrapTable({                                                                                                  
-    url: 'usrMgmt/defaultSelect',
+    url: 'usrMgmt/initSel',
 	method: 'get', 					//请求方式（*）                                                                                                
  	toolbar: '#toolbar', //工具按钮用哪个容器                       
 	striped: false, 					//是否显示行间隔色
@@ -30,7 +30,7 @@ $('#table').bootstrapTable({
         field: 'user_name',                                                                                                    
         title: '用户名称'                                                                                                         
     }, {                                                                                                                      
-        field: 'roles',                                                                                                     
+        field: 'role_names',                                                                                                     
         title: '角色名称'                                                                                                        
     }, {                                                                                                                      
         field: 'user_phone',                                                                                                    
@@ -87,10 +87,10 @@ angular.module('myApp', [])
 $("#scopeCode").blur(function(){
 	$.ajax({
 		type:"post",
-		url:"usrMgmt/checkUserId",
+		url:"usrMgmt/chkUserId",
 		data: {"scopeCode":$("#scopeCode").val()},
 		success: function(data) {
-			alert(data);
+			alert(data.chkUserId);
         }
 	})
 });
