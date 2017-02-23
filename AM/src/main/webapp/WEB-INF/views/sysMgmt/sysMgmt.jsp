@@ -53,18 +53,10 @@
  				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
  				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>
  			</div>
- 			<div class="col-xs-8 text-right">
-				<div class="form-inline">
-					<div class="form-group">
-						<input type="text" placeholder="请输入系统名称" style="width: 200px;" id="search" class="form-control">
-					</div>
-					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
-				</div><br/>
-			</div>
  		</div>
  		<table id="table"></table>
  		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
- 			<form id="form" name="signUpForm" ng-submit="submitForm()">
+ 			<form id="form" name="signUpForm" ng-submit="submitForm()" action="sysMgmt/save">
  				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
 					<label>域编码</label> 
 					<input name="scopeCode" 
@@ -80,9 +72,6 @@
 					/>
 					<p class="fa fa-check input_result success"
 						ng-if="signUpForm.scopeCode.$valid"></p>
-					<p class="error" ng-if="signUpForm.scopeCode.$error.required &&
-						signUpForm.scopeCode.$touched">
-					域编码不可为空</p>
 					<p class="error" ng-if="(signUpForm.scopeCode.$error.minlength ||
 						signUpForm.scopeCode.$error.maxlength) && 
 						signUpForm.scopeCode.$touched">
@@ -105,9 +94,6 @@
 					/>
 					<p class="fa fa-check input_result success"
 						ng-if="signUpForm.scopeName.$valid"></p>
-					<p class="error" ng-if="signUpForm.scopeName.$error.required &&
-						signUpForm.scopeName.$touched">
-					域名称不可为空</p>
 					<p class="error" ng-if="(signUpForm.scopeName.$error.minlength ||
 						signUpForm.scopeName.$error.maxlength) && 
 						signUpForm.scopeName.$touched">
@@ -124,16 +110,13 @@
 						   ng-maxlength="5"
 						   required
 					/>
-					<p class="error" ng-if="signUpForm.scopeSort.$error.required &&
-						signUpForm.scopeSort.$touched">
-					排序不可为空</p>
 					<p class="error" ng-if="(signUpForm.scopeSort.$error.minlength ||
 						signUpForm.scopeSort.$error.maxlength) && 
 						signUpForm.scopeSort.$touched">
 					域编码长度应在1~5位之间</p>
 				</div>
 				<div class="form-group">
-					<button class="btn btn-primary">保存</button>
+					<button type="submit" class="btn btn-primary">保存</button>
 				</div>
  			</form>
  		</div>

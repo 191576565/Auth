@@ -7,4 +7,10 @@
     	]]>
 	</sql>
 	
+	<sql id="addSys">
+		<![CDATA[ 
+        	select * from sys_domain_info
+    	]]>
+	</sql>
+	
 </sql-statement>
