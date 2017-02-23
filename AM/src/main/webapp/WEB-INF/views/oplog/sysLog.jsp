@@ -50,9 +50,9 @@
 				</ol>
 			</div>
 		</div>
-		<br/><br/><br/><br/>
+		<br/>
  		<div class="row">
- 			<div class="col-xs-9">
+ 			<div class="col-xs-12">
  			<form id="searchform">
 				<div class="form-inline">
 					<div class="form-group">
@@ -68,17 +68,15 @@
 					<div class="form-group">
 						<input type="text" placeholder="操作时间止" style="width: 170px;" class="form-control layer-date datetimepicker" id="endate" name="startdate_end">
 					</div>
+					
 					<button class="btn btn-default search" id="logsearch" type="button"><i class="fa fa-search"></i></button>
-					<button class="btn btn-default" type="reset" value="Reset"><i class="fa">重置</i></button>
+					<button class="btn btn-default" id="resetBtn" type="reset" value="Reset">重置</button>
+			
 				</div><br/>
 				</form>
 			</div>
  		</div>
  		<table id="syslogtable"></table>
- 		<div id="sys_add_div" style="display:none;">
- 			新增test用户
- 		</div>
- 		
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
@@ -109,10 +107,5 @@
     
     <!-- layerDate plugin javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/laydate/laydate.js"></script>
-    <script>
-        //外部js调用
-       
-      
-    </script>
 	</body>
 </html>
