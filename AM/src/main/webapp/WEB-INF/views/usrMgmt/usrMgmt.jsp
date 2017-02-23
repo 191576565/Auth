@@ -58,6 +58,7 @@
  			<form id="form" name="signUpForm" ng-submit="submitForm()">
  				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
 					<label>用户编码</label> 
+					<p id="chkUserError" class="error"></p>
 					<input name="scopeCode" 
 						   id="scopeCode"
 						   type="text" 

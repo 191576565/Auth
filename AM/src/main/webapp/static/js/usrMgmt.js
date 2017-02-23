@@ -90,7 +90,8 @@ $("#scopeCode").blur(function(){
 		url:"usrMgmt/chkUserId",
 		data: {"scopeCode":$("#scopeCode").val()},
 		success: function(data) {
-			alert(data.chkUserId);
+			var str = data.chkUserId?'':'该用户已存在';
+			 $("#chkUserError").html(str);
         }
 	})
 });
