@@ -3,7 +3,7 @@
 
 	<sql id="pageSelect">
 		<![CDATA[ 
-        	select * from sys_domain_info;
+        	select * from sys_domain_info
     	]]>
 	</sql>
 	
