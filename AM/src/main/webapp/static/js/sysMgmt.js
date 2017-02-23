@@ -38,7 +38,7 @@ $('#table').bootstrapTable({
 		field: 'opt',
 		title: '操 作',
 		formatter: function(value, row, index) {
-			var e = '<a href="#" class="btn btn-info update edit">编辑</a> ';
+			var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.id +'\',\''+ row.code +'\',\''+ row.name +'\',\''+ row.sort +'\')">编辑</a> ';
 			var d = '<a href="#" class="btn btn-danger delete">删除</a> ';
 			var f = '<a href="orgMgmt" class="btn btn-success">机构</a> ';
 			return e + d + f;
@@ -56,15 +56,18 @@ $('#sys_add').on('click', function() {
 	});
 });
 
-$('#table').on('click', '.edit', function() {
+function onEdit(id,code,name,sort) {
+//	alert(id + ' ' + code + ' ' + name + ' ' + sort);
+	var $ipt_code = $("#sys_add_div #form #ipt_code").val(code);
+	var $ipt_name = $("#sys_add_div #form #ipt_name").val(name);
+	var $ipt_sort = $("#sys_add_div #form #ipt_sort").val(sort);
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
 		title: '系统信息',
-		area: ['640px', '360px']
+		area: ['640px', '360px'],
 	});
-	return false;
-});
+};
 
 angular.module('myApp', [])
 .controller('SignUpController',function($scope){
