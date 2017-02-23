@@ -38,7 +38,7 @@ $('#table').bootstrapTable({
 		field: 'uuid',
 		title: '操 作',
 		formatter: function(value, row, index) {
-			var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.id +'\',\''+ row.code +'\',\''+ row.name +'\',\''+ row.sort +'\')">编辑</a> ';
+			var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.domain_id +'\',\''+ row.domain_name +'\',\''+ row.sort_id +'\')">编辑</a> ';
 			var d = '<a href="#" class="btn btn-danger delete">删除</a> ';
 			var f = '<a href="orgMgmt" class="btn btn-success">机构</a> ';
 			return e + d + f;
