@@ -69,6 +69,7 @@
 						<input type="text" placeholder="操作时间止" style="width: 170px;" class="form-control layer-date datetimepicker" id="endate" name="startdate_end">
 					</div>
 					<button class="btn btn-default search" id="logsearch" type="button"><i class="fa fa-search"></i></button>
+					<button class="btn btn-default" type="reset" value="Reset"><i class="fa">重置</i></button>
 				</div><br/>
 				</form>
 			</div>
@@ -91,7 +92,7 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<!-- Bootstrap datetimepicker -->
-	 <script src="${ctxPath }/static/js/bootstrap-datetimepicker.min.js"></script>
+	 <script src="${ctxPath }/static/js/bootstrap-datetimepicker.js"></script>
 	 <script src="${ctxPath }/static/js/bootstrap-datetimepicker.zh-CN.js"></script>
 	
     <!-- Peity -->

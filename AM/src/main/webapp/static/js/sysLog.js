@@ -78,27 +78,6 @@ function onMore(name) {
 
 
 //------------
-$("#logsearch_old").click(function() {
-    $.ajax({
-        url: "syslog/search",//要请求的服务器url         
-        data: $("#searchform").serialize(),
-        async: true,   //是否为异步请求
-        cache: false,  //是否缓存结果
-        type: "POST", //请求方式为POST
-        dataType: "json",   //服务器返回的数据是什么类型 
-        success: function(result){  //这个方法会在服务器执行成功是被调用 ，参数result就是服务器返回的值(现在是json类型) 
-            if(result){
-            	
-            	$('#syslogtable').bootstrapTable('refresh');
-            	//$('#syslogtable').bootstrapTable('load', result);
-            }else{
-            	alert("error");
-            	//$('#syslogtable').bootstrapTable('load', result);
-            }
-        }
-      });
-});
-
 $('#startdate').datetimepicker({
     format: 'yyyy-mm-dd hh:ii',
     autoclose:true,

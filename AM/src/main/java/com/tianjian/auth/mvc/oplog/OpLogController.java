@@ -14,18 +14,11 @@ import java.util.List;
 import java.util.Map;
 
 public class OpLogController extends Controller {
+
+	private OpLogService oplogservice = new OpLogService();
+
 	public void index() {
 		render("sysLog.jsp");
-	}
-
-	public void test() {
-
-		String sqlselect = ToolGetSql.getSql("tianjian.oplog.pageAllSelect");
-		String sqlfrom = ToolGetSql.getSql("tianjian.oplog.pageAllFrom");
-		Page<OpLog> logall = OpLog.dao.paginate(1, 2, sqlselect, sqlfrom);
-		PageJson myjson = new PageJson();
-		myjson.buildJson(logall);
-		renderJson(myjson);
 	}
 
 	public static void datasave(String doName) {
@@ -45,78 +38,30 @@ public class OpLogController extends Controller {
 	}
 
 	/*
-	 * 获取日志数据
-	 * 
-	 * @return json
-	 * 
+	 * 获取日志数据 
+	 * @return json 
 	 * @author hujian
-	 * 
 	 * @see ToolGetSql
-	 * 
 	 * @
 	 */
 	public void logdata() {
-		//获取表单参数
+		// 获取表单参数
 		Integer pageSize = getParaToInt("pageSize");
 		Integer pageNumber = getParaToInt("pageNumber");
 		String user_uuid = getPara("user_uuid");
 		String op_type = getPara("op_type");
 		String startdate_start = getPara("startdate_start");
 		String startdate_end = getPara("startdate_end");
-		//调用生成from sql，并构造param
-		Map<String, Object> mpara = new HashMap<String, Object>();
-		String domain_name = getPara("domain_name");
-		mpara.put("domain_name", "FTP");
-		mpara.put("user_uuid", user_uuid);
-		mpara.put("op_type", op_type);
-		mpara.put("startdate_start", startdate_start);
-		mpara.put("startdate_end", startdate_end);
-		
-		String sqlselect = ToolGetSql.getSql("tianjian.oplog.pageAllSelect");
-		String sqlfrom = ToolGetSql.getSql("tianjian.oplog.pageAllFrom", mpara);
-		System.out.println("size:" + pageSize);
-		System.out.println("number:" + pageNumber);
+		// 组装sql参数
+		Map<String, Object> mpara = oplogservice.getMparam(user_uuid, op_type, startdate_start, startdate_end);
+		// 获取select语句
+		String selectsql = oplogservice.getSelectSql(OpLog.sqlId_log_select);
+		// 获取from语句
+		String fromsql = oplogservice.getFromSql(OpLog.sqlId_log_selectfrom, mpara);
+		// 获取数据
+		PageJson<OpLog> myjson = oplogservice.getPageData(pageSize, pageNumber, selectsql, fromsql);
 
-		Page<OpLog> logall = OpLog.dao.paginate(pageNumber, pageSize, sqlselect, sqlfrom);
-		PageJson myjson = new PageJson();
-		myjson.buildJson(logall);
 		renderJson(myjson);
 	}
 
-	/*
-	 * 搜索日志数据
-	 * 
-	 * @return json
-	 * 
-	 * @author hujian
-	 * 
-	 * @see ToolGetSql
-	 * 
-	 * @
-	 */
-	public void search() {
-		String domain_name = getPara("domain_name");
-		domain_name="FTP";
-		String user_uuid = getPara("user_uuid");
-		String op_type = getPara("op_type");
-		String startdate_start = getPara("startdate_start");
-		String startdate_end = getPara("startdate_end");
-		// 调用生成from sql，并构造paramValue
-		Map<String, Object> mpara = new HashMap<String, Object>();
-		mpara.put("domain_name", domain_name);
-		mpara.put("user_uuid", user_uuid);
-		mpara.put("op_type", op_type);
-		mpara.put("startdate_start", startdate_start);
-		mpara.put("startdate_end", startdate_end);
-		System.out.println("getpara:" + mpara);
-
-		String sqlselect = ToolGetSql.getSql("tianjian.oplog.pageSearchSelect");
-		String sqlfrom = ToolGetSql.getSql("tianjian.oplog.pageSearchFrom", mpara);
-
-		// Page<OpLog> logsearch = OpLog.dao.paginate(1, 2, sqlselect, sqlfrom);
-		Page<Record> logsearch = Db.paginate(1, 15, sqlselect, sqlfrom);
-		PageJson myjson = new PageJson();
-		myjson.buildJson(logsearch);
-		renderJson(myjson);
-	}
 }
