@@ -1,16 +1,16 @@
 $('#table').bootstrapTable({
-	url: 					'static/js/demo/1.json', 		//请求后台的URL（*）
+	url: 					'sysMgmt/sysData', 		//请求后台的URL（*）
 	method: 				'get', 					//请求方式（*）
 	toolbar: 				'#toolbar', 			//工具按钮用哪个容器
 	striped: 				false, 					//是否显示行间隔色
 	cache: 					false, 					//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 	pagination: 			true, 					//是否显示分页（*）
 	sortable: 				false, 					//是否启用排序
-	sortOrder: 				"asc", 					//排序方式
+//	sortOrder: 				"asc", 					//排序方式
 //	queryParams: 			oTableInit.queryParams, //传递参数（*）	
 	sidePagination: 		"client",   			//分页方式：client客户端分页，server服务端分页（*）
 	pageNumber: 			1, 						//初始化加载第一页，默认第一页
-	pageSize: 				5, 						//每页的记录行数（*）
+//	pageSize: 				5, 						//每页的记录行数（*）
 	pageList: 				[10, 25, 50, 100], 		//可供选择的每页的行数（*）
 	search: 				false, 					//是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
 	showColumns: 			false, 					//是否显示所有的列
@@ -26,16 +26,16 @@ $('#table').bootstrapTable({
 	columns: [{
 		checkbox: true
 	}, {
-		field: 'code',
+		field: 'domain_id',
 		title: '域编码'
 	}, {
-		field: 'name',
+		field: 'domain_name',
 		title: '域 名'
 	}, {
-		field: 'sort',
+		field: 'sort_id',
 		title: '排 序'
 	}, {
-		field: 'opt',
+		field: 'uuid',
 		title: '操 作',
 		formatter: function(value, row, index) {
 			var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.id +'\',\''+ row.code +'\',\''+ row.name +'\',\''+ row.sort +'\')">编辑</a> ';

@@ -27,6 +27,7 @@ import com.tianjian.auth.mvc.login.LoginController;
 import com.tianjian.auth.mvc.model.User;
 import com.tianjian.auth.mvc.oplog.OpLog;
 import com.tianjian.auth.mvc.oplog.OpLogController;
+import com.tianjian.auth.mvc.sysMgmt.SysMgmt;
 import com.tianjian.platform.constant.ConstantCache;
 import com.tianjian.platform.constant.ConstantInit;
 import com.tianjian.platform.dto.DataBase;
@@ -105,6 +106,7 @@ public class MainConfig extends JFinalConfig {
 		// 添加表映射
 		arp.addMapping("SYS_LOG","UUID" ,OpLog.class);
 		arp.addMapping("SYS_USER_INFO", User.class);
+		arp.addMapping("sys_domain_info","UUID", SysMgmt.class);
 		me.add(c3p0Plugin);
 
 		me.add(arp);
