@@ -16,7 +16,7 @@ $('#table').bootstrapTable({
 	showColumns: 			false, 					//是否显示所有的列
 	showRefresh: 			false, 					//是否显示刷新按钮
 	minimumCountColumns: 	2, 						//最少允许的列数
-	clickToSelect: 			true, 					//是否启用点击选中行
+	clickToSelect: 			false, 					//是否启用点击选中行
 //	height: 				400,      				//行高，如果没有设置height属性，表格自动根据记录条数调整表格高度
 	uniqueId: 				"ID", 					//每一行的唯一标识，一般为主键列
 	showToggle: 			false, 					//是否显示详细视图和列表视图的切换按钮
@@ -48,6 +48,9 @@ $('#table').bootstrapTable({
 
 //layer弹出自定义div
 $('#sys_add').on('click', function() {
+	var $ipt_code = $("#sys_add_div #form #ipt_code").val('');
+	var $ipt_name = $("#sys_add_div #form #ipt_name").val('');
+	var $ipt_sort = $("#sys_add_div #form #ipt_sort").val('');
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
