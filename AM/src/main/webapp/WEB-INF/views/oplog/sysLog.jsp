@@ -52,7 +52,7 @@
 		</div>
 		<br/>
  		<div class="row">
- 			<div class="col-xs-9">
+ 			<div class="col-xs-12">
  			<form id="searchform">
 				<div class="form-inline">
 					<div class="form-group">
@@ -68,8 +68,10 @@
 					<div class="form-group">
 						<input type="text" placeholder="操作时间止" style="width: 170px;" class="form-control layer-date datetimepicker" id="endate" name="startdate_end">
 					</div>
+					
 					<button class="btn btn-default search" id="logsearch" type="button"><i class="fa fa-search"></i></button>
-					<button class="btn btn-default" type="reset" value="Reset"><i class="fa">重置</i></button>
+					<button class="btn btn-default" id="resetBtn" type="reset" value="Reset">重置</button>
+			
 				</div><br/>
 				</form>
 			</div>

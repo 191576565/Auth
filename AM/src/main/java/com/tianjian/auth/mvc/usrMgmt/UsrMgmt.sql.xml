@@ -10,6 +10,7 @@
 			       A.USER_ID,
 			       A.ORG_UUID,
 			       A.USER_NAME,
+			       A.USER_PHONE,
 			       A.USER_EMAIL,
 			       B.ORG_UNIT_ID,
 			       B.ORG_UNIT_DESC,
@@ -30,6 +31,7 @@
 			          A.USER_ID,
 			          A.ORG_UUID,
 			          A.USER_NAME,
+			       	  A.USER_PHONE,
 			          A.USER_EMAIL,
 			          B.ORG_UNIT_ID,
 			          B.ORG_UNIT_DESC
@@ -38,6 +40,23 @@
 	<sql id="checkUserId">
 		<![CDATA[ 
         	SELECT UUID,DOMAIN_UUID,USER_ID,ORG_UUID FROM SYS_USER_INFO WHERE USER_ID=?
+    	]]>
+	</sql>
+	<sql id="addUser">
+		<![CDATA[ 
+			INSERT INTO SYS_USER_INFO
+			  (DOMAIN_UUID,
+			   USER_ID,
+			   ORG_UUID,
+			   ROLES,
+			   USER_PWD,
+			   USER_NAME,
+			   USER_EMAIL,
+			   USER_PHONE,
+			   CREATED_DATE,
+			   CREATOR)
+			VALUES
+			  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     	]]>
 	</sql>
 	<sql id="selectDomain">
