@@ -2,6 +2,7 @@ package com.tianjian.auth.mvc.sysMgmt;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jfinal.template.ext.directive.Date;
 
 public class SysMgmtController extends Controller {
 	
@@ -32,6 +33,8 @@ public class SysMgmtController extends Controller {
 		sysMgmt.set("DOMAIN_NAME", getPara("scopeName"));
 		sysMgmt.set("CREATOR", "Yeqc");
 		sysMgmt.set("SORT_ID", getPara("scopeSort"));
+		sysMgmt.set("MODIFIER", "Yeqc");
+		System.err.println(sysMgmtService.notRepeated(getPara("scopeCode"), getPara("scopeName")));
 		sysMgmtService.save(sysMgmt);
 		redirect("/sysMgmt");
 	}

@@ -2,6 +2,7 @@ package com.tianjian.auth.mvc.sysMgmt;
 
 import java.util.List;
 import com.tianjian.platform.tools.ToolGetSql;
+import com.jfinal.plugin.activerecord.Db;
 
 public class SysMgmtService {
 	
@@ -14,6 +15,12 @@ public class SysMgmtService {
 	//新增系统信息
 	public void save(SysMgmt sysMgmt){
 		sysMgmt.save();
+	}
+	
+	//重复性验证
+	public boolean notRepeated(String scopeCode, String scopeName){
+		String sql = ToolGetSql.getSql(SysMgmt.sqlId_sys_repeat);
+		return SysMgmt.dao.find(sql, scopeCode, scopeName).isEmpty();
 	}
 
 }

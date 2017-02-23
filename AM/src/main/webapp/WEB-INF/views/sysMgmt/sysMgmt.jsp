@@ -56,7 +56,7 @@
  		</div>
  		<table id="table"></table>
  		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
- 			<form id="form" name="signUpForm" ng-submit="submitForm()" action="sysMgmt/save">
+ 			<form id="form" name="signUpForm" ng-submit="submitForm()" action="sysMgmt/save" method="post">
  				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
 					<label>域编码</label> 
 					<input name="scopeCode" 
