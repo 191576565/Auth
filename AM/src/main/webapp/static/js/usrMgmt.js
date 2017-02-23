@@ -96,3 +96,14 @@ $("#scopeCode").blur(function(){
 	})
 });
 
+$("#form").submit(function(){
+	alert($("#form").serialize());
+	$.ajax({
+		type:"post",
+		url:"usrMgmt/insUsr",
+		data: $("#form").serialize(),
+		success: function(data) {
+			alert("data");
+        }
+	})
+});

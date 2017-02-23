@@ -192,7 +192,7 @@
 					邮箱填写错误</p>
 				</div>
 				<div class="form-group">
-					<button class="btn btn-primary">保存</button>
+					<button class="btn btn-primary" type="submit">保存</button>
 				</div>
  			</form>
  		</div>

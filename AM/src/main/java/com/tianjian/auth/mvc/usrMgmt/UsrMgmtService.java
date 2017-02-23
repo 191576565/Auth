@@ -29,6 +29,8 @@ public class UsrMgmtService {
 		boolean chkRst = Db.find(sql, userId).isEmpty();
 		return chkRst;
 	}
+	
+//	以下没用到
 	public List<Record> selectDomain(){
 		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectDomain");
 		List<Record> list = Db.find(sql);

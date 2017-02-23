@@ -108,7 +108,7 @@ public class MainConfig extends JFinalConfig {
 		arp.addMapping("SYS_LOG","UUID" ,OpLog.class);
 		arp.addMapping("SYS_USER_INFO", User.class);
 		arp.addMapping("sys_domain_info","UUID", SysMgmt.class);
-		arp.addMapping("SYS_USER_INFO", UsrMgmt.class);
+		arp.addMapping("SYS_USER_INFO","UUID", UsrMgmt.class);
 		me.add(c3p0Plugin);
 
 		me.add(arp);
