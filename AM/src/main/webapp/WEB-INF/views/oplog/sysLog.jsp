@@ -50,7 +50,7 @@
 				</ol>
 			</div>
 		</div>
-		<br/><br/><br/><br/>
+		<br/>
  		<div class="row">
  			<div class="col-xs-9">
  			<form id="searchform">
@@ -75,10 +75,6 @@
 			</div>
  		</div>
  		<table id="syslogtable"></table>
- 		<div id="sys_add_div" style="display:none;">
- 			新增test用户
- 		</div>
- 		
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
@@ -109,10 +105,5 @@
     
     <!-- layerDate plugin javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/laydate/laydate.js"></script>
-    <script>
-        //外部js调用
-       
-      
-    </script>
 	</body>
 </html>

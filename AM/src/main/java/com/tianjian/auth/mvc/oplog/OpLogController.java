@@ -16,33 +16,50 @@ import java.util.Map;
 public class OpLogController extends Controller {
 
 	private OpLogService oplogservice = new OpLogService();
-
+	
+	/*
+	 * 日志首页
+	 * @return 
+	 * @author hujian
+	 * @see 
+	 * @
+	 */
 	public void index() {
 		render("sysLog.jsp");
 	}
-
-	public static void datasave(String doName) {
+	/*
+	 * 静态方法
+	 * 保存日志数据到数据库,域，用户名，机构，角色名称都从session拿
+	 * @return  
+	 * @author hujian
+	 * @see jfinal
+	 * @TODO：  session完了之后再改对应取值
+	 */
+	public  void logToDb(String opType,String opContent) {
 
 		OpLog l = new OpLog();
+		//从session获取数据
+		String doName=getSessionAttr("user");
+		String orgName=getSessionAttr("user");
+		String roleName=getSessionAttr("user");
+		String userName=getSessionAttr("user");
+		//Model赋值
 		l.set("DOMAIN_NAME", doName);
-		l.set("ORG_UNIT_DESC", doName);
-		l.set("USER_NAME", doName);
-		l.set("ROLE_NAME", doName);
-		l.set("OP_TYPE", doName);
-		l.set("OP_CONTENT", doName);
+		l.set("ORG_UNIT_DESC", orgName);
+		l.set("USER_NAME", userName);
+		l.set("ROLE_NAME", roleName);
+		l.set("OP_TYPE", opType);
+		l.set("OP_CONTENT", opContent);
 		l.set("OP_DATE", new Timestamp(System.currentTimeMillis()));
-
 		l.save();
-
-		// OpLog.dao.set(attr, value);
 	}
 
 	/*
 	 * 获取日志数据 
 	 * @return json 
 	 * @author hujian
-	 * @see ToolGetSql
-	 * @
+	 * @see ToolGetSql oplogservice
+	 * @TODO：  现在域名写死了FTP，session完了之后再改对应取值
 	 */
 	public void logdata() {
 		// 获取表单参数
