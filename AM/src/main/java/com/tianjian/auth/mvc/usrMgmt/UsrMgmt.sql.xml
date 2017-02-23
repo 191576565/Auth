@@ -3,18 +3,41 @@
 <!-- 用户sql -->
 <sql-statement namespace="tianjian.usrMgmt">
 
-	<sql id="defaultSelect">
+	<sql id="initSelect">
 		<![CDATA[ 
-        	SELECT A.*, B.ORG_UNIT_ID, B.ORG_UNIT_DESC
+			SELECT A.UUID,
+			       A.DOMAIN_UUID,
+			       A.USER_ID,
+			       A.ORG_UUID,
+			       A.USER_NAME,
+			       A.USER_EMAIL,
+			       B.ORG_UNIT_ID,
+			       B.ORG_UNIT_DESC,
+			       LISTAGG(C.ROLE_ID, ',') WITHIN GROUP(ORDER BY C.ROLE_ID) AS ROLE_IDS,
+			       LISTAGG(C.ROLE_NAME, ',') WITHIN GROUP(ORDER BY C.ROLE_ID) AS ROLE_NAMES
 			  FROM SYS_USER_INFO A
-			  LEFT JOIN SYS_ORG_INFO B
+			 INNER JOIN (SELECT T.UUID, T.DOMAIN_UUID, T.ORG_UNIT_ID, T.ORG_UNIT_DESC
+			               FROM SYS_ORG_INFO T
+			              WHERE T.DOMAIN_UUID = ?
+			              START WITH T.UUID = ?
+			             CONNECT BY PRIOR T.UUID = T.ORG_UP_UUID) B
 			    ON A.ORG_UUID = B.UUID
-			 ORDER BY ORG_UUID, A.UUID
+			   AND A.DOMAIN_UUID = B.DOMAIN_UUID
+			  LEFT JOIN SYS_ROLE_INFO C
+			    ON INSTR(A.ROLES, C.UUID) > 0
+			 GROUP BY A.UUID,
+			          A.DOMAIN_UUID,
+			          A.USER_ID,
+			          A.ORG_UUID,
+			          A.USER_NAME,
+			          A.USER_EMAIL,
+			          B.ORG_UNIT_ID,
+			          B.ORG_UNIT_DESC
     	]]>
 	</sql>
 	<sql id="checkUserId">
 		<![CDATA[ 
-        	SELECT * FROM SYS_USER_INFO WHERE USER_ID=?
+        	SELECT UUID,DOMAIN_UUID,USER_ID,ORG_UUID FROM SYS_USER_INFO WHERE USER_ID=?
     	]]>
 	</sql>
 	<sql id="selectDomain">
