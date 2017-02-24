@@ -27,6 +27,7 @@ import com.tianjian.auth.mvc.login.LoginController;
 import com.tianjian.auth.mvc.model.User;
 import com.tianjian.auth.mvc.oplog.OpLog;
 import com.tianjian.auth.mvc.oplog.OpLogController;
+import com.tianjian.auth.mvc.rolMgmt.RoleMgmt;
 import com.tianjian.auth.mvc.sysMgmt.SysMgmt;
 import com.tianjian.auth.mvc.usrMgmt.UsrMgmt;
 import com.tianjian.platform.constant.ConstantCache;
@@ -113,6 +114,7 @@ public class MainConfig extends JFinalConfig {
 		arp.addMapping("SYS_USER_INFO", User.class);
 		arp.addMapping("sys_domain_info","UUID", SysMgmt.class);
 		arp.addMapping("SYS_USER_INFO","UUID", UsrMgmt.class);
+		arp.addMapping("SYS_ROLE_INFO","UUID", RoleMgmt.class);
 		me.add(c3p0Plugin);
 
 		me.add(arp);

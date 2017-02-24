@@ -63,56 +63,61 @@
  		</div>
  		<table id="table"></table>
  		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
- 			<form id="form" name="signUpForm" ng-submit="submitForm()">
+ 			<form id="form" name="signUpForm" ng-submit="submitForm()" action="" method="post">
  				<div class="form-group" ng-class="{ 'has-success': signUpForm.CustCode.$valid }">
+ 				<input id="uuid" 
+ 						name="UUID" 
+ 						type="hidden" 
+ 						ng-model="userdata.UUID"
+ 					/>
  					<label>角色编码</label> 
- 					<input name="CustCode" 
+ 					<input name="role_id" 
  						   type="text" 
  						   class="form-control"
  						   placeholder="1~30位字母/数字"
- 						   ng-model="userdata.scopeCode"
+ 						   ng-model="userdata.role_id"
 						   ng-minlength="1"
 						   ng-maxlength="30"
 						   ng-pattern="/^[A-Za-z0-9]+$/"
 						   required
  					/>
  					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.CustCode.$valid"></p>
-					<p class="error" ng-if="signUpForm.CustCode.$error.required &&
-						signUpForm.CustCode.$touched">
+						ng-if="signUpForm.role_id.$valid"></p>
+					<p class="error" ng-if="signUpForm.role_id.$error.required &&
+						signUpForm.role_id.$touched">
 					不可为空</p>
-					<p class="error" ng-if="(signUpForm.CustCode.$error.minlength ||
-						signUpForm.CustCode.$error.maxlength) && 
-						signUpForm.CustCode.$touched">
+					<p class="error" ng-if="(signUpForm.role_id.$error.minlength ||
+						signUpForm.role_id.$error.maxlength) && 
+						signUpForm.role_id.$touched">
 					长度应在1~30位之间</p>
-					<p class="error" ng-if="signUpForm.CustCode.$error.pattern &&
-						signUpForm.CustCode.$touched">
+					<p class="error" ng-if="signUpForm.role_id.$error.pattern &&
+						signUpForm.role_id.$touched">
 					只能是字母/数字组合</p>
  				</div>
-				<div class="form-group" ng-class="{ 'has-success': signUpForm.CustName.$valid }">
+				<div class="form-group" ng-class="{ 'has-success': signUpForm.role_name.$valid }">
 					<label>角色名称</label> 
-					<input name="CustName" 
+					<input name="role_name" 
 						   type="text" 
 						   class="form-control"
 						   placeholder="请输入角色名"
-						   ng-model="userdata.CustName"
+						   ng-model="userdata.role_name"
 						   required		   
 					/>
 					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.CustName.$valid"></p>
-					<p class="error" ng-if="signUpForm.CustName.$error.required &&
-						signUpForm.CustName.$touched">
+						ng-if="signUpForm.role_name.$valid"></p>
+					<p class="error" ng-if="signUpForm.role_name.$error.required &&
+						signUpForm.role_name.$touched">
 					不可为空</p>
 				</div>
 				<div class="form-group">
 					<label>所属域</label> 
-					<select class="form-control">
-						<option value="FTP">FTP</option>
-						<option value="RPM">RPM</option>
+					<select class="form-control" name="domain_uuid">
+						<option value="48ABB16E6BC0164DE055000000000001">外部定价</option>
+						<option value="48A97A1E49CE173BE055000000000001">系统初始域</option>
 					</select>
 				</div>
 				<div class="form-group">
-					<button class="btn btn-info ladda-button save">保存</button>
+					<button class="btn btn-info ladda-button save" id="sub">保存</button>
 				</div>
  			</form>
  		</div>
