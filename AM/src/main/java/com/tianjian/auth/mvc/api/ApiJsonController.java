@@ -62,6 +62,7 @@ public class ApiJsonController extends Controller {
 	 *@Author    谢涛
 	 *@Return    object  json
 	 *@Eg           http://127.0.0.1:8080/AM/Api/rpmParam?userid=jfinal&sid=77E30E1DFD28BA533821DE626ED7DC78&login=0&apitype=1
+	 *@Param    apitype=1:获取前台权限
 	 */
     public void rpmParam() {
     	String username=getPara("userid") ;
