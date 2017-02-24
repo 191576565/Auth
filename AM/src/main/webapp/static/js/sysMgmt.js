@@ -97,6 +97,7 @@ $('#sub').click(function(){
 					title: '新增失败',
 					area: ['200px', '200px'],
 				});
+				return false;
 			}else{
 				window.location.href='sysMgmt';
 			}
