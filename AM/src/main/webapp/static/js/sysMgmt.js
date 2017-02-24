@@ -97,7 +97,9 @@ $('#sub').click(function(){
 					title: '新增失败',
 					area: ['200px', '200px'],
 				});
-			};
+			}else{
+				window.location.href='sysMgmt';
+			}
 		});
 		return false;//阻止表单默认提交
 	});
