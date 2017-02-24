@@ -24,7 +24,6 @@ import com.jfinal.template.Engine;
 import com.tianjian.auth.mvc.handler.GlobalHandler;
 import com.tianjian.auth.mvc.login.Login;
 import com.tianjian.auth.mvc.login.LoginController;
-import com.tianjian.auth.mvc.model.Apitype1;
 import com.tianjian.auth.mvc.model.User;
 import com.tianjian.auth.mvc.oplog.OpLog;
 import com.tianjian.auth.mvc.oplog.OpLogController;
