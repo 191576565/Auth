@@ -185,5 +185,10 @@ public interface ConstantInit {
 	 *  主数据源名称：系统主数据源
 	 */
 	public static final String db_dataSource_main = "db.dataSource.main";
+	
+	/**
+	 * # 域名或者服务器IP，多个逗号隔开，验证Referer时使用
+	 */
+	public static final String config_domain_key = "config.domain";
 
 }

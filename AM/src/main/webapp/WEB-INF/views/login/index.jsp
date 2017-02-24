@@ -114,9 +114,10 @@
                                 <li class="divider"></li>
                                 <li>
                                     <div class="text-center link-block">
-                                        <a class="J_menuItem" href="ulogin">
+                                        <a class="J_menuItem" href="ulogin/userexit">
                                             <i class="fa fa-bell-slash"></i> <strong> 退出登录</strong>
                                         </a>
+                                        </form>
                                     </div>
                                 </li>
                             </ul>
@@ -144,6 +145,12 @@
 
     <!-- 第三方插件 -->
     <script src="static/js/plugins/pace/pace.min.js"></script>
+    <script type="text/javascript">
+    function dosubmit(){
+    	document.forms[0].action="userexit";
+    	document.forms[0].submit();
+    	}
+    </script>
 
 </body>
 

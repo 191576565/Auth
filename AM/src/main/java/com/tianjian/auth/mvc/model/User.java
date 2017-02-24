@@ -11,9 +11,14 @@ import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseModel;
 import com.tianjian.platform.tools.ToolCache;
 
-/**
- * 用户model
- * @author 董华健
+
+
+
+/** 
+ *@Company  重庆天健金管科技股份有限公司
+ *@Function   User Model         
+ *@Declare     
+ *@Author      谢涛
  */
 @SuppressWarnings("unused")
 public class User extends BaseModel<User> {
@@ -73,6 +78,12 @@ public class User extends BaseModel<User> {
 
 	//COLUMN_SECRETKEY 加密key 
 	public static final String secretkey = "secretkey";
+	
+	//CHAR(1)    Y 用户登录状态           0 登录  1 未登录
+	public static final String loggin_status = "loggin_status";
+		
+	//VARCHAR2(60)  Y  用户SESSION_ID
+	public static final String user_sid = "user_sid";
 	
 
 	public  String getUuid() {
@@ -134,9 +145,16 @@ public class User extends BaseModel<User> {
 	public  String getSecretkey() {
 		return secretkey;
 	}
-	
 
-	
 
+
+	public  String getLogginStatus() {
+		return loggin_status;
+	}
+
+	public  String getUserSid() {
+		return user_sid;
+	}
+	
 	
 }

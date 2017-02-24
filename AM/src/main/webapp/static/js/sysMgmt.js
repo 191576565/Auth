@@ -80,7 +80,7 @@ angular.module('myApp', [])
 			alert('请检查您的信息!');
 		else{
 			console.log($scope.userdata);
-			window.location.href='sysMgmt';
+//			window.location.href='sysMgmt';
 //			alert('提交成功!');
 		}
 	}
@@ -91,7 +91,14 @@ $('#sub').click(function(){
 		$(this).ajaxSubmit(function(resultJson){
 			//回调操作
 			if(JSON.stringify(resultJson) == "false"){
-				alert("域编码/域名重复，新增失败!");
+				layer.open({
+					type: 1,
+					content: '域编码/域名重复，新增失败!',
+					title: '新增失败',
+					area: ['200px', '200px'],
+				});
+			}else{
+				window.location.href='sysMgmt';
 			}
 		});
 		return false;//阻止表单默认提交
