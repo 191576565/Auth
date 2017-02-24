@@ -51,11 +51,11 @@ public class SysMgmtController extends Controller {
 		sysMgmt.set("DOMAIN_ID", getPara("scopeCode"));
 		sysMgmt.set("DOMAIN_NAME", getPara("scopeName"));
 		sysMgmt.set("SORT_ID", getPara("scopeSort"));
-		if(sysMgmtService.update(sysMgmt)){
-			renderJson(true);
+		if(!sysMgmtService.update(sysMgmt)){
+			renderJson(false);
 			return;
 		}
-		renderJson(false);
+		renderJson(true);
 	}
 	
 	/*
@@ -65,11 +65,11 @@ public class SysMgmtController extends Controller {
 	public void delete(){
 		SysMgmt sysMgmt = new SysMgmt();
 		sysMgmt.set("UUID", getPara("UUID"));
-		if(sysMgmtService.delete(sysMgmt)){
-			renderJson(true);
+		if(!sysMgmtService.delete(sysMgmt)){
+			renderJson(false);
 			return;
 		}
-		renderJson(false);
+		renderJson(true);
 	}
 	
 }

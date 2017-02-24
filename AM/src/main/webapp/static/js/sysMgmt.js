@@ -83,20 +83,21 @@ function onDel(id) {
 		title: '系统提示',
 		area: ['300px', '100px'],
 	});
-	return false;
 };
 $('#btn_beSure').click(function() {
 	$('#del_form').attr("action", "sysMgmt/delete");
 	$('#del_form').submit(function(){
 		$(this).ajaxSubmit(function(resultJson){
-			if(JSON.stringify(resultJson) == "true"){
-				window.location.href='sysMgmt';
-				alert('删除成功');
+			if(JSON.stringify(resultJson) == "false"){
+				alert('更新失败');
+				return;
 			}else{
-				alert('删除失败!');
+				window.location.href='sysMgmt';
 			}
 		});
+		return false;
 	});
+	
 });
 
 //表单验证
