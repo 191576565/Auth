@@ -1,22 +1,23 @@
 package com.tianjian.auth.mvc.model;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
+
+
+
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
+
 import java.util.Map;
 
-import org.apache.commons.codec.binary.Base64;
+
+
 
 import com.jfinal.aop.Before;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Record;
+
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.tianjian.auth.mvc.base.BaseModel;
-import com.tianjian.auth.mvc.base.BaseSecurityMD5;
+
+
 import com.tianjian.platform.constant.ConstantRender;
 import com.tianjian.platform.plugin.ParamInitPlugin;
 import com.tianjian.platform.tools.ToolCache;
@@ -51,6 +52,55 @@ public class UserService   {
 			user = User.dao.findFirst(sql, userName);
 		}
 		return user;
+	}
+	
+	/**
+	 * @exception 用户登录成功后更新数据库状态
+	 * @author      谢 涛
+	 * */
+	@Before(Tx.class)
+	public static  int  login(String username,String Sessionid,String type){
+		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + username);
+		int updates='0';
+		if(user == null){
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("column", User.user_id);
+			param.put("table", User.table_name);
+			String sql = getSqlByBeetl("model.user.ulogino", param);
+	        updates=Db.update(sql,type,Sessionid,username) ;
+	       
+		}
+		return updates;
+	}
+	
+	/**
+	 * @exception 用户登录成功后更新数据库状态
+	 * @author      谢 涛
+	 * */
+	@Before(Tx.class)
+	public static  int  ulogin(String username,String Sessionid,String type){
+		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + username);
+		int updates='0';
+		if(user == null){
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("column", User.user_id);
+			param.put("table", User.table_name);
+			String sql = getSqlByBeetl("model.user.ulogino", param);
+	        updates=Db.update(sql,type,Sessionid,username) ;
+		}
+		return updates;
+	}
+	
+	/**
+	 * @exception 全局监听器检查用户是登录
+	 * @author      谢 涛
+	 * */
+	public static boolean  login_status(String username){
+		User	user=User.dao.findFirst("select loggin_status from sys_user_info where user_id = ? and loggin_status='1' ",username) ;
+		if (user==null){
+			return false;
+		}
+		return true;
 	}
 	
 }
