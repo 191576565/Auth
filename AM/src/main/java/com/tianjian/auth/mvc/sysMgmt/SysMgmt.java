@@ -9,5 +9,6 @@ public class SysMgmt extends Model<SysMgmt> {
 	public static final SysMgmt dao=new SysMgmt();	
 	
 	public static final String sqlId_sys_select = "tianjian.sys.pageSelect";
+	public static final String sqlId_sys_repeat = "tianjian.sys.repeatSelect";
 	
 }

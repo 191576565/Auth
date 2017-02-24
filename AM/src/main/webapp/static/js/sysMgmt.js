@@ -12,7 +12,7 @@ $('#table').bootstrapTable({
 	pageNumber: 			1, 						//初始化加载第一页，默认第一页
 //	pageSize: 				5, 						//每页的记录行数（*）
 	pageList: 				[10, 25, 50, 100], 		//可供选择的每页的行数（*）
-	search: 				false, 					//是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+	search: 				true, 					//是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
 	showColumns: 			false, 					//是否显示所有的列
 	showRefresh: 			false, 					//是否显示刷新按钮
 	minimumCountColumns: 	2, 						//最少允许的列数
@@ -85,3 +85,15 @@ angular.module('myApp', [])
 		}
 	}
 })
+
+$('#sub').click(function(){
+	$('#form').submit(function(){
+		$(this).ajaxSubmit(function(resultJson){
+			//回调操作
+			if(JSON.stringify(resultJson) == "false"){
+				alert("域编码/域名重复，新增失败!");
+			}
+		});
+		return false;//阻止表单默认提交
+	});
+});

@@ -58,6 +58,7 @@
  			<form id="form" name="signUpForm" ng-submit="submitForm()">
  				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
 					<label>用户编码</label> 
+					<p id="chkUserError" class="error"></p>
 					<input name="scopeCode" 
 						   id="scopeCode"
 						   type="text" 
@@ -191,7 +192,7 @@
 					邮箱填写错误</p>
 				</div>
 				<div class="form-group">
-					<button class="btn btn-primary">保存</button>
+					<button class="btn btn-primary" type="submit">保存</button>
 				</div>
  			</form>
  		</div>
