@@ -46,6 +46,7 @@ public class UsrMgmtController extends Controller {
 		String userPwd = BaseSecurityMD5.encodeMD5Hex(getPara("pwd"));
 		String userPhone = getPara("phone");
 		String userEmail = getPara("email");
+		//前台没做domainUUID和orgUUID，先暂用常量代替
 		String domainUUID = "48ABB16E6BB7164DE055000000000001";
 		String orgUUID = "4930C618599C63FBE055000000000001";
 		//将session中的userid作为创建者
