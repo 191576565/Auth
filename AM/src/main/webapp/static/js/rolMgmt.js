@@ -1,7 +1,7 @@
 $('#table').bootstrapTable({
     url: 'rolMgmt/showRol',
 // 	toolbar: '#toolbar', //工具按钮用哪个容器
-	method: 'post', 					//请求方式（*）    
+	method: 'get', 					//请求方式（*）    
  	striped: true, //是否显示行间隔色
  	pagination: true, //是否显示分页（*）
  	sortable: false, //是否启用排序
@@ -69,13 +69,56 @@ $('#table').on('click', '.edit', function() {
 angular.module('myApp', [])
 .controller('SignUpController',function($scope){
 	$scope.userdata = {};
-	$scope.submitForm = function(){
-		if($scope.signUpForm.$invalid)
-			alert('请检查您的信息!');
-		else{
-			console.log($scope.userdata);
-			window.location.href='rolMgmt';
-//			alert('提交成功!');
-		}
-	}
+	$scope.submitForm = function(){}
 })
+
+
+
+$('#sub').click(function(){
+	//新增操作
+	if($("#sys_add_div #form #uuid").val() == ''){
+		$("#form").attr("action", "rolMgmt/save");
+		
+		$('#form').submit(function(){
+			
+			$(this).ajaxSubmit(function(resultJson){
+			
+				//回调操作
+				if(JSON.stringify(resultJson) == "false"){
+					layer.open({
+						type: 1,
+						content: '角色编码/角色名重复，新增失败!',
+						title: '新增失败',
+						area: ['200px', '200px'],
+					});
+					return false;
+				}else{
+					
+					window.location.href='rolMgmt';
+				}
+			});
+					
+			return false;//阻止表单默认提交
+		});
+	}
+	
+	//修改操作
+	if($("#sys_add_div #form #uuid").val() != ''){
+		$("#form").attr("action", "sysMgmt/update");
+		$('#form').submit(function(){
+			$(this).ajaxSubmit(function(resultJson){
+				if(JSON.stringify(resultJson) == "true"){
+					window.location.href='sysMgmt';
+					alert('修改成功');
+				}else{
+					alert('修改失败!');
+				}
+			});
+			return false;//阻止表单默认提交
+		});
+	}
+	
+	
+});
+
+
