@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.tianjian.auth.mvc.model.UserService;
 /** 
  *@Company  重庆天健金管科技股份有限公司
  *@Function   Session 管理控制器            
@@ -33,8 +34,9 @@ public class BaseSessionController extends Controller{
 		        HttpSession session = request.getSession();
 		        String sessionId = session.getId();
 		       // if((session.getAttribute("username")) == null){
-			        session.setAttribute("username", userids);
+			        session.setAttribute("user_id", userids);
 			        session.setAttribute("usersessionid", sessionId);
+			        UserService.login(userids, sessionId, "0");
 			        log.info("用户会话级别session绑定：user："+userids+"["+sessionId+"]");
 			   //     }
 		        return sessionId;
@@ -52,14 +54,18 @@ public class BaseSessionController extends Controller{
 		            throws ServletException, IOException {
 		        response.setCharacterEncoding("UTF=8");
 		        response.setContentType("text/html;charset=UTF-8");
-		       HttpSession session = request.getSession();
-		        String sessionId = session.getId();
-		        String username = (String) session.getAttribute("username");
-		        if((session.getAttribute("usersessionid")) != null){
-			        session.setAttribute("usersessionid", null);
-			        log.info("用户会话级别session解除绑定：user："+username+"["+sessionId+"]");
-			        }
-		    }
+		        HttpSession session = request.getSession();
+		        String sessionId = (String) session.getAttribute("usersessionid");
+		        String username = (String) session.getAttribute("user_id");
+
+		        if(sessionId!=null){
+			    session.setAttribute("usersessionid", null);
+			    UserService.ulogin(username, sessionId, "1");
+			   log.info("用户会话级别session解除绑定：user："+username+"["+sessionId+"]");
+
+
+		        }
+		       }
 	 
 	 
 	 /** 
@@ -75,12 +81,18 @@ public class BaseSessionController extends Controller{
 		        HttpSession session = request.getSession();
 		        String usersessionid=(String) session.getAttribute("usersessionid");
 		        String sessionid=session.getId();
+		        String username=(String) session.getAttribute("user_id");
 		        if((usersessionid!=null)&&(sessionid.equals(usersessionid))){
-		        		System.out.println( "用户会话级别session认证成功："+sessionid+"["+session.getAttribute("usersessionid")+"]");
+		        		 if(UserService.login_status(username)){
+		  		        	session.setAttribute("usersessionid", null);
+		  		        	log.info( "用户主动注销登录："+username+"-"+sessionid+"["+session.getAttribute("usersessionid")+"]");
+		  		        	redirect("ulogin/userexit");
+		  		        }
 		        	}else{
-		        		System.out.println( "用户会话级别session认证失败："+sessionid+"["+session.getAttribute("usersessionid")+"]");
-		        		//render("/user");
-		        		//render("/");
+
+
+
+		        		redirect("ulogin/userexit");
 		        }
 		    }
 	 
