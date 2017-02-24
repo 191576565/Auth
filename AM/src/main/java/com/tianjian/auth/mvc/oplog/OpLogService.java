@@ -15,9 +15,10 @@ public class OpLogService {
 	 * @see 
 	 * @
 	 */
-	public Map<String, Object> getMparam(String user_uuid,String op_type,String startdate_start,String startdate_end){
+	public Map<String, Object> getMparam(String user_uuid,String op_type,String startdate_start,String startdate_end,String domain_id){
 		Map<String, Object> mpara = new HashMap<String, Object>();
-		mpara.put("domain_name", "FTP");
+		
+		mpara.put("domain_id", domain_id);
 		mpara.put("user_uuid", user_uuid);
 		mpara.put("op_type", op_type);
 		mpara.put("startdate_start", startdate_start);

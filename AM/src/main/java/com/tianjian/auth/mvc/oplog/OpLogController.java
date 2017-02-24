@@ -42,11 +42,13 @@ public class OpLogController extends Controller {
 
 		OpLog l = new OpLog();
 		//从session获取数据
-		String doName=getSessionAttr("user");
-		String orgName=getSessionAttr("user");
-		String roleName=getSessionAttr("user");
-		String userName=getSessionAttr("user");
+		String doId=getSessionAttr("domain_id");
+		String doName=getSessionAttr("domain_name");
+		String orgName=getSessionAttr("org_unit_desc");
+		String roleName=getSessionAttr("role_name");
+		String userName=getSessionAttr("user_id");
 		//Model赋值
+		l.set("DOMAIN_ID", doId);
 		l.set("DOMAIN_NAME", doName);
 		l.set("ORG_UNIT_DESC", orgName);
 		l.set("USER_NAME", userName);
@@ -72,8 +74,11 @@ public class OpLogController extends Controller {
 		String op_type = getPara("op_type");
 		String startdate_start = getPara("startdate_start");
 		String startdate_end = getPara("startdate_end");
+		//获取session中domain_id
+		String domain_id=getSessionAttr("domain_id");
+		domain_id="ftp";
 		// 组装sql参数
-		Map<String, Object> mpara = oplogservice.getMparam(user_uuid, op_type, startdate_start, startdate_end);
+		Map<String, Object> mpara = oplogservice.getMparam(user_uuid, op_type, startdate_start, startdate_end,domain_id);
 		// 获取select语句
 		String selectsql = oplogservice.getSelectSql(OpLog.sqlId_log_select);
 		// 获取from语句
