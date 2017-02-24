@@ -2,9 +2,11 @@ package com.tianjian.auth.mvc.oplog;
 
 import com.jfinal.core.Controller;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.tianjian.auth.mvc.login.LoginController;
 import com.tianjian.platform.pjson.PageJson;
 import com.tianjian.platform.tools.ToolGetSql;
 
@@ -14,7 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 public class OpLogController extends Controller {
-
+	
+	private static final Log log = Log.getLog(LoginController.class);
 	private OpLogService oplogservice = new OpLogService();
 	
 	/*
