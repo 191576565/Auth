@@ -30,49 +30,110 @@ public class Apitype1 extends BaseModel<Apitype1> {
 	public static final Apitype1 dao = new Apitype1();
 
 
-	// UUID	VARCHAR2(60)		sys_guid()	唯一标识符  PK
+	// 域编码
 	public static final String domain_id = "domain_id";
 	
-	// DOMAIN_UUID	VARCHAR2(60)			所属域编码唯一标识
+	// 域名称
 	public static final String domain_name = "domain_name";
 	
-	 // USER_ID	      VARCHAR2(60)			用户账号
+	 // 机构编码
 	public static final String org_unit_id = "org_unit_id";
 	
-	 // ORG_UUID	   VARCHAR2(60)			机构唯一标识
+	 //机构名称
 	public static final String org_unit_desc = "org_unit_desc";
 	
-	 // ROLES	CLOB	Y		用户角色       （ROLE_UUID多角色逗号分隔)
+	 //用户编码
 	public static final String user_id = "user_id";
 	
-	 // USER_PWD	   VARCHAR2(30)	Y		用户密码
+	 //用户名称
 	public static final String user_name = "user_name";
 	
-	 // USER_NAME	VARCHAR2(100)	Y		用户名称
+	 //角色编码列表
 	public static final String role_ids = "role_ids";
 	
-	 // USER_EMAIL	VARCHAR2(30)	Y		用户邮箱
+	 //角色名称列表
 	public static final String role_names = "role_names";
 	
-	 // USER_PHONE	VARCHAR2(15)	Y		用户手机号
+	 //资源编码列表  （逗号分隔)
 	public static final String res_ids = "res_ids";
 	
-	 // CREATED_DATE	DATE			创建时间
+	 //资源名称列表  （逗号分隔)
 	public static final String res_names = "res_names";
 	
-	 // CREATOR	VARCHAR2(30)			创建人
+	 //上级资源列表  （逗号分隔)
 	public static final String res_up_ids = "res_up_ids";
 	
-	 // MODIFIED_DATE	DATE			修改时间
+	 //资源CSS列表   （逗号分隔)
 	public static final String res_css = "res_css";
 	
-	 // MODIFIER	VARCHAR2(30)			修改人
+	 //资源颜色列表  （逗号分隔)
 	public static final String res_color = "res_color";
 	
-	 // MEMO	VARCHAR2(300)	  Y		备注
+	 //资源图标列表  （逗号分隔)
 	public static final String res_icon = "res_icon";
 
-	//COLUMN_SECRETKEY 加密key 
+	//资源类型  （逗号分隔)
 	public static final String res_type = "res_type";
+
+	public  String getDomainId() {
+		return domain_id;
+	}
+
+	public  String getDomainName() {
+		return domain_name;
+	}
+
+	public  String getOrgUnitId() {
+		return org_unit_id;
+	}
+
+	public  String getOrgUnitDesc() {
+		return org_unit_desc;
+	}
+
+	public  String getUserId() {
+		return user_id;
+	}
+
+	public  String getUserName() {
+		return user_name;
+	}
+
+	public  String getRoleIds() {
+		return role_ids;
+	}
+
+	public  String getRoleNames() {
+		return role_names;
+	}
+
+	public  String getResIds() {
+		return res_ids;
+	}
+
+	public  String getResNames() {
+		return res_names;
+	}
+
+	public  String getResUpIds() {
+		return res_up_ids;
+	}
+
+	public  String getResCss() {
+		return res_css;
+	}
+
+	public  String getResColor() {
+		return res_color;
+	}
+
+	public  String getResIcon() {
+		return res_icon;
+	}
+
+	public  String getResType() {
+		return res_type;
+	}
+	
 	
 }

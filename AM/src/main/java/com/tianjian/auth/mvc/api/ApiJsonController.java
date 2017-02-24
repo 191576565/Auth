@@ -2,6 +2,7 @@ package com.tianjian.auth.mvc.api;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.tianjian.auth.mvc.model.Apitype1;
 import com.tianjian.auth.mvc.model.User;
 
 /** 
@@ -41,7 +42,7 @@ public class ApiJsonController extends Controller {
     	/*判断命令类型：0 正常请求类型    1 用户注销 */
     	if(flag.equals("0")){
     		//获取json返回对象
-        	User user = ApiJsonService.getSelect(username,usersession,type);
+        	Apitype1 user = ApiJsonService.getSelect(username,usersession,type);
         	if(user==null){
         		log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
         		renderJson("failed", "api请求数据异常，请检查接入格式或用户Session状态！");
@@ -73,7 +74,7 @@ public class ApiJsonController extends Controller {
     	/*判断命令类型：0 正常请求类型    1 用户注销 */
     	if(flag.equals("0")){
     		//获取json返回对象
-        	User user = ApiJsonService.getSelect(username,usersession,type);
+        	Apitype1 user = ApiJsonService.getSelect(username,usersession,type);
         	if(user==null){
         		log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
         		renderJson("failed", "api请求数据异常，请检查接入格式或用户Session状态！");

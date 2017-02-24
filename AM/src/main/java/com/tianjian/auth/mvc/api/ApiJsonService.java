@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import com.jfinal.plugin.activerecord.Db;
+import com.tianjian.auth.mvc.model.Apitype1;
 import com.tianjian.auth.mvc.model.User;
 import com.tianjian.platform.constant.ConstantRender;
 import com.tianjian.platform.plugin.ParamInitPlugin;
@@ -31,15 +32,15 @@ public class ApiJsonService {
 	 * @exception 用户权限查询方法
 	 * @author      谢涛
 	 * */
-	public static  User  getSelect(String username, String sessionid, String type){
-		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + username);
+	public static  Apitype1  getSelect(String username, String sessionid, String type){
+		Apitype1 user = ToolCache.get(ParamInitPlugin.cacheStart_user + username);
 		if(user == null){
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", User.user_id);
 			param.put("session", User.user_sid);
 			param.put("table", User.table_name);
 			String sql = getSqlByBeetl("model.user.rpmselect"+type, param);
-			user = User.dao.findFirst(sql, username,sessionid);
+			user = Apitype1.dao.findFirst(sql, username,sessionid);
 		}
 		return user;
 	}
