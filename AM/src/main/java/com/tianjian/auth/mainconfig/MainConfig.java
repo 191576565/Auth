@@ -33,11 +33,13 @@ import com.tianjian.platform.constant.ConstantCache;
 import com.tianjian.platform.constant.ConstantInit;
 import com.tianjian.platform.dto.DataBase;
 import com.tianjian.platform.plugin.SqlXmlPlugin;
+import com.tianjian.platform.routes.ApiJsonRoutes;
 import com.tianjian.platform.routes.DpgMgmtRoutes;
 import com.tianjian.platform.routes.LoginRoutes;
 import com.tianjian.platform.routes.ResMgmtRoutes;
 import com.tianjian.platform.routes.RolMgmtRoutes;
 import com.tianjian.platform.routes.SysMgmtRoutes;
+import com.tianjian.platform.routes.UloginRoutes;
 import com.tianjian.platform.routes.UptPwdRoutes;
 import com.tianjian.platform.routes.UsrMgmtRoutes;
 import com.tianjian.platform.tools.ToolCache;
@@ -60,6 +62,8 @@ public class MainConfig extends JFinalConfig {
 		// TODO Auto-generated method stub
 		// 添加路由
 		me.add(new LoginRoutes());
+		me.add(new UloginRoutes());
+		me.add(new ApiJsonRoutes());
 		me.add(new SysMgmtRoutes());
 		me.add(new UsrMgmtRoutes());
 		me.add(new RolMgmtRoutes());
