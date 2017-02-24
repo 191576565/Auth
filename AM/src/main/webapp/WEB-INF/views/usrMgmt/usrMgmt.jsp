@@ -57,8 +57,12 @@
  		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
  			<form id="form" name="signUpForm" ng-submit="submitForm()">
  				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
+ 					<input id="uuid" 
+ 						name="uuid" 
+ 						type="hidden" 
+ 						ng-model="userdata.uuid"
+ 					/>
 					<label>用户编码</label> 
-					<p id="chkUserError" class="error"></p>
 					<input name="scopeCode" 
 						   id="scopeCode"
 						   type="text" 
@@ -82,6 +86,7 @@
 					<p class="error" ng-if="signUpForm.scopeCode.$error.pattern &&
 						signUpForm.scopeCode.$touched">
 					只能是字母/数字组合</p>
+					<p id="chkUserError" class="error"></p>
 				</div>
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeName.$valid }">
 					<label>用户名称</label> 
@@ -192,7 +197,7 @@
 					邮箱填写错误</p>
 				</div>
 				<div class="form-group">
-					<button class="btn btn-primary" type="submit">保存</button>
+					<button class="btn btn-primary" type="submit" id="sub" >保存</button>
 				</div>
  			</form>
  		</div>
@@ -200,6 +205,7 @@
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="${ctxPath }/static/js/angular.min.js"></script>
+    <script src="${ctxPath }/static/js/jquery-form.js"></script>
 
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>

@@ -76,28 +76,26 @@ angular.module('myApp', [])
 		$scope.userdata = {};
 		$scope.submitForm = function(){
 			console.log($scope.userdata)
-			if($scope.signUpForm.$invalid)
+			if($scope.signUpForm.$invalid){
 				alert('请检查您的信息!');
-			else
-				window.location.href='usrMgmt';
-//				alert('提交成功!');
+			}
 		}
 	});
-
+//校验用户是否唯一变量
+var chkUserStr;
 $("#scopeCode").blur(function(){
 	$.ajax({
 		type:"post",
 		url:"usrMgmt/chkUserId",
 		data: {"scopeCode":$("#scopeCode").val()},
 		success: function(data) {
-			var str = data.chkUserId?'':'该用户已存在';
-			 $("#chkUserError").html(str);
+			chkUserStr = data.chkUserId?'':'该用户已存在';
+			 $("#chkUserError").html(chkUserStr);
         }
 	})
 });
-
+/*
 $("#form").submit(function(){
-	alert($("#form").serialize());
 	$.ajax({
 		type:"post",
 		url:"usrMgmt/insUsr",
@@ -106,4 +104,35 @@ $("#form").submit(function(){
 			alert("data");
         }
 	})
+});*/
+
+$('#sub').click(function(){
+	//新增操作
+	if($("#uuid").val() == ''){
+		$("#form").attr("action", "usrMgmt/insUsr");
+		$('#form').submit(function(){
+			if(chkUserStr==''){
+				$(this).ajaxSubmit(function(){});	
+				window.location.href='usrMgmt';	
+			}else{
+				return false;
+			}
+		});
+	}
+	//修改操作
+	if($("#uuid").val() != ''){
+		$("#form").attr("action", "sysMgmt/update");
+		$('#form').submit(function(){
+			$(this).ajaxSubmit(function(resultJson){
+				if(JSON.stringify(resultJson) == "true"){
+					window.location.href='usrMgmt';
+					alert('修改成功');
+				}else{
+					alert('修改失败!');
+				}
+			});
+			return false;//阻止表单默认提交
+		});
+	}
 });
+
