@@ -13,4 +13,9 @@ public class DpgMgmtController extends Controller {
 		render("dpgMgmt.jsp");
 
 	}
+	
+	public void list() {
+		log.info("jump to dpgMgmt");
+		render("dpgMgmt.jsp");
+	}
 }
