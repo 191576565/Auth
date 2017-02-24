@@ -27,5 +27,10 @@ public class SysMgmtService {
 	public boolean update(SysMgmt sysMgmt){
 		return sysMgmt.update();
 	}
+	
+	//删除系统信息
+	public boolean delete(SysMgmt sysMgmt){
+		return sysMgmt.delete();
+	}
 
 }

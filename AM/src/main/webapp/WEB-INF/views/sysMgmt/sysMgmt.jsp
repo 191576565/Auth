@@ -61,7 +61,6 @@
  					<input id="uuid" 
  						name="UUID" 
  						type="hidden" 
- 						ng-model="userdata.UUID"
  					/>
 					<label>域编码</label> 
 					<input name="scopeCode" 
@@ -125,6 +124,13 @@
 				</div>
  			</form>
  		</div>
+ 		<div id="sys_del_div" class="form-group" style="display:none;">
+ 			<form id="del_form" action="" method="post">
+ 				<input type="hidden" name="UUID" id="del_uuid"/>
+				确定要删除该系统信息吗？
+				<button id="btn_beSure" class="btn btn-danger delete">删除</button>
+			</form>
+		</div>
 
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>

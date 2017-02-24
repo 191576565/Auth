@@ -47,7 +47,6 @@ public class SysMgmtController extends Controller {
 	 */
 	public void update(){
 		SysMgmt sysMgmt = new SysMgmt();
-		System.out.println(getPara("UUID"));
 		sysMgmt.set("UUID", getPara("UUID"));
 		sysMgmt.set("DOMAIN_ID", getPara("scopeCode"));
 		sysMgmt.set("DOMAIN_NAME", getPara("scopeName"));
@@ -58,4 +57,19 @@ public class SysMgmtController extends Controller {
 		}
 		renderJson(false);
 	}
+	
+	/*
+	 * sysMgmt/delete
+	 * 删除系统信息
+	 */
+	public void delete(){
+		SysMgmt sysMgmt = new SysMgmt();
+		sysMgmt.set("UUID", getPara("UUID"));
+		if(sysMgmtService.delete(sysMgmt)){
+			renderJson(true);
+			return;
+		}
+		renderJson(false);
+	}
+	
 }

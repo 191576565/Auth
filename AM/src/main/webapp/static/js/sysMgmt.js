@@ -39,14 +39,14 @@ $('#table').bootstrapTable({
 		title: '操 作',
 		formatter: function(value, row, index) {
 			var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.domain_id +'\',\''+ row.domain_name +'\',\''+ row.sort_id +'\')">编辑</a> ';
-			var d = '<a href="#" class="btn btn-danger delete">删除</a> ';
+			var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
 			var f = '<a href="orgMgmt" class="btn btn-success">机构</a> ';
 			return e + d + f;
 		}
 	}, ]
 });
 
-//layer弹出自定义div
+//layer弹出自定义div__新增
 $('#sys_add').on('click', function() {
 	var $ipt_code = $("#sys_add_div #form #ipt_code").val('');
 	var $ipt_name = $("#sys_add_div #form #ipt_name").val('');
@@ -59,6 +59,7 @@ $('#sys_add').on('click', function() {
 	});
 });
 
+//layer弹出自定义div__修改
 function onEdit(id,code,name,sort) {
 //	alert(id + ' ' + code + ' ' + name + ' ' + sort);
 	var $ipt_uuid = $("#sys_add_div #form #uuid").val(id);
@@ -73,10 +74,36 @@ function onEdit(id,code,name,sort) {
 	});
 };
 
+//删除
+function onDel(id) {
+	var $ipt_uuid = $("#sys_del_div #del_form #del_uuid").val(id);
+	layer.open({
+		type: 1,
+		content: $('#sys_del_div'),
+		title: '系统提示',
+		area: ['300px', '100px'],
+	});
+	return false;
+};
+$('#btn_beSure').click(function() {
+	$('#del_form').attr("action", "sysMgmt/delete");
+	$('#del_form').submit(function(){
+		$(this).ajaxSubmit(function(resultJson){
+			if(JSON.stringify(resultJson) == "true"){
+				window.location.href='sysMgmt';
+				alert('删除成功');
+			}else{
+				alert('删除失败!');
+			}
+		});
+	});
+});
+
+//表单验证
 angular.module('myApp', [])
 .controller('SignUpController',function($scope){
 	$scope.userdata = {};
-	$scope.submitForm = function(){}
+	$scope.submitForm = function(){};
 })
 
 $('#sub').click(function(){
