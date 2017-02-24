@@ -1,6 +1,6 @@
 package com.tianjian.auth.mvc.base;
 
-import java.lang.reflect.Field;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -271,48 +271,56 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		return super.save();
 	}
 
-	/**
-	 * 重写update方法
-	 * 如果存在版本号字段，则验证Model中的modifyFlag集合中是否包含version字段，
-	 * 如果包含，则自动将版本号加1，并重新set版本号值
-	 */
-	@SuppressWarnings("unchecked")
-	public boolean update() {
-		Table table = getTable();
-		boolean hasVersion = table.hasColumnLabel(column_version);
-		
-		if(hasVersion){// 是否需要乐观锁控制，表是否有version字段
-			Set<String> modifyFlag = null;
-			try {
-				Field field = this.getClass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
-				field.setAccessible(true);
-				Object object = field.get(this);
-				if(null != object){
-					modifyFlag = (Set<String>) object;
-				}
-				field.setAccessible(false);
-			} catch (NoSuchFieldException e) {
-				log.error("业务Model类必须继承BaseModel");
-				e.printStackTrace();
-				throw new RuntimeException("业务Model类必须继承BaseModel");
-			} catch (IllegalArgumentException e) {
-				log.error("BaseModel访问modifyFlag异常");
-				e.printStackTrace();
-				throw new RuntimeException("BaseModel访问modifyFlag异常");
-			} catch (IllegalAccessException e) {
-				log.error("BaseModel访问modifyFlag异常");
-				e.printStackTrace();
-				throw new RuntimeException("BaseModel访问modifyFlag异常");
-			}
-			boolean versionModify = modifyFlag.contains(column_version); // 表单是否包含version字段
-			if(versionModify){
-				Long newVersion = getNumber(column_version).longValue() + 1; // 表单中的版本号+1
-				this.set(column_version, newVersion); // 保存新版本号
-			}
-		}
-		
-		return super.update();
-	}
+//	/**
+//	 * 重写update方法
+//	 * 如果存在版本号字段，则验证Model中的modifyFlag集合中是否包含version字段，
+//	 * 如果包含，则自动将版本号加1，并重新set版本号值
+//	 */
+
+//	@SuppressWarnings("unchecked")
+//	public boolean update() {
+//		Table table = getTable();
+//		boolean hasVersion = table.hasColumnLabel(column_version);
+//		
+
+//		if(hasVersion){// 是否需要乐观锁控制，表是否有version字段
+//			Set<String> modifyFlag = null;
+//			try {
+//				Field field = this.getClass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
+//				field.setAccessible(true);
+//				Object object = field.get(this);
+//				if(null != object){
+//					modifyFlag = (Set<String>) object;
+//				}
+
+//				field.setAccessible(false);
+//			} catch (NoSuchFieldException e) {
+//				log.error("业务Model类必须继承BaseModel");
+//				e.printStackTrace();
+//				throw new RuntimeException("业务Model类必须继承BaseModel");
+//			} catch (IllegalArgumentException e) {
+//				log.error("BaseModel访问modifyFlag异常");
+//				e.printStackTrace();
+//				throw new RuntimeException("BaseModel访问modifyFlag异常");
+//			} catch (IllegalAccessException e) {
+//				log.error("BaseModel访问modifyFlag异常");
+//				e.printStackTrace();
+//				throw new RuntimeException("BaseModel访问modifyFlag异常");
+//			}
+
+//			boolean versionModify = modifyFlag.contains(column_version); // 表单是否包含version字段
+//			if(versionModify){
+//				Long newVersion = getNumber(column_version).longValue() + 1; // 表单中的版本号+1
+//				this.set(column_version, newVersion); // 保存新版本号
+//			}
+//		}
+//		
+
+
+
+//		return super.update();
+//	}
+
 
 	/**
 	 * 针对Oracle做特殊处理

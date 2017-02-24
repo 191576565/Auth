@@ -26,10 +26,10 @@ public class LoginService {
 			// 密码验证成功
 			/**
 			 * 登录成功，添加日志记录方法
-			 *
-			 *
+
+
 			 **/
-			//AuthInterceptor.setCurrentUser(request, response, user, autoLogin);// 设置登录账户
+
 			return ConstantLogin.login_info_3;
 		} else {
 			// 密码验证失败
