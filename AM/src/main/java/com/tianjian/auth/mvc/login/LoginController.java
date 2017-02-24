@@ -52,7 +52,7 @@ public class LoginController extends Controller {
 				e.printStackTrace();
 			}
 			//用户交互数据命令生成
-				render("index.jsp");
+				render("login_after.jsp");
 		}else{
 				render("login_v2.html");
 		}
