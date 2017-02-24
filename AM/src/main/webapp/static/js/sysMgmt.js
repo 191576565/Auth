@@ -85,3 +85,15 @@ angular.module('myApp', [])
 		}
 	}
 })
+
+$('#sub').click(function(){
+	$('#form').submit(function(){
+		$(this).ajaxSubmit(function(resultJson){
+			//回调操作
+			if(JSON.stringify(resultJson) == "false"){
+				alert("域编码/域名重复，新增失败!");
+			}
+		});
+		return false;//阻止表单默认提交
+	});
+});

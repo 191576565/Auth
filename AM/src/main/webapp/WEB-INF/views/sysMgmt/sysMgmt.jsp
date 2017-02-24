@@ -116,7 +116,7 @@
 					域编码长度应在1~5位之间</p>
 				</div>
 				<div class="form-group">
-					<button type="submit" class="btn btn-primary">保存</button>
+					<button id="sub" class="btn btn-primary">保存</button>
 				</div>
  			</form>
  		</div>
@@ -125,6 +125,7 @@
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="${ctxPath }/static/js/angular.min.js"></script>
+    <script src="${ctxPath }/static/js/jquery-form.js"></script>
 
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>
