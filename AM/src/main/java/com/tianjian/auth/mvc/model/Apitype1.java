@@ -21,13 +21,13 @@ import com.tianjian.platform.tools.ToolCache;
  *@Author      谢涛
  */
 @SuppressWarnings("unused")
-public class apitype1 extends BaseModel<apitype1> {
+public class Apitype1 extends BaseModel<Apitype1> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static final Log log = Log.getLog(apitype1.class);
+	private static final Log log = Log.getLog(Apitype1.class);
 	
-	public static final apitype1 dao = new apitype1();
+	public static final Apitype1 dao = new Apitype1();
 
 
 	// UUID	VARCHAR2(60)		sys_guid()	唯一标识符  PK
