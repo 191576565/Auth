@@ -61,6 +61,7 @@ $('#sys_add').on('click', function() {
 
 function onEdit(id,code,name,sort) {
 //	alert(id + ' ' + code + ' ' + name + ' ' + sort);
+	var $ipt_uuid = $("#sys_add_div #form #uuid").val(id);
 	var $ipt_code = $("#sys_add_div #form #ipt_code").val(code);
 	var $ipt_name = $("#sys_add_div #form #ipt_name").val(name);
 	var $ipt_sort = $("#sys_add_div #form #ipt_sort").val(sort);
@@ -75,33 +76,47 @@ function onEdit(id,code,name,sort) {
 angular.module('myApp', [])
 .controller('SignUpController',function($scope){
 	$scope.userdata = {};
-	$scope.submitForm = function(){
-		if($scope.signUpForm.$invalid)
-			alert('请检查您的信息!');
-		else{
-			console.log($scope.userdata);
-//			window.location.href='sysMgmt';
-//			alert('提交成功!');
-		}
-	}
+	$scope.submitForm = function(){}
 })
 
 $('#sub').click(function(){
-	$('#form').submit(function(){
-		$(this).ajaxSubmit(function(resultJson){
-			//回调操作
-			if(JSON.stringify(resultJson) == "false"){
-				layer.open({
-					type: 1,
-					content: '域编码/域名重复，新增失败!',
-					title: '新增失败',
-					area: ['200px', '200px'],
-				});
-				return false;
-			}else{
-				window.location.href='sysMgmt';
-			}
+	//新增操作
+	if($("#sys_add_div #form #uuid").val() == ''){
+		$("#form").attr("action", "sysMgmt/save");
+		$('#form').submit(function(){
+			$(this).ajaxSubmit(function(resultJson){
+				//回调操作
+				if(JSON.stringify(resultJson) == "false"){
+					layer.open({
+						type: 1,
+						content: '域编码/域名重复，新增失败!',
+						title: '新增失败',
+						area: ['200px', '200px'],
+					});
+					return false;
+				}else{
+					window.location.href='sysMgmt';
+				}
+			});
+			return false;//阻止表单默认提交
 		});
-		return false;//阻止表单默认提交
-	});
+	}
+	
+	//修改操作
+	if($("#sys_add_div #form #uuid").val() != ''){
+		$("#form").attr("action", "sysMgmt/update");
+		$('#form').submit(function(){
+			$(this).ajaxSubmit(function(resultJson){
+				if(JSON.stringify(resultJson) == "true"){
+					window.location.href='sysMgmt';
+					alert('修改成功');
+				}else{
+					alert('修改失败!');
+				}
+			});
+			return false;//阻止表单默认提交
+		});
+	}
+	
+	
 });

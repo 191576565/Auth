@@ -40,4 +40,22 @@ public class SysMgmtController extends Controller {
 		sysMgmtService.save(sysMgmt);
 		renderJson(true);
 	}
+	
+	/*
+	 * sysMgmt/update
+	 * 修改系统信息
+	 */
+	public void update(){
+		SysMgmt sysMgmt = new SysMgmt();
+		System.out.println(getPara("UUID"));
+		sysMgmt.set("UUID", getPara("UUID"));
+		sysMgmt.set("DOMAIN_ID", getPara("scopeCode"));
+		sysMgmt.set("DOMAIN_NAME", getPara("scopeName"));
+		sysMgmt.set("SORT_ID", getPara("scopeSort"));
+		if(sysMgmtService.update(sysMgmt)){
+			renderJson(true);
+			return;
+		}
+		renderJson(false);
+	}
 }

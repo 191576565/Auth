@@ -22,5 +22,10 @@ public class SysMgmtService {
 		String sql = ToolGetSql.getSql(SysMgmt.sqlId_sys_repeat);
 		return SysMgmt.dao.find(sql, scopeCode, scopeName).isEmpty();
 	}
+	
+	//修改系统信息
+	public boolean update(SysMgmt sysMgmt){
+		return sysMgmt.update();
+	}
 
 }
