@@ -26,9 +26,12 @@ public class LoginController extends Controller {
 	private static final Log log = Log.getLog(LoginController.class);
 	public void index() {
 		log.info("welcome to login");
-		//renderJsp("auth/login.html");
-		///render("WEB-INF/auth/login_v2.html");
-		//render("AAA.jsp");
+		render("login_v2.html");
+
+	}
+	
+	public void init_login() {
+		log.info("welcome to init_login");
 		render("login_v2.html");
 
 	}

@@ -39,9 +39,9 @@ public class GlobalInterceptor implements Interceptor {
 	            inv.getController().redirect("/ulogin/userexit");
 	        } else if (sessionflag == 0) {
 	            if (!inv.getMethod().getName().equals("validLogin")
-	            		&&!inv.getMethod().getName().equals("index")
+	            		&&!inv.getMethod().getName().equals("init_login")
 	            		&&!inv.getMethod().getName().equals("rpmParam")) {
-	            	 inv.getController().redirect("/");
+	            	 inv.getController().redirect("/init_login");
 	            }else{inv.invoke();}
 	        } else {
 	            inv.invoke();
