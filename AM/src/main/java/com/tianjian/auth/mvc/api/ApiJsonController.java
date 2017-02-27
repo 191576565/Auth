@@ -1,5 +1,7 @@
 package com.tianjian.auth.mvc.api;
 
+import java.util.List;
+
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Record;
@@ -42,7 +44,8 @@ public class ApiJsonController extends Controller {
     	/*判断命令类型：0 正常请求类型    1 用户注销 */
     	if(flag.equals("0")){
     		//获取json返回对象
-        	Record user = ApiJsonService.getSelect(username,usersession,type);
+    		//Record user1 = ApiJsonService.getSelect(username,usersession,type);
+        	List<Record> user = ApiJsonService.getSelectlist(username,usersession,type);
         	if(user==null){
         		log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
         		renderJson("failed", "api请求数据异常，请检查接入格式或用户Session状态！");
@@ -74,16 +77,17 @@ public class ApiJsonController extends Controller {
     	/*判断命令类型：0 正常请求类型    1 用户注销 */
     	if(flag.equals("0")){
     		//获取json返回对象
-        	Record user = ApiJsonService.getSelect(username,usersession,type);
+    		//Record user1 = ApiJsonService.getSelect(username,usersession,type);
+    		List<Record> user = ApiJsonService.getSelectlist(username,usersession,type);
         	if(user==null){
         		log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
-        		renderJson("failed", "api请求数据异常，请检查接入格式或用户Session状态！");
+        		renderJson("code:400;msg:"+username+"数据api请求异常，请检查接入格式或用户Session状态！");
         	}else{
-             	renderJson("code:200;msg:api请求数据异常","data:"+user);}
+             	renderJson("code:200;msg:"+username+"数据请求成功！","data:"+user);}
     	}else{
     		int ulogin=ApiJsonService.ulogin(username,usersession);
     	   log.info("api请求"+ulogin+"个用户退出成功，用户["+username+"],["+usersession+"]！");
-    		redirect("/ulogin");
+    		redirect("/ulogin/userexit");
     	}
     	System.out.print(username+"-"+usersession+"-"+flag+"-"+type);
      }

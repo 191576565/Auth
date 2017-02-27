@@ -15,8 +15,11 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.tianjian.auth.mvc.dto.SplitPage;
+import com.tianjian.auth.mvc.model.User;
 import com.tianjian.platform.constant.ConstantInit;
 import com.tianjian.platform.constant.ConstantRender;
+import com.tianjian.platform.plugin.ParamInitPlugin;
+import com.tianjian.platform.tools.ToolCache;
 import com.tianjian.platform.tools.ToolSqlXml;
 import com.tianjian.platform.tools.ToolString;
 
@@ -356,4 +359,19 @@ public class BaseService {
 		return getBatchCount(ConstantInit.db_dataSource_main, sql, batchSize);
 	}
 	
+	/**
+	 * @exception 用户信息查询方法
+	 * @author      谢涛
+	 * @param      String username 
+	 * @return       Record
+	 * */
+	public static  Record getUserInfo(String username){
+		Record user = ToolCache.get(ParamInitPlugin.cacheStart_user + username);
+		if(user == null){
+			Map<String, Object> param = new HashMap<String, Object>();
+			String sql = getSqlByBeetl("model.user.userinfo", param);
+			user = (Record) Db.findFirst(sql, username);
+		}
+		return user;
+	}
 }

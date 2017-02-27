@@ -2,10 +2,12 @@ package com.tianjian.auth.mvc.api;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.tianjian.auth.mvc.base.BaseService;
 import com.tianjian.auth.mvc.model.User;
 import com.tianjian.platform.constant.ConstantRender;
 import com.tianjian.platform.plugin.ParamInitPlugin;
@@ -19,7 +21,7 @@ import com.tianjian.platform.tools.ToolSqlXml;
  *@Return    
  */
 
-public class ApiJsonService {
+public class ApiJsonService extends BaseService{
 	
 	public static String getSqlByBeetl(String sqlId, Map<String, Object> param){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl);
@@ -31,6 +33,7 @@ public class ApiJsonService {
 	/**
 	 * @exception 用户权限查询方法
 	 * @author      谢涛
+	 * @return       Record  Record
 	 * */
 	public static  Record  getSelect(String username, String sessionid, String type){
 		Record user = ToolCache.get(ParamInitPlugin.cacheStart_user + username);
@@ -40,6 +43,23 @@ public class ApiJsonService {
 			param.put("session", User.user_sid);
 			String sql = getSqlByBeetl("model.user.rpmselect"+type, param);
 			user = Db.findFirst(sql, username,sessionid);
+		}
+		return user;
+	}
+	
+	/**
+	 * @exception 用户权限查询方法
+	 * @author      谢涛
+	 * @return       list集合  List<Record>
+	 * */
+	public static  List<Record> getSelectlist(String username, String sessionid, String type){
+		List<Record> user = ToolCache.get(ParamInitPlugin.cacheStart_user + username);
+		if(user == null){
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("column", User.user_id);
+			param.put("session", User.user_sid);
+			String sql = getSqlByBeetl("model.user.rpmselect"+type, param);
+			user = (List<Record>) Db.find(sql, username,sessionid);
 		}
 		return user;
 	}
