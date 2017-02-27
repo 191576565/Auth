@@ -17,9 +17,7 @@ $('#table').bootstrapTable({
 // 	showToggle:true, //是否显示详细视图和列表视图的切换按钮
 // 	cardView: false, //是否显示详细视图
 
-    columns: [{
-        field: 'id',
-        title: '域 ID',
+    columns: [{   
         checkbox: true
     }, {
         field: 'domain_name',
@@ -31,40 +29,80 @@ $('#table').bootstrapTable({
         field: 'role_name',
         title: '角色名称'
     }, {
-    	field: 'opt',
+    	field: 'uuid',
     	title: '操 作',
     	formatter:function(value,row,index){
-    	var e = '<a href="#" class="btn btn-info update edit">编辑</a> ';
-    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';
+    	var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.role_id +'\',\''+ row.role_name +'\',\''+ row.domain_uuid +'\')">编辑</a>';
+    	var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
     	var f = '<a href="funList" class="btn btn-primary create" onclick="del(\''+ row.id +'\')">功能</a> ';
     	return e+d+f;
     	}
     },]
 });
 
-//yeqc
-//layer弹出自定义div
-$('#sys_add').on('click', function(){
-	layer.open({
-		type:1,
-		content: $('#sys_add_div'),
-//		skin: 'layui-layer-molv',
-		title:'角色信息',
-		area: ['640px', '360px'],
-//		maxmin: true	
-	});
-});
 
-$('#table').on('click', '.edit', function() {
+//layer弹出自定义div__新增
+$('#sys_add').on('click', function() {
+	var $role_uuid = $("#sys_add_div #form #uuid").val('');
+	var $role_id = $("#sys_add_div #form #role_id").val('');
+	var $role_name = $("#sys_add_div #form #role_name").val('');
+	var $domain_uuid=$("#sys_add_div #form #domain_uuid").val('');
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-//		skin: 'layui-layer-molv',
-		title: '角色信息',
-		area: ['640px', '360px']
+		title: '系统信息',
+		area: ['768px', '432px'],
 	});
 	return false;
 });
+
+//layer弹出自定义div__修改
+function onEdit(id,roleid,rolename,domainuuid) {
+	//alert(id + ' ' + roleid + ' ' + rolename + ' ' + domainuuid);
+	var $uuid = $("#sys_add_div #form #uuid").val(id);
+	var $role_id = $("#sys_add_div #form #role_id").val(roleid);
+	var $role_name = $("#sys_add_div #form #role_name").val(rolename);
+	var $domain_uuid = $("#sys_add_div #form #domain_uuid").val(domainuuid);
+	
+	layer.open({
+		type: 1,
+		content: $('#sys_add_div'),
+		title: '系统信息',
+		area: ['768px', '432px'],
+	});
+};
+
+//删除
+function onDel(id) {
+	var $role_uuid = $("#sys_del_div #del_form #role_uuid").val(id);
+	layer.open({
+		type: 1,
+		content: $('#sys_del_div'),
+		title: '系统提示',
+		area: ['300px', '100px'],
+	});
+};
+$('#btn_beSure').click(function() {
+	$('#del_form').attr("action", "rolMgmt/delete");
+	$('#del_form').submit(function(){
+		$(this).ajaxSubmit(function(resultJson){
+			if(JSON.stringify(resultJson) == "false"){
+				alert('更新失败');
+				return;
+			}else{
+				window.location.href='rolMgmt';
+			}
+		});
+		return false;
+	});
+	
+});
+
+
+
+
+
+
 
 angular.module('myApp', [])
 .controller('SignUpController',function($scope){
@@ -104,12 +142,12 @@ $('#sub').click(function(){
 	
 	//修改操作
 	if($("#sys_add_div #form #uuid").val() != ''){
-		$("#form").attr("action", "sysMgmt/update");
+		$("#form").attr("action", "rolMgmt/update");
 		$('#form').submit(function(){
 			$(this).ajaxSubmit(function(resultJson){
 				if(JSON.stringify(resultJson) == "true"){
-					window.location.href='sysMgmt';
-					alert('修改成功');
+					window.location.href='rolMgmt';
+					//alert('修改成功');
 				}else{
 					alert('修改失败!');
 				}

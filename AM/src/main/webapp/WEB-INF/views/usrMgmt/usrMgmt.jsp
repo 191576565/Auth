@@ -92,6 +92,7 @@
 					<label>用户名称</label> 
 					<input name="usrName" 
 						   type="text" 
+						   id="usrName"
 						   class="form-control" 
 						   placeholder="请输入用户名称"
 						   ng-model="userdata.usrName"
@@ -164,6 +165,7 @@
 					<label>手机号</label> 
 					<input name="phone" 
 						   type="text" 
+						   id="phone"
 						   class="form-control" 
 						   ng-model="userdata.phone"
 						   ng-pattern="/^1[34578]\d{9}$/"
@@ -182,6 +184,7 @@
 					<label>邮箱</label> 
 					<input name="email" 
 						   type="text" 
+						   id="email"
 						   class="form-control" 
 						   ng-model="userdata.email"
 						   ng-pattern="/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/"

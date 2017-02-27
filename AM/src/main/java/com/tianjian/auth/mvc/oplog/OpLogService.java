@@ -1,9 +1,11 @@
 package com.tianjian.auth.mvc.oplog;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.platform.pjson.PageJson;
 import com.tianjian.platform.tools.ToolGetSql;
 
@@ -57,5 +59,25 @@ public class OpLogService {
 		PageJson<OpLog> myjson = new PageJson<OpLog>();
 		myjson.buildJson(logall);
 		return myjson;
+	}
+	
+	
+	public void getsessiondata(Object userinfo,OpLog l){
+		String doId=((Record) userinfo).getStr("domain_id");
+		String doName=((Record) userinfo).getStr("domain_name");
+		String orgName=((Record) userinfo).getStr("org_unit_desc");
+		String roleName=((Record) userinfo).getStr("role_names");
+		String userName=((Record) userinfo).getStr("user_id");
+		l.set("DOMAIN_ID", doId);
+		l.set("DOMAIN_NAME", doName);
+		l.set("ORG_UNIT_DESC", orgName);
+		l.set("USER_NAME", userName);
+		l.set("ROLE_NAME", roleName);
+	}
+	public void saveLogData(OpLog l,String opType,String opContent){
+		l.set("OP_TYPE", opType);
+		l.set("OP_CONTENT", opContent);
+		l.set("OP_DATE", new Timestamp(System.currentTimeMillis()));
+		l.save();
 	}
 }
