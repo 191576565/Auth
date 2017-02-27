@@ -22,6 +22,7 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.tianjian.auth.mvc.handler.GlobalHandler;
+import com.tianjian.auth.mvc.handler.GlobalInterceptor;
 import com.tianjian.auth.mvc.login.Login;
 import com.tianjian.auth.mvc.login.LoginController;
 import com.tianjian.auth.mvc.model.User;
@@ -131,7 +132,7 @@ public class MainConfig extends JFinalConfig {
 
 	@Override
 	public void configInterceptor(Interceptors me) {
-
+		me.add(new GlobalInterceptor());
 	}
 
 	@Override
@@ -139,7 +140,7 @@ public class MainConfig extends JFinalConfig {
 		// TODO Auto-generated method stub
 		 me.add(new ContextPathHandler("ctxPath"));
 		// me.add(new ContextPathHandler("contextPath"));
-		me.add(new GlobalHandler()); 
+		 me.add(new GlobalHandler()); 
 	}
 
 	public static void main(String[] args) {
