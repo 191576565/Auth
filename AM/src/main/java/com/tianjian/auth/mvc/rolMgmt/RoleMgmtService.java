@@ -43,5 +43,15 @@ public class RoleMgmtService {
 		String sql = ToolGetSql.getSql("tianjian.roleMgmt.repeatSelect");
 		return RoleMgmt.dao.find(sql, scopeCode, scopeName).isEmpty();
 	}
+	
+	//修改角色
+	public boolean update(RoleMgmt roleMgmt) {
+		return roleMgmt.update();
+	}
+	
+	//删除角色信息
+	public boolean delete(RoleMgmt roleMgmt) {
+		return roleMgmt.delete();
+	}
 
 }
