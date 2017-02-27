@@ -86,7 +86,7 @@ public class ApiJsonController extends Controller {
     		//获取json返回对象
     		//Record user1 = ApiJsonService.getSelect(username,usersession,type);
     		List<Record> user = ApiJsonService.getSelectlist(username,usersession,type);
-        	if(user==null){
+        	if(user==null||user.size()==0){
         		log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
         		code="400";
         		 msg = username+"数据api请求异常，请检查接入格式或用户Session状态！";
