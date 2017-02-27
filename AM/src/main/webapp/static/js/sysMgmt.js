@@ -57,6 +57,7 @@ $('#sys_add').on('click', function() {
 		title: '系统信息',
 		area: ['640px', '360px'],
 	});
+	return false;
 });
 
 //layer弹出自定义div__修改
@@ -121,7 +122,7 @@ $('#sub').click(function(){
 						title: '新增失败',
 						area: ['200px', '200px'],
 					});
-					return false;
+					return;
 				}else{
 					window.location.href='sysMgmt';
 				}

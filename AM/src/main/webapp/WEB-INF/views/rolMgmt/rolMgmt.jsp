@@ -126,6 +126,7 @@
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="${ctxPath }/static/js/angular.min.js"></script>
+    <script src="${ctxPath }/static/js/jquery-form.js"></script>
 
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>
