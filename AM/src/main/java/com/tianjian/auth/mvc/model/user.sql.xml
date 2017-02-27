@@ -76,28 +76,72 @@
 	<!-- 不规则查询：查询Sessionid和用户信息权限  1 用户权限 -->
 	<sql id="rpmselect1">
 		<![CDATA[ 
-select  t2.domain_id     as domain_id                                                                    
-       ,t2.domain_name    as domain_name                                                                 
-       ,t3.org_unit_id   as org_unit_id                                                                   
-       ,t3.org_unit_desc  as org_unit_desc                                                                 
-       ,t0.user_id       as  user_id                                                                
-       ,t0.user_name     as user_name                                                                   
-       ,t1.role_id   as role_id
-       ,t1.role_name  as role_name
-       ,t4.res_id           as res_ids       
-       ,t4.res_name         as res_names   
-       ,nvl(t5.res_id,'#')  as res_up_ids   
-       ,t4.res_class        as res_css      
-       ,t4.res_color        as res_color    
-       ,t4.res_icon         as res_icon    
-       ,t4.res_type         as res_type      
-     from sys_user_info     t0                                                            
-left join sys_role_info     t1  on instr(t0.roles  ,t1.uuid)>0                             
-left join sys_domain_info   t2  on t0.domain_uuid=t2.uuid                               
-left join sys_org_info      t3  on t0.org_uuid=t3.uuid and t0.domain_uuid=t3.domain_uuid    
-left join sys_resource_info t4  on instr(t1.resources  ,t4.uuid)>0
-left join sys_resource_info t5  on t4.res_up_uuid=t5.uuid
+with tmp_roles as
+ (select t0.user_id,
+         listagg(t1.role_id, ',') within group(order by t1.role_id) as role_ids,
+         listagg(t1.role_name, ',') within group(order by t1.role_id) as role_names
+    from sys_user_info t0
+    left join sys_role_info t1
+      on instr(t0.roles, t1.uuid) > 0
+   group by t0.user_id),
+tmp_users as
+ (select t2.domain_id,
+         t2.domain_name,
+         t3.org_unit_id,
+         t3.org_unit_desc,
+         t0.user_id,
+         t0.user_name,
+         t4.res_id as res_ids,
+         t4.res_name as res_names,
+         nvl(t5.res_id, '#') as res_up_ids,
+         t4.res_class as res_css,
+         t4.res_color as res_color,
+         t4.res_icon as res_icon,
+         t4.res_type as res_type
+    from sys_user_info t0
+    left join sys_role_info t1
+      on instr(t0.roles, t1.uuid) > 0
+    left join sys_domain_info t2
+      on t0.domain_uuid = t2.uuid
+    left join sys_org_info t3
+      on t0.org_uuid = t3.uuid
+     and t0.domain_uuid = t3.domain_uuid
+    left join sys_resource_info t4
+      on instr(t1.resources, t4.uuid) > 0
+    left join sys_resource_info t5
+      on t4.res_up_uuid = t5.uuid
 where ${column} = ? and ${session} = ? and loggin_status = '0'
+   group by t2.domain_id,
+            t2.domain_name,
+            t3.org_unit_id,
+            t3.org_unit_desc,
+            t0.user_id,
+            t0.user_name,
+            t4.res_id,
+            t4.res_name,
+            nvl(t5.res_id, '#'),
+            t4.res_class,
+            t4.res_color,
+            t4.res_icon,
+            t4.res_type)
+select tu.domain_id,
+       tu.domain_name,
+       tu.org_unit_id,
+       tu.org_unit_desc,
+       tu.user_id,
+       tu.user_name,
+       tr.role_ids,
+       tr.role_names,
+       tu.res_ids,
+       tu.res_names,
+       tu.res_up_ids,
+       tu.res_css,
+       tu.res_color,
+       tu.res_icon,
+       tu.res_type
+  from tmp_users tu
+  left join tmp_roles tr
+    on tu.user_id = tr.user_id
     	]]>
 	</sql>
 	
