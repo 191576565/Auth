@@ -29,7 +29,7 @@
 			.input_result {
 				position: relative;
 				top: -27px;
-				left: 570px;
+				left: 685px;
 			}
 		</style>
 		
@@ -118,6 +118,10 @@
 						signUpForm.scopeSort.$error.maxlength) && 
 						signUpForm.scopeSort.$touched">
 					域编码长度应在1~5位之间</p>
+				</div>
+				<div class="form-group">
+					<lable>备注</lable>
+					<textarea id="ipt_memo" class="form-control" name="memo" rows="" cols=""></textarea>
 				</div>
 				<div class="form-group">
 					<button id="sub" class="btn btn-primary">保存</button>
