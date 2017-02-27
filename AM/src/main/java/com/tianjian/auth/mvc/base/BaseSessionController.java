@@ -1,6 +1,8 @@
 package com.tianjian.auth.mvc.base;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.model.UserService;
 /** 
  *@Company  重庆天健金管科技股份有限公司
@@ -27,21 +30,39 @@ public class BaseSessionController extends Controller{
 		 *@Author    谢涛
 		 *@Return    String  sessionId
 		 */
-	 public String bindUSessionId(HttpServletRequest request, HttpServletResponse response,String userids)
+	 public String bindUSessionId(HttpServletRequest request, HttpServletResponse response,String username)
 		            throws ServletException, IOException {
 		        response.setCharacterEncoding("UTF=8");
 		        response.setContentType("text/html;charset=UTF-8");
 		        HttpSession session = request.getSession();
 		        String sessionId = session.getId();
 		       // if((session.getAttribute("username")) == null){
-			        session.setAttribute("user_id", userids);
+			        session.setAttribute("user_id", username);
 			        session.setAttribute("usersessionid", sessionId);
-			        UserService.login(userids, sessionId, "0");
-			        log.info("用户会话级别session绑定：user："+userids+"["+sessionId+"]");
+			        UserService.login(username, sessionId, "0");
+			        log.info("用户会话级别session绑定：user："+username+"["+sessionId+"]");
 			   //     }
 		        return sessionId;
 		    }
 
+	 /** 
+		 *@Function 绑定用户信息       
+		 *@Declare   登录成功后调用该方法，完成会话级别用户信息绑定
+		 *@Author    谢涛
+		 *@Return    String  sessionId
+		 */
+	 public void bindUserInfo(HttpServletRequest request, HttpServletResponse response,String username)
+		            throws ServletException, IOException {
+		        response.setCharacterEncoding("UTF=8");
+		        response.setContentType("text/html;charset=UTF-8");
+		        HttpSession session = request.getSession();
+		        String sessionId = (String) session.getAttribute("usersessionid");
+		        Record userinfo=BaseService.getUserInfo(username);
+		        session.setAttribute("userinfo", userinfo);
+		        //  Object test1=session.getAttribute("userinfo");
+		        //  String test0=((Record) test1).getStr("domain_uuid");
+			   log.info("用户信息绑定：user："+username+"  sessionId :["+sessionId+"]");
+		    }
 	 
 	 /** 
 		 *@Function 用户session id 解绑        

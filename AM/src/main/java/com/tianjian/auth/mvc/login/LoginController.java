@@ -48,6 +48,7 @@ public class LoginController extends Controller {
 			//用户Session绑定
 			try {
 				SessionController.bindUSessionId(getRequest(), getResponse(), username);
+				SessionController.bindUserInfo(getRequest(), getResponse(), username);
 			} catch (ServletException | IOException e) {
 				e.printStackTrace();
 			}
