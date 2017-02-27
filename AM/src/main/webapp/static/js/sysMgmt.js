@@ -112,8 +112,8 @@ $('#sub').click(function(){
 	//新增操作
 	if($("#sys_add_div #form #uuid").val() == ''){
 		$("#form").attr("action", "sysMgmt/save");
-		$('#form').submit(function(){
-			$(this).ajaxSubmit(function(resultJson){
+//		$('#form').submit(function(){
+			$('#form').ajaxSubmit(function(resultJson){
 				//回调操作
 				if(JSON.stringify(resultJson) == "false"){
 					layer.open({
@@ -122,13 +122,12 @@ $('#sub').click(function(){
 						title: '新增失败',
 						area: ['200px', '200px'],
 					});
-					return;
 				}else{
 					window.location.href='sysMgmt';
 				}
 			});
 			return false;//阻止表单默认提交
-		});
+//		});
 	}
 	
 	//修改操作
