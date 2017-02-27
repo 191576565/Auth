@@ -18,27 +18,35 @@ public class GlobalInterceptor implements Interceptor {
 	
 	 private static final Set<String> excludedActionKeys = new HashSet<String>();
 
-	@Override
-	public void intercept(Invocation inv) {
-		// TODO Auto-generated method stub
-		Controller contro = (Controller) inv.getController();
-		BaseSessionController SessionController=new BaseSessionController();
-		int sessionflag=0;
-		try {
-			sessionflag=SessionController.CheckUserSessionId(contro.getRequest(), contro.getResponse());
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(sessionflag==2){
-			inv.getController().redirect("/ulogin/userexit");
-		}else{
-			inv.invoke();
-		}
-	}
+	 @Override
+	    public void intercept(Invocation inv) {
+	        // TODO Auto-generated method stub
+	        Controller contro = (Controller) inv.getController();
+	        BaseSessionController SessionController = new BaseSessionController();
+	        int sessionflag = 0;
+	        try {
+	            sessionflag = SessionController.CheckUserSessionId(contro.getRequest(),
+	                    contro.getResponse());
+	        } catch (ServletException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+
+	        if (sessionflag == 2) {
+	            inv.getController().redirect("/ulogin/userexit");
+	        } else if (sessionflag == 0) {
+	            if (!inv.getMethod().getName().equals("validLogin")
+	            		&&!inv.getMethod().getName().equals("index")
+	            		&&!inv.getMethod().getName().equals("rpmParam")) {
+	            	 inv.getController().redirect("/");
+	            }else{inv.invoke();}
+	        } else {
+	            inv.invoke();
+	        }
+	    }
 	
 	 public static void addExcludedActionKey(String ApiJsonController) {
 		   excludedActionKeys.add(ApiJsonController);

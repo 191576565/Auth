@@ -7,9 +7,11 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 
+import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.tianjian.auth.mvc.base.BaseSessionController;
+import com.tianjian.auth.mvc.handler.GlobalInterceptor;
 import com.tianjian.auth.mvc.model.UserService;
 
 /** 
@@ -24,7 +26,6 @@ public class LoginController extends Controller {
 	private static final Log log = Log.getLog(LoginController.class);
 	public void index() {
 		log.info("welcome to login");
-		
 		//renderJsp("auth/login.html");
 		///render("WEB-INF/auth/login_v2.html");
 		//render("AAA.jsp");
@@ -38,6 +39,7 @@ public class LoginController extends Controller {
 		 *@Author    谢涛
 		 *@Return    String  sessionId
 		 */
+	@Clear(GlobalInterceptor.class)
 	public void validLogin() {
 		BaseSessionController SessionController=new BaseSessionController();
 		String username=getPara("username");
