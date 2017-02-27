@@ -62,7 +62,6 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("creator", sessionUserId);
 		
 		usrMgmt.save();
-		index();
 	}
 	public void updtUsr(){
 		//获取form中的信息
@@ -90,7 +89,6 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("modifier", sessionUserId);
 		usrMgmt.set("modified_date", new Timestamp(System.currentTimeMillis()));
 		usrMgmt.update();
-		index();
 	}
 	public void delUsr(){
 		//获取form中的信息
