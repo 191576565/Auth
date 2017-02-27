@@ -21,7 +21,7 @@ public class UsrMgmtController extends Controller {
 	//初始化查询
 	public void initSel(){
 		//获取session中的user_id
-		String sessionUserId = getSessionAttr("username");
+		String sessionUserId = getSessionAttr("user_id");
 		System.out.println("sessionUserId == "+sessionUserId);
 		//将查询到的domain_uuid和org_uuid放到list中
 		ArrayList<String> list = new ArrayList<String>();
@@ -50,7 +50,7 @@ public class UsrMgmtController extends Controller {
 		String domainUUID = "48ABB16E6BB7164DE055000000000001";
 		String orgUUID = "4930C618599C63FBE055000000000001";
 		//将session中的userid作为创建者
-		String sessionUserId = getSessionAttr("username");
+		String sessionUserId = getSessionAttr("user_id");
 		
 		//将获得的字段与表字段对应
 		usrMgmt.set("domain_uuid", domainUUID);
