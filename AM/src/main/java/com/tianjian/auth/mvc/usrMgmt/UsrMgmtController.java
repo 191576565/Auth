@@ -36,6 +36,7 @@ public class UsrMgmtController extends Controller {
 		setAttr("chkUserId",ums.checkUserId(userId));
 		renderJson();
 	}
+	//新增用户
 	public void insUsr(){
 		//获取form中的信息
 		String userId = getPara("scopeCode");
@@ -63,6 +64,7 @@ public class UsrMgmtController extends Controller {
 		
 		usrMgmt.save();
 	}
+	//编辑用户
 	public void updtUsr(){
 		//获取form中的信息
 		String uuid = getPara("uuid");
@@ -90,6 +92,7 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("modified_date", new Timestamp(System.currentTimeMillis()));
 		usrMgmt.update();
 	}
+	//删除用户
 	public void delUsr(){
 		//获取form中的信息
 		String uuid = getPara("uuid");
