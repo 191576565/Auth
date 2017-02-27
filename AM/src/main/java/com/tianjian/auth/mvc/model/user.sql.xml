@@ -142,7 +142,6 @@ select tu.domain_id,
   from tmp_users tu
   left join tmp_roles tr
     on tu.user_id = tr.user_id
-
     	]]>
 	</sql>
 	
