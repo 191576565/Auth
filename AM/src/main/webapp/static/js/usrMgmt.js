@@ -41,9 +41,7 @@ $('#table').bootstrapTable({
     }, {                                                                                                                      
         field: 'user_email',                                                                                                   
         title: '电子信箱'                                                                                                        
-    }                                                                                                                            
-    ,                                                                                                                         
-    {                                                                                                                         
+    }, {                                                                                                                         
     	field: 'uuid',                                                                                                         
     	title: '操 作',                                                                                                         
     	formatter:function(value,row,index){                                                                                  
@@ -52,9 +50,8 @@ $('#table').bootstrapTable({
 																    		   + row.user_name +'\',\''
 																    		   + row.user_phone +'\',\''
 																    		   + row.user_email + '\')">编辑</a> ';                                                      
-    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\')">删除</a> ';                                                        
-    	var f = '<a href="#" class="btn btn-primary create" onclick="rol(\''+ row.uuid +'\')">角色</a> ';                                                   
-    	return e+d+f;                                                                                                           
+    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\')">删除</a> ';                                                    
+    	return e+d;                                                                                                           
     	}                                                                                                                     
     },]                                                                                                                       
 });
