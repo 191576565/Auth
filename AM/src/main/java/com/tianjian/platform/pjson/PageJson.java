@@ -5,7 +5,7 @@ import java.util.List;
 import com.jfinal.plugin.activerecord.Page;
 /** 
  *@Company  重庆天健金管科技股份有限公司
- *@Function   Json 封装的方法            
+ *@Function  bootstrap table的 Json 封装的方法 , buildJson方法的Page类型必须为jfinal的Page类型          
  *@Declare     
  *@Author    hujian
  */
@@ -31,7 +31,4 @@ public class PageJson<T> {
 	public void setRows(List<T> rows) {
 		this.rows = rows;
 	}
-	
-	
-
 }
