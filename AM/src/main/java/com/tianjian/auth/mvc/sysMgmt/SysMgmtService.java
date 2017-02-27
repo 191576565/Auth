@@ -12,6 +12,12 @@ public class SysMgmtService {
 		return SysMgmt.dao.find(sql);
 	}
 	
+	//查询root域uuid
+	public List<SysMgmt> getRoot(){
+		String sql = ToolGetSql.getSql(SysMgmt.sqlId_sys_root);
+		return SysMgmt.dao.find(sql);
+	}
+	
 	//新增系统信息
 	public void save(SysMgmt sysMgmt){
 		sysMgmt.save();

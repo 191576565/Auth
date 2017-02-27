@@ -38,7 +38,7 @@ $('#table').bootstrapTable({
 		field: 'uuid',
 		title: '操 作',
 		formatter: function(value, row, index) {
-			var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.domain_id +'\',\''+ row.domain_name +'\',\''+ row.sort_id +'\')">编辑</a> ';
+			var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.domain_id +'\',\''+ row.domain_name +'\',\''+ row.sort_id +'\',\''+ row.memo +'\')">编辑</a> ';
 			var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
 			var f = '<a href="orgMgmt" class="btn btn-success">机构</a> ';
 			return e + d + f;
@@ -48,30 +48,33 @@ $('#table').bootstrapTable({
 
 //layer弹出自定义div__新增
 $('#sys_add').on('click', function() {
+	var $ipt_uuid = $("#sys_add_div #form #uuid").val('');
 	var $ipt_code = $("#sys_add_div #form #ipt_code").val('');
 	var $ipt_name = $("#sys_add_div #form #ipt_name").val('');
 	var $ipt_sort = $("#sys_add_div #form #ipt_sort").val('');
+	var $ipt_memo = $("#sys_add_div #form #ipt_memo").val('');
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
 		title: '系统信息',
-		area: ['640px', '360px'],
+		area: ['768px', '432px'],
 	});
 	return false;
 });
 
 //layer弹出自定义div__修改
-function onEdit(id,code,name,sort) {
+function onEdit(id,code,name,sort,memo) {
 //	alert(id + ' ' + code + ' ' + name + ' ' + sort);
 	var $ipt_uuid = $("#sys_add_div #form #uuid").val(id);
 	var $ipt_code = $("#sys_add_div #form #ipt_code").val(code);
 	var $ipt_name = $("#sys_add_div #form #ipt_name").val(name);
 	var $ipt_sort = $("#sys_add_div #form #ipt_sort").val(sort);
+	var $ipt_memo = $("#sys_add_div #form #ipt_memo").val(memo);
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
 		title: '系统信息',
-		area: ['640px', '360px'],
+		area: ['768px', '432px'],
 	});
 };
 
@@ -112,8 +115,8 @@ $('#sub').click(function(){
 	//新增操作
 	if($("#sys_add_div #form #uuid").val() == ''){
 		$("#form").attr("action", "sysMgmt/save");
-		$('#form').submit(function(){
-			$(this).ajaxSubmit(function(resultJson){
+//		$('#form').submit(function(){
+			$('#form').ajaxSubmit(function(resultJson){
 				//回调操作
 				if(JSON.stringify(resultJson) == "false"){
 					layer.open({
@@ -122,13 +125,12 @@ $('#sub').click(function(){
 						title: '新增失败',
 						area: ['200px', '200px'],
 					});
-					return;
 				}else{
 					window.location.href='sysMgmt';
 				}
 			});
 			return false;//阻止表单默认提交
-		});
+//		});
 	}
 	
 	//修改操作

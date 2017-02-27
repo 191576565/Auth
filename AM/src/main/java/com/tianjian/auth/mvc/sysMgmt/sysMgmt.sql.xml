@@ -15,5 +15,12 @@
     	]]>
 	</sql>
 	
+	<sql id="rootSelect">
+		<![CDATA[ 
+        	select t.UUID from sys_domain_info t 
+        		where 1=1 
+        			and t.domain_up_uuid = '#'
+    	]]>
+	</sql>
 	
 </sql-statement>
