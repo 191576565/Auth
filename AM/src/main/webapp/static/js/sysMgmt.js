@@ -18,13 +18,11 @@ $('#table').bootstrapTable({
 	minimumCountColumns: 	2, 						//最少允许的列数
 	clickToSelect: 			false, 					//是否启用点击选中行
 //	height: 				400,      				//行高，如果没有设置height属性，表格自动根据记录条数调整表格高度
-	uniqueId: 				"ID", 					//每一行的唯一标识，一般为主键列
 	showToggle: 			false, 					//是否显示详细视图和列表视图的切换按钮
 	cardView: 				false, 					//是否显示详细视图
 	detailView: 			false,     				//是否显示父子表
 
 	columns: [{
-		field: 'state',
 		checkbox: true
 	}, {
 		field: 'domain_id',
@@ -48,13 +46,13 @@ $('#table').bootstrapTable({
 	
 });
 
+//批量删除
 $('#btn_del').on('click', function(){
 	var selectContent = $('#table').bootstrapTable('getSelections');
 	var len = selectContent.length;//获取对象数组的长度
 	var arr = new Array();//初始化数组
 	var i = 0;//初始化数组下标
 	var sendData = '';//初始化发送数据
-	var left_right = '"';
 	var sep = ",";
 	$.each(selectContent, function(index, data){//遍历对象数组
 		//遍历对象,拼接数据
@@ -70,7 +68,7 @@ $('#btn_del').on('click', function(){
 		}
 		i++;
 	})
-	if(typeof(selectContent) == 'undefined'){
+	if(sendData == ''){
 		alert('请选择一条数据');
 	}else{
 //		alert(sendData);
@@ -140,7 +138,7 @@ $('#btn_beSure').click(function() {
 	$('#del_form').submit(function(){
 		$(this).ajaxSubmit(function(resultJson){
 			if(JSON.stringify(resultJson) == "false"){
-				alert('更新失败');
+				alert('删除失败');
 				return;
 			}else{
 				window.location.href='sysMgmt';
@@ -158,6 +156,7 @@ angular.module('myApp', [])
 	$scope.submitForm = function(){};
 })
 
+//"#sub"是隐藏在div中的表单的"保存"按钮
 $('#sub').click(function(){
 	//新增操作
 	if($("#sys_add_div #form #uuid").val() == ''){
@@ -187,7 +186,6 @@ $('#sub').click(function(){
 			$(this).ajaxSubmit(function(resultJson){
 				if(JSON.stringify(resultJson) == "true"){
 					window.location.href='sysMgmt';
-					alert('修改成功');
 				}else{
 					alert('修改失败!');
 				}
