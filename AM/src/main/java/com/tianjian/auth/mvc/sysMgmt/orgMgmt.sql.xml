@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-statement namespace="tianjian.org">
+
+	<sql id="pageSelect">
+		<![CDATA[ 
+        	select * from sys_org_info t 
+        		where 1=1 
+        			and t.domain_uuid=?
+        			and t.org_up_uuid=(select t2.UUID from sys_org_info t2 where t2.ORG_UP_UUID='#')
+        			order by t.modified_date desc
+    	]]>
+	</sql>
+	
+	<sql id="subSelect">
+		<![CDATA[ 
+        	select t.* from sys_org_info t 
+        		where 1=1 
+        			and t.domain_uuid=?
+        			and t.org_up_uuid=(select t2.UUID from sys_org_info t2 
+                                    where t2.org_up_uuid=(select t3.uuid from sys_org_info t3 where t3.org_up_uuid='#') 
+                                      and t2.DOMAIN_UUID=?)
+        			order by t.modified_date desc
+    	]]>
+	</sql>
+	
+</sql-statement>

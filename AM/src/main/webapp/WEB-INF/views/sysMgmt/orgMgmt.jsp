@@ -39,14 +39,6 @@
  				<button id="btn_add" type="button" class="btn btn-primary create">新增</button>
  				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>
  			</div>
- 			<div class="col-xs-8 text-right">
-				<div class="form-inline">
-					<div class="form-group">
-						<input type="text" placeholder="请输入机构名称" style="width: 200px;" id="search" class="form-control">
-					</div>
-					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
-				</div>
-			</div>
  		</div>
  		<table id="table"></table>
 	<!-- 全局js -->
@@ -61,9 +53,6 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
-    <!-- Peity -->
-    <script src="${ctxPath }/static/js/demo/bootstrap-table-demo.js"></script>
     
     <!--
     	作者：yeqc

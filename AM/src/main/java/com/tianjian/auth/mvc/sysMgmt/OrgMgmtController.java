@@ -6,10 +6,40 @@ import com.jfinal.log.Log;
 public class OrgMgmtController extends Controller {
 	
 	private static final Log log = Log.getLog(OrgMgmtController.class);
+	public OrgMgmtService orgMgmtService =  new OrgMgmtService();
+	//保存接收参数("uuid")
+	public static String g_uuid = "";
 	
 	public void index() {
 		log.info("jump to orgMgmt");
 		render("orgMgmt.jsp");
 
+	}
+	
+	/*
+	 * orgMgmt/subData
+	 * 查询下级机构
+	 */
+	public void subData(){
+		String up_uuid = getPara("up_uuid");
+		System.err.println(up_uuid);
+		renderJson(orgMgmtService.subData(g_uuid));
+	}
+	
+	/*
+	 * orgMgmt/orgData
+	 * 查询机构信息
+	 */
+	public void orgData(){
+		renderJson(orgMgmtService.getData(g_uuid));
+	}
+	
+	/*
+	 * orgMgmt/accept
+	 * 接收查询条件
+	 */
+	public void accept(){
+		g_uuid = getPara("uuid");
+		renderJson(true);
 	}
 }

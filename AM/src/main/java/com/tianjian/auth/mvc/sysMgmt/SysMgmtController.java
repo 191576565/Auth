@@ -81,6 +81,7 @@ public class SysMgmtController extends Controller {
 	}
 	
 	/*
+	 * sysMgmt/deleteMore
 	 * 删除多个
 	 */
 	public void deleteMore(){	
