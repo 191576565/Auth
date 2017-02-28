@@ -1,0 +1,16 @@
+package com.tianjian.auth.mvc.model;
+
+import com.jfinal.plugin.activerecord.Model;
+
+public class DpgMgmt extends Model<DpgMgmt> {
+	private static final long serialVersionUID = 8265239943741381714L;
+	public static final DpgMgmt dao=new DpgMgmt();	
+	/*
+	 * 权限数据select语句
+	 */
+	public static final String sqlId_DM_select = "tianjian.dpgmgmt.pageAllSelect";
+	/*
+	 * 权限数据from语句
+	 */
+	public static final String sqlId_DM_selectfrom = "tianjian.dpgmgmt.pageAllFrom";
+}
