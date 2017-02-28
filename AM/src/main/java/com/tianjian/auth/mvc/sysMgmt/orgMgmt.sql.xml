@@ -3,8 +3,11 @@
 
 	<sql id="pageSelect">
 		<![CDATA[ 
-        	select * from sys_org_info t 
-        		where 1=1 
+        	select t.UUID,t3.DOMAIN_NAME,t.ORG_UNIT_ID,t.ORG_UNIT_DESC,t4.ORG_UNIT_DESC AS UP_ORG_UNIT_DESC
+        	 from sys_org_info t 
+        		left join sys_domain_info t3 on t3.UUID = t.DOMAIN_UUID
+            	left join SYS_ORG_INFO t4 on t4.UUID = t.ORG_UP_UUID
+           		where 1=1
         			and t.domain_uuid=?
         			and t.org_up_uuid=(select t2.UUID from sys_org_info t2 where t2.ORG_UP_UUID='#')
         			order by t.modified_date desc

@@ -3,7 +3,10 @@
 
 	<sql id="pageSelect">
 		<![CDATA[ 
-        	select * from sys_domain_info t where 1=1 order by t.modified_date desc
+        	select * from sys_domain_info t 
+        		where 1=1 
+        			and t.DOMAIN_UP_UUID != '#' 
+        				order by t.modified_date desc
     	]]>
 	</sql>
 	

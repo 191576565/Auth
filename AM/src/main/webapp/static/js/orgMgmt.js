@@ -7,7 +7,7 @@ $('#table').bootstrapTable({
 	pagination: 			false, 					//是否显示分页（*）
 	sortable: 				false, 					//是否启用排序
 	sidePagination: 		"client",   			//分页方式：client客户端分页，server服务端分页（*）
-	search: 				true, 					//是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+	search: 				false, 					//是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
 	showColumns: 			false, 					//是否显示所有的列
 	showRefresh: 			false, 					//是否显示刷新按钮
 	minimumCountColumns: 	2, 						//最少允许的列数
@@ -17,18 +17,18 @@ $('#table').bootstrapTable({
 	detailView: 			true,     				//是否显示父子表
 
     columns: [{
+    	field: 'domain_name',
+    	title: '域',
+    },{
         field: 'org_unit_id',
         title: '机构ID',
     }, {
         field: 'org_unit_desc',
         title: '机构描述'	,
     }, {
-        field: 'org_up_uuid',
-        title: '上级机构ID',
-    }, {
-        field: 'is_enable',
-        title: '是否显示',
-    },
+        field: 'up_org_unit_desc',
+        title: '上级机构',
+    }, 
     {
     	field: 'opt',
     	title: '操 作',
@@ -52,6 +52,8 @@ InitSubTable = function (index, row, $detail) {
 		detailView: true,
 		striped: true,
 		columns: [{
+	    	field: 'domain_uuid',
+	    },{
 	        field: 'org_unit_id',
 	    }, {
 	        field: 'org_unit_desc',
@@ -82,6 +84,8 @@ InitSubTable2 = function (index, row, $detail) {
 		detailView: true,
 		striped: true,
 		columns: [{
+	    	field: 'domain_uuid',
+	    },{
 	        field: 'org_unit_id',
 	    }, {
 	        field: 'org_unit_desc',
