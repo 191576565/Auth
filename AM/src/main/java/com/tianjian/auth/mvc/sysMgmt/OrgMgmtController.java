@@ -17,6 +17,16 @@ public class OrgMgmtController extends Controller {
 	}
 	
 	/*
+	 * orgMgmt/subData
+	 * 查询下级机构
+	 */
+	public void subData(){
+		String up_uuid = getPara("up_uuid");
+		System.err.println(up_uuid);
+		renderJson(orgMgmtService.subData(g_uuid));
+	}
+	
+	/*
 	 * orgMgmt/orgData
 	 * 查询机构信息
 	 */
