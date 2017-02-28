@@ -7,9 +7,6 @@ $('#table').bootstrapTable({
 	pagination: 			false, 					//是否显示分页（*）
 	sortable: 				false, 					//是否启用排序
 	sidePagination: 		"client",   			//分页方式：client客户端分页，server服务端分页（*）
-	pageNumber: 			1, 						//初始化加载第一页，默认第一页
-	pageSize: 				100, 					//每页的记录行数（*）
-	pageList: 				[10, 25, 50, 100], 		//可供选择的每页的行数（*）
 	search: 				true, 					//是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
 	showColumns: 			false, 					//是否显示所有的列
 	showRefresh: 			false, 					//是否显示刷新按钮
@@ -21,16 +18,16 @@ $('#table').bootstrapTable({
 
     columns: [{
         field: 'org_unit_id',
-        title: '机构ID'
+        title: '机构ID',
     }, {
         field: 'org_unit_desc',
-        title: '机构描述'	
+        title: '机构描述'	,
     }, {
         field: 'org_up_uuid',
-        title: '上级机构ID'
+        title: '上级机构ID',
     }, {
         field: 'is_enable',
-        title: '是否显示'
+        title: '是否显示',
     },
     {
     	field: 'opt',
@@ -53,6 +50,7 @@ InitSubTable = function (index, row, $detail) {
 		url: 'orgMgmt/subData',
 		method: 'get',
 		detailView: true,
+		striped: true,
 		columns: [{
 	        field: 'org_unit_id',
 	    }, {
@@ -82,6 +80,7 @@ InitSubTable2 = function (index, row, $detail) {
 		url: 'orgMgmt/subData2?up_uuid='+row.uuid,
 		method: 'get',
 		detailView: true,
+		striped: true,
 		columns: [{
 	        field: 'org_unit_id',
 	    }, {
