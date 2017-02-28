@@ -1,8 +1,12 @@
 package com.tianjian.auth.mvc.rolMgmt;
 
+import java.util.List;
+
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.tianjian.auth.mvc.rolMgmt.RolMgmtController;
+import com.tianjian.auth.mvc.sysMgmt.SysMgmt;
+import com.tianjian.auth.mvc.sysMgmt.SysMgmtService;
 
 /**
  * 角色管理
@@ -15,9 +19,14 @@ public class RolMgmtController extends Controller {
 	private static final Log log = Log.getLog(RolMgmtController.class);
 	
 	RoleMgmtService mgmtService = new RoleMgmtService();
-	
+	SysMgmtService sysMgmtService = new SysMgmtService();
 	public void index() {
 		log.info("jump to sysMgmt");
+		
+		List<SysMgmt> sysList = sysMgmtService.getData();
+		
+		setAttr("domainlist", sysList);
+		
 		render("rolMgmt.jsp");
 
 	}

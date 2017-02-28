@@ -1,6 +1,5 @@
 package com.tianjian.auth.mvc.usrMgmt;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,38 +8,34 @@ import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.platform.tools.ToolGetSql;
 
 public class UsrMgmtService {
-	
-	public ArrayList<String> selectDomainOrg(String userId){
-		String sql = ToolGetSql.getSql("tianjian.usrMgmt.checkUserId");
+	//初始化时查询，查询session用户机构
+	public String selectInitOrganization(String userId){
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectInitOrganization");
 		List<Record> list = Db.find(sql,userId);
-		ArrayList<String> arrayList = new ArrayList<String>();
-		arrayList.add(list.get(0).getStr("domain_uuid"));
-		arrayList.add(list.get(0).getStr("org_uuid"));
-		return arrayList;
+		String org = list.get(0).getStr("org_uuid");
+		return org;
 	}
-	public List<Record> initSelect(ArrayList<?> param){
+	//初始化查询，查询session用户所能看到的用户
+	public List<Record> initSelect(String orgUUID){
 		String sql = ToolGetSql.getSql("tianjian.usrMgmt.initSelect");
-		//0-->DOMAIN_UUID;1-->ORG_UUID
-		List<Record> list = Db.find(sql,param.get(0).toString(),param.get(1).toString());
+		List<Record> list = Db.find(sql,orgUUID);
 		return list;
 	}
+	//校验用户是否存在
 	public boolean checkUserId(String userId){
 		String sql = ToolGetSql.getSql("tianjian.usrMgmt.checkUserId");
 		boolean chkRst = Db.find(sql, userId).isEmpty();
 		return chkRst;
 	}
-	
-//	以下没用到
-	public List<Record> selectDomain(){
+	//查询该用户所能看到的域
+	public List<Record> selectDomain(String userId){
 		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectDomain");
-		List<Record> list = Db.find(sql);
+		List<Record> list = Db.find(sql,userId);
 		return list;
 	}
-	public List<Record> selectOrg(String domainUUID){
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("domain_uuid", domainUUID);
-		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectOrg", param);
-		List<Record> list = Db.find(sql);
+	public List<Record> selectOrganization(String userId){
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectOrganization");
+		List<Record> list = Db.find(sql,userId);
 		return list;
 	}
 	public List<Record> selectRole(String domainUUID){

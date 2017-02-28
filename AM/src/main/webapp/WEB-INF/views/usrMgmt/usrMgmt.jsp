@@ -40,7 +40,7 @@
 		<br /><br /><br /><br />
  		<div class="row">
  			<div class="col-xs-4">
- 				<button type="button" class="btn btn-primary create">重置密码</button>
+ 				<!-- <button type="button" class="btn btn-primary create">重置密码</button> -->
  				<button id="btn_add" type="button" class="btn btn-primary create">新增</button>
  				<button type="button" class="btn btn-danger delete">删除</button>
  			</div>
@@ -119,19 +119,11 @@
 				</div>
 				<div class="form-group">
 					<label>所属域</label>
-					<select class="form-control">
-						<option value="FTP">FTP</option>
-						<option value="RPM">RPM</option>
-					</select>
+					<select class="form-control" name="domain" id="domain"></select>
 				</div>
 				<div class="form-group">
 					<label>所属机构</label>
-					<select class="form-control">
-						<option value="tjzh">天健总行</option>
-						<option value="yzzh">渝中分行</option>
-						<option value="yzzh">渝北分行</option>
-						<option value="yzzh">江北分行</option>
-					</select>
+					<select class="form-control"  name="organization" id="organization"></select>
 				</div>
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.pwd.$valid }">
 					<label>密码</label> 

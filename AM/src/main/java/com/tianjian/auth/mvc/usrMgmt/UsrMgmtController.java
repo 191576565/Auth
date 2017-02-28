@@ -1,7 +1,6 @@
 package com.tianjian.auth.mvc.usrMgmt;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.tianjian.auth.mvc.base.BaseSecurityMD5;
@@ -22,11 +21,22 @@ public class UsrMgmtController extends Controller {
 		//获取session中的user_id
 		String sessionUserId = getSessionAttr("user_id");
 		System.out.println("sessionUserId == "+sessionUserId);
-		//将查询到的domain_uuid和org_uuid放到list中
-		ArrayList<String> list = new ArrayList<String>();
-		list.addAll(ums.selectDomainOrg(sessionUserId));
-		//查询该用户所属域和机构所能展示的用户
-		renderJson(ums.initSelect(list));
+		//查询到的org_uuid
+		String orgUUID = ums.selectInitOrganization(sessionUserId);
+		//查询该用户所属机构下所能展示的用户
+		renderJson(ums.initSelect(orgUUID));
+	}
+	//初始化域
+	public void selDmn(){
+		//获取session中的user_id
+		String sessionUserId = getSessionAttr("user_id");
+		renderJson(ums.selectDomain(sessionUserId));
+	}
+	//初始化机构
+	public void selOrg(){
+		//获取session中的user_id
+		String sessionUserId = getSessionAttr("user_id");
+		renderJson(ums.selectOrganization(sessionUserId));
 	}
 	//用户id ajax校验
 	public void chkUserId(){
@@ -36,6 +46,7 @@ public class UsrMgmtController extends Controller {
 		setAttr("chkUserId",ums.checkUserId(userId));
 		renderJson();
 	}
+	//新增用户
 	public void insUsr(){
 		//获取form中的信息
 		String userId = getPara("scopeCode");
@@ -44,9 +55,8 @@ public class UsrMgmtController extends Controller {
 		String userPwd = BaseSecurityMD5.encodeMD5Hex(getPara("pwd"));
 		String userPhone = getPara("phone");
 		String userEmail = getPara("email");
-		//前台没做domainUUID和orgUUID，先暂用常量代替
-		String domainUUID = "48ABB16E6BB7164DE055000000000001";
-		String orgUUID = "4930C618599C63FBE055000000000001";
+		String domainUUID = getPara("domain");
+		String orgUUID = getPara("organization");
 		//将session中的userid作为创建者
 		String sessionUserId = getSessionAttr("user_id");
 		
@@ -63,6 +73,7 @@ public class UsrMgmtController extends Controller {
 		
 		usrMgmt.save();
 	}
+	//编辑用户
 	public void updtUsr(){
 		//获取form中的信息
 		String uuid = getPara("uuid");
@@ -72,8 +83,8 @@ public class UsrMgmtController extends Controller {
 		String userPhone = getPara("phone");
 		String userEmail = getPara("email");
 		//前台没做domainUUID和orgUUID，先暂用常量代替
-		String domainUUID = "48ABB16E6BB7164DE055000000000001";
-		String orgUUID = "4930C618599C63FBE055000000000001";
+		String domainUUID = getPara("domain");
+		String orgUUID = getPara("organization");
 		//将session中的userid作为创建者
 		String sessionUserId = getSessionAttr("user_id");
 		
@@ -90,6 +101,7 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("modified_date", new Timestamp(System.currentTimeMillis()));
 		usrMgmt.update();
 	}
+	//删除用户
 	public void delUsr(){
 		//获取form中的信息
 		String uuid = getPara("uuid");
