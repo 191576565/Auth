@@ -45,7 +45,7 @@
  				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
  				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>
  			</div>
- 			<div class="col-xs-8 text-right">
+ 			  <div class="col-xs-8 text-right">
 				<div class="form-inline">
 					<div class="form-group">
 						<input type="text" placeholder="请输入系统名称" style="width: 200px;" id="search" class="form-control">
