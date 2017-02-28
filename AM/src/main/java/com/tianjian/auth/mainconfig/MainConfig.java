@@ -115,7 +115,7 @@ public class MainConfig extends JFinalConfig {
 		// 添加表映射
 		arp.addMapping("SYS_LOG","UUID" ,OpLog.class);
 		arp.addMapping("SYS_USER_INFO","UUID",User.class);
-		arp.addMapping("SYS_DPGMGMT","UUID",DpgMgmt.class);
+		//arp.addMapping("SYS_DPGMGMT","UUID",DpgMgmt.class);
 		arp.addMapping("sys_domain_info","UUID", SysMgmt.class);
 		arp.addMapping("SYS_ORG_INFO", "UUID", OrgMgmt.class);
 		arp.addMapping("SYS_USER_INFO","UUID", UsrMgmt.class);
