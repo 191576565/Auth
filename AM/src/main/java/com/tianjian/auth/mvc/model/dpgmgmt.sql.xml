@@ -21,4 +21,18 @@
     	]]>
 	</sql>
 	
+	
+	<sql id="domaininfo">
+		<![CDATA[ 
+		select * from SYS_DOMAIN_INFO t 
+         where 1=1
+		<% if(domain_id == "root"){ %>
+       	 
+        <% } else if(!isEmpty(domain_id)){%>
+        and t.domain_id=#'$domain_id$'#
+        <% } %>
+        
+    	]]>
+	</sql>
+	
 </sql-statement>

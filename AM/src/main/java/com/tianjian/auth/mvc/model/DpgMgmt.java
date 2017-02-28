@@ -12,4 +12,9 @@ public class DpgMgmt extends Model<DpgMgmt> {
 	 * 权限数据from语句
 	 */
 	public static final String sqlId_DM_selectfrom = "tianjian.dpgmgmt.pageAllFrom";
+	
+	/*
+	 * 域信息获取语句
+	 */
+	public static final String sqlId_domaininfo = "tianjian.dpgmgmt.domaininfo";
 }

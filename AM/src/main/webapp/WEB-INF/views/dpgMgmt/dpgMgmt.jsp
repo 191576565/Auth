@@ -56,18 +56,17 @@
  		</div>
  		<div id="sys_add_div" style="display:none;">
  			<form id="form"></br>
-				<label>域编码</label> <input style="margin-left: 5%;" type="text" placeholder="1~30位字母数字下划线" name="CustCode"></br></br><!--字母和数字(1~30位) -->
-				<label>组名称</label> <input style="margin-left: 5%;" type="text" placeholder="请输入组名称" name="CustName"></br></br>
-				<label>所属域</label> 
-				<select style="width: 120px; margin-left: 5%;">
-					<option value="FTP">FTP</option>
-					<option value="RPM">RPM</option>
+				<label style="margin-left: 5%;">组编码</label> <input style="margin-left: 6%;" type="text" placeholder="1~30位字母数字下划线" id="CustCode" name="CustCode"></br></br><!--字母和数字(1~30位) -->
+				<label style="margin-left: 5%;">组名称</label> <input style="margin-left: 6%;" type="text" placeholder="请输入组名称" name="CustName"></br></br>
+				<label style="margin-left: 5%;">所属域</label> 
+				<select id="domaininfo" style="width: 120px; margin-left: 6%;">
+					<option value="default">请选择域</option>
 	 			</select></br></br>
-				<label>所属用户</label> <input id="userid" name="userid" style="margin-left: 2%;" type="text" />
+				<label style="margin-left: 5%;">所属用户</label> <input id="guserid" name="guserid" style="margin-left: 2%;" type="text" />
 				</br></br></br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" class="btn btn-default">关闭</button>&nbsp;&nbsp;
-				<button type="button" class="btn btn-info ladda-button save">保存</button>
+				<button type="button"  class="btn btn-default">关闭</button>&nbsp;&nbsp;
+				<button type="button"  class="btn btn-info ladda-button save">保存</button>
  			</form>
  		</div>
  		<table id="table"></table>
@@ -105,9 +104,10 @@
     -->
     <script src="${ctxPath }/static/js/dpgMgmt.js"></script>
      <script type="text/javascript"> 
-	$(document).ready(function () { 
-		 initdpgMgmtlist();
-		});
+     <!-- 初始化界面数据 -->
+     $(document).ready(function() {
+    	    initdpgMgmtlist();
+    	});
 	</script>
 	</body>
 </html>

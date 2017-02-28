@@ -8,6 +8,7 @@ import java.util.Map;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.tianjian.auth.mvc.base.BaseService;
 import com.tianjian.auth.mvc.model.DpgMgmt;
 import com.tianjian.auth.mvc.model.User;
 import com.tianjian.auth.mvc.oplog.OpLog;
@@ -18,7 +19,7 @@ import com.tianjian.platform.tools.ToolCache;
 import com.tianjian.platform.tools.ToolGetSql;
 import com.tianjian.platform.tools.ToolSqlXml;
 
-public class DpgMgmtService {
+public class DpgMgmtService extends BaseService {
 	
 	public static String getSqlByBeetl(String sqlId, Map<String, Object> param){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl);
@@ -78,4 +79,5 @@ public class DpgMgmtService {
 		myjson.buildJson(logall);
 		return myjson;
 	}
+
 }
