@@ -23,4 +23,12 @@
     	]]>
 	</sql>
 	
+	<sql id="deleteMore">
+		<![CDATA[ 
+        	delete from sys_domain_info t 
+        		where 1=1 
+        			and t.domain_up_uuid in (?)
+    	]]>
+	</sql>
+	
 </sql-statement>

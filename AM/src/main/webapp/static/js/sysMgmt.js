@@ -24,6 +24,7 @@ $('#table').bootstrapTable({
 	detailView: 			false,     				//是否显示父子表
 
 	columns: [{
+		field: 'state',
 		checkbox: true
 	}, {
 		field: 'domain_id',
@@ -44,7 +45,53 @@ $('#table').bootstrapTable({
 			return e + d + f;
 		}
 	}, ]
+	
 });
+
+$('#btn_del').on('click', function(){
+	var selectContent = $('#table').bootstrapTable('getSelections');
+	var len = selectContent.length;//获取对象数组的长度
+	var arr = new Array();//初始化数组
+	var i = 0;//初始化数组下标
+	var sendData = '';//初始化发送数据
+	var left_right = '"';
+	var sep = ",";
+	$.each(selectContent, function(index, data){//遍历对象数组
+		//遍历对象,拼接数据
+		$.each(data, function(key, value){
+			if(key === "uuid"){
+				sendData += value;
+			}
+		})
+		if(index < len-1){
+			sendData += sep;
+		}else{
+			sendData = sendData;
+		}
+		i++;
+	})
+	if(typeof(selectContent) == 'undefined'){
+		alert('请选择一条数据');
+	}else{
+//		alert(sendData);
+		$.ajax({
+	        type: "POST",
+	        url: "sysMgmt/deleteMore",
+	        cache : false,
+	        data: {"uuid":sendData},
+	        dataType: 'json',
+	        success: function (message) {
+	            if (message > 0) {
+	                alert("删除成功！");
+	                window.location.href = "sysMgmt";
+	            }
+	        },
+	        error: function (message) {
+	           alert("提交数据失败！");
+	        }
+	    });
+	}	
+})
 
 //layer弹出自定义div__新增
 $('#sys_add').on('click', function() {

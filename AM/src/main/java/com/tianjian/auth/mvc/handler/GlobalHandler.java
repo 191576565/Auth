@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.jfinal.core.Controller;
 import com.jfinal.handler.Handler;
 import com.jfinal.render.Render;
 import com.tianjian.auth.mvc.base.BaseSessionController;
@@ -22,17 +23,9 @@ public class GlobalHandler extends Handler {
 	@Override
 	public void handle(String target, HttpServletRequest request,
 			HttpServletResponse response, boolean[] isHandled) {
-		    BaseSessionController SessionController=new BaseSessionController();
-		    try {
-		    	//用户Session认证
-				SessionController.CheckUserSessionId(request, response);
-			} catch (ServletException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		 //   int index = target.lastIndexOf(".jsp");
-		//    if (index != -1)
-		//      target = target.substring(0, index);
+	    	 //   int index = target.lastIndexOf(".jsp");
+	     	//    if (index != -1)
+	     	//      target = target.substring(0, index);
 		    nextHandler.handle(target, request, response, isHandled);
 		  }
 		 

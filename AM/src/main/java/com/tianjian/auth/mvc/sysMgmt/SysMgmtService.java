@@ -38,5 +38,14 @@ public class SysMgmtService {
 	public boolean delete(SysMgmt sysMgmt){
 		return sysMgmt.delete();
 	}
+	
+	//批量删除系统信息
+	public boolean deleteMore(String idValues){
+		String[] idValue = idValues.split(",");
+		for (int i=0; i<idValue.length; i++){
+			SysMgmt.dao.deleteById(idValue[i]);
+		}
+		return true;
+	}
 
 }

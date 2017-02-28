@@ -11,5 +11,6 @@ public class SysMgmt extends Model<SysMgmt> {
 	public static final String sqlId_sys_select = "tianjian.sys.pageSelect";
 	public static final String sqlId_sys_repeat = "tianjian.sys.repeatSelect";
 	public static final String sqlId_sys_root = "tianjian.sys.rootSelect";
+	public static final String sqlId_sys_delete = "tianjian.sys.deleteMore";
 	
 }

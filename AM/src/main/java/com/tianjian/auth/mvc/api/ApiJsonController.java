@@ -1,6 +1,8 @@
 package com.tianjian.auth.mvc.api;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
@@ -75,20 +77,31 @@ public class ApiJsonController extends Controller {
     	String type=getPara("apitype") ;
     	String tourl=getPara("tourl") ;
     	/*判断命令类型：0 正常请求类型    1 用户注销 */
+    	//Object userinfo=new Object();
+    	Map<String,Object> userinfo = new HashMap<String,Object>();
+    	String  code="200";
+    	String  msg =username+"用户数据请求成功！";
+    	Object data =null;
     	if(flag.equals("0")){
     		//获取json返回对象
     		//Record user1 = ApiJsonService.getSelect(username,usersession,type);
     		List<Record> user = ApiJsonService.getSelectlist(username,usersession,type);
-        	if(user==null){
+        	if(user==null||user.size()==0){
         		log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
-        		renderJson("code:400;msg:"+username+"数据api请求异常，请检查接入格式或用户Session状态！");
+        		code="400";
+        		 msg = username+"数据api请求异常，请检查接入格式或用户Session状态！";
         	}else{
-             	renderJson("code:200;msg:"+username+"数据请求成功！","data:"+user);}
+        		data=user;}
     	}else{
     		int ulogin=ApiJsonService.ulogin(username,usersession);
-    	   log.info("api请求"+ulogin+"个用户退出成功，用户["+username+"],["+usersession+"]！");
+    	    log.info("api请求"+ulogin+"个用户退出成功，用户["+username+"],["+usersession+"]！");
+    	    code="101";
+    	    msg ="api请求"+ulogin+"个用户退出成功，用户["+username+"],["+usersession+"]！";
     		redirect("/ulogin/userexit");
     	}
-    	System.out.print(username+"-"+usersession+"-"+flag+"-"+type);
+    	userinfo.put("code", code);
+    	userinfo.put("msg", msg);
+    	userinfo.put("data",data);
+    	renderJson(userinfo);
      }
 }

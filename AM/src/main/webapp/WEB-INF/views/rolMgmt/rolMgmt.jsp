@@ -50,7 +50,7 @@
  		<div class="row">
  			<div class="col-xs-4">
  				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
- 				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>
+ 			
  			</div>
  			<div class="col-xs-8 text-right">
 				<div class="form-inline">
@@ -68,10 +68,10 @@
  				<input id="uuid" 
  						name="UUID" 
  						type="hidden" 
- 						ng-model="userdata.UUID"
  					/>
  					<label>角色编码</label> 
  					<input name="role_id" 
+ 						   id="role_id"
  						   type="text" 
  						   class="form-control"
  						   placeholder="1~30位字母/数字"
@@ -97,6 +97,7 @@
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.role_name.$valid }">
 					<label>角色名称</label> 
 					<input name="role_name" 
+					       id="role_name"
 						   type="text" 
 						   class="form-control"
 						   placeholder="请输入角色名"
@@ -111,7 +112,7 @@
 				</div>
 				<div class="form-group">
 					<label>所属域</label> 
-					<select class="form-control" name="domain_uuid">
+					<select class="form-control" name="domain_uuid" id="domain_uuid">
 						<option value="48ABB16E6BC0164DE055000000000001">外部定价</option>
 						<option value="48A97A1E49CE173BE055000000000001">系统初始域</option>
 					</select>
@@ -121,7 +122,13 @@
 				</div>
  			</form>
  		</div>
- 		
+ 		<div id="sys_del_div" class="form-group" style="display:none;">
+ 			<form id="del_form" action="" method="post">
+ 				<input type="hidden" name="UUID" id="role_uuid"/>
+				确定要删除该系统信息吗？
+				<button id="btn_beSure" class="btn btn-danger delete">删除</button>
+			</form>
+		</div>
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>

@@ -1,6 +1,7 @@
 package com.tianjian.auth.mvc.sysMgmt;
 
 import java.sql.Timestamp;
+import java.util.Map;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
@@ -77,6 +78,16 @@ public class SysMgmtController extends Controller {
 			return;
 		}
 		renderJson(true);
+	}
+	
+	/*
+	 * 删除多个
+	 */
+	public void deleteMore(){	
+		String uuids = getPara("uuid");
+		if(sysMgmtService.deleteMore(uuids)){
+			renderJson(true);
+		}
 	}
 	
 }

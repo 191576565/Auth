@@ -95,7 +95,7 @@ public class BaseSessionController extends Controller{
 		 *@Author    谢涛
 		 *@Return    void  
 		 */
-	 public  void CheckUserSessionId(HttpServletRequest request, HttpServletResponse response)
+	 public  int CheckUserSessionId(HttpServletRequest request, HttpServletResponse response)
 		            throws ServletException, IOException {
 		        response.setCharacterEncoding("UTF=8");
 		        response.setContentType("text/html;charset=UTF-8");
@@ -103,17 +103,18 @@ public class BaseSessionController extends Controller{
 		        String usersessionid=(String) session.getAttribute("usersessionid");
 		        String sessionid=session.getId();
 		        String username=(String) session.getAttribute("user_id");
-		        if((usersessionid!=null)&&(sessionid.equals(usersessionid))){
+		        if(usersessionid==null){
+		        	//usersessionid为空，用户登录，不拦截 ,Api Json 数据不拦截
+		        	return 0;
+		        }
+		        if(sessionid.equals(usersessionid)){
 		        		 if(UserService.login_status(username)){
 		  		        	session.setAttribute("usersessionid", null);
 		  		        	log.info( "用户主动注销登录："+username+"-"+sessionid+"["+session.getAttribute("usersessionid")+"]");
-		  		        	redirect("ulogin/userexit");
-		  		        }
+		  		        	return 2;
+		  		        }else{return 1;}
 		        	}else{
-
-
-
-		        		redirect("ulogin/userexit");
+		        		return 2;
 		        }
 		    }
 	 
