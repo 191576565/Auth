@@ -1,1 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<sql-statement namespace="tianjian.org">
+
+	<sql id="pageSelect">
+		<![CDATA[ 
+        	select * from sys_org_info t 
+        		where 1=1 
+        			order by t.modified_date desc
+    	]]>
+	</sql>
+	
+</sql-statement>
