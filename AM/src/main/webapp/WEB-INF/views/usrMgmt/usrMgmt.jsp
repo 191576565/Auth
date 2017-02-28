@@ -119,19 +119,11 @@
 				</div>
 				<div class="form-group">
 					<label>所属域</label>
-					<select class="form-control">
-						<option value="FTP">FTP</option>
-						<option value="RPM">RPM</option>
-					</select>
+					<select class="form-control" name="domain" id="domain"></select>
 				</div>
 				<div class="form-group">
 					<label>所属机构</label>
-					<select class="form-control">
-						<option value="tjzh">天健总行</option>
-						<option value="yzzh">渝中分行</option>
-						<option value="yzzh">渝北分行</option>
-						<option value="yzzh">江北分行</option>
-					</select>
+					<select class="form-control"  name="organization" id="organization"></select>
 				</div>
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.pwd.$valid }">
 					<label>密码</label> 

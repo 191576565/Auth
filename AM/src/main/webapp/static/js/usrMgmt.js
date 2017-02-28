@@ -19,7 +19,7 @@ $('#table').bootstrapTable({
  	showColumns: false, //是否显示所有的列                                                                                             
  	showRefresh: false, //是否显示刷新按钮                                                                                             
  	clickToSelect: true, //是否启用点击选中行                                                                                          
- 	uniqueId: "UUID", //每一行的唯一标识，一般为主键列                                                                                         
+ 	uniqueId: "uuid", //每一行的唯一标识，一般为主键列                                                                                         
  	showToggle:false, //是否显示详细视图和列表视图的切换按钮                                                                                     
  	cardView: false, //是否显示详细视图                                                                                               
                                                                                                                               
@@ -55,6 +55,32 @@ $('#table').bootstrapTable({
     	}                                                                                                                     
     },]                                                                                                                       
 });
+//域load
+$("#domain").load(
+	"usrMgmt/selDmn",//url
+	//{},//data 可选
+	function(data){
+		//解析json
+		var dataObj=eval("("+data+")");
+		$.each(dataObj,function(idx,item){ 
+			var option = $("<option>").val(item.uuid).text(item.domain_name); 
+			$("#domain").append(option); 
+		})
+	}
+);
+//机构load
+$("#organization").load(
+	"usrMgmt/selOrg",//url
+	//{},//data 可选
+	function(data){
+		//解析json
+		var dataObj=eval("("+data+")");
+		$.each(dataObj,function(idx,item){ 
+			var option = $("<option>").val(item.uuid).text(item.org_unit_desc).attr("data-domain", item.domain_uuid);
+			$("#organization").append(option); 
+		})
+	}
+);
 //新增的onclick事件
 $('#btn_add').on('click', function() {
 	//初始化form
@@ -131,7 +157,7 @@ $("#form").submit(function(){
 $('#sub').click(function(){
 	//新增操作
 	if($("#uuid").val() == ''){
-		$("#form").attr("action", "usrMgmt/insUsr");
+		$("#form").attr("action", "usrMgmt/insUsr"); 
 		$('#form').submit(function(){
 			if(chkUserStr==''){
 				$(this).ajaxSubmit(function(){});	
@@ -150,4 +176,10 @@ $('#sub').click(function(){
 		});
 	}
 });
-
+$('#domain').change(function(){
+	alert('in');
+	$('#organization option').each(function(){
+		alert($(this).attr("data-domain").val());
+//		var ifHid = $
+	});
+});
