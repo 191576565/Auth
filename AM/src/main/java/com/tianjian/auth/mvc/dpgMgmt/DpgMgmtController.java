@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.api.ApiJsonService;
 import com.tianjian.auth.mvc.dpgMgmt.DpgMgmtController;
@@ -43,8 +45,7 @@ public class DpgMgmtController extends Controller {
 		Object userinfo = getSessionAttr("userinfo");	
 		String domain_id=((Record) userinfo).getStr("domain_id");
 		
-		//List<Record> user = dpgmgmtservice.getSelectlist(username,usersession,type);
-		// 组装sql参数
+	    // 组装sql参数
 		//mpara.put("user_id", user_id);
 		mpara.put("domain_id", domain_id);
 		String selectsql = dpgmgmtservice.getSelectSql(DpgMgmt.sqlId_DM_select);
@@ -53,5 +54,21 @@ public class DpgMgmtController extends Controller {
 		// 获取数据
 		PageJson<DpgMgmt> myjson = dpgmgmtservice.getPageData(pageSize, pageNumber, selectsql, wheresql);
 		renderJson(myjson);
+	}
+	 /** 
+	 *@Function 获取域信息           
+	 *@Declare   根据用户的权限获取域信息
+	 *@Author    谢涛
+	 *@Return    String  void
+	 */
+	public void domaininfo() {
+		Map<String, Object> mpara = new HashMap<String, Object>();
+		Object userinfo = getSessionAttr("userinfo");	
+		String domain_id=((Record) userinfo).getStr("domain_id");
+		mpara.put("domain_id", domain_id);
+		String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_domaininfo, mpara);
+		// 获取数据
+		List<Record> dpgmgmt = (List<Record>) Db.find(sql);
+		renderJson(dpgmgmt);
 	}
 }

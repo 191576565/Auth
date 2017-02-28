@@ -55,7 +55,6 @@ function initdpgMgmtlist(){
     	formatter:function(value,row,index){
     		var e = '<a href="#" class="btn btn-info update edit">编辑</a> ';
     		var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';
-    		//var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';
     		var f = '<a href="#" class="btn btn-primary create">数据权限</a> ';
     		return e+d+f;
     	}
@@ -67,16 +66,25 @@ function initdpgMgmtlist(){
 //yeqc
 //layer弹出自定义div
 
-$('#sys_add').on('click', function() {
+//$('#sys_add').on('click', function() {
+//	layer.open({
+//		type: 1,
+//		content: $('#sys_add_div'),
+//		skin: 'layui-layer-molv',
+//		title: ' 权限组信息',
+//		area: ['400px', '300px'],	
+//	});
+//});
+
+function sys_add(){
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
 		skin: 'layui-layer-molv',
-		title: '权限组信息',
-		area: ['400px', '300px'],
-		//		maxmin: true	
+		title: ' 权限组信息',
+		area: ['400px', '300px'],	
 	});
-});
+};
 
 $('#table').on('click', '.edit', function() {
 	layer.open({
@@ -103,6 +111,30 @@ $('#sys_add_div #form').on('click', '#tree', function() {
 	});
 	return false;
 });
+
+$('#sys_add').on('click', function() {
+	removeAll();
+	$("#domaininfo").append("<option value='Value'>==请选择域==</option>");
+    $.ajax({  
+        url: "dpgMgmt/domaininfo",
+        dataType: "json",  
+        success: function (data) {  
+            $.each(data, function (index, domaininfo) {
+            	$("#domaininfo").append("<option value='Value'>" + domaininfo.domain_id + "</option>");
+            });  
+        },  
+         
+        error: function (XMLHttpRequest, textStatus, errorThrown) {  
+            alert("error");  
+        }  
+    }); 
+    sys_add();
+});  
+
+function removeAll(){ 
+	var obj=document.getElementById('domaininfo'); 
+	obj.options.length=0; 
+	} 
 
 
 
