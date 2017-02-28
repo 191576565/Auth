@@ -70,7 +70,7 @@ $('#btn_del').on('click', function(){
 		}
 		i++;
 	})
-	if(typeof(selectContent) == 'undefined'){
+	if(sendData == ''){
 		alert('请选择一条数据');
 	}else{
 //		alert(sendData);
