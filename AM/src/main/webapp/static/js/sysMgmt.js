@@ -39,12 +39,31 @@ $('#table').bootstrapTable({
 		formatter: function(value, row, index) {
 			var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.domain_id +'\',\''+ row.domain_name +'\',\''+ row.sort_id +'\',\''+ row.memo +'\')">编辑</a> ';
 			var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
-			var f = '<a href="orgMgmt" class="btn btn-success">机构</a> ';
+			var f = '<a href="#" class="btn btn-success" onclick="onOrg(\''+ row.uuid +'\')">机构</a> ';
 			return e + d + f;
 		}
 	}, ]
 	
 });
+
+//跳转机构页面
+function onOrg(id){
+	$.ajax({
+        type: "POST",
+        url: "orgMgmt/accept",
+        cache : false,
+        data: {"uuid":id},
+        dataType: 'json',
+        success: function (message) {
+            if (message > 0) {
+                window.location.href = "orgMgmt";
+            }
+        },
+        error: function (message) {
+           alert("提交数据失败！");
+        }
+    });
+}
 
 //批量删除
 $('#btn_del').on('click', function(){
