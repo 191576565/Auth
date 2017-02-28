@@ -15,5 +15,10 @@ public class OrgMgmtService {
 		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_sub_select);
 		return OrgMgmt.dao.find(sql,uuid,uuid);
 	}
+	
+	public List<OrgMgmt> subData2(String uuid, String up_uuid){
+		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_sub2_select);
+		return OrgMgmt.dao.find(sql,uuid,up_uuid);
+	}
 
 }

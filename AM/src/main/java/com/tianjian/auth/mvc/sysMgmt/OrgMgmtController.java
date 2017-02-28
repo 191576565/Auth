@@ -18,12 +18,21 @@ public class OrgMgmtController extends Controller {
 	
 	/*
 	 * orgMgmt/subData
-	 * 查询下级机构
+	 * 查询第二级机构
 	 */
 	public void subData(){
+		renderJson(orgMgmtService.subData(g_uuid));
+	}
+	
+	/*
+	 * orgMgmt/subData2
+	 * 无线循环
+	 */
+	public void subData2(){
 		String up_uuid = getPara("up_uuid");
 		System.err.println(up_uuid);
-		renderJson(orgMgmtService.subData(g_uuid));
+		System.err.println(g_uuid);
+		renderJson(orgMgmtService.subData2(g_uuid, up_uuid));
 	}
 	
 	/*

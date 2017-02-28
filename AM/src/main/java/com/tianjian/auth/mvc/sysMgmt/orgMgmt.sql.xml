@@ -23,4 +23,14 @@
     	]]>
 	</sql>
 	
+	<sql id="subSelect2">
+		<![CDATA[ 
+        	select t.* from sys_org_info t 
+        		where 1=1 
+        			and t.domain_uuid=?
+        			and t.org_up_uuid=?
+        			order by t.modified_date desc
+    	]]>
+	</sql>
+	
 </sql-statement>

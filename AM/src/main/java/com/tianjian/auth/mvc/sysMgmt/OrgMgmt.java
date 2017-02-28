@@ -10,5 +10,6 @@ public class OrgMgmt extends Model<OrgMgmt>{
 	
 	public static final String sqlId_org_select = "tianjian.org.pageSelect";
 	public static final String sqlId_sub_select = "tianjian.org.subSelect";
+	public static final String sqlId_sub2_select = "tianjian.org.subSelect2";
 
 }

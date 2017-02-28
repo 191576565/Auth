@@ -2,7 +2,7 @@ $('#table').bootstrapTable({
     url: 					'orgMgmt/orgData',
     method: 				'get', 					//请求方式（*）
 	toolbar: 				'#toolbar', 			//工具按钮用哪个容器
-	striped: 				false, 					//是否显示行间隔色
+	striped: 				true, 					//是否显示行间隔色
 	cache: 					false, 					//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 	pagination: 			false, 					//是否显示分页（*）
 	sortable: 				false, 					//是否启用排序
@@ -55,20 +55,44 @@ InitSubTable = function (index, row, $detail) {
 		detailView: true,
 		columns: [{
 	        field: 'org_unit_id',
-	        title: '机构ID'
 	    }, {
 	        field: 'org_unit_desc',
-	        title: '机构描述'	
 	    }, {
 	        field: 'org_up_uuid',
-	        title: '上级机构ID'
 	    }, {
 	        field: 'is_enable',
-	        title: '是否显示'
 	    },
 	    {
 	    	field: 'opt',
-	    	title: '操 作',
+	    	formatter:function(value,row,index){
+	    	var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ row.id + '\')">编辑</a> ';
+	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';
+	    	return e+d;
+	    	}
+	    },],
+        onExpandRow: function (index, row, $Subdetail) {
+            InitSubTable2(index, row, $Subdetail);
+        }
+	});
+}
+
+InitSubTable2 = function (index, row, $detail) {
+	var cur_table = $detail.html('<table></table>').find('table');
+	$(cur_table).bootstrapTable({
+		url: 'orgMgmt/subData2?up_uuid='+row.uuid,
+		method: 'get',
+		detailView: true,
+		columns: [{
+	        field: 'org_unit_id',
+	    }, {
+	        field: 'org_unit_desc',
+	    }, {
+	        field: 'org_up_uuid',
+	    }, {
+	        field: 'is_enable',
+	    },
+	    {
+	    	field: 'opt',
 	    	formatter:function(value,row,index){
 	    	var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ row.id + '\')">编辑</a> ';
 	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';
@@ -77,7 +101,7 @@ InitSubTable = function (index, row, $detail) {
 	    },],
 	    //无线循环取子表，直到子表里面没有记录
         onExpandRow: function (index, row, $Subdetail) {
-            InitSubTable(index, row, $Subdetail);
+            InitSubTable2(index, row, $Subdetail);
         }
 	});
 }
