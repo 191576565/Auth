@@ -30,8 +30,6 @@ public class OrgMgmtController extends Controller {
 	 */
 	public void subData2(){
 		String up_uuid = getPara("up_uuid");
-		System.err.println(up_uuid);
-		System.err.println(g_uuid);
 		renderJson(orgMgmtService.subData2(g_uuid, up_uuid));
 	}
 	
