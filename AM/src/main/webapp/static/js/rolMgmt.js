@@ -34,7 +34,7 @@ $('#table').bootstrapTable({
     	formatter:function(value,row,index){
     	var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.role_id +'\',\''+ row.role_name +'\',\''+ row.domain_uuid +'\')">编辑</a>';
     	var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
-    	var f = '<a href="funList" class="btn btn-primary create" onclick="del(\''+ row.id +'\')">功能</a> ';
+    	var f = '<a href="funList/showFunList?uuid='+row.uuid+'" class="btn btn-primary create">功能</a> ';
     	return e+d+f;
     	}
     },]

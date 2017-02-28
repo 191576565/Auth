@@ -19,4 +19,12 @@
     	]]>
 	</sql>
 	
+	<sql id="selectFunList">
+		<![CDATA[ 
+          select t2.uuid,t1.role_id,t1.Role_Name,t1.res_id,t1.res_name from V_Api_Rpm02 t1 left join
+          sys_resource_info t2 on t1.res_id=T2.Res_Id
+    	]]>
+	</sql>
+	
+	
 </sql-statement>

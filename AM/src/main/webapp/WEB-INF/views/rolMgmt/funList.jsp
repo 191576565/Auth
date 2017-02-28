@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -43,38 +44,32 @@
 			</div>
 		</div>
 		<br/><br/>
-		<div class="row">
+		
+ 		<br/><br/>
+		<div id="sys_add_div" style="margin-left:1% ;">
+ 			<form id="form" method="post" action="funSave">
+				
+			<input type="hidden" id="fun_uuid" name="fun_uuid" value="${funuuid }"/>	
+			<table class="table table-hover table-bordered">
+  				<thead><th>功能名称</th></thead>
+   				<tbody>
+  				<c:forEach items="${funlist }" var="fun">
+  				 
+   					<tr>
+   					<td>
+   					<input name="fun_list" id="fun_list"  type="checkbox"  value="${fun.uuid }" style="margin-left: 9%;"/>${fun.res_name }
+   					</td>
+
+   					</tr>
+  				 </c:forEach>
+   				</tbody>
+  			</table>
+  			<div class="row">
  			<div class="col-xs-4">
- 				<button id="sys_add" type="button" class="btn btn-primary create">保存</button>
+ 				<button id="sys_add" type="submit" class="btn btn-primary create">保存</button>
  				<button id="btn_add" type="button" class="btn btn-danger delete">刷新</button>
  			</div>
  		</div>
- 		<br/><br/>
-		<div id="sys_add_div" style="margin-left:1% ;">
- 			<form id="form">
-				<input name="sys" type="checkbox" value=""/>系统服务<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 3%;"/>域管理<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 3%;"/>用户权限<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 6%;"/>用户管理
-				<input name="sys" type="checkbox" value="" style="margin-left: 6%;"/>角色管理
-				<input name="sys" type="checkbox" value="" style="margin-left: 6%;"/>资源管理
-				<input name="sys" type="checkbox" value="" style="margin-left: 6%;"/>数据权限组管理
-				<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 3%;"/>系统维护<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 6%;"/>系统日志
-				<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 3%;"/>RPM<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 6%;"/>客户管理<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 9%;"/>客户-新增
-				<input name="sys" type="checkbox" value="" style="margin-left: 9%;"/>客户-删除
-				<input name="sys" type="checkbox" value="" style="margin-left: 9%;"/>客户-编辑
-				<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 3%;"/>FTP<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 6%;"/>曲线管理<br/><br/>
-				<input name="sys" type="checkbox" value="" style="margin-left: 9%;"/>曲线-新增
-				<input name="sys" type="checkbox" value="" style="margin-left: 9%;"/>曲线-删除
-				<input name="sys" type="checkbox" value="" style="margin-left: 9%;"/>曲线-编辑
-
  			</form>
  		</div>
 	</body>

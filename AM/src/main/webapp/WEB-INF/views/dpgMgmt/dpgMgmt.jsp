@@ -45,7 +45,7 @@
  				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
  				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>
  			</div>
- 			<div class="col-xs-8 text-right">
+ 			  <div class="col-xs-8 text-right">
 				<div class="form-inline">
 					<div class="form-group">
 						<input type="text" placeholder="请输入系统名称" style="width: 200px;" id="search" class="form-control">
@@ -54,7 +54,6 @@
 				</div><br/>
 			</div>
  		</div>
- 		<table id="table"></table>
  		<div id="sys_add_div" style="display:none;">
  			<form id="form"></br>
 				<label>域编码</label> <input style="margin-left: 5%;" type="text" placeholder="1~30位字母数字下划线" name="CustCode"></br></br><!--字母和数字(1~30位) -->
@@ -63,15 +62,15 @@
 				<select style="width: 120px; margin-left: 5%;">
 					<option value="FTP">FTP</option>
 					<option value="RPM">RPM</option>
-				</select></br></br>
-				<label>所属用户</label> <input id="tree" style="margin-left: 2%;" type="text" />
+	 			</select></br></br>
+				<label>所属用户</label> <input id="userid" name="userid" style="margin-left: 2%;" type="text" />
 				</br></br></br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="button" class="btn btn-default">关闭</button>&nbsp;&nbsp;
 				<button type="button" class="btn btn-info ladda-button save">保存</button>
  			</form>
  		</div>
- 		
+ 		<table id="table"></table>
  		<div id="opn_tree" class="ibox float-e-margins" style="display:none;">
                 <div class="ibox-content">
                     <div id="treeview12" class="test"></div>
@@ -105,6 +104,10 @@
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/dpgMgmt.js"></script>
-    
+     <script type="text/javascript"> 
+	$(document).ready(function () { 
+		 initdpgMgmtlist();
+		});
+	</script>
 	</body>
 </html>
