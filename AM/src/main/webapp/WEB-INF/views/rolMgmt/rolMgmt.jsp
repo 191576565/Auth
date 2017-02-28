@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -113,8 +114,10 @@
 				<div class="form-group">
 					<label>所属域</label> 
 					<select class="form-control" name="domain_uuid" id="domain_uuid">
-						<option value="48ABB16E6BC0164DE055000000000001">外部定价</option>
-						<option value="48A97A1E49CE173BE055000000000001">系统初始域</option>
+						<c:forEach items="${domainlist }" var="dlist">
+						<option value="${dlist.uuid }">${dlist.domain_name }</option>
+						</c:forEach>
+						
 					</select>
 				</div>
 				<div class="form-group">
