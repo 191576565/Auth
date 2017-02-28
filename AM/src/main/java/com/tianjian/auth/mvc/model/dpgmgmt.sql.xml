@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 用户sql -->
+<sql-statement namespace="tianjian.dpgmgmt">
+
+	<sql id="pageAllSelect">
+		<![CDATA[ 
+       select t1.domain_id, t1.domain_name, t.group_id, t.group_desc, t.users 
+    	]]>
+	</sql>
+	
+	<sql id="pageAllFrom">
+		<![CDATA[ 
+		  from sys_group_info t, sys_domain_info t1
+         where t.domain_uuid = t1.uuid and 1=1
+		<% if(domain_id == "root"){ %>
+       	 
+        <% } else if(!isEmpty(domain_id)){%>
+        and t1.domain_id=#'$domain_id$'#
+        <% } %>
+        
+    	]]>
+	</sql>
+	
+</sql-statement>
