@@ -176,10 +176,14 @@ $('#sub').click(function(){
 		});
 	}
 });
-$('#domain').change(function(){
-	alert('in');
+$('#domain').change(function(){	
 	$('#organization option').each(function(){
-		alert($(this).attr("data-domain").val());
-//		var ifHid = $
+		$(this).show();
+		var orgDomainUUID = $(this).data("domain");
+		var domainUUID = $('#domain').val();
+		var ifHid = orgDomainUUID==domainUUID?false:true;
+		if(ifHid){
+			$(this).hide();
+		}
 	});
 });
