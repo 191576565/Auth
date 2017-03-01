@@ -53,6 +53,9 @@ function initsyslogtable(){
 	    }, {
 	        field: 'op_date',
 	        title: '操作时间'
+	    },{
+	        field: 'op_ipadr',
+	        title: '操作IP'
 	    }, {
 	    	field: 'op_content',
 	    	title: '操 作',

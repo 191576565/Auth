@@ -6,6 +6,7 @@ import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.tianjian.auth.mvc.constant.ConstantLog;
 import com.tianjian.auth.mvc.login.LoginController;
 import com.tianjian.platform.pjson.PageJson;
 import com.tianjian.platform.tools.ToolGetSql;
@@ -28,6 +29,9 @@ public class OpLogController extends Controller {
 	 * @
 	 */
 	public void index() {
+//		setAttr(ConstantLog.log_optype, "HUJIAN TEST");
+//		setAttr(ConstantLog.log_opcontent, "HUJIAN TEST CONTENT");
+
 		render("sysLog.jsp");
 	}
 	
