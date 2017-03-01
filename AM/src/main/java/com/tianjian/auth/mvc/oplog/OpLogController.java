@@ -29,8 +29,8 @@ public class OpLogController extends Controller {
 	 * @
 	 */
 	public void index() {
-//		setAttr(ConstantLog.log_optype, "HUJIAN TEST");
-//		setAttr(ConstantLog.log_opcontent, "HUJIAN TEST CONTENT");
+		//setAttr(ConstantLog.log_optype, "HUJIAN TEST");
+		//setAttr(ConstantLog.log_opcontent, "HUJIAN TEST CONTENT");
 
 		render("sysLog.jsp");
 	}

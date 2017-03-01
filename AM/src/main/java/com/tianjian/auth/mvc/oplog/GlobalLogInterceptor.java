@@ -42,8 +42,8 @@ public class GlobalLogInterceptor implements Interceptor {
 		
 		
 		String ip = getIpAddr(request);
-		String opType = (String)request.getAttribute("OPTYPE"); 
-		String opContent = (String)request.getAttribute("OPCONTENT");
+		String opType = (String)request.getAttribute(ConstantLog.log_optype); 
+		String opContent = (String)request.getAttribute(ConstantLog.log_opcontent);
 		
 		//
 		String doId=((Record) userinfo).getStr("domain_id");
