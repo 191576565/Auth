@@ -1,5 +1,5 @@
-//校验用户是否唯一变量
-var chkUserStr;
+var chkUserStr;//校验用户是否唯一变量
+var orgList;//onload机构list
 
 $('#table').bootstrapTable({                                                                                                  
     url: 'usrMgmt/initSel',
@@ -74,8 +74,8 @@ $("#organization").load(
 	//{},//data 可选
 	function(data){
 		//解析json
-		var dataObj=eval("("+data+")");
-		$.each(dataObj,function(idx,item){ 
+		orgList=eval("("+data+")");
+		$.each(orgList,function(idx,item){ 
 			var option = $("<option>").val(item.uuid).text(item.org_unit_desc).attr("data-domain", item.domain_uuid);
 			$("#organization").append(option); 
 		})
@@ -177,13 +177,12 @@ $('#sub').click(function(){
 	}
 });
 $('#domain').change(function(){	
-	$('#organization option').each(function(){
-		$(this).show();
-		var orgDomainUUID = $(this).data("domain");
-		var domainUUID = $('#domain').val();
-		var ifHid = orgDomainUUID==domainUUID?false:true;
-		if(ifHid){
-			$(this).hide();
+	$("#organization").find("option").remove(); 
+	var domainUUID = $('#domain').val();
+	$.each(orgList,function(idx,item){
+		if(item.domain_uuid==domainUUID){
+			var option = $("<option>").val(item.uuid).text(item.org_unit_desc).attr("data-domain", item.domain_uuid);
+			$("#organization").append(option); 
 		}
 	});
 });
