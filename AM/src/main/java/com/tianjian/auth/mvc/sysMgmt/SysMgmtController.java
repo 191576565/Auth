@@ -1,7 +1,6 @@
 package com.tianjian.auth.mvc.sysMgmt;
 
 import java.sql.Timestamp;
-import java.util.Map;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;

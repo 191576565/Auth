@@ -40,4 +40,12 @@
     	]]>
 	</sql>
 	
+	<sql id="getOrgInfo">
+		<![CDATA[ 
+        	select t.* from SYS_ORG_INFO t 
+    			where t.DOMAIN_UUID= ? 
+      				or t.ORG_UP_UUID='#'
+    	]]>
+	</sql>
+	
 </sql-statement>

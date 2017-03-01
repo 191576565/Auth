@@ -112,17 +112,35 @@ angular.module('myApp', [])
 	$scope.submitForm = function(){};
 })
 
-//新增机构
+//新增机构_弹出层
 $('#org_add').on('click', function() {
-	//获取域名
+	//获取域
 	$.getJSON("orgMgmt/getId",function(data){
 		console.log(data);
-//		alert(JSON.stringify(data));
 		$.each(data, function(i, item){
 			$.each(item, function(key,value){
 				if(key === "domain_name"){
-//					alert(value);
 					var $scop_n = $("#org_add_div #form #scop_n").val(value);
+				}
+				if(key === "uuid"){
+					var $uuid = $("#org_add_div #form #uuid").val(value);
+				}
+			})
+		})
+	})
+	//获取机构
+	$.getJSON("orgMgmt/getOrg",function(data){
+		console.log(data);
+		$.each(data, function(i, item){
+			var up_id = '';
+			$.each(item, function(key,value){
+				if(key === "uuid"){
+					up_id = value;
+				}
+			})
+			$.each(item, function(key,value){
+				if(key === "org_unit_desc"){
+					$('#up_org').append("<option value="+up_id+">" + value + "</option>");
 				}
 			})
 		})
@@ -134,4 +152,12 @@ $('#org_add').on('click', function() {
 		area: ['960px', '540px'],
 	});
 	return false;
+});
+//新增机构_保存
+$('#sub').click(function(){
+	$("#form").attr("action", "orgMgmt/save");
+	$('#form').ajaxSubmit(function(resultJson){
+		window.location.href='orgMgmt';
+	});
+	return false;//阻止表单默认提交
 });

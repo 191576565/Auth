@@ -100,6 +100,8 @@
 						   ng-maxlength="30"
 						   required
 					/>
+					<p class="fa fa-check input_result success"
+						ng-if="signUpForm.orgCode.$valid"></p>
 					<p class="error" ng-if="(signUpForm.orgName.$error.minlength ||
 						signUpForm.orgName.$error.maxlength) && 
 						signUpForm.orgName.$touched">
@@ -107,8 +109,7 @@
 				</div>
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.upOrg.$valid }">
 					<label>上级机构</label> 
-					<select name="" class="form-control">
-						<option>初始机构</option>
+					<select id="up_org" name="upOrg" class="form-control">
 					</select>
 				</div>
 				<div class="form-group">

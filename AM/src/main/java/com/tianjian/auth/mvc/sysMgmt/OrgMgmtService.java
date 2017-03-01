@@ -29,4 +29,15 @@ public class OrgMgmtService {
 	public List<Record> getScopeInfo(String uuid){
 		return Db.find("select t.* from SYS_DOMAIN_INFO t where t.UUID = ?",uuid);
 	}
+	
+	//获取机构信息
+	public List<OrgMgmt> getOrgInfo(String uuid){
+		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_getOrgInfo);
+		return OrgMgmt.dao.find(sql,uuid);
+	}
+	
+	//新增机构信息
+	public void save(OrgMgmt orgMgmt){
+		orgMgmt.save();
+	}
 }

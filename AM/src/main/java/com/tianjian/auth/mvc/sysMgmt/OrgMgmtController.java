@@ -1,5 +1,7 @@
 package com.tianjian.auth.mvc.sysMgmt;
 
+import java.sql.Timestamp;
+
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 
@@ -52,9 +54,36 @@ public class OrgMgmtController extends Controller {
 	
 	/*
 	 * orgMgmt/getId
-	 * 发送查询结果
+	 * 发送域信息查询结果
 	 */
 	public void getId(){
 		renderJson(orgMgmtService.getScopeInfo(g_uuid));
+	}
+	
+	/*
+	 * orgMgmt/getOrg
+	 * 发送机构信息查询结果
+	 */
+	public void getOrg(){
+		renderJson(orgMgmtService.getOrgInfo(g_uuid));
+	}
+	
+	/*
+	 * orgMgmt/save
+	 * 新增机构信息
+	 */
+	public void save(){
+		OrgMgmt orgMgmt = new OrgMgmt();
+		orgMgmt.set("DOMAIN_UUID", getPara("UUID"));
+		orgMgmt.set("ORG_UNIT_ID", getPara("orgCode"));
+		orgMgmt.set("ORG_UNIT_DESC", getPara("orgName"));
+		orgMgmt.set("ORG_UP_UUID", getPara("upOrg"));
+		orgMgmt.set("IS_ENABLE", "Y");
+		orgMgmt.set("MEMO", getPara("memo"));
+		orgMgmt.set("CREATOR", "yeqc");
+		orgMgmt.set("MODIFIER", "yeqc");
+		orgMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
+		orgMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
+		orgMgmtService.save(orgMgmt);
 	}
 }
