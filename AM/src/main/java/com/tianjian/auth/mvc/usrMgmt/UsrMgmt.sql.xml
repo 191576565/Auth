@@ -29,6 +29,7 @@
 			    ON A.ORG_UUID = B.UUID
 			  LEFT JOIN SYS_ROLE_INFO C
 			    ON INSTR(A.ROLES, C.UUID) > 0
+			 WHERE A.USER_ID <> ?
 			 GROUP BY A.UUID,
 			          A.DOMAIN_UUID,
 			          A.USER_ID,
