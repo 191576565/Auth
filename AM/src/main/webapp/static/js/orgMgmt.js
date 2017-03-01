@@ -52,16 +52,14 @@ InitSubTable = function (index, row, $detail) {
 		detailView: true,
 		striped: true,
 		columns: [{
-	    	field: 'domain_uuid',
+	    	field: 'domain_name',
 	    },{
 	        field: 'org_unit_id',
 	    }, {
 	        field: 'org_unit_desc',
 	    }, {
-	        field: 'org_up_uuid',
-	    }, {
-	        field: 'is_enable',
-	    },
+	        field: 'up_org_unit_desc',
+	    }, 
 	    {
 	    	field: 'opt',
 	    	formatter:function(value,row,index){
@@ -84,16 +82,14 @@ InitSubTable2 = function (index, row, $detail) {
 		detailView: true,
 		striped: true,
 		columns: [{
-	    	field: 'domain_uuid',
+	    	field: 'domain_name',
 	    },{
 	        field: 'org_unit_id',
 	    }, {
 	        field: 'org_unit_desc',
 	    }, {
-	        field: 'org_up_uuid',
-	    }, {
-	        field: 'is_enable',
-	    },
+	        field: 'up_org_unit_desc',
+	    }, 
 	    {
 	    	field: 'opt',
 	    	formatter:function(value,row,index){
