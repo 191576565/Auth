@@ -17,18 +17,15 @@ import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.activerecord.dialect.SqlServerDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
-import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.tianjian.auth.mvc.handler.GlobalHandler;
 import com.tianjian.auth.mvc.handler.GlobalInterceptor;
-import com.tianjian.auth.mvc.login.Login;
-import com.tianjian.auth.mvc.login.LoginController;
 import com.tianjian.auth.mvc.model.DpgMgmt;
 import com.tianjian.auth.mvc.model.User;
+import com.tianjian.auth.mvc.oplog.GlobalLogInterceptor;
 import com.tianjian.auth.mvc.oplog.OpLog;
-import com.tianjian.auth.mvc.oplog.OpLogController;
 import com.tianjian.auth.mvc.rolMgmt.RoleMgmt;
 import com.tianjian.auth.mvc.sysMgmt.OrgMgmt;
 import com.tianjian.auth.mvc.sysMgmt.SysMgmt;
@@ -137,6 +134,8 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configInterceptor(Interceptors me) {
 		me.add(new GlobalInterceptor());
+		me.add(new GlobalLogInterceptor());
+		
 	}
 
 	@Override
