@@ -53,6 +53,6 @@ public interface ConstantLog {
 	/**
 	 * 日志  操作信息
 	 */
-	public static final String log_optype = syslog+"OPTYPE";
-	public static final String log_opcontent = syslog+"-OPCONTENT";	
+	public static final String log_optype = "OPTYPE";
+	public static final String log_opcontent = "OPCONTENT";	
 }
