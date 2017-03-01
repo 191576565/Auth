@@ -49,4 +49,12 @@ public class OrgMgmtController extends Controller {
 		g_uuid = getPara("uuid");
 		renderJson(true);
 	}
+	
+	/*
+	 * orgMgmt/getId
+	 * 发送查询结果
+	 */
+	public void getId(){
+		renderJson(orgMgmtService.getScopeInfo(g_uuid));
+	}
 }

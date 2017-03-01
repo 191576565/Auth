@@ -104,3 +104,34 @@ InitSubTable2 = function (index, row, $detail) {
         }
 	});
 }
+
+//表单验证
+angular.module('myApp', [])
+.controller('SignUpController',function($scope){
+	$scope.userdata = {};
+	$scope.submitForm = function(){};
+})
+
+//新增机构
+$('#org_add').on('click', function() {
+	//获取域名
+	$.getJSON("orgMgmt/getId",function(data){
+		console.log(data);
+//		alert(JSON.stringify(data));
+		$.each(data, function(i, item){
+			$.each(item, function(key,value){
+				if(key === "domain_name"){
+//					alert(value);
+					var $scop_n = $("#org_add_div #form #scop_n").val(value);
+				}
+			})
+		})
+	})
+	layer.open({
+		type: 1,
+		content: $('#org_add_div'),
+		title: '机构信息',
+		area: ['960px', '540px'],
+	});
+	return false;
+});
