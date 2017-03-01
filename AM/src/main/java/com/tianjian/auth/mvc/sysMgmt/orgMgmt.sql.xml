@@ -30,7 +30,9 @@
 	
 	<sql id="subSelect2">
 		<![CDATA[ 
-        	select t.* from sys_org_info t 
+        	select t.UUID,t2.DOMAIN_NAME,t.ORG_UNIT_ID,t.ORG_UNIT_DESC,t3.ORG_UNIT_DESC AS UP_ORG_UNIT_DESC from sys_org_info t
+          		left join SYS_DOMAIN_INFO t2 on t2.UUID = t.DOMAIN_UUID
+          		left join SYS_ORG_INFO t3 on t3.UUID = t.ORG_UP_UUID
         		where 1=1 
         			and t.domain_uuid=?
         			and t.org_up_uuid=?
