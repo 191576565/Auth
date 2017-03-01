@@ -48,6 +48,8 @@ $('#table').bootstrapTable({
     	var e = '<a href="#" class="btn btn-info update edit" onclick="edit(\''+ row.uuid +'\',\''
 																    		   + row.user_id +'\',\''
 																    		   + row.user_name +'\',\''
+																    		   + row.domain_uuid +'\',\''
+																    		   + row.org_uuid +'\',\''
 																    		   + row.user_phone +'\',\''
 																    		   + row.user_email + '\')">编辑</a> ';                                                      
     	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\')">删除</a> ';                                                    
@@ -73,7 +75,7 @@ $("#organization").load(
 	"usrMgmt/selOrg",//url
 	//{},//data 可选
 	function(data){
-		//解析json
+		//解析json，将解析后的json放入orgList中
 		orgList=eval("("+data+")");
 		$.each(orgList,function(idx,item){ 
 			var option = $("<option>").val(item.uuid).text(item.org_unit_desc).attr("data-domain", item.domain_uuid);
@@ -88,6 +90,8 @@ $('#btn_add').on('click', function() {
 	var $scopeCode = $("#scopeCode").val('');
 	$("#scopeCode").attr("disabled",false);
 	var $usrName = $("#usrName").val('');
+	var $domain = $("#domain option:first").prop("selected", 'selected');
+	changeDomain($("#domain").val());
 	var $phone = $("#phone").val('');
 	var $email = $("#email").val('');
 	layer.open({
@@ -98,13 +102,16 @@ $('#btn_add').on('click', function() {
 	});
 });
 //修改的onclick事件
-function edit(uuid,user_id,user_name,user_phone,user_email) {
+function edit(uuid,user_id,user_name,domain_uuid,org_uuid,user_phone,user_email) {
 	chkUserStr='';
 	//初始化form
 	var $uuid = $("#uuid").val(uuid);
 	var $scopeCode = $("#scopeCode").val(user_id);
 	$("#scopeCode").attr("disabled",true);
 	var $usrName = $("#usrName").val(user_name);
+	var $domain = $("#domain").val(domain_uuid);
+	changeDomain(domain_uuid);
+	var $organization = $("#organization").val(org_uuid);
 	var $phone = $("#phone").val(user_phone);
 	var $email = $("#email").val(user_email);
 	layer.open({
@@ -176,13 +183,19 @@ $('#sub').click(function(){
 		});
 	}
 });
-$('#domain').change(function(){	
+
+var changeDomain = function(domainUUID){
+	//清空所有的机构select中的option
 	$("#organization").find("option").remove(); 
-	var domainUUID = $('#domain').val();
+	//将机构的domain_uuid与域selected的域的uuid做比较，相同的插入机构的select中
 	$.each(orgList,function(idx,item){
 		if(item.domain_uuid==domainUUID){
 			var option = $("<option>").val(item.uuid).text(item.org_unit_desc).attr("data-domain", item.domain_uuid);
 			$("#organization").append(option); 
 		}
 	});
+};
+$('#domain').change(function(){	
+	var domainUUID = $('#domain').val();
+	changeDomain(domainUUID);
 });
