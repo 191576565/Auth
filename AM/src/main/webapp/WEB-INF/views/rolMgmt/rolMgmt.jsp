@@ -30,7 +30,7 @@
 			.input_result {
 				position: relative;
 				top: -27px;
-				left: 570px;
+				left: 700px;
 			}
 		</style>
 	</head>
@@ -51,16 +51,8 @@
  		<div class="row">
  			<div class="col-xs-4">
  				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
- 			
+ 				<button id="btn_del" type="button" class="btn btn-danger delete">删除</button>
  			</div>
- 			<div class="col-xs-8 text-right">
-				<div class="form-inline">
-					<div class="form-group">
-						<input type="text" placeholder="请输入角色名称" style="width: 200px;" id="search" class="form-control">
-					</div>
-					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
-				</div><br/>
-			</div>
  		</div>
  		<table id="table"></table>
  		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
@@ -132,6 +124,32 @@
 				<button id="btn_beSure" class="btn btn-danger delete">删除</button>
 			</form>
 		</div>
+		<div id="funList" style="margin-left:1% ; display:none">
+ 			<form id="form" method="post" action="funSave">
+				
+			<input type="hidden" id="fun_uuid" name="fun_uuid" value="${funuuid }"/>	
+			<table class="table table-hover table-bordered">
+  				<thead><th>功能名称</th></thead>
+   				<tbody>
+  				<c:forEach items="${funlist }" var="fun">
+  				 
+   					<tr>
+   					<td>
+   					<input name="fun_list" id="fun_list"  type="checkbox"  value="${fun.uuid }" style="margin-left: 9%;"/>${fun.res_name }
+   					</td>
+
+   					</tr>
+  				 </c:forEach>
+   				</tbody>
+  			</table>
+  			<div class="row">
+ 			<div class="col-xs-4">
+ 				<button id="sys_add" type="submit" class="btn btn-primary create">保存</button>
+ 				<button id="btn_add" type="button" class="btn btn-danger delete">刷新</button>
+ 			</div>
+ 		</div>
+ 			</form>
+ 		</div>
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
