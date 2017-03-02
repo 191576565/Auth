@@ -1,8 +1,14 @@
 package com.tianjian.auth.mvc.usrMgmt;
 
+import java.awt.List;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Map;
+
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseSecurityMD5;
 import com.tianjian.auth.mvc.usrMgmt.UsrMgmtController;
 
@@ -109,5 +115,10 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("uuid", uuid);
 		
 		usrMgmt.delete();
+	}
+	//批量删除用户
+	public void batchDel(){
+		String[] uuids = getParaValues("uuid[]");
+		renderJson(ums.batchDeleteUUID(uuids));
 	}
 }
