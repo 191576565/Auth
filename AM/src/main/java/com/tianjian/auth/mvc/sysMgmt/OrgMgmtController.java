@@ -85,5 +85,6 @@ public class OrgMgmtController extends Controller {
 		orgMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
 		orgMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 		orgMgmtService.save(orgMgmt);
+		renderJson(true);
 	}
 }
