@@ -4,7 +4,21 @@
 	
 	<sql id="allresdata">
 		<![CDATA[ 
-        	select * from SYS_RESOURCE_INFO
+        	select    t.uuid       
+         ,t.res_id  
+         ,t.res_name 
+         ,t.res_up_uuid
+         ,t1.res_name as up_res_name  
+         ,t.res_url
+           ,t.res_type
+            ,t.res_class
+             ,t.res_color
+              ,t.res_icon           
+         ,level  lvl
+        from SYS_RESOURCE_INFO t
+      left  join SYS_RESOURCE_INFO t1  on t.res_up_uuid =t1.uuid
+     start with  t.res_up_uuid='#' connect  by prior t.uuid =t.res_up_uuid
+ 	order by  lvl,uuid desc
     	]]>
 	</sql>
 	<sql id="menuSelect">

@@ -15,8 +15,11 @@ public class ResMgmtController extends Controller {
 	public void index() {
 		render("resMgmt.jsp");
 	}
+	/*
+	 * 资源的获取
+	 */
 	public void get() {
-	//	sqlId_res_select
+	
 		List<ResMgmt> all=reservice.get(ResMgmt.sqlId_res_select);
 		renderJson(all);
 	}

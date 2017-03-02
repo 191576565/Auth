@@ -31,8 +31,8 @@ $('#table')
 								title : '资源名称'
 							},
 							{
-								field : 'res_up_uuid',
-								title : '上级资源'
+								field : 'up_res_name',
+								title : '上级资源名称'
 							},
 							{
 								field : 'res_url',
