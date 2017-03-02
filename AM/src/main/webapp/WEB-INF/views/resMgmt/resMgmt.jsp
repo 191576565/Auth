@@ -33,8 +33,8 @@
 		<br /><br /><br /><br />
  		<div class="row">
  			<div class="col-xs-4">
- 				<button id="btn_add" type="button" class="btn btn-primary create">新增</button>
- 				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>
+ 				<button id="res_add" type="button" class="btn btn-primary create">新增</button>
+ 				<button id="res_del" type="button" class="btn btn-danger delete">删除</button>
  			</div>
  			<div class="col-xs-8 text-right">
 				<div class="form-inline">
@@ -46,10 +46,46 @@
 			</div>
  		</div>
  		<table id="table"></table>
+ 		<div id="sys_add_div" style="display:none;">
+ 			<form id="form" ng-submit="submitForm()" action="" method="post"></br>
+				<input id="uuid" 
+ 						name="res.uuid" 
+ 						type="hidden" 
+ 				/>
+				<label>资源编码</label> <input id="res_id" name="res.res_id" value="${res.res_id }" type="text" placeholder="1~30位字母/数字/下划线" ></br></br><!--字母和数字(1~30位) -->
+				<label>资源名称</label> <input id="res_name" name="res.res_name" value="${res.re_name }" type="text" placeholder="请输入角色名" ></br></br>
+				<label>上级资源名称</label> <input id="res_up_uuid" name="res.res_up_uuid" value="" type="text" placeholder="请输入角色名" ></br></br>
+				<label>资源url</label> <input id="res_url" name="res.res_url" type="text" placeholder="请输入角色名" ></br></br>
+				<label>资源类型</label> 
+				<select style="width: 120px;">
+					<option value="1">叶子</option>
+					<option value="0">节点</option>
+				</select></br>
+				<label>资源CSS</label> <input id="res_class" name="res.res_class" type="text" placeholder="请输入角色名" ></br></br>
+				<label>资源颜色</label> 
+				<select style="width: 120px;">
+					<option value="red">red</option>
+					<option value="yello">yello</option>
+				</select></br>
+				<label>资源图标</label> <input id="res_icon" name="res.res_icon" type="text" placeholder="请输入角色名" ></br></br>
+				<label>排序编号</label> <input id="sort_id" name="res.sort_id" type="text" placeholder="请输入角色名" ></br></br>
+				<button id="resave" type="submit" class="btn btn-info ladda-button save" >保存</button>
+ 			</form>
+ 		</div>
+ 		<div id="sys_del_div" class="form-group" style="display:none;">
+ 			<form id="del_form" action="" method="post">
+ 				<input type="hidden" id="deluuid" name="uuid"/>
+					确定要删除该系统信息吗？
+				</br>
+				<button id="resdelete" type="submit" class="btn btn-danger delete">确定删除</button>
+			</form>
+		</div>
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${ctxPath }/static/js/jquery-form.js"></script>
+   
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
-
+	<script src="${ctxPath }/static/js/angular.min.js"></script>
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>
 
@@ -58,7 +94,8 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-    
+     <!-- layer javascript -->
+    <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
     <!--
     	作者：yeqc
     	时间：2017-02-09

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 用户sql -->
 <sql-statement namespace="tianjian.res">
-
+	
+	<sql id="allresdata">
+		<![CDATA[ 
+        	select * from SYS_RESOURCE_INFO
+    	]]>
+	</sql>
 	<sql id="menuSelect">
 		<![CDATA[ 
         	  <%if(db_type== "oracle"){%>
