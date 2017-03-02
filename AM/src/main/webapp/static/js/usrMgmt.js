@@ -204,14 +204,9 @@ $('#domain').change(function(){
 });
 //批量删除
 $('#btn_del').click(function(){
-
-	var selectContent = $('#table').bootstrapTable('getSelections');
-	var arrUUID = new Array();
-	var arrUser = new Array();
-	$.each(selectContent,function(idx,item){
-		arrUUID[arrUUID.length]=item.uuid;
-		arrUser[arrUser.length]=item.user_name;
-	});
+	var selectContent = $('#table').bootstrapTable('getSelections',uuid);
+	var arrUUID = $.map(selectContent,function(row){return row.uuid});
+	var arrUser = $.map(selectContent,function(row){return row.user_name});
 	//确认删除
 	var msg = "请再次确认您要删除的用户：\n"+arrUser+"\n";
 	if(confirm(msg)){
@@ -223,7 +218,4 @@ $('#btn_del').click(function(){
 	}else{
 		return false;
 	}
-	
-	
-	
 });
