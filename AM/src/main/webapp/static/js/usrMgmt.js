@@ -23,7 +23,9 @@ $('#table').bootstrapTable({
  	showToggle:false, //是否显示详细视图和列表视图的切换按钮                                                                                     
  	cardView: false, //是否显示详细视图                                                                                               
                                                                                                                               
-   columns: [ {                                                                                                                      
+   columns: [ {
+		checkbox: true
+	},{                                                                                                                      
         field: 'org_unit_desc',                                                                                                        
         title: '机 构'                                                                                                        
     },{        	
@@ -137,7 +139,7 @@ angular.module('myApp', []).controller('SignUpController',function($scope){
 	$scope.userdata = {};
 	$scope.submitForm = function(){}
 });
-
+//用户唯一校验
 $("#scopeCode").blur(function(){
 	$.ajax({
 		type:"post",
@@ -183,7 +185,7 @@ $('#sub').click(function(){
 		});
 	}
 });
-
+//根据域选择机构的option的方法
 var changeDomain = function(domainUUID){
 	//清空所有的机构select中的option
 	$("#organization").find("option").remove(); 
@@ -195,7 +197,33 @@ var changeDomain = function(domainUUID){
 		}
 	});
 };
+//根据域选择机构的option的事件
 $('#domain').change(function(){	
 	var domainUUID = $('#domain').val();
 	changeDomain(domainUUID);
+});
+//批量删除
+$('#btn_del').click(function(){
+
+	var selectContent = $('#table').bootstrapTable('getSelections');
+	var arrUUID = new Array();
+	var arrUser = new Array();
+	$.each(selectContent,function(idx,item){
+		arrUUID[arrUUID.length]=item.uuid;
+		arrUser[arrUser.length]=item.user_name;
+	});
+	//确认删除
+	var msg = "请再次确认您要删除的用户：\n"+arrUser+"\n";
+	if(confirm(msg)){
+		$.get("usrMgmt/batchDel",{"uuid[]":arrUUID},function(data){
+			if(data){
+				window.location.href='usrMgmt';	
+			}
+		});
+	}else{
+		return false;
+	}
+	
+	
+	
 });

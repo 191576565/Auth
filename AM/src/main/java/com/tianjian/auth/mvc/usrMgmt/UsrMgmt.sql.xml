@@ -80,5 +80,10 @@
         	SELECT uuid,ROLE_ID,ROLE_NAME FROM SYS_ROLE_INFO WHERE DOMAIN_UUID=?
     	]]>
 	</sql>
+	<sql id="batchDelete">
+		<![CDATA[ 
+        	DELETE FROM SYS_USER_INFO WHERE UUID IN (?)
+    	]]>
+	</sql>
 	
 </sql-statement>

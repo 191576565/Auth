@@ -45,4 +45,17 @@ public class UsrMgmtService {
 		List<Record> list = Db.find(sql);
 		return list;
 	}
+	public boolean batchDeleteUUID(String[] uuids){
+		boolean feedback = false;
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.batchDelete");
+		Object[][] obj = new Object[uuids.length][1];
+		for (int i = 0; i < uuids.length; i++) {
+			obj[i][0] = uuids[i];
+		}
+		int[] size = Db.batch(sql, obj, 10);
+		if(!size.equals(null)&&size.length>0){
+			feedback = true;
+		}
+		return feedback;
+	}
 }
