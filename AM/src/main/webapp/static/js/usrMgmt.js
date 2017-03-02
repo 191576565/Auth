@@ -204,7 +204,7 @@ $('#domain').change(function(){
 });
 //批量删除
 $('#btn_del').click(function(){
-	var selectContent = $('#table').bootstrapTable('getSelections',uuid);
+	var selectContent = $('#table').bootstrapTable('getSelections');
 	var arrUUID = $.map(selectContent,function(row){return row.uuid});
 	var arrUser = $.map(selectContent,function(row){return row.user_name});
 	//确认删除
