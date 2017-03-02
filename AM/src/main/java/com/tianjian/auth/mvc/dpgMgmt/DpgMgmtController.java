@@ -71,4 +71,22 @@ public class DpgMgmtController extends Controller {
 		List<Record> dpgmgmt = (List<Record>) Db.find(sql);
 		renderJson(dpgmgmt);
 	}
+	
+	 /** 
+		 *@Function 校验组id是否存在       
+		 *@Declare   根据用户的权限获取域信息
+		 *@Author    谢涛
+		 *@Return    String  void
+		 */
+		public void verifygroupid() {
+			Map<String, Object> mpara = new HashMap<String, Object>();
+			Object userinfo = getSessionAttr("userinfo");	
+			String domain_id=((Record) userinfo).getStr("domain_id");
+			mpara.put("domain_id", domain_id);
+			String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_domaininfo, mpara);
+			// 获取数据
+			List<Record> dpgmgmt = (List<Record>) Db.find(sql);
+			renderJson(dpgmgmt);
+		}
+	
 }

@@ -120,7 +120,7 @@ $('#sys_add').on('click', function() {
         dataType: "json",  
         success: function (data) {  
             $.each(data, function (index, domaininfo) {
-            	$("#domaininfo").append("<option value='Value'>" + domaininfo.domain_id + "</option>");
+            	$("#domaininfo").append("<option value='"+ domaininfo.domain_id +"'>" + domaininfo.domain_id + "</option>");
             });  
         },  
          
@@ -135,6 +135,34 @@ function removeAll(){
 	var obj=document.getElementById('domaininfo'); 
 	obj.options.length=0; 
 	} 
+
+function formValidate(){ 
+	$("#form").validate({
+	  });
+	}; 
+
+$('#groupid').blur(function() {
+	  $.ajax({  
+	        url: "dpgMgmt/verifygroupid",
+	        dataType: "json",  
+	        success: function (data) {  
+	            $.each(data, function (index, domaininfo) {
+	            	 alert("start--->>>"+txt+"--->>>"+txt1);
+	            });  
+	        },  
+	        error: function (XMLHttpRequest, textStatus, errorThrown) {  
+	            alert("error");  
+	        }  
+	    }); 
+	  
+	});
+
+$('#guserid').on('click', function() {
+	alert('开始了吗？-----》');
+}); 
+
+    
+
 
 
 
