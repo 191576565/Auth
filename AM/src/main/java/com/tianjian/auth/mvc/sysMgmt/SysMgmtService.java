@@ -2,7 +2,6 @@ package com.tianjian.auth.mvc.sysMgmt;
 
 import java.util.List;
 import com.tianjian.platform.tools.ToolGetSql;
-import com.jfinal.plugin.activerecord.Db;
 
 public class SysMgmtService {
 	

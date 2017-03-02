@@ -48,4 +48,12 @@
     	]]>
 	</sql>
 	
+	<sql id="getSubOrg">
+		<![CDATA[ 
+        	select * from sys_org_info  t  
+				start with t.ORG_UP_UUID=?  
+					connect by PRIOR T.UUID=T.ORG_UP_UUID
+    	]]>
+	</sql>
+	
 </sql-statement>

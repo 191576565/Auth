@@ -1,5 +1,6 @@
 package com.tianjian.auth.mvc.sysMgmt;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
@@ -39,5 +40,36 @@ public class OrgMgmtService {
 	//新增机构信息
 	public void save(OrgMgmt orgMgmt){
 		orgMgmt.save();
+	}
+	
+	//删除机构信息
+	public boolean delete(String uuid){
+		String[] subIds = getSubOrg(uuid);
+		boolean[] flags = new boolean[subIds.length];
+		for(int i=0; i<subIds.length; i++){
+			flags[i] = OrgMgmt.dao.deleteById(subIds[i]);
+		}
+		for(int i=0; i<flags.length; i++){
+			if(flags[i] == false){
+				return false;
+			}
+		}
+		return OrgMgmt.dao.deleteById(uuid);
+	}
+	
+	/**
+	 * 说明:查询该机构下的所有机构
+	 * 输入:String uuid
+	 * 输出:String[] subIds
+	 */
+	public String[] getSubOrg(String uuid){
+		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_getSubOrg);
+		List<OrgMgmt> list = OrgMgmt.dao.find(sql,uuid);
+		String[] subIds = new String[list.size()];
+		for(int i=0; i<list.size(); i++){
+			System.err.println(list.get(i).getStr("uuid"));
+			subIds[i] = list.get(i).getStr("uuid");
+		}
+		return subIds;
 	}
 }

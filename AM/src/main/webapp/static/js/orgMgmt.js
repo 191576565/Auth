@@ -34,7 +34,7 @@ $('#table').bootstrapTable({
     	title: '操 作',
     	formatter:function(value,row,index){
     	var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ row.id + '\')">编辑</a> ';
-    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';
+    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\')">删除</a> ';
     	return e+d;
     	}
     },],
@@ -64,7 +64,7 @@ InitSubTable = function (index, row, $detail) {
 	    	field: 'opt',
 	    	formatter:function(value,row,index){
 	    	var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ row.id + '\')">编辑</a> ';
-	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';
+	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\')">删除</a> ';
 	    	return e+d;
 	    	}
 	    },],
@@ -94,7 +94,7 @@ InitSubTable2 = function (index, row, $detail) {
 	    	field: 'opt',
 	    	formatter:function(value,row,index){
 	    	var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ row.id + '\')">编辑</a> ';
-	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';
+	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\')">删除</a> ';
 	    	return e+d;
 	    	}
 	    },],
@@ -160,4 +160,30 @@ $('#sub').click(function(){
 		window.location.href='orgMgmt';
 	});
 	return false;//阻止表单默认提交
+});
+
+//删除
+function del(id) {
+	var $ipt_uuid = $("#sys_del_div #del_form #del_uuid").val(id);
+	layer.open({
+		type: 1,
+		content: $('#sys_del_div'),
+		title: '系统提示',
+		area: ['300px', '100px'],
+	});
+};
+$('#btn_beSure').click(function() {
+	$('#del_form').attr("action", "orgMgmt/delete");
+//	$('#del_form').submit(function(){
+		$('#del_form').ajaxSubmit(function(resultJson){
+			if(JSON.stringify(resultJson) == "false"){
+				alert('删除失败');
+				return;
+			}else{
+				window.location.href='orgMgmt';
+			}
+		});
+		return false;
+//	});
+	
 });

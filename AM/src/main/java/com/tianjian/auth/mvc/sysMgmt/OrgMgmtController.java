@@ -87,4 +87,16 @@ public class OrgMgmtController extends Controller {
 		orgMgmtService.save(orgMgmt);
 		renderJson(true);
 	}
+	
+	/*
+	 * orgMgmt/delete
+	 * 删除机构信息
+	 */
+	public void delete(){
+		if(orgMgmtService.delete(getPara("UUID"))){
+			renderJson(true);
+			return;
+		}
+		renderJson(false);
+	}
 }
