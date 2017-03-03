@@ -17,74 +17,88 @@ public class ResMgmtController extends Controller {
 	public void index() {
 		render("resMgmt.jsp");
 	}
+
 	/*
-	 * 资源的获取
+	 * 资源的--查询
 	 */
 	public void get() {
 
 		List<ResMgmt> all = reservice.get(ResMgmt.sqlId_res_select);
 		renderJson(all);
 	}
-
+	/*
+	 * 资源的--新增
+	 */
 	public void save() {
-		ResMgmt res = getModel(ResMgmt.class, "res");	
+		ResMgmt res = getModel(ResMgmt.class, "res");
 		System.out.println(res);
-		//获取session中数据
+		// 获取session中数据
 		Object userinfo = getSessionAttr("userinfo");
-		//完善res数据
-		reservice.setResParam(res,userinfo);
-		//uuid自动生成
+		// 完善res数据
+		reservice.setResParam(res, userinfo);
+		// uuid自动生成
 		res.remove(ResMgmt.column_uuid);
 		boolean savesucess = res.save();
 		if (savesucess) {
-			//写日志
-			setAttr(ConstantLog.log_optype,ConstantLog.res_add);
-			String msg="新增资源"+"res_id:"+res.getStr(ResMgmt.column_res_id)+"res_name:"+res.getStr(ResMgmt.column_res_name);
-			setAttr(ConstantLog.log_opcontent,msg);
+			// 写日志
+			setAttr(ConstantLog.log_optype, ConstantLog.res_add);
+			String msg = "新增资源" + "res_id:" + res.getStr(ResMgmt.column_res_id) + "res_name:"
+					+ res.getStr(ResMgmt.column_res_name);
+			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {
 			renderJson(false);
 		}
 
 	}
-
+	/*
+	 * 资源的--更改
+	 */
 	public void put() {
 		ResMgmt res = getModel(ResMgmt.class, "res");
 
-		//获取session中数据
+		// 获取session中数据
 		Object userinfo = getSessionAttr("userinfo");
 		//
-		reservice.updateResParam(res,userinfo);
-		
+		reservice.updateResParam(res, userinfo);
+
 		boolean savesucess = res.update();
 		if (savesucess) {
-			//写日志
-			setAttr(ConstantLog.log_optype,ConstantLog.res_chg);
-			String msg="编辑资源"+"res_id:"+res.getStr(ResMgmt.column_res_id)+"res_name:"+res.getStr(ResMgmt.column_res_name);
-			setAttr(ConstantLog.log_opcontent,msg);
+			// 写日志
+			setAttr(ConstantLog.log_optype, ConstantLog.res_chg);
+			String msg = "编辑资源" + "res_id:" + res.getStr(ResMgmt.column_res_id) + "res_name:"
+					+ res.getStr(ResMgmt.column_res_name);
+			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {
 			renderJson(false);
 		}
 
 	}
-
+	/*
+	 * 资源的--删除
+	 */
 	public void delete() {
-//		ResMgmt res = new ResMgmt();
-//
-//		res.set("uuid", getPara("uuid"));
-		String uuid=getPara("uuid");
-		try{
-			Db.update(ResMgmt.sqlId_resmenu_delete,uuid);
-			setAttr(ConstantLog.log_optype,ConstantLog.res_del);
-			String msg="删除资源"+"uuid:";
-			setAttr(ConstantLog.log_opcontent,msg);
+
+		String uuid = getPara("uuid");
+		System.out.println("uuid=====" + uuid);
+
+		int i = reservice.delmore(ResMgmt.sqlId_res_delete, uuid);
+		if (i >= 1) {
 			renderJson(true);
-		}catch(Exception e){
+		} else {
 			renderJson(false);
 		}
-	}
 
+	}
+	
+	/*
+	 * 资源的--资源树
+	 */
+	public void restree() {
+		List<Record> restree = reservice.gettree(ResMgmt.sqlId_res_tree);
+		renderJson(restree);
+	}
 	/*
 	 * 根据res_type，res_up_uuid，user_id获取菜单 author： hujian
 	 * 
