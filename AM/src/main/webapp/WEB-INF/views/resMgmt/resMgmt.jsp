@@ -14,6 +14,7 @@
     	<link rel="shortcut icon" href="favicon.ico"> <link href="${ctxPath }/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
    		<link href="${ctxPath }/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     	<link href="${ctxPath }/static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    	<link href="${ctxPath }/static/css/plugins/treegrid/jquery.treegrid.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/animate.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/style.css?v=4.1.0" rel="stylesheet">
 	</head>
@@ -32,20 +33,39 @@
 		</div>
 		<br /><br /><br /><br />
  		<div class="row">
- 			<div class="col-xs-4">
+ 			<div class="col-xs-12">
  				<button id="res_add" type="button" class="btn btn-primary create">新增</button>
  				<button id="res_del" type="button" class="btn btn-danger delete">删除</button>
  			</div>
- 			<div class="col-xs-8 text-right">
+ 			<!-- <div class="col-xs-8 text-right">
 				<div class="form-inline">
 					<div class="form-group">
 						<input type="text" placeholder="请输入资源名称" style="width: 200px;" id="search" class="form-control">
 					</div>
 					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
 				</div>
-			</div>
+			</div> -->
  		</div>
- 		<table id="table"></table>
+ 		<br>
+ 		<table id="table"  class="table table-striped table-bordered table-hover">
+ 			<thead>
+				<tr>
+					<td style='width:40px;'></td>
+					<th>资源编码</th>
+					<th>资源名称</th>
+					<th>上级资源编码</th>
+					<th>资源URL</th>
+					<th>资源类型</th>
+					<th>资源样式</th>
+					<th>资源背景色</th>
+					<th>资源图标</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+                 
+            </tbody>
+ 		</table>
  		<div id="sys_add_div" style="display:none;">
  			<form id="form" ng-submit="submitForm()" action="" method="post"></br>
 				<input id="uuid" 
@@ -96,6 +116,10 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
      <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
+    
+    <!-- treegrid -->
+    <script src="${ctxPath }/static/js/plugins/treegrid/jquery.treegrid.min.js"></script>
+    <script src="${ctxPath }/static/js/plugins/treegrid/jquery.treegrid.bootstrap3.js"></script>
     <!--
     	作者：yeqc
     	时间：2017-02-09
