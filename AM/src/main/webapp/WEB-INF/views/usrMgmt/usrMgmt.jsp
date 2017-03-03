@@ -123,7 +123,7 @@
 				</div>
 				<div class="form-group">
 					<label>所属机构</label>
-					<select class="form-control"  name="organization" id="organization"></select>
+					<select class="form-control" name="organization" id="organization"></select>
 				</div>
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.pwd.$valid }">
 					<label>密码</label> 
@@ -148,10 +148,7 @@
 				</div>
 				<div class="form-group">
 					<label>角色</label>
-					<select class="form-control">
-						<option value="role1">管理员</option>
-						<option value="role2">用户</option>
-					</select>
+					<select class="form-control" name="role" id="role"></select>
 				</div>
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.phone.$valid }">
 					<label>手机号</label> 

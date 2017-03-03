@@ -78,7 +78,20 @@
 	</sql>
 	<sql id="selectRole">
 		<![CDATA[ 
-        	SELECT uuid,ROLE_ID,ROLE_NAME FROM SYS_ROLE_INFO WHERE DOMAIN_UUID=?
+			SELECT T.UUID AS DOMAIN_UUID, A.UUID AS ROLE_UUID, A.ROLE_ID, A.ROLE_NAME
+			  FROM (SELECT T.UUID,
+			               T.DOMAIN_ID,
+			               T.DOMAIN_NAME,
+			               DECODE(T.UUID, A.DOMAIN_UUID, 'SELECTED', '') AS SELECTED
+			          FROM SYS_DOMAIN_INFO T
+			          LEFT JOIN SYS_USER_INFO A
+			            ON A.DOMAIN_UUID = T.UUID
+			           AND A.USER_ID = ?
+			         WHERE T.DOMAIN_UP_UUID <> '#'
+			         START WITH T.UUID = A.DOMAIN_UUID
+			        CONNECT BY PRIOR T.UUID = T.DOMAIN_UP_UUID) T
+			 INNER JOIN SYS_ROLE_INFO A
+			    ON T.UUID = A.DOMAIN_UUID
     	]]>
 	</sql>
 	<sql id="batchDelete">
