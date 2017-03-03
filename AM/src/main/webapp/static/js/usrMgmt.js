@@ -1,5 +1,6 @@
 var chkUserStr;//校验用户是否唯一变量
 var orgList;//onload机构list
+var rolList;//onload角色list
 
 $('#table').bootstrapTable({                                                                                                  
     url: 'usrMgmt/initSel',
@@ -83,6 +84,19 @@ $("#organization").load(
 		$.each(orgList,function(idx,item){ 
 			var option = $("<option>").val(item.uuid).text(item.org_unit_desc).attr("data-domain", item.domain_uuid);
 			$("#organization").append(option); 
+		})
+	}
+);
+//角色load
+$("#role").load(
+	"usrMgmt/selRol",//url
+	//{},//data 可选
+	function(data){
+		//解析json，将解析后的json放入orgList中
+		rolList=eval("("+data+")");
+		$.each(rolList,function(idx,item){ 
+			var option = $("<option>").val(item.uuid).text(item.role_name).attr("data-domain", item.domain_uuid);
+			$("#role").append(option); 
 		})
 	}
 );
