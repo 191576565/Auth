@@ -28,6 +28,7 @@
 		<link href="${ctxPath }/static/css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
+	<!--  
 		<div class="row">
 			<div class="col-lg-12">
 					<ol class="breadcrumb">
@@ -45,7 +46,7 @@
 		</div>
 		<br/><br/>
 		
- 		<br/><br/>
+ 		<br/><br/>-->
 		<div id="sys_add_div" style="margin-left:1% ;">
  			<form id="form" method="post" action="funSave">
 				
