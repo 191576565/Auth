@@ -28,6 +28,9 @@ $('#table').bootstrapTable({
    columns: [ {
 		checkbox: true
 	},{                                                                                                                      
+        field: 'domain_name',                                                                                                        
+        title: '域'                                                                                                        
+    },{                                                                                                                      
         field: 'org_unit_desc',                                                                                                        
         title: '机 构'                                                                                                        
     },{        	
