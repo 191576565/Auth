@@ -19,25 +19,8 @@ public class OrgMgmtController extends Controller {
 	}
 	
 	/*
-	 * orgMgmt/subData
-	 * 查询第二级机构
-	 */
-	public void subData(){
-		renderJson(orgMgmtService.subData(g_uuid));
-	}
-	
-	/*
-	 * orgMgmt/subData2
-	 * 无线循环
-	 */
-	public void subData2(){
-		String up_uuid = getPara("up_uuid");
-		renderJson(orgMgmtService.subData2(g_uuid, up_uuid));
-	}
-	
-	/*
 	 * orgMgmt/orgData
-	 * 查询机构信息
+	 * root用户查询机构信息
 	 */
 	public void orgData(){
 		renderJson(orgMgmtService.getData(g_uuid));

@@ -10,17 +10,9 @@
     	<link rel="shortcut icon" href="favicon.ico"> <link href="${ctxPath }/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
    		<link href="${ctxPath }/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     	<link href="${ctxPath }/static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    	<link href="${ctxPath }/static/css/plugins/treegrid/jquery.treegrid.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/animate.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/style.css?v=4.1.0" rel="stylesheet">
-    	<!-- Toastr style -->
-		<link href="${ctxPath }/static/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-		<link href="${ctxPath }/static/css/plugins/select2/select2.min.css" rel="stylesheet">
-		<!-- Ladda style -->
-		<link href="${ctxPath }/static/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
-		<link href="${ctxPath }/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-		<!-- Sweet Alert -->
-		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-		<link href="${ctxPath }/static/css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
 		<style type="text/css">
 			.input_result {
 				position: relative;
@@ -51,7 +43,21 @@
  				<button id="org_add" type="button" class="btn btn-primary create">新增</button>
  			</div>
  		</div>
- 		<table id="table"></table>
+ 		<br/>
+ 		<table id="table"  class="table table-striped table-bordered table-hover">
+ 			<thead>
+				<tr>
+					<th>机构ID</th>
+					<th>域</th>
+					<th>机构描述</th>
+					<th>上级机构</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+                 
+            </tbody>
+ 		</table>
  		<div class="wrapper" id="org_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
  			<form id="form" name="signUpForm" ng-submit="submitForm()" action="" method="post">
  				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
@@ -145,6 +151,10 @@
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
+    
+    <!-- treegrid -->
+    <script src="${ctxPath }/static/js/plugins/treegrid/jquery.treegrid.min.js"></script>
+    <script src="${ctxPath }/static/js/plugins/treegrid/jquery.treegrid.bootstrap3.js"></script>
     
     <!--
     	作者：yeqc
