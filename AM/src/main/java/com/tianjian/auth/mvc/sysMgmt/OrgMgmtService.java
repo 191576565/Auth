@@ -1,6 +1,5 @@
 package com.tianjian.auth.mvc.sysMgmt;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
@@ -58,7 +57,7 @@ public class OrgMgmtService {
 	}
 	
 	/**
-	 * 说明:查询该机构下的所有机构
+	 * 功能:查询该机构下的所有机构
 	 * 输入:String uuid
 	 * 输出:String[] subIds
 	 */
@@ -71,5 +70,18 @@ public class OrgMgmtService {
 			subIds[i] = list.get(i).getStr("uuid");
 		}
 		return subIds;
+	}
+	
+	/**
+	 * 功能:该域下的机构编码是否重复
+	 * 输入:String orgId,String domainId
+	 * 输出:boolean
+	 */
+	public boolean isRepeated(String domainId, String orgId){
+		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_repeatSelect);
+		if(OrgMgmt.dao.find(sql,domainId,orgId).size()>0){
+			return true;
+		}
+		return false;
 	}
 }

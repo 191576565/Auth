@@ -56,4 +56,12 @@
     	]]>
 	</sql>
 	
+	<sql id="repeatSelect">
+		<![CDATA[ 
+        	select t.* from sys_org_info t
+  				where t.DOMAIN_UUID=? 
+  					and t.ORG_UNIT_ID=?
+    	]]>
+	</sql>
+	
 </sql-statement>

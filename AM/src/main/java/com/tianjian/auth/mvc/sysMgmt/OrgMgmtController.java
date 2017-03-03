@@ -84,6 +84,10 @@ public class OrgMgmtController extends Controller {
 		orgMgmt.set("MODIFIER", "yeqc");
 		orgMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
 		orgMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
+		if(orgMgmtService.isRepeated(getPara("UUID"), getPara("orgCode"))){
+			renderJson(false);
+			return;
+		}
 		orgMgmtService.save(orgMgmt);
 		renderJson(true);
 	}
