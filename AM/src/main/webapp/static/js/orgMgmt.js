@@ -115,7 +115,7 @@ angular.module('myApp', [])
 //新增机构_弹出层
 $('#org_add').on('click', function() {
 	//初始化表单
-	
+	$("#org_add_div #form #up_org").html("");
 	//获取域
 	$.getJSON("orgMgmt/getId",function(data){
 		console.log(data);
