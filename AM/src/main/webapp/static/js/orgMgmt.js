@@ -159,6 +159,10 @@ $('#org_add').on('click', function() {
 $('#sub').click(function(){
 	$("#form").attr("action", "orgMgmt/save");
 	$('#form').ajaxSubmit(function(resultJson){
+		if(JSON.stringify(resultJson) == "false"){
+			alert("机构编码不能重复!");
+			return;
+		}
 		window.location.href='orgMgmt';
 	});
 	return false;//阻止表单默认提交
