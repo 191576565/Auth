@@ -28,10 +28,13 @@ public class ResMgmtController extends Controller {
 
 	public void save() {
 		ResMgmt res = getModel(ResMgmt.class, "res");	
+		System.out.println(res);
 		//获取session中数据
 		Object userinfo = getSessionAttr("userinfo");
 		//完善res数据
 		reservice.setResParam(res,userinfo);
+		//uuid自动生成
+		res.remove(ResMgmt.column_uuid);
 		boolean savesucess = res.save();
 		if (savesucess) {
 			//写日志
@@ -52,10 +55,11 @@ public class ResMgmtController extends Controller {
 		Object userinfo = getSessionAttr("userinfo");
 		//
 		reservice.updateResParam(res,userinfo);
+		
 		boolean savesucess = res.update();
 		if (savesucess) {
 			//写日志
-			setAttr(ConstantLog.log_optype,ConstantLog.res_add);
+			setAttr(ConstantLog.log_optype,ConstantLog.res_chg);
 			String msg="编辑资源"+"res_id:"+res.getStr(ResMgmt.column_res_id)+"res_name:"+res.getStr(ResMgmt.column_res_name);
 			setAttr(ConstantLog.log_opcontent,msg);
 			renderJson(true);
@@ -72,7 +76,7 @@ public class ResMgmtController extends Controller {
 		String uuid=getPara("uuid");
 		try{
 			Db.update(ResMgmt.sqlId_resmenu_delete,uuid);
-			setAttr(ConstantLog.log_optype,ConstantLog.res_add);
+			setAttr(ConstantLog.log_optype,ConstantLog.res_del);
 			String msg="删除资源"+"uuid:";
 			setAttr(ConstantLog.log_opcontent,msg);
 			renderJson(true);
