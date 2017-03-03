@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 用户sql -->
 <sql-statement namespace="tianjian.res">
-
+	<sql id="restree">
+		<![CDATA[ 
+        	select uuid as id,res_up_uuid as parent,trim(res_name) text from SYS_RESOURCE_INFO 
+			start with res_up_uuid ='#' connect by prior uuid =res_up_uuid
+			order by res_id asc
+    	]]>
+	</sql>
 	<sql id="allresdata">
 		<![CDATA[ 
         	select    t.uuid       
@@ -22,15 +28,15 @@
         from SYS_RESOURCE_INFO t
       left  join SYS_RESOURCE_INFO t1  on t.res_up_uuid =t1.uuid
      start with  t.res_up_uuid='#' connect  by prior t.uuid =t.res_up_uuid
- 	order by  lvl,uuid desc
+ 	order by  lvl,res_id asc
     	]]>
 	</sql>
 	<sql id="resdatadelete">
 		<![CDATA[ 
-		delete from SYS_RESOURCE_INFO  i
+		delete from SYS_RESOURCE_INFO i
       where i.uuid in (
       select  t.uuid from 
-      SYS_RESOURCE_INFO t start with t.uuid=:1
+      SYS_RESOURCE_INFO t start with t.uuid = ?
       connect by prior t.uuid=t.res_up_uuid)	
 		]]>
 	</sql>

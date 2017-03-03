@@ -1,15 +1,25 @@
 package com.tianjian.auth.mvc.dpgMgmt;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import com.jfinal.core.Controller;
+import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.api.ApiJsonService;
+import com.tianjian.auth.mvc.callback.GetTreeData;
 import com.tianjian.auth.mvc.dpgMgmt.DpgMgmtController;
 import com.tianjian.auth.mvc.model.DpgMgmt;
 import com.tianjian.auth.mvc.oplog.OpLog;
@@ -17,7 +27,7 @@ import com.tianjian.auth.mvc.oplog.OpLogService;
 import com.tianjian.platform.pjson.PageJson;
 
 public class DpgMgmtController extends Controller {
-	
+	protected DataSource dataSource;
 	private static final Log log = Log.getLog(DpgMgmtController.class);
 	private DpgMgmtService dpgmgmtservice = new DpgMgmtService();
 	
@@ -88,5 +98,31 @@ public class DpgMgmtController extends Controller {
 			List<Record> dpgmgmt = (List<Record>) Db.find(sql);
 			renderJson(dpgmgmt);
 		}
+		
+		 /** 
+			 *@throws SQLException 
+		 * @Function 获取机构树       
+			 *@Declare   根据用户的权限获取域下面的机构数据
+			 *@Author    谢涛
+			 *@Return    String  void
+			 */
+			public void getTreeData() throws SQLException {
+				GetTreeData  callback=new GetTreeData();
+				Map<String,Object> TreeData = new HashMap<String,Object>();
+				callback.domain_id=getPara("domainid");
+				 String jsondata=(String) Db.execute(callback);
+				 if(jsondata.length()>0){
+					 TreeData.put("status", "success");
+				 }else{
+					 TreeData.put("status", "error");}
+				 TreeData.put("data", jsondata);
+				 renderJson(TreeData);
+			}
+
+		private String getStr(String string) {
+			// TODO Auto-generated method stub
+			return string;
+		}
+
 	
 }

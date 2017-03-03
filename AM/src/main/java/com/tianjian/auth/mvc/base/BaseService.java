@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.jfinal.aop.Before;
-import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
@@ -15,7 +14,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.tianjian.auth.mvc.dto.SplitPage;
-import com.tianjian.auth.mvc.model.User;
 import com.tianjian.platform.constant.ConstantInit;
 import com.tianjian.platform.constant.ConstantRender;
 import com.tianjian.platform.plugin.ParamInitPlugin;
