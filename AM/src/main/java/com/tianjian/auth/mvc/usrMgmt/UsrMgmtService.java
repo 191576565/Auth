@@ -1,8 +1,6 @@
 package com.tianjian.auth.mvc.usrMgmt;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.platform.tools.ToolGetSql;
@@ -33,18 +31,19 @@ public class UsrMgmtService {
 		List<Record> list = Db.find(sql,userId);
 		return list;
 	}
+	//查询该用户所能看到的机构
 	public List<Record> selectOrganization(String userId){
 		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectOrganization");
 		List<Record> list = Db.find(sql,userId);
 		return list;
 	}
-	public List<Record> selectRole(String domainUUID){
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("domain_uuid", domainUUID);
-		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectRole", param);
-		List<Record> list = Db.find(sql);
+	//查询该用户所能看到的角色
+	public List<Record> selectRole(String userId){
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.selectRole");
+		List<Record> list = Db.find(sql,userId);
 		return list;
 	}
+	//批量删除
 	public boolean batchDeleteUUID(String[] uuids){
 		boolean feedback = false;
 		String sql = ToolGetSql.getSql("tianjian.usrMgmt.batchDelete");

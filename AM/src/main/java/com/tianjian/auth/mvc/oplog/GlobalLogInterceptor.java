@@ -38,7 +38,7 @@ public class GlobalLogInterceptor implements Interceptor {
 	 * @param request
 	 * @return
 	 */
-	public OpLog getSysLog(HttpServletRequest request,Object userinfo) {
+	public  OpLog getSysLog(HttpServletRequest request,Object userinfo) {
 		
 		
 		String ip = getIpAddr(request);

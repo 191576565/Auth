@@ -1,14 +1,8 @@
 package com.tianjian.auth.mvc.usrMgmt;
 
-import java.awt.List;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Map;
-
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseSecurityMD5;
 import com.tianjian.auth.mvc.usrMgmt.UsrMgmtController;
 
@@ -43,6 +37,12 @@ public class UsrMgmtController extends Controller {
 		//获取session中的user_id
 		String sessionUserId = getSessionAttr("user_id");
 		renderJson(ums.selectOrganization(sessionUserId));
+	}
+	//初始化角色
+	public void selRol(){
+		//获取session中的user_id
+		String sessionUserId = getSessionAttr("user_id");
+		renderJson(ums.selectRole(sessionUserId));
 	}
 	//用户id ajax校验
 	public void chkUserId(){
