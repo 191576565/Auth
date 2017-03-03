@@ -151,18 +151,6 @@ $("#scopeCode").blur(function(){
         }
 	})
 });
-/*
-$("#form").submit(function(){
-	$.ajax({
-		type:"post",
-		url:"usrMgmt/insUsr",
-		data: $("#form").serialize(),
-		success: function(data) {
-			alert("data");
-        }
-	})
-});*/
-
 $('#sub').click(function(){
 	//新增操作
 	if($("#uuid").val() == ''){
@@ -204,8 +192,11 @@ $('#domain').change(function(){
 });
 //批量删除
 $('#btn_del').click(function(){
+	//获得bootstraptable，如果 要解析，用json.stringify(data)方法解析。
 	var selectContent = $('#table').bootstrapTable('getSelections');
+	//获得UUID[]，传到后台
 	var arrUUID = $.map(selectContent,function(row){return row.uuid});
+	//获得userName，confirm的时候用
 	var arrUser = $.map(selectContent,function(row){return row.user_name});
 	//确认删除
 	var msg = "请再次确认您要删除的用户：\n"+arrUser+"\n";
