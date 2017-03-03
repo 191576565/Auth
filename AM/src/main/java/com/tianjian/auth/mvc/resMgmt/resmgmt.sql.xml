@@ -10,7 +10,11 @@
          ,t.res_up_uuid
          ,t1.res_name as up_res_name  
          ,t.res_url
-           ,t.res_type
+           ,case  t.res_type when '#' then '初始顶层'
+           when '0' then '主菜单'
+            when  '1' then '子菜单'
+                when  '2' then '按钮'
+                  end res_type
             ,t.res_class
              ,t.res_color
               ,t.res_icon           
