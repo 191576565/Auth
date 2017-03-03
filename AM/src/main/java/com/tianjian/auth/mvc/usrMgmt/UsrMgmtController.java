@@ -44,6 +44,12 @@ public class UsrMgmtController extends Controller {
 		String sessionUserId = getSessionAttr("user_id");
 		renderJson(ums.selectOrganization(sessionUserId));
 	}
+	//初始化角色
+	public void selRol(){
+		//获取session中的user_id
+		String sessionUserId = getSessionAttr("user_id");
+		renderJson(ums.selectRole(sessionUserId));
+	}
 	//用户id ajax校验
 	public void chkUserId(){
 		//获取前台userid
