@@ -158,8 +158,43 @@ $('#groupid').blur(function() {
 	});
 
 $('#guserid').on('click', function() {
-	alert('开始了吗？-----》');
+	getTreeData();
+	layer.open({
+		type: 1,
+		content: $('#sys_user_div'),
+		skin: 'layui-layer-molv',
+		title: '选择用户',
+		area: ['500px', '700px']
+	});
+	return false;
 }); 
+
+function getTreeData() {
+	// var domainid=$('#domaininfo').val();
+     $.ajax({ 
+		    url: "dpgMgmt/getTreeData",
+	        dataType: "json",
+	        data:{domainid:$('#domaininfo').val()},
+	        success: function (data) {
+                var defaultData = eval(data.data);
+                $('#user_in_div').treeview({
+                	data: defaultData,  // 数据源
+                	multiSelect: true,
+                    color: "#428bca",
+                    levels:30,
+                    multiSelect: true,
+                    showBorder: false,
+                    showCheckbox: true
+                });
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown,data) {
+                alert('啊哦，数据掉坑里了。。。');
+            },
+	    }); 
+	}
+
+
+
 
     
 

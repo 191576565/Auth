@@ -78,7 +78,11 @@
                     <div id="treeview12" class="test"></div>
                 </div>
             </div>
- 		
+ 		<div id="sys_user_div" style="display:none;">
+ 			<form id="userform"></br>
+ 		     	<div id="user_in_div"></div>
+ 			</form>
+ 		</div>
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
