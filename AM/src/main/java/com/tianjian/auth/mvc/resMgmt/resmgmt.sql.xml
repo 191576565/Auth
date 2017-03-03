@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 用户sql -->
 <sql-statement namespace="tianjian.res">
-	
+
 	<sql id="allresdata">
 		<![CDATA[ 
         	select    t.uuid       
@@ -24,6 +24,15 @@
      start with  t.res_up_uuid='#' connect  by prior t.uuid =t.res_up_uuid
  	order by  lvl,uuid desc
     	]]>
+	</sql>
+	<sql id="resdatadelete">
+		<![CDATA[ 
+		delete from SYS_RESOURCE_INFO  i
+      where i.uuid in (
+      select  t.uuid from 
+      SYS_RESOURCE_INFO t start with t.uuid=:1
+      connect by prior t.uuid=t.res_up_uuid)	
+		]]>
 	</sql>
 	<sql id="menuSelect">
 		<![CDATA[ 
