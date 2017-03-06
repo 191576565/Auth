@@ -3,9 +3,9 @@
 <sql-statement namespace="tianjian.res">
 	<sql id="restree">
 		<![CDATA[ 
-        	select uuid as id,res_up_uuid as parent,trim(res_name) text from SYS_RESOURCE_INFO 
+        	select uuid as id,res_up_uuid as pid,trim(res_name) name from SYS_RESOURCE_INFO 
 			start with res_up_uuid ='#' connect by prior uuid =res_up_uuid
-			order by res_id asc
+			order res_id asc
     	]]>
 	</sql>
 	<sql id="allresdata">
@@ -20,7 +20,8 @@
            when '0' then '主菜单'
             when  '1' then '子菜单'
                 when  '2' then '按钮'
-                  end res_type
+                  end res_type_name
+            ,t.res_type
             ,t.res_class
              ,t.res_color
               ,t.res_icon           
@@ -28,7 +29,7 @@
         from SYS_RESOURCE_INFO t
       left  join SYS_RESOURCE_INFO t1  on t.res_up_uuid =t1.uuid
      start with  t.res_up_uuid='#' connect  by prior t.uuid =t.res_up_uuid
- 	order by  lvl,res_id asc
+ 	order by  lvl asc,res_id desc
     	]]>
 	</sql>
 	<sql id="resdatadelete">
