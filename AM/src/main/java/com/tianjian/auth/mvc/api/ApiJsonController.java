@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.jfinal.core.Controller;
+import com.jfinal.kit.JsonKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.model.User;
@@ -71,6 +72,8 @@ public class ApiJsonController extends Controller {
 	 *@Param    apitype=1:获取前台权限
 	 */
     public void rpmParam() {
+    	//允许跨域操作
+    	getResponse().addHeader("Access-Control-Allow-Origin", "*");
     	String username=getPara("userid") ;
     	String usersession=getPara("sid") ;
     	String flag=getPara("login") ;
@@ -102,6 +105,6 @@ public class ApiJsonController extends Controller {
     	userinfo.put("code", code);
     	userinfo.put("msg", msg);
     	userinfo.put("data",data);
-    	renderJson(userinfo);
+        renderJson(userinfo);
      }
 }

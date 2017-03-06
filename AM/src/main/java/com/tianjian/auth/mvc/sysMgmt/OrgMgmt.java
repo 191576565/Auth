@@ -8,9 +8,7 @@ public class OrgMgmt extends Model<OrgMgmt>{
 	
 	public static final OrgMgmt dao = new OrgMgmt();
 	
-	public static final String sqlId_org_select = "tianjian.org.pageSelect";
-	public static final String sqlId_sub_select = "tianjian.org.subSelect";
-	public static final String sqlId_sub2_select = "tianjian.org.subSelect2";
+	public static final String sqlId_root_select = "tianjian.org.rootSelect";
 	public static final String sqlId_getOrgInfo = "tianjian.org.getOrgInfo";
 	public static final String sqlId_getSubOrg = "tianjian.org.getSubOrg";
 	public static final String sqlId_repeatSelect = "tianjian.org.repeatSelect";

@@ -58,6 +58,10 @@ public class SysMgmtController extends Controller {
 		sysMgmt.set("DOMAIN_NAME", getPara("scopeName"));
 		sysMgmt.set("SORT_ID", getPara("scopeSort"));
 		sysMgmt.set("MEMO", getPara("memo"));
+		if(sysMgmtService.uptRepeated(getPara("scopeCode"), getPara("scopeName"), getPara("UUID"))==true){
+			renderJson("{\"message\":\"repeat\"}");
+			return;
+		}
 		if(!sysMgmtService.update(sysMgmt)){
 			renderJson(false);
 			return;

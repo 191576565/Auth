@@ -201,16 +201,20 @@ $('#sub').click(function(){
 	//修改操作
 	if($("#sys_add_div #form #uuid").val() != ''){
 		$("#form").attr("action", "sysMgmt/update");
-		$('#form').submit(function(){
-			$(this).ajaxSubmit(function(resultJson){
-				if(JSON.stringify(resultJson) == "true"){
+//		$('#form').submit(function(){
+			$('#form').ajaxSubmit(function(resultJson){
+				if(JSON.stringify(resultJson) === "true"){
 					window.location.href='sysMgmt';
-				}else{
-					alert('修改失败!');
+					return;
 				}
+				$.each(resultJson, function(i, item){
+					if(item === "repeat"){
+						alert('域编码/域名重复，修改失败!');
+					}
+				})
 			});
 			return false;//阻止表单默认提交
-		});
+//		});
 	}
 	
 	

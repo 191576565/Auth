@@ -7,22 +7,10 @@ import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.platform.tools.ToolGetSql;
 
 public class OrgMgmtService {
-	//查询根机构
+	//root用户机构查询
 	public List<OrgMgmt> getData(String uuid){
-		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_org_select);
+		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_root_select);
 		return OrgMgmt.dao.find(sql,uuid);
-	}
-	
-	//查询二级机构
-	public List<OrgMgmt> subData(String uuid){
-		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_sub_select);
-		return OrgMgmt.dao.find(sql,uuid,uuid);
-	}
-	
-	//查询下层机构(无限循环)
-	public List<OrgMgmt> subData2(String uuid, String up_uuid){
-		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_sub2_select);
-		return OrgMgmt.dao.find(sql,uuid,up_uuid);
 	}
 	
 	//获取域信息

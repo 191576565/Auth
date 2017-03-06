@@ -22,10 +22,19 @@ public class SysMgmtService {
 		sysMgmt.save();
 	}
 	
-	//重复性验证
+	//重复性验证(新增)
 	public boolean notRepeated(String scopeCode, String scopeName){
 		String sql = ToolGetSql.getSql(SysMgmt.sqlId_sys_repeat);
 		return SysMgmt.dao.find(sql, scopeCode, scopeName).isEmpty();
+	}
+	
+	//重复性验证(修改)
+	public boolean uptRepeated(String scopeCode, String scopeName, String uuid){
+		String sql = ToolGetSql.getSql(SysMgmt.sqlId_uptReapeatSelect);
+		if(SysMgmt.dao.find(sql, scopeCode, scopeName, uuid).size()>0){
+			return true;
+		}
+		return false;
 	}
 	
 	//修改系统信息

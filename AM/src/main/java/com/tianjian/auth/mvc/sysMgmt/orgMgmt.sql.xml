@@ -1,42 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sql-statement namespace="tianjian.org">
 
-	<sql id="pageSelect">
+	<sql id="rootSelect">
 		<![CDATA[ 
-        	select t.UUID,t3.DOMAIN_NAME,t.ORG_UNIT_ID,t.ORG_UNIT_DESC,t4.ORG_UNIT_DESC AS UP_ORG_UNIT_DESC
-        	 from sys_org_info t 
-        		left join sys_domain_info t3 on t3.UUID = t.DOMAIN_UUID
-            	left join SYS_ORG_INFO t4 on t4.UUID = t.ORG_UP_UUID
-           		where 1=1
-        			and t.domain_uuid=?
-        			and t.org_up_uuid=(select t2.UUID from sys_org_info t2 where t2.ORG_UP_UUID='#')
-        			order by t.modified_date desc
-    	]]>
-	</sql>
-	
-	<sql id="subSelect">
-		<![CDATA[ 
-        	select t.UUID,t4.DOMAIN_NAME,t.ORG_UNIT_ID,t.ORG_UNIT_DESC,t5.ORG_UNIT_DESC AS UP_ORG_UNIT_DESC from sys_org_info t 
-          		left join SYS_DOMAIN_INFO t4 on t4.UUID = t.DOMAIN_UUID
-          		left join SYS_ORG_INFO t5 on t5.UUID = t.ORG_UP_UUID
-        		where 1=1 
-        			and t.domain_uuid=?
-        			and t.org_up_uuid=(select t2.UUID from sys_org_info t2 
-                                    where t2.org_up_uuid=(select t3.uuid from sys_org_info t3 where t3.org_up_uuid='#') 
-                                      and t2.DOMAIN_UUID=?)
-        			order by t.modified_date desc
-    	]]>
-	</sql>
-	
-	<sql id="subSelect2">
-		<![CDATA[ 
-        	select t.UUID,t2.DOMAIN_NAME,t.ORG_UNIT_ID,t.ORG_UNIT_DESC,t3.ORG_UNIT_DESC AS UP_ORG_UNIT_DESC from sys_org_info t
-          		left join SYS_DOMAIN_INFO t2 on t2.UUID = t.DOMAIN_UUID
-          		left join SYS_ORG_INFO t3 on t3.UUID = t.ORG_UP_UUID
-        		where 1=1 
-        			and t.domain_uuid=?
-        			and t.org_up_uuid=?
-        			order by t.modified_date desc
+        	SELECT T3.UUID,
+       			   T3.ORG_UNIT_ID,
+                   T3.ORG_UNIT_DESC,
+                   T3.ORG_UP_UUID,
+                   T5.ORG_UNIT_DESC AS UP_ORG_UNIT_DESC,
+                   T2.DOMAIN_NAME,
+                   level
+            FROM SYS_ORG_INFO T3
+            LEFT JOIN SYS_DOMAIN_INFO T2 ON T3.DOMAIN_UUID=T2.UUID
+            LEFT JOIN SYS_ORG_INFO T5 ON T5.UUID=T3.ORG_UP_UUID
+            	START WITH T3.ORG_UP_UUID=(select T4.UUID FROM SYS_ORG_INFO T4 WHERE T4.ORG_UP_UUID='#') 
+                	AND T3.DOMAIN_UUID=?
+              	CONNECT BY PRIOR T3.UUID =T3.ORG_UP_UUID
     	]]>
 	</sql>
 	
