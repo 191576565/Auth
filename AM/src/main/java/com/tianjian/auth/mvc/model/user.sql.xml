@@ -150,7 +150,7 @@
 			LEFT JOIN SYS_ORG_INFO        T9  ON INSTR(T8.CONDITION_CONTENT  ,T9.UUID)>0
 			WHERE T0.DOMAIN_UUID  IN (  
 			  select d.uuid from  SYS_DOMAIN_INFO   D  
-			  START WITH d.uuid=  (select domain_uuid from sys_user_info  u  where where ${column} = ? and ${session} = ? and loggin_status = '0' ) connect by prior d.uuid=d.domain_up_uuid)
+			  START WITH d.uuid=  (select domain_uuid from sys_user_info  u   where ${column} = ? and ${session} = ? and loggin_status = '0' ) connect by prior d.uuid=d.domain_up_uuid)
 			GROUP BY T2.DOMAIN_ID,T2.DOMAIN_NAME ,T3.ORG_UNIT_ID,T3.ORG_UNIT_DESC ,T0.USER_ID ,T0.USER_NAME,T7.GROUP_ID,T8.REQ_URL,T8.CONDITION_TYPE,T8.CONDITION_CONTENT,t9.org_unit_id  ,t9.org_unit_desc
     	]]>
 	</sql>
