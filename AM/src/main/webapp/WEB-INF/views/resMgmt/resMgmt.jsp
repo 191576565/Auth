@@ -15,8 +15,14 @@
    		<link href="${ctxPath }/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     	<link href="${ctxPath }/static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/plugins/treegrid/jquery.treegrid.css" rel="stylesheet">
+    	<link href="${ctxPath }/static/css/plugins/ztree/zTreeStyle.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/animate.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/style.css?v=4.1.0" rel="stylesheet">
+    	<style type="text/css">
+    		.table-striped>tbody>tr:nth-of-type(odd), .table-bordered > thead > tr > th, .table-bordered > thead > tr > td{
+    			background-color: white;
+    		}
+    	</style>
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
  		<div class="row">
@@ -31,7 +37,7 @@
 				</ol>
 			</div>
 		</div>
-		<br /><br /><br /><br />
+		<br /><!-- <br /><br /><br /> -->
  		<div class="row">
  			<div class="col-xs-12">
  				<button id="res_add" type="button" class="btn btn-primary create">新增</button>
@@ -66,9 +72,12 @@
                  
             </tbody>
  		</table>
- 		<div id="sys_add_div" style="display:none;">
- 			<form id="form" ng-submit="submitForm()" action="" method="post"></br>
-				<input id="uuid" 
+ 		<div class="t" style="display: none;">
+ 			<ul id="res" class="ztree"></ul>
+ 		</div>
+ 		<div id="sys_add_div"  class="row" style="display:none;width:100%;margin:0px;">
+ 			<form id="form" ></br>
+				<%-- <input id="uuid" 
  						name="res.uuid" 
  						type="hidden" 
  				/>
@@ -89,7 +98,53 @@
 				</select></br>
 				<label>资源图标</label> <input id="res_icon" name="res.res_icon" type="text" placeholder="请输入角色名" ></br></br>
 				<label>排序编号</label> <input id="sort_id" name="res.sort_id" type="text" placeholder="请输入角色名" ></br></br>
-				<button id="resave" type="submit" class="btn btn-info ladda-button save" >保存</button>
+				<button id="resave" type="submit" class="btn btn-info ladda-button save" >保存</button> --%>
+                        <input type="hidden" name="res.uuid" id="uuid">
+                        <div class="col-sm-12">
+                                <div class="form-group col-sm-6">
+                                    <label>资源编码</label>
+                                    <input type="text" placeholder="" class="form-control" name="res.res_id" id="res_id">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>资源名称</label>
+                                    <input type="text" placeholder="" class="form-control" name="res.res_name" id="res_name">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>上级资源</label>
+                                    <div class="input-group">
+                                    	<input type="hidden" name="res.res_up_uuid" id="res_up_uuid">
+	                                   <input type="text" class="form-control" name="res_up_name" id="up_res_name"> 
+	                                   <span class="input-group-btn"> 
+	                                   		<button type="button" class="btn tree"><i class="fa fa-tree"></i></button> 
+	                                   </span>
+	                               </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>资源URL</label>
+                                    <input type="text" placeholder="" class="form-control" name="res.res_url" id="res_url">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>资源类型</label>
+                                    <select class="form-control" name="res.res_type" style="border-radius: 2px;" id="res_type">
+                                    	<option value="0">主菜单</option>
+                                        <option value="1">子菜单</option>
+                                        <option value="2">按钮</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>资源样式</label>
+                                    <input type="text" placeholder="" class="form-control" name="res.res_class" id="res_class">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>资源背景色</label>
+                                    <input type="text" placeholder="" class="form-control" name="res.res_color" id="res_color">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>资源图标</label>
+                                    <input type="text" placeholder="" class="form-control" name="res.res_icon" id="res_icon">
+                                </div>
+                                <button class="btn btn-primary pull-right m-t-n-xs save"  style="margin-right:15px;">保存</button>
+                        </div>
  			</form>
  		</div>
  		<div id="sys_del_div" class="form-group" style="display:none;">
@@ -111,18 +166,21 @@
 
 
     <!-- Bootstrap table -->
-    <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <%-- <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-    <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script> --%>
      <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
     
     <!-- treegrid -->
     <script src="${ctxPath }/static/js/plugins/treegrid/jquery.treegrid.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/treegrid/jquery.treegrid.bootstrap3.js"></script>
+    
+    <!-- ztree -->
+    <script src="${ctxPath }/static/js/plugins/zTree/jquery.ztree.all.min.js"></script>
     <!--
-    	作者：yeqc
-    	时间：2017-02-09
+    	作者：ys
+    	时间：2017-03-06
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/resMgmt.js"></script>
