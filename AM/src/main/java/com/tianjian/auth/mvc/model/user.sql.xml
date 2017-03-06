@@ -148,7 +148,7 @@
 	</sql>
 	
 	<!-- 不规则查询：查询用户信息  3 用户数据权限  （登录用户）-->
-	<sql id="rpmselect2">
+	<sql id="rpmselect3">
 		<![CDATA[ 
 		 SELECT  T2.DOMAIN_ID
        ,T2.DOMAIN_NAME
