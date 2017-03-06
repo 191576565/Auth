@@ -131,27 +131,27 @@
 	<!-- 不规则查询：查询Sessionid和用户信息权限  2 用户数据权限  （全部）-->
 	<sql id="rpmselect2">
 		<![CDATA[ 
-			  SELECT  T2.DOMAIN_ID                                                                        --#域编码
-			       ,T2.DOMAIN_NAME                                                                      --#域名称
-			       ,T3.ORG_UNIT_ID                                                                      --#机构编码
-			       ,T3.ORG_UNIT_DESC                                                                    --#机构名称
-			       ,T0.USER_ID                                                                          --#用户编码
-			       ,T0.USER_NAME                                                                        --#用户名称
-			       ,T7.GROUP_ID
-			       ,T8.REQ_URL,T8.CONDITION_TYPE,T8.CONDITION_CONTENT
-			       ,t9.org_unit_id    as  CONTENT_ORG_ID
-			       ,t9.org_unit_desc  as  CONTENT_ORG_DESC
-			     FROM SYS_USER_INFO     T0                                                              --TAB：用户信息
-			LEFT JOIN SYS_ROLE_INFO     T1  ON INSTR(T0.ROLES  ,T1.UUID)>0                              --TAB：角色信息
-			LEFT JOIN SYS_DOMAIN_INFO   T2  ON T0.DOMAIN_UUID=T2.UUID                                   --TAB：域信息
-			LEFT JOIN SYS_ORG_INFO      T3  ON T0.ORG_UUID=T3.UUID and t0.domain_uuid=t3.domain_uuid    --TAB：机构信息
-			LEFT JOIN SYS_GROUP_INFO      T7  ON T0.DOMAIN_UUID=T7.DOMAIN_UUID  AND  INSTR(T7.USERS  ,T0.UUID)>0
-			LEFT JOIN sys_group_url_rela  T8  ON T7.UUID  =T8.GROUP_UUID
-			LEFT JOIN SYS_ORG_INFO        T9  ON INSTR(T8.CONDITION_CONTENT  ,T9.UUID)>0
-			WHERE T0.DOMAIN_UUID  IN (  
-			  select d.uuid from  SYS_DOMAIN_INFO   D  
-			  START WITH d.uuid=  (select domain_uuid from sys_user_info  u  where where ${column} = ? and ${session} = ? and loggin_status = '0' ) connect by prior d.uuid=d.domain_up_uuid)
-			GROUP BY T2.DOMAIN_ID,T2.DOMAIN_NAME ,T3.ORG_UNIT_ID,T3.ORG_UNIT_DESC ,T0.USER_ID ,T0.USER_NAME,T7.GROUP_ID,T8.REQ_URL,T8.CONDITION_TYPE,T8.CONDITION_CONTENT,t9.org_unit_id  ,t9.org_unit_desc
+		    SELECT  T2.DOMAIN_ID                                                                         
+             ,T2.DOMAIN_NAME                                                                   
+             ,T3.ORG_UNIT_ID                                                                   
+             ,T3.ORG_UNIT_DESC                                                                 
+             ,T0.USER_ID                                                                       
+             ,T0.USER_NAME                                                                     
+             ,T7.GROUP_ID
+             ,T8.REQ_URL,T8.CONDITION_TYPE,T8.CONDITION_CONTENT
+             ,t9.org_unit_id    as  CONTENT_ORG_ID
+             ,t9.org_unit_desc  as  CONTENT_ORG_DESC
+           FROM SYS_USER_INFO     T0                                                              
+      LEFT JOIN SYS_ROLE_INFO     T1  ON INSTR(T0.ROLES  ,T1.UUID)>0                             
+      LEFT JOIN SYS_DOMAIN_INFO   T2  ON T0.DOMAIN_UUID=T2.UUID                                  
+      LEFT JOIN SYS_ORG_INFO      T3  ON T0.ORG_UUID=T3.UUID and t0.domain_uuid=t3.domain_uuid   
+      LEFT JOIN SYS_GROUP_INFO      T7  ON T0.DOMAIN_UUID=T7.DOMAIN_UUID  AND  INSTR(T7.USERS  ,T0.UUID)>0
+      LEFT JOIN sys_group_url_rela  T8  ON T7.UUID  =T8.GROUP_UUID
+      LEFT JOIN SYS_ORG_INFO        T9  ON INSTR(T8.CONDITION_CONTENT  ,T9.UUID)>0
+      WHERE T0.DOMAIN_UUID  IN (  
+        select d.uuid from  SYS_DOMAIN_INFO   D  
+        START WITH d.uuid=  (select domain_uuid from sys_user_info  u   where ${column} = ? and ${session} = ? and loggin_status = '0' ) connect by prior d.uuid=d.domain_up_uuid)
+      GROUP BY T2.DOMAIN_ID,T2.DOMAIN_NAME ,T3.ORG_UNIT_ID,T3.ORG_UNIT_DESC ,T0.USER_ID ,T0.USER_NAME,T7.GROUP_ID,T8.REQ_URL,T8.CONDITION_TYPE,T8.CONDITION_CONTENT,t9.org_unit_id  ,t9.org_unit_desc
     	]]>
 	</sql>
 	
