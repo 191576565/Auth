@@ -98,16 +98,17 @@
                      ,t4.res_color        as res_color  
                      ,t4.res_icon         as res_icon   
                      ,t4.res_type         as res_type   
+                     ,t4.sort_id          as res_sort_id
                    from sys_user_info     t0                                             
               left join sys_role_info     t1  on instr(t0.roles  ,t1.uuid)>0             
               left join sys_domain_info   t2  on t0.domain_uuid=t2.uuid                  
               left join sys_org_info      t3  on t0.org_uuid=t3.uuid and t0.domain_uuid=t3.domain_uuid  
               left join sys_resource_info t4  on instr(t1.resources  ,t4.uuid)>0
               left join sys_resource_info t5  on t4.res_up_uuid=t5.uuid
-             where ${column} = ? and ${session} = ? and loggin_status = '0'
+             where   ${column} = ? and ${session} = ? and loggin_status = '0'
               group  by
                t2.domain_id     ,t2.domain_name     ,t3.org_unit_id   ,t3.org_unit_desc ,t0.user_id  ,t0.user_name ,t4.res_id
-               ,t4.res_name     ,t4.res_url   ,nvl(t5.res_id,'#') ,t4.res_class   ,t4.res_color     ,t4.res_icon   ,t4.res_type   )
+               ,t4.res_name     ,t4.res_url   ,nvl(t5.res_id,'#') ,t4.res_class   ,t4.res_color     ,t4.res_icon   ,t4.res_type ,t4.sort_id        )
      select tu.domain_id,            
             tu.domain_name,         
             tu.org_unit_id,         
@@ -126,7 +127,7 @@
             tu.res_type             
     from tmp_users  tu 
     left join tmp_roles   tr on  tu.user_id=tr.user_id
-    order by  tu.res_id
+    order by  tu.res_sort_id
     	]]>
 	</sql>
 	<!-- 不规则查询：查询Sessionid和用户信息权限  2 用户数据权限  （全部）-->
