@@ -126,6 +126,7 @@
             tu.res_type             
     from tmp_users  tu 
     left join tmp_roles   tr on  tu.user_id=tr.user_id
+    order by  tu.res_id
     	]]>
 	</sql>
 	<!-- 不规则查询：查询Sessionid和用户信息权限  2 用户数据权限  （全部）-->
