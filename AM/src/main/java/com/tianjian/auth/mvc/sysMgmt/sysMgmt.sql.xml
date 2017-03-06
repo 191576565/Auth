@@ -18,6 +18,15 @@
     	]]>
 	</sql>
 	
+	<sql id="uptRepeatSelect">
+		<![CDATA[ 
+        	select * from sys_domain_info t 
+        		where 1=1 
+        			and (t.domain_id = ? or domain_name = ?)
+        				and t.uuid <> ?
+    	]]>
+	</sql>
+	
 	<sql id="rootSelect">
 		<![CDATA[ 
         	select t.UUID from sys_domain_info t 
