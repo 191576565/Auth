@@ -89,7 +89,6 @@ public class ResMgmtController extends Controller {
 		} else {
 			renderJson(false);
 		}
-
 	}
 	
 	/*
