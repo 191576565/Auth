@@ -12,12 +12,28 @@ function initTable() {
 						if(e.level===1){
 							temp='<tr class="treegrid-'+e.uuid+'" lvl="'+e.level+'"><td>'+e.org_unit_id+'</td><td>'+e.domain_name+'</td><td>'
 									+e.org_unit_desc+'</td><td>'+e.up_org_unit_desc
-									+'</td><td><button id="" type="button" class="btn btn-info btn-sm tbl-upt">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger btn-sm">删除</button></td></tr>';
+									+'</td><td><button id="" type="button" class="btn btn-info btn-sm tbl-upt" onclick="upt(\''+ e.uuid
+									+'\',\''+ e.org_unit_id 
+									+'\',\''+ e.domain_name 
+									+'\',\''+ e.org_unit_desc 
+									+'\',\''+ e.up_org_unit_desc 
+									+'\',\''+ e.org_up_uuid 
+									+'\',\''+ e.memo 
+									+'\')">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger btn-sm" onclick="del(\''+ e.uuid
+									+'\')">删除</button></td></tr>';
 							$('#table tbody').append(temp);
 						}else {
 							temp='<tr class="treegrid-'+e.uuid+' treegrid-parent-'+e.org_up_uuid+'" lvl="'+e.level+'"><td>'+e.org_unit_id+'</td><td>'+e.domain_name+'</td><td>'
 									+e.org_unit_desc+'</td><td>'+e.up_org_unit_desc
-									+'</td><td><button id="" type="button" class="btn btn-info btn-sm tbl-upt">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger btn-sm" onclick="del(\''+ e.uuid+'\')">删除</button></td></tr>';
+									+'</td><td><button id="" type="button" class="btn btn-info btn-sm tbl-upt" onclick="upt(\''+ e.uuid
+									+'\',\''+ e.org_unit_id 
+									+'\',\''+ e.domain_name 
+									+'\',\''+ e.org_unit_desc 
+									+'\',\''+ e.up_org_unit_desc 
+									+'\',\''+ e.org_up_uuid 
+									+'\',\''+ e.memo
+									+'\')">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger btn-sm" onclick="del(\''+ e.uuid
+									+'\')">删除</button></td></tr>';
 							$('#table tbody tr.treegrid-'+e.org_up_uuid).after(temp);
 						}
 					});
@@ -45,6 +61,11 @@ angular.module('myApp', [])
 $('#org_add').on('click', function() {
 	//初始化表单
 	$("#org_add_div #form #up_org").html("");
+	$("#org_add_div #form #uuid").val("");
+	$("#org_add_div #form #scop_n").val("");
+	$("#org_add_div #form #org_code").val("");
+	$("#org_add_div #form #org_name").val("");
+	$("#org_add_div #form #ipt_memo").val("");
 	//获取域
 	$.getJSON("orgMgmt/getId",function(data){
 		$.each(data, function(i, item){
@@ -53,14 +74,13 @@ $('#org_add').on('click', function() {
 					var $scop_n = $("#org_add_div #form #scop_n").val(value);
 				}
 				if(key === "uuid"){
-					var $uuid = $("#org_add_div #form #uuid").val(value);
+					var $uuid = $("#org_add_div #form #domain_uuid").val(value);
 				}
 			})
 		})
 	})
 	//获取机构
 	$.getJSON("orgMgmt/getOrg",function(data){
-		console.log(data);
 		$.each(data, function(i, item){
 			var up_id = '';
 			$.each(item, function(key,value){
@@ -83,18 +103,70 @@ $('#org_add').on('click', function() {
 	});
 	return false;
 });
-//新增机构_保存
-$('#sub').click(function(){
-	$("#form").attr("action", "orgMgmt/save");
-	$('#form').ajaxSubmit(function(resultJson){
-		if(JSON.stringify(resultJson) == "false"){
-			alert("机构编码不能重复!");
-			return;
-		}
-		window.location.href='orgMgmt';
+
+//编辑机构_弹出层
+function upt(uuid,orgCode,dName,orgDesc,upOrgDesc,upOrgID,memo){
+	//初始化表单
+	$("#org_add_div #form #up_org").html("");
+	$("#org_add_div #form #uuid").val(uuid);
+	$("#org_add_div #form #scop_n").val(dName);
+	$("#org_add_div #form #org_code").val(orgCode);
+	$("#org_add_div #form #org_name").val(orgDesc);
+	$('#org_add_div #form #up_org').append("<option value="+upOrgID+">" + upOrgDesc + "</option>");
+	$("#org_add_div #form #ipt_memo").val(memo);
+	
+	//获取机构
+	$.getJSON("orgMgmt/getOrg",function(data){
+		$.each(data, function(i, item){
+			var up_id = '';
+			$.each(item, function(key,value){
+				if(key === "uuid"){
+					up_id = value;
+				}
+			})
+			$.each(item, function(key,value){
+				if(key === "org_unit_desc" && value != upOrgDesc){
+					$('#up_org').append("<option value="+up_id+">" + value + "</option>");
+				}
+			})
+		})
+	})
+	layer.open({
+		type: 1,
+		content: $('#org_add_div'),
+		title: '机构信息',
+		area: ['960px', '540px'],
 	});
-	return false;//阻止表单默认提交
+	return false;
+}
+//新增||编辑机构_保存
+$('#sub').click(function(){
+	if($("#org_add_div #form #uuid").val() == ''){
+		//新增操作
+		$("#form").attr("action", "orgMgmt/save");
+		$('#form').ajaxSubmit(function(resultJson){
+			if(JSON.stringify(resultJson) == "false"){
+				alert("机构编码不能重复!");
+				return;
+			}
+			window.location.href='orgMgmt';
+		});
+		return false;//阻止表单默认提交
+	}
+	if($("#org_add_div #form #uuid").val() != ''){
+		//编辑操作
+		$("#form").attr("action", "orgMgmt/update");
+		$('#form').ajaxSubmit(function(resultJson){
+			if(JSON.stringify(resultJson) == "true"){
+				window.location.href='orgMgmt';
+			}
+			
+		});
+		return false;//阻止表单默认提交
+	}
+	
 });
+
 
 //删除
 function del(id) {

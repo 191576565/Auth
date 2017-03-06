@@ -57,7 +57,7 @@ public class OrgMgmtController extends Controller {
 	 */
 	public void save(){
 		OrgMgmt orgMgmt = new OrgMgmt();
-		orgMgmt.set("DOMAIN_UUID", getPara("UUID"));
+		orgMgmt.set("DOMAIN_UUID", getPara("domainUUID"));
 		orgMgmt.set("ORG_UNIT_ID", getPara("orgCode"));
 		orgMgmt.set("ORG_UNIT_DESC", getPara("orgName"));
 		orgMgmt.set("ORG_UP_UUID", getPara("upOrg"));
@@ -73,6 +73,24 @@ public class OrgMgmtController extends Controller {
 		}
 		orgMgmtService.save(orgMgmt);
 		renderJson(true);
+	}
+	
+	/*
+	 * orgMgmt/update
+	 * 编辑机构信息
+	 */
+	public void update(){
+		OrgMgmt orgMgmt = new OrgMgmt();
+		orgMgmt.set("UUID", getPara("UUID"));
+		orgMgmt.set("ORG_UNIT_ID", getPara("orgCode"));
+		orgMgmt.set("ORG_UNIT_DESC", getPara("orgName"));
+		orgMgmt.set("ORG_UP_UUID", getPara("upOrg"));
+		orgMgmt.set("MEMO", getPara("memo"));
+		orgMgmt.set("MODIFIER", "yeqc");
+		orgMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
+		if(orgMgmtService.update(orgMgmt)){
+			renderJson(true);
+		}
 	}
 	
 	/*

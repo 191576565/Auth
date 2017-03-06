@@ -29,6 +29,11 @@ public class OrgMgmtService {
 		orgMgmt.save();
 	}
 	
+	//修改域信息
+	public boolean update(OrgMgmt orgMgmt){
+		return orgMgmt.update();
+	}
+	
 	//删除机构信息
 	public boolean delete(String uuid){
 		String[] subIds = getSubOrg(uuid);
