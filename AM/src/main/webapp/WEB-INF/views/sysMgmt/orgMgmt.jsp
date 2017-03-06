@@ -82,7 +82,8 @@
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.orgCode.$valid }">
 					<label>机构编码</label> 
 					<input name="orgCode"
-						   class="form-control"
+						   class="form-control notNull"
+						   nullName="机构编码"
 						   id="org_code"
 						   ng-model="userdata.orgCode"
 						   ng-minlength="1"
@@ -103,7 +104,8 @@
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.orgName.$valid }">
 					<label>机构名称</label> 
 					<input name="orgName"
-						   class="form-control"
+						   class="form-control notNull"
+						   nullName="机构名称"
 						   id="org_name"
 						   ng-model="userdata.orgName"
 						   ng-minlength="1"

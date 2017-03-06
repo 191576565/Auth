@@ -177,25 +177,34 @@ angular.module('myApp', [])
 
 //"#sub"是隐藏在div中的表单的"保存"按钮
 $('#sub').click(function(){
+	//非空验证
+	var flag = true;
+	$(".notNull").each(function(){
+        if($(this).val()==""){
+        	alert($(this).attr('nullName')+"不能为空");
+        	flag = false;
+        	return false;
+        }
+    });
+	 if(!flag){
+ 		return;
+ 	}
 	//新增操作
 	if($("#sys_add_div #form #uuid").val() == ''){
 		$("#form").attr("action", "sysMgmt/save");
-//		$('#form').submit(function(){
-			$('#form').ajaxSubmit(function(resultJson){
-				//回调操作
-				if(JSON.stringify(resultJson) == "false"){
-					layer.open({
-						type: 1,
-						content: '域编码/域名重复，新增失败!',
-						title: '新增失败',
-						area: ['200px', '200px'],
-					});
-				}else{
-					window.location.href='sysMgmt';
-				}
-			});
-			return false;//阻止表单默认提交
-//		});
+		$('#form').ajaxSubmit(function(resultJson){
+			if(JSON.stringify(resultJson) == "false"){
+				layer.open({
+					type: 1,
+					content: '域编码/域名重复，新增失败!',
+					title: '新增失败',
+					area: ['200px', '200px'],
+				});
+			}else{
+				window.location.href='sysMgmt';
+			}
+		});
+		return false;//阻止表单默认提交
 	}
 	
 	//修改操作

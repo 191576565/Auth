@@ -141,6 +141,18 @@ function upt(uuid,orgCode,dName,orgDesc,upOrgDesc,upOrgID,memo){
 }
 //新增||编辑机构_保存
 $('#sub').click(function(){
+	//非空验证
+	var flag = true;
+	$(".notNull").each(function(){
+        if($(this).val()==""){
+        	alert($(this).attr('nullName')+"不能为空");
+        	flag = false;
+        	return false;
+        }
+    });
+	 if(!flag){
+ 		return;
+ 	}
 	if($("#org_add_div #form #uuid").val() == ''){
 		//新增操作
 		$("#form").attr("action", "orgMgmt/save");
