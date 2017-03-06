@@ -26,6 +26,7 @@ public class GlobalHandler extends Handler {
 	    	 //   int index = target.lastIndexOf(".jsp");
 	     	//    if (index != -1)
 	     	//      target = target.substring(0, index);
+	     	response.addHeader("Access-Control-Allow-Origin", "*");
 		    nextHandler.handle(target, request, response, isHandled);
 		  }
 		 
