@@ -12,12 +12,12 @@ function initTable() {
 						if(e.level===1){
 							temp='<tr class="treegrid-'+e.uuid+'" lvl="'+e.level+'"><td>'+e.org_unit_id+'</td><td>'+e.domain_name+'</td><td>'
 									+e.org_unit_desc+'</td><td>'+e.up_org_unit_desc
-									+'</td><td><button id="" type="button" class="btn btn-info btn-sm">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger btn-sm">删除</button></td></tr>';
+									+'</td><td><button id="" type="button" class="btn btn-info btn-sm tbl-upt">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger btn-sm">删除</button></td></tr>';
 							$('#table tbody').append(temp);
 						}else {
 							temp='<tr class="treegrid-'+e.uuid+' treegrid-parent-'+e.org_up_uuid+'" lvl="'+e.level+'"><td>'+e.org_unit_id+'</td><td>'+e.domain_name+'</td><td>'
 									+e.org_unit_desc+'</td><td>'+e.up_org_unit_desc
-									+'</td><td><button id="" type="button" class="btn btn-info btn-sm">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger btn-sm">删除</button></td></tr>';
+									+'</td><td><button id="" type="button" class="btn btn-info btn-sm tbl-upt">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger btn-sm" onclick="del(\''+ e.uuid+'\')">删除</button></td></tr>';
 							$('#table tbody tr.treegrid-'+e.org_up_uuid).after(temp);
 						}
 					});
@@ -94,4 +94,30 @@ $('#sub').click(function(){
 		window.location.href='orgMgmt';
 	});
 	return false;//阻止表单默认提交
+});
+
+//删除
+function del(id) {
+	var $ipt_uuid = $("#sys_del_div #del_form #del_uuid").val(id);
+	layer.open({
+		type: 1,
+		content: $('#sys_del_div'),
+		title: '系统提示',
+		area: ['300px', '100px'],
+	});
+};
+$('#btn_beSure').click(function() {
+	$('#del_form').attr("action", "orgMgmt/delete");
+//	$('#del_form').submit(function(){
+		$('#del_form').ajaxSubmit(function(resultJson){
+			if(JSON.stringify(resultJson) == "false"){
+				alert('删除失败');
+				return;
+			}else{
+				window.location.href='orgMgmt';
+			}
+		});
+		return false;
+//	});
+	
 });
