@@ -1,10 +1,7 @@
 package com.tianjian.auth.mvc.dpgMgmt;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Types;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,18 +9,12 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import com.jfinal.core.Controller;
-import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.DbKit;
-import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Record;
-import com.tianjian.auth.mvc.api.ApiJsonService;
 import com.tianjian.auth.mvc.callback.GetTreeData;
 import com.tianjian.auth.mvc.dpgMgmt.DpgMgmtController;
 import com.tianjian.auth.mvc.model.DpgMgmt;
-import com.tianjian.auth.mvc.oplog.OpLog;
-import com.tianjian.auth.mvc.oplog.OpLogService;
 import com.tianjian.platform.pjson.PageJson;
 
 public class DpgMgmtController extends Controller {
@@ -47,7 +38,7 @@ public class DpgMgmtController extends Controller {
 		// 获取表单参数
 		Integer pageSize = getParaToInt("pageSize");
 		Integer pageNumber = getParaToInt("pageNumber");
- 		String user_id = getPara("user_id");
+// 		String user_id = getPara("user_id");
 //		String op_type = getPara("op_type");
 //		String startdate_start = getPara("startdate_start");
 //		String startdate_end = getPara("startdate_end");
@@ -90,13 +81,16 @@ public class DpgMgmtController extends Controller {
 		 */
 		public void verifygroupid() {
 			Map<String, Object> mpara = new HashMap<String, Object>();
-			Object userinfo = getSessionAttr("userinfo");	
-			String domain_id=((Record) userinfo).getStr("domain_id");
-			mpara.put("domain_id", domain_id);
-			String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_domaininfo, mpara);
-			// 获取数据
-			List<Record> dpgmgmt = (List<Record>) Db.find(sql);
-			renderJson(dpgmgmt);
+			Map<String,Object> insertflag = new HashMap<String,Object>();
+			mpara.put("domainid", getPara("domaininfo"));
+			mpara.put("groupid", getPara("groupid"));
+			String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlid_verifygid, mpara);
+		    List<Record> dpgmgmt =Db.find(sql);
+			if(dpgmgmt.size()>0){
+				insertflag.put("status", "error");
+			}else{
+				insertflag.put("status", "success");}
+			renderJson(insertflag);
 		}
 		
 		 /** 
@@ -119,10 +113,54 @@ public class DpgMgmtController extends Controller {
 				 renderJson(TreeData);
 			}
 
-		private String getStr(String string) {
-			// TODO Auto-generated method stub
-			return string;
-		}
-
+			 /** 
+			 *@Function 保存权限组信息       
+			 *@Declare   保存权限组信息
+			 *@Author    谢涛
+			 *@Return    String  void
+			 */
+			public void saveform() {
+				Map<String, Object> mpara = new HashMap<String, Object>();
+				Map<String,Object> insertflag = new HashMap<String,Object>();
+				Object userinfo = getSessionAttr("userinfo");	
+				mpara.put("domainid", getPara("domaininfo"));
+				mpara.put("groupid", getPara("groupid"));
+				mpara.put("groupname", getPara("groupname"));
+				mpara.put("guserid", getPara("guserid"));
+				mpara.put("opuser", ((Record) userinfo).getStr("user_id"));
+				String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_ingroupinfo, mpara);
+				int dpgmgmt =Db.update(sql);
+				if(dpgmgmt==1){
+					insertflag.put("status", "success");
+				}else{
+					insertflag.put("status", "error");}
+				renderJson(insertflag);
+			}
+			
+			 /** 
+			 *@Function 删除权限组数据      
+			 *@Declare   删除权限组数据   ,支持批量删除
+			 *@Author    谢涛
+			 *@Return    String  void
+			 */
+			public void delform() {
+				Map<String,Object> insertflag = new HashMap<String,Object>();
+				Map<String, Object> mpara = new HashMap<String, Object>();
+				StringBuffer  InString = new StringBuffer(); 
+				String[] duid = getPara("uuid").split(","); 
+				for (int i = 0; i < duid.length; i++) { 
+					InString.append("'").append(duid[i]).append("'").append(","); 
+					} 
+			    String para=InString.toString().substring(1, InString.length() - 2);
+				mpara.put("para", para.replaceAll("\\s*", ""));
+		        String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlid_deletegid, mpara);
+			    int dpgmgmt =Db.update(sql);
+              	if(dpgmgmt>0){
+					insertflag.put("status", "success");
+					insertflag.put("delcount", dpgmgmt);
+				 }else{
+					insertflag.put("status", "error");}
+				renderJson(insertflag);
+			}
 	
 }

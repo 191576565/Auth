@@ -13,7 +13,7 @@ function initdpgMgmtlist(){
  	showColumns: false, //是否显示所有的列
  	showRefresh: false, //是否显示刷新按钮
  	clickToSelect: true, //是否启用点击选中行
- 	uniqueId: "group_id", //每一行的唯一标识，一般为主键列
+ 	uniqueId: "uuid", //每一行的唯一标识，一般为主键列
  	showToggle:false, //是否显示详细视图和列表视图的切换按钮
  	cardView: false, //是否显示详细视图
  	queryParamsType: '',
@@ -28,6 +28,11 @@ function initdpgMgmtlist(){
       },  
 
     columns: [{
+        field: 'uuid',
+        title: '主键',
+        width:'20',
+        checkbox: true
+    },{
         field: 'domain_id',
         title: '域 ID',
         width:'20',
@@ -60,21 +65,11 @@ function initdpgMgmtlist(){
     	}
     },]
 });
-
+   $('#table').bootstrapTable('hideColumn', 'uuid');
 };
 
 //yeqc
 //layer弹出自定义div
-
-//$('#sys_add').on('click', function() {
-//	layer.open({
-//		type: 1,
-//		content: $('#sys_add_div'),
-//		skin: 'layui-layer-molv',
-//		title: ' 权限组信息',
-//		area: ['400px', '300px'],	
-//	});
-//});
 
 function sys_add(){
 	layer.open({
@@ -82,7 +77,13 @@ function sys_add(){
 		content: $('#sys_add_div'),
 		skin: 'layui-layer-molv',
 		title: ' 权限组信息',
-		area: ['400px', '300px'],	
+		area: ['400px', '310px'],
+		btn: ['保存']
+         ,yes: function(index){
+        	  saveform();
+              location.reload();
+              layer.closeAll(index);
+         }
 	});
 };
 
@@ -92,7 +93,12 @@ $('#table').on('click', '.edit', function() {
 		content: $('#sys_add_div'),
 		skin: 'layui-layer-molv',
 		title: '权限组信息',
-		area: ['500px', '300px']
+		area: ['500px', '300px'],
+		btn: ['保存']
+        ,yes: function(index){
+        	updateform();
+            layer.closeAll(index);
+        }
 	});
 	return false;
 });
@@ -107,7 +113,7 @@ $('#sys_add_div #form').on('click', '#tree', function() {
 		type: 1,
 		content: $('#opn_tree'),
 		title: '权限组信息',
-		area: ['300px', '600px']
+		area: ['300px', '500px']
 	});
 	return false;
 });
@@ -125,7 +131,7 @@ $('#sys_add').on('click', function() {
         },  
          
         error: function (XMLHttpRequest, textStatus, errorThrown) {  
-            alert("error");  
+        	layer.tips("抱歉，数据掉沟里了！", '#domaininfo');
         }  
     }); 
     sys_add();
@@ -142,35 +148,60 @@ function formValidate(){
 	}; 
 
 $('#groupid').blur(function() {
-	  $.ajax({  
+		var domainid=$('#domaininfo').val();
+		var groupid=$('#groupid').val();
+		if(domainid==null || domainid=='Value'){
+			layer.tips("请先选择所属域!", '#domaininfo');
+			 return false;
+		 }
+		if(groupid==null || groupid==''){
+			layer.tips("组 id 不能为空!", '#groupid');
+			 return false;
+		}else{
+	        $.ajax({  
 	        url: "dpgMgmt/verifygroupid",
+	        data:{domaininfo:$('#domaininfo').val(),groupid:$('#groupid').val()},
 	        dataType: "json",  
-	        success: function (data) {  
-	            $.each(data, function (index, domaininfo) {
-	            	 alert("start--->>>"+txt+"--->>>"+txt1);
-	            });  
+	        success: function (data) {
+	        	if(data.status=='success'){
+	        		layer.tips("恭喜,组id可以使用！", '#groupid');
+	        	}else{
+	        		layer.tips("啊哦,组id已被占用,请重新输入！", '#groupid');
+	        	}  	
 	        },  
-	        error: function (XMLHttpRequest, textStatus, errorThrown) {  
-	            alert("error");  
-	        }  
-	    }); 
-	  
-	});
+	        error: function (XMLHttpRequest, textStatus, errorThrown) {
+	        	    layer.tips("抱歉，数据掉沟里了！", '#groupid');
+	        } 
+	    });
+	}
+});
 
 $('#guserid').on('click', function() {
-	getTreeData();
-	layer.open({
-		type: 1,
-		content: $('#sys_user_div'),
-		skin: 'layui-layer-molv',
-		title: '选择用户',
-		area: ['500px', '700px']
-	});
+	var domainid=$('#domaininfo').val();
+	if(domainid==null || domainid=='Value'){
+		layer.tips("请先选择所属域!", '#domaininfo');
+		 return false;
+	 }else{
+	    getTreeData();
+	    layer.open({
+	    	  type: 1,
+	    	  title: '选择用户',
+	    	  skin: 'layui-layer-molv',
+	    	  area: ['500px', '550px'],
+	    	  content: $('#sys_user_div'),
+	    	  btn: ['重置', '保存']
+	          , yes: function(){
+	            dosome(2);
+	          },btn2: function(index){
+	            getDisabled();
+                layer.closeAll(index);
+              }
+	    	});
 	return false;
+	}
 }); 
 
 function getTreeData() {
-	// var domainid=$('#domaininfo').val();
      $.ajax({ 
 		    url: "dpgMgmt/getTreeData",
 	        dataType: "json",
@@ -179,19 +210,124 @@ function getTreeData() {
                 var defaultData = eval(data.data);
                 $('#user_in_div').treeview({
                 	data: defaultData,  // 数据源
-                	multiSelect: true,
-                    color: "#428bca",
-                    levels:30,
-                    multiSelect: true,
+                	showCheckbox : true,
+                    levels:10,
+                    color: "#000000",
                     showBorder: false,
-                    showCheckbox: true
+                //  backColor:"#0000FF",
+                //  onhoverColor:"7EC0EE",
+                //  multiSelect:true,
+                //  checkedIcon:"glyphicon glyphicon-check",
+                //  selectable: true,
+                //  showBorder: false,
+                    onNodeChecked: function(event, data){
+                   	if(data.nodes != null)
+                   	{
+                   		var arrayInfo = data.nodes;
+                   		for (var i = 0; i < arrayInfo.length; i++) {
+                   			$('#user_in_div').treeview('checkNode', [ arrayInfo[i].nodeId, { silent: true } ]);
+                   			//$('#user_in_div').treeview('toggleNodeChecked', [ arrayInfo[i].nodeId, { silent: true } ]);
+               			}                                 
+                   	}
+               	  },
+               	  onNodeUnchecked: function(event, data){
+                       	if(data.nodes != null)
+                       	{
+                       		var arrayInfo = data.nodes;
+                       		for (var i = 0; i < arrayInfo.length; i++) {
+                       			//$('#user_in_div').treeview('checkNode', [ arrayInfo[i].nodeId, { silent: true } ]);
+                       			$('#user_in_div').treeview('toggleNodeChecked', [ arrayInfo[i].nodeId, { silent: true } ]);
+               				}
+                       	}
+               		  }
                 });
             },
             error: function (XMLHttpRequest, textStatus, errorThrown,data) {
-                alert('啊哦，数据掉坑里了。。。');
+            	layer.tips("抱歉，数据掉沟里了！", '#domaininfo');
             },
 	    }); 
 	}
+
+
+function dosome( num){
+	if(num == 1)
+	{
+		$('#user_in_div').treeview('checkAll', { silent: true });//全选
+	}else if(num == 2){
+		$('#user_in_div').treeview('uncheckAll', { silent: true });//取消全选
+	}else if(num == 3){
+		$('#user_in_div').treeview('collapseAll', { silent: true });//折叠
+	}else if(num == 4){
+		$('#user_in_div').treeview('expandAll', { levels: 2, silent: true });//展开所有二级节点
+	}
+}
+
+function getDisabled(){
+	var checkedArr = $('#user_in_div').treeview('getChecked','');
+	var userid="";
+	for(var i = 0; i < checkedArr.length; i++){
+          if(i == 0){
+        	  userid=checkedArr[i].id;
+          }else{
+        	  userid=userid+","+checkedArr[i].id;
+           }
+	    }
+	$('#guserid').val(userid);
+}
+
+function saveform(){
+	$.ajax({  
+        url: "dpgMgmt/saveform",
+        dataType: "json",  
+        data:{domaininfo:$('#domaininfo').val(),groupid:$('#groupid').val(),groupname:$('#groupname').val(),guserid:$('#guserid').val()},
+        success: function (data) {
+        	if(data.status=='success'){
+        		layer.msg("数据保存成功");
+        	}else{
+        		layer.msg("数据保存失败");
+        	}  	
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+             	layer.msg("数据被城管抓走了！");
+        }  
+    }); 
+}
+
+function updateform(){
+	
+}
+
+$('#btn_add').on('click', function() {
+    var selRow = $("#table").bootstrapTable('getSelections');
+    var uuid = new Array(); 
+    if(selRow.length>0){
+    	$.each(selRow, function() {
+    		uuid.push(this.uuid);
+    		});
+        $.ajax({  
+            url: "dpgMgmt/delform",
+            dataType: "json", 
+            data:{'uuid':uuid.toString()},
+            success: function (data) {
+                	if(data.status=='success'){
+                	    	layer.msg("数据删除成功,本次共删除"+data.delcount+"行数据！");
+                	   }else{
+                	    	layer.msg("数据删除失败咯！");}  	
+                       },
+            error: function (XMLHttpRequest, textStatus, errorThrown) { 
+             	layer.msg("对象被城管抓走了！");}  
+               }); 
+        location.reload();
+    }else{
+     layer.tips("要先选择删除对象哦！", '#btn_add');
+    }
+});
+
+
+
+
+
+
 
 
 
