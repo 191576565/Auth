@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jfinal.plugin.activerecord.Record;
 
 public class OrgMgmtController extends Controller {
 	
@@ -63,8 +64,8 @@ public class OrgMgmtController extends Controller {
 		orgMgmt.set("ORG_UP_UUID", getPara("upOrg"));
 		orgMgmt.set("IS_ENABLE", "Y");
 		orgMgmt.set("MEMO", getPara("memo"));
-		orgMgmt.set("CREATOR", "yeqc");
-		orgMgmt.set("MODIFIER", "yeqc");
+		orgMgmt.set("CREATOR", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
+		orgMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
 		orgMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
 		orgMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 		if(orgMgmtService.isRepeated(getPara("UUID"), getPara("orgCode"))){
@@ -86,7 +87,7 @@ public class OrgMgmtController extends Controller {
 		orgMgmt.set("ORG_UNIT_DESC", getPara("orgName"));
 		orgMgmt.set("ORG_UP_UUID", getPara("upOrg"));
 		orgMgmt.set("MEMO", getPara("memo"));
-		orgMgmt.set("MODIFIER", "yeqc");
+		orgMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
 		orgMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 		if(orgMgmtService.update(orgMgmt)){
 			renderJson(true);
