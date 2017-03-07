@@ -17,4 +17,19 @@ public class DpgMgmt extends Model<DpgMgmt> {
 	 * 域信息获取语句
 	 */
 	public static final String sqlId_domaininfo = "tianjian.dpgmgmt.domaininfo";
+	
+	/*
+	 * 保存权限组数据 GROUP_INFO
+	 */
+	public static final String sqlId_ingroupinfo = "tianjian.dpgmgmt.ingroupinfo";
+	
+	/*
+	 * 验证权限组id是否存在 GROUP_INFO
+	 */
+	public static final String sqlid_verifygid = "tianjian.dpgmgmt.verifygid";
+	
+	/*
+	 * 删除权限组  DELETE GROUP_INFO
+	 */
+	public static final String sqlid_deletegid = "tianjian.dpgmgmt.deletegid";
 }

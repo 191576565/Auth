@@ -125,6 +125,18 @@
             tu.res_color,           
             tu.res_icon,            
             tu.res_type             
+
+
+
+
+
+
+
+
+
+
+
+
     from tmp_users  tu 
     left join tmp_roles   tr on  tu.user_id=tr.user_id
     order by  tu.res_sort_id
@@ -139,6 +151,12 @@
              ,ORG_UNIT_DESC                                                                 
              ,USER_ID                                                                       
              ,USER_NAME                                                                     
+
+
+
+
+
+
              ,GROUP_ID
              ,REQ_URL
              ,CONDITION_TYPE
