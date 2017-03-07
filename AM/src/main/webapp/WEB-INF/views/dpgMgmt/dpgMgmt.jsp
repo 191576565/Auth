@@ -59,17 +59,12 @@
  		     	<label style="margin-left: 5%;">所属域</label> 
 				<select id="domaininfo" name="domaininfo" nValidate="{required:true}" style="width: 120px; margin-left: 6%;">
 					<option value="default">请选择域</option>
-	 			</select><span id="domainmsg" name="domainmsg"  style="color:red;margin-left: 11%;">*</span></br></br>
-				<label style="margin-left: 5%;">组编码</label> <input id="groupid"  name="groupid" style="margin-left: 6%;" type="text" placeholder="1~30位字母数字下划线"  >
-				<span id="groupidmsg" name="groupidmsg"  style="color:red;margin-left: 2%;">*</span></br></br><!--字母和数字(1~30位) -->
+	 			</select></br></br>
+				<label style="margin-left: 5%;">组编码</label> <input id="groupid"  name="groupid" style="margin-left: 6%;" type="text" placeholder="1~30位字母数字下划线"  ></br></br><!--字母和数字(1~30位) -->
 				<label style="margin-left: 5%;">组名称</label> <input id="groupname"  name="groupname"  style="margin-left: 6%;" type="text" placeholder="请输入组名称" name="CustName">
 				<span id="groupnamemsg" name="groupnamemsg"  style="color:red;margin-left: 2%;"></span></br></br>
 				<label style="margin-left: 5%;">所属用户</label> <input id="guserid" name="guserid" style="margin-left: 2%;" type="text" />
-				<span id="guseridmsg" name="guseridmsg"  style="color:red;margin-left: 2%;">*</span>
 				</br></br></br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<!-- <button type="button"  class="btn btn-default">关闭</button>&nbsp;&nbsp; -->
-				<button type="button"  class="btn btn-info ladda-button save">保存</button>
  			</form>
  		</div>
  		<table id="table"></table>
@@ -80,13 +75,16 @@
             </div>
  		<div id="sys_user_div" style="display:none;">
  			<form id="userform"></br>
- 		     	<div id="user_in_div"></div>
+ 		     	<div id="user_in_div" style="margin-left: 2%;"></div>
  			</form>
  		</div>
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
-
+    
+    <!-- Bootstrap-Treeview plugin javascript-->
+    <script src="${ctxPath }/static/js/bootstrap-treeview.js" type="text/javascript"></script>
+   
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>
 
@@ -99,8 +97,7 @@
     <!-- Peity -->
     <script src="${ctxPath }/static/js/demo/bootstrap-table-demo.js"></script>
     
-    <!-- Bootstrap-Treeview plugin javascript -->
-    <script src="${ctxPath }/static/js/plugins/treeview/bootstrap-treeview.js"></script>
+   
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>

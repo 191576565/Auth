@@ -4,7 +4,7 @@
 
 	<sql id="pageAllSelect">
 		<![CDATA[ 
-       select t1.domain_id, t1.domain_name, t.group_id, t.group_desc, t.users 
+         select t.uuid,t1.domain_id, t1.domain_name, t.group_id, t.group_desc, t.users
     	]]>
 	</sql>
 	
@@ -21,7 +21,6 @@
     	]]>
 	</sql>
 	
-	
 	<sql id="domaininfo">
 		<![CDATA[ 
 		select * from SYS_DOMAIN_INFO t 
@@ -32,6 +31,53 @@
         and t.domain_id=#'$domain_id$'#
         <% } %>
         
+    	]]>
+	</sql>
+	
+	<!-- 保存权限组信息 -->
+	<sql id="ingroupinfo">
+		<![CDATA[ 
+		insert into sys_group_info
+        (uuid,
+         domain_uuid,
+         group_id,
+         group_desc,
+         created_date,
+         creator,
+         modified_date,
+         modifier,
+         memo,
+         users)
+     select 
+          sys_guid(),
+          max(t.uuid),
+          #'$groupid$'#,
+          #'$groupname$'#,
+          sysdate,
+          #'$opuser$'#,
+          sysdate,
+          #'$opuser$'#,
+           '',
+          #'$guserid$'#
+        from SYS_DOMAIN_INFO t WHERE t.domain_id =#'$domainid$'#
+    	]]>
+	</sql>
+	
+	<!-- 删除权限组信息 -->
+	<sql id="deletegid">
+		<![CDATA[ 
+		delete from sys_group_info t where  t.uuid in (#'$para$'#)
+    	]]>
+	</sql>
+	
+	<!-- 验证权限组id -->
+	<sql id="verifygid">
+		<![CDATA[ 
+		select t.domain_uuid
+        from sys_group_info t, sys_domain_info t1
+        where t.domain_uuid = t1.uuid
+        and t.group_id = #'$groupid$'#
+        and t1.domain_id = #'$domainid$'#
     	]]>
 	</sql>
 	
