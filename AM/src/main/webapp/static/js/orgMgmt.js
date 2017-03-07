@@ -14,7 +14,8 @@ function initTable() {
 									+e.org_unit_desc+'</td><td>'+e.up_org_unit_desc
 									+'</td><td><button id="" type="button" class="btn btn-info btn-sm tbl-upt" onclick="upt(\''+ e.uuid
 									+'\',\''+ e.org_unit_id 
-									+'\',\''+ e.domain_name 
+									+'\',\''+ e.domain_name
+									+'\',\''+ e.domain_uuid
 									+'\',\''+ e.org_unit_desc 
 									+'\',\''+ e.up_org_unit_desc 
 									+'\',\''+ e.org_up_uuid 
@@ -27,7 +28,8 @@ function initTable() {
 									+e.org_unit_desc+'</td><td>'+e.up_org_unit_desc
 									+'</td><td><button id="" type="button" class="btn btn-info btn-sm tbl-upt" onclick="upt(\''+ e.uuid
 									+'\',\''+ e.org_unit_id 
-									+'\',\''+ e.domain_name 
+									+'\',\''+ e.domain_name
+									+'\',\''+ e.domain_uuid
 									+'\',\''+ e.org_unit_desc 
 									+'\',\''+ e.up_org_unit_desc 
 									+'\',\''+ e.org_up_uuid 
@@ -66,6 +68,7 @@ $('#org_add').on('click', function() {
 	$("#org_add_div #form #org_code").val("");
 	$("#org_add_div #form #org_name").val("");
 	$("#org_add_div #form #ipt_memo").val("");
+	$("#org_add_div #form #domain_uuid").val("");
 	//获取域
 	$.getJSON("orgMgmt/getId",function(data){
 		$.each(data, function(i, item){
@@ -105,7 +108,7 @@ $('#org_add').on('click', function() {
 });
 
 //编辑机构_弹出层
-function upt(uuid,orgCode,dName,orgDesc,upOrgDesc,upOrgID,memo){
+function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 	//初始化表单
 	$("#org_add_div #form #up_org").html("");
 	$("#org_add_div #form #uuid").val(uuid);
@@ -114,6 +117,7 @@ function upt(uuid,orgCode,dName,orgDesc,upOrgDesc,upOrgID,memo){
 	$("#org_add_div #form #org_name").val(orgDesc);
 	$('#org_add_div #form #up_org').append("<option value="+upOrgID+">" + upOrgDesc + "</option>");
 	$("#org_add_div #form #ipt_memo").val(memo);
+	$("#org_add_div #form #domain_uuid").val(dId);
 	
 	//获取机构
 	$.getJSON("orgMgmt/getOrg",function(data){
@@ -171,8 +175,13 @@ $('#sub').click(function(){
 		$('#form').ajaxSubmit(function(resultJson){
 			if(JSON.stringify(resultJson) == "true"){
 				window.location.href='orgMgmt';
+				return;
 			}
-			
+			$.each(resultJson, function(i, item){
+				if(item === "repeat"){
+					alert('机构编码重复，修改失败!');
+				}
+			})
 		});
 		return false;//阻止表单默认提交
 	}

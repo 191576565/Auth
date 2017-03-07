@@ -68,7 +68,7 @@ public class OrgMgmtController extends Controller {
 		orgMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
 		orgMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
 		orgMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
-		if(orgMgmtService.isRepeated(getPara("UUID"), getPara("orgCode"))){
+		if(orgMgmtService.isRepeated(getPara("domainUUID"), getPara("orgCode"))){
 			renderJson(false);
 			return;
 		}
@@ -89,6 +89,10 @@ public class OrgMgmtController extends Controller {
 		orgMgmt.set("MEMO", getPara("memo"));
 		orgMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
 		orgMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
+		if(orgMgmtService.uptReapeated(getPara("domainUUID"), getPara("orgCode"), getPara("UUID"))){
+			renderJson("{\"message\":\"repeat\"}");
+			return;
+		}
 		if(orgMgmtService.update(orgMgmt)){
 			renderJson(true);
 		}
