@@ -39,25 +39,25 @@
             </div> <!-- .site-header -->
         </div> <!-- .site-top -->
         <!-- MAIN POSTS -->
-        <div class="main-posts">
-            <div class="container">
-                <div class="row">
-                    <div class="blog-masonry masonry-true">
+        <div id="1" class="main-posts">
+            <div id="2" class="container">
+                <div id="3" class="row">
+                    <div id="4" class="blog-masonry masonry-true">
                         <div class="post-masonry col-md-4 col-sm-6">
                             <div class="post-thumb">
                                 <a href="auth"><img src="${ctxPath }/static/img/auth.png" alt=""></a>
                             </div>
-                        </div> <!-- /.post-masonry -->
+                        </div>
                         <div class="post-masonry col-md-4 col-sm-6">
                             <div class="post-thumb">
                                 <a href="http://172.168.173.6:8020/rpm_web/index.html?userid=${userid }&sid=${sid }"><img src="${ctxPath }/static/img/rpm.png" alt=""></a>
                             </div>
-                        </div> <!-- /.post-masonry -->
+                        </div>
                         <div class="post-masonry col-md-4 col-sm-6">
                             <div class="post-thumb">
                                 <a href="#"><img src="${ctxPath }/static/img/ftp.png" alt=""></a>
                             </div>
-                        </div> <!-- /.post-masonry -->
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -79,5 +79,11 @@
             //]]>
         </script>
 	<!-- templatemo 434 masonry -->
+	<!--
+    	作者：yeqc
+    	时间：2017-02-09
+    	描述：页面js
+    -->
+    <script src="${ctxPath }/static/js/login_after.js"></script>
     </body>
 </html>

@@ -13,6 +13,7 @@ import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseSessionController;
 import com.tianjian.auth.mvc.handler.GlobalInterceptor;
+import com.tianjian.auth.mvc.menu.MenuService;
 import com.tianjian.auth.mvc.model.UserService;
 
 /** 
@@ -24,6 +25,7 @@ import com.tianjian.auth.mvc.model.UserService;
 
 public class LoginController extends Controller {
 	private LoginService loginservice=new LoginService();
+	private MenuService menuService = new MenuService();
 	private static final Log log = Log.getLog(LoginController.class);
 	public void index() {
 		log.info("welcome to login");
@@ -67,5 +69,10 @@ public class LoginController extends Controller {
 				render("login_v2.html");
 		}
 	}
-
+	
+	//获取用户拥有的菜单项
+	public void getMenu(){
+		renderJson(menuService.getScopeInfo(((Record)getSessionAttr("userinfo")).getStr("user_id")));
+	}
+	
 }
