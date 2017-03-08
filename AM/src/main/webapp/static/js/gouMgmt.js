@@ -1,6 +1,6 @@
-function initdpgMgmtlist(){
+function initdpgMgmtlist(groupuuid){
    $('#table').bootstrapTable({
-	url: 'dpgMgmt/list',
+	url: 'goulist',
 // 	toolbar: '#toolbar', //工具按钮用哪个容器
  	striped: true, //是否显示行间隔色
  	pagination: true, //是否显示分页（*）
@@ -19,7 +19,8 @@ function initdpgMgmtlist(){
  	queryParamsType: '',
  	sidePagination: "server",
  	queryParams: function queryParams(params) {   //设置查询参数  
-        var param = {    
+        var param = {
+        	groupuuid :groupuuid,
             pageNumber: params.pageNumber,    
             pageSize: params.pageSize,  
             user_id : $("#userid").val()
@@ -31,14 +32,14 @@ function initdpgMgmtlist(){
         field: 'uuid',
         title: '主键'
     },{
-        field: 'domain_id',
-        title: '域 ID'
-    },{
         field: 'check_ed',
         title: '多选框',
         width: '20',
         checkbox: true
     },{
+        field: 'domain_id',
+        title: '域 ID'
+    }, {
         field: 'domain_name',
         title: '域名称',
         width:'100'
@@ -51,19 +52,30 @@ function initdpgMgmtlist(){
         title: '组名称',
         width:'100'
     }, {
-        field: 'users',
-        title: '所属用户',
+        field: 'req_url',
+        title: 'URL',
         width:'200'
+    }, {
+    	field: 'req_url_desc',
+    	title: 'URL描述',
+        width:'400'
+    }, {
+        field: 'condition_type',
+        title: '条件类型',
+        width:'60',
+    }, {
+        field: 'condition_content',
+        title: '条件值',
+        width:'400',
     }, {
     	field: 'opt',
     	title: '操 作',
-        width:'400',
+        width:'170',
         events: operateEvents,
     	formatter:function(value,row,index){
     		var e = '<button type="button" class="edit  btn-info update edit">编辑</button> ';
     		var d = '<button type="button" class="delete  btn-danger delete">删除</button> ';
-    		var f = '<button type="button" class="access  btn-primary access">数据权限</button> ';
-    		return e+d+f;
+    		return e+d;
     	}
     },]
 });
@@ -96,10 +108,6 @@ window.operateEvents = {
       'click .delete': function (e, value, row, index) {
     	  var selRow = $("#table").bootstrapTable('getData');
           del(selRow[index].uuid);
-      },
-      'click .access': function (e, value, row, index) {
-    	  var selRow = $("#table").bootstrapTable('getData');
-    	  window.location="dpgMgmt/gouMgmt?groupuuid="+selRow[index].uuid;
       }
       };
 

@@ -6,7 +6,6 @@
 		<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     	<title> - Bootstrap Table</title>
     	<meta name="keywords" content="">
     	<meta name="description" content="">
@@ -34,7 +33,10 @@
 						<a href="${ctxPath }/static/welcome.jsp">首页</a>
 					</li>
 					<li>
-						<a href="dpgMgmt">数据权限组管理</a>
+						<a href="${ctxPath }/dpgMgmt"/>数据权限组管理</a>
+					</li>
+					<li>
+						<a href="gouMgmt">权限组管理</a>
 					</li>
 				</ol>
 			</div>
@@ -106,11 +108,11 @@
     	时间：2017-02-09
     	描述：页面js
     -->
-    <script src="${ctxPath }/static/js/dpgMgmt.js"></script>
+    <script src="${ctxPath }/static/js/gouMgmt.js"></script>
      <script type="text/javascript"> 
      <!-- 初始化界面数据 -->
      $(document).ready(function() {
-    	    initdpgMgmtlist();
+    	    initdpgMgmtlist("${groupuuid}");
     	});
 	</script>
 	</body>

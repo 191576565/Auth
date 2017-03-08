@@ -21,6 +21,28 @@
     	]]>
 	</sql>
 	
+	
+	<sql id="gouAllSelect">
+		<![CDATA[ 
+         select t.uuid,t1.domain_name,
+       t2.group_id,
+       t2.group_desc,
+       t.req_url,
+       t.req_url_desc,
+       t.condition_type,
+       t.condition_content 
+    	]]>
+	</sql>
+	
+	<sql id="gouAllFrom">
+		<![CDATA[ 
+		  from sys_group_url_rela t, sys_domain_info t1, sys_group_info t2
+           where t.group_uuid = t2.uuid
+             and t2.domain_uuid = t1.uuid
+             and t2.uuid=#'$groupuuid$'#
+    	]]>
+	</sql>
+	
 	<sql id="domaininfo">
 		<![CDATA[ 
 		select * from SYS_DOMAIN_INFO t 

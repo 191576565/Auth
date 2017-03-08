@@ -13,6 +13,17 @@ public class DpgMgmt extends Model<DpgMgmt> {
 	 */
 	public static final String sqlId_DM_selectfrom = "tianjian.dpgmgmt.pageAllFrom";
 	
+	
+	/*
+	 * 权限数据子页面select语句
+	 */
+	public static final String sqlId_DG_select = "tianjian.dpgmgmt.gouAllSelect";
+	/*
+	 * 权限数据子页面from语句
+	 */
+	public static final String sqlId_DG_selectfrom = "tianjian.dpgmgmt.gouAllFrom";
+	
+	
 	/*
 	 * 域信息获取语句
 	 */

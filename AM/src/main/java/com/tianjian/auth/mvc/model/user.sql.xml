@@ -174,15 +174,10 @@ GROUP BY  t2.UUID,T2.DOMAIN_ID,T2.DOMAIN_NAME ,T3.UUID ,T3.ORG_UNIT_ID,T3.ORG_UN
     	]]>
 	</sql>
 	
-	
-	
-	
-	
-	
 	<!-- 外部系统用户登出 -->
 	<sql id="uloginw">
 		<![CDATA[ 
-		    update ${table} set  loggin_status='1'  where ${column} = ? and ${session} = ?
+		    update ${table} set  loggin_status='1'  where ${column} = ? 
     	]]>
 	</sql>
 	
