@@ -16,7 +16,6 @@
         <link rel="stylesheet" href="${ctxPath }/static/css/font-awesome.css">
         <link rel="stylesheet" href="${ctxPath }/static/css/bootstrap.min.css">
         <link rel="stylesheet" href="${ctxPath }/static/css/templatemo-style.css">
-        <script src="${ctxPath }/static/js/plugins/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -73,7 +72,6 @@
         <script src="${ctxPath }/static/js/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="${ctxPath }/static/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="${ctxPath }/static/js/plugins/min/plugins.min.js"></script>
-        <script src="${ctxPath }/static/js/plugins/min/main.min.js"></script>
 
         <!-- Preloader -->
         <script type="text/javascript">
