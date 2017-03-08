@@ -73,7 +73,7 @@ public class ApiJsonController extends Controller {
 	 */
     public void rpmParam() {
     	//允许跨域操作
-    	getResponse().addHeader("Access-Control-Allow-Origin", "*");
+    	//getResponse().addHeader("Access-Control-Allow-Origin", "*");
     	String username=getPara("userid") ;
     	String usersession=getPara("sid") ;
     	String flag=getPara("login") ;

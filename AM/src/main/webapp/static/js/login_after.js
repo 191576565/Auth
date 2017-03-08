@@ -1,0 +1,3 @@
+$.getJSON("getMenu",function(data){
+
+})

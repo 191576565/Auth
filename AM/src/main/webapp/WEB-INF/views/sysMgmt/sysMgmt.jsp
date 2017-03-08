@@ -65,7 +65,8 @@
 					<label>域编码</label> 
 					<input name="scopeCode" 
 						   type="text" 
-						   class="form-control"
+						   class="form-control notNull"
+						   nullName="域编码"
 						   id="ipt_code" 
 						   placeholder="2~32位数字/字母"
 						   ng-model="userdata.scopeCode"
@@ -88,7 +89,8 @@
 					<label>域名称</label> 
 					<input name="scopeName" 
 						   type="text" 
-						   class="form-control"
+						   class="form-control notNull"
+						   nullName="域名称"
 						   id="ipt_name" 
 						   placeholder="请输入域名称"
 						   ng-model="userdata.scopeName"
@@ -106,7 +108,8 @@
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeName.$valid }">
 					<label>排序</label> 
 					<input name="scopeSort"
-						   class="form-control"
+						   class="form-control notNull"
+						   nullName="排序"
 						   id="ipt_sort" 
 						   type="number"
 						   ng-model="userdata.scopeSort"
@@ -124,7 +127,7 @@
 					<textarea id="ipt_memo" class="form-control" name="memo" rows="" cols=""></textarea>
 				</div>
 				<div class="form-group">
-					<button id="sub" class="btn btn-primary">保存</button>
+					<button id="sub" class="btn btn-primary" onsubmit="return check()">保存</button>
 				</div>
  			</form>
  		</div>

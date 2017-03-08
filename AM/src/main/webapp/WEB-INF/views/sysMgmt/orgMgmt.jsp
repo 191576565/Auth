@@ -60,7 +60,7 @@
  		</table>
  		<div class="wrapper" id="org_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
  			<form id="form" name="signUpForm" ng-submit="submitForm()" action="" method="post">
- 				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
+ 				<div class="form-group">
  					<input id="uuid" 
  						name="UUID" 
  						type="hidden" 
@@ -68,6 +68,10 @@
 				</div>
 				<div class="form-group">
 					<label>域名称</label> 
+					<input id="domain_uuid" 
+ 						name="domainUUID" 
+ 						type="hidden" 
+ 					/>
 					<input name="scopeName" 
 						   type="text"
 						   disabled="true"
@@ -78,7 +82,8 @@
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.orgCode.$valid }">
 					<label>机构编码</label> 
 					<input name="orgCode"
-						   class="form-control"
+						   class="form-control notNull"
+						   nullName="机构编码"
 						   id="org_code"
 						   ng-model="userdata.orgCode"
 						   ng-minlength="1"
@@ -99,7 +104,8 @@
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.orgName.$valid }">
 					<label>机构名称</label> 
 					<input name="orgName"
-						   class="form-control"
+						   class="form-control notNull"
+						   nullName="机构名称"
 						   id="org_name"
 						   ng-model="userdata.orgName"
 						   ng-minlength="1"

@@ -4,7 +4,8 @@
 	<display-name>AM</display-name>
 	<welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
-    <filter>
+  	</welcome-file-list>
+  	<filter>
 		<filter-name>CORS</filter-name>
 		<filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
 		<init-param>
@@ -32,7 +33,6 @@
 		<filter-name>CORS</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-  	</welcome-file-list>
 	<filter>
 		<filter-name>jfinalFilter</filter-name>
 		<filter-class>com.jfinal.core.JFinalFilter</filter-class>

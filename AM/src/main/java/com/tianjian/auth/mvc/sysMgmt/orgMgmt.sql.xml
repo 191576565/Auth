@@ -7,15 +7,17 @@
        			   T3.ORG_UNIT_ID,
                    T3.ORG_UNIT_DESC,
                    T3.ORG_UP_UUID,
+                   T3.DOMAIN_UUID,
+                   T3.MEMO,
                    T5.ORG_UNIT_DESC AS UP_ORG_UNIT_DESC,
                    T2.DOMAIN_NAME,
                    level
             FROM SYS_ORG_INFO T3
             LEFT JOIN SYS_DOMAIN_INFO T2 ON T3.DOMAIN_UUID=T2.UUID
             LEFT JOIN SYS_ORG_INFO T5 ON T5.UUID=T3.ORG_UP_UUID
-            	START WITH T3.ORG_UP_UUID=(select T4.UUID FROM SYS_ORG_INFO T4 WHERE T4.ORG_UP_UUID='#') 
-                	AND T3.DOMAIN_UUID=?
-              	CONNECT BY PRIOR T3.UUID =T3.ORG_UP_UUID
+            START WITH T3.ORG_UP_UUID=(select T4.UUID FROM SYS_ORG_INFO T4 WHERE T4.ORG_UP_UUID='#') 
+                AND T3.DOMAIN_UUID=?
+            CONNECT BY PRIOR T3.UUID =T3.ORG_UP_UUID
     	]]>
 	</sql>
 	
@@ -40,6 +42,16 @@
         	select t.* from sys_org_info t
   				where t.DOMAIN_UUID=? 
   					and t.ORG_UNIT_ID=?
+    	]]>
+	</sql>
+	
+	<sql id="uptRepeatSelect">
+		<![CDATA[ 
+        	select * from sys_org_info t 
+        		where 1=1 
+        			and t.DOMAIN_UUID = ?
+        			and t.ORG_UNIT_ID=?
+        			and t.uuid <> ?
     	]]>
 	</sql>
 	

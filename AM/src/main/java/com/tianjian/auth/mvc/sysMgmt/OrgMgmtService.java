@@ -29,6 +29,20 @@ public class OrgMgmtService {
 		orgMgmt.save();
 	}
 	
+	//修改域信息
+	public boolean update(OrgMgmt orgMgmt){
+		return orgMgmt.update();
+	}
+	
+	//重复性验证(修改)
+	public boolean uptReapeated(String domainId, String orgId, String uuid){
+		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_uptRepeatSelect);
+		if(OrgMgmt.dao.find(sql,domainId,orgId,uuid).size()>0){
+			return true;
+		}
+		return false;
+	}
+	
 	//删除机构信息
 	public boolean delete(String uuid){
 		String[] subIds = getSubOrg(uuid);

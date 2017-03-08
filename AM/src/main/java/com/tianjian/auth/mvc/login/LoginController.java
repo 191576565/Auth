@@ -10,8 +10,10 @@ import javax.servlet.http.Cookie;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseSessionController;
 import com.tianjian.auth.mvc.handler.GlobalInterceptor;
+import com.tianjian.auth.mvc.menu.MenuService;
 import com.tianjian.auth.mvc.model.UserService;
 
 /** 
@@ -23,6 +25,7 @@ import com.tianjian.auth.mvc.model.UserService;
 
 public class LoginController extends Controller {
 	private LoginService loginservice=new LoginService();
+	private MenuService menuService = new MenuService();
 	private static final Log log = Log.getLog(LoginController.class);
 	public void index() {
 		log.info("welcome to login");
@@ -57,6 +60,9 @@ public class LoginController extends Controller {
 			} catch (ServletException | IOException e) {
 				e.printStackTrace();
 			}
+			String sessionId = (String) getRequest().getSession().getAttribute("usersessionid");
+			setAttr("userid", username);
+			setAttr("sid", sessionId);
 			//用户交互数据命令生成
 				render("login_after.jsp");
 		}else{
@@ -64,26 +70,9 @@ public class LoginController extends Controller {
 		}
 	}
 	
-//	 /** 
-//		 *@Function 用户注销            
-//		 *@Declare   实现用户注销功能：用户Session解绑，用户权限交互-退出
-//		 *@Author    谢涛
-//		 *@Return    String  sessionId
-//		 */
-//	public  void userexit() {
-//		//int i=1;
-//		BaseSessionController SessionController=new BaseSessionController();
-//		// TODO Auto-generated method stub
-//		try {
-//			SessionController.ubindUSessionId(getRequest(), getResponse());
-//		} catch (ServletException | IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-
-
-
-
-//		}
-//		render("login_v2.html");
-//	}
+	//获取用户拥有的菜单项
+	public void getMenu(){
+		renderJson(menuService.getScopeInfo(((Record)getSessionAttr("userinfo")).getStr("user_id")));
+	}
+	
 }

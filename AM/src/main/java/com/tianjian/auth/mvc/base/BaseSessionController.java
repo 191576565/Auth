@@ -59,8 +59,6 @@ public class BaseSessionController extends Controller{
 		        String sessionId = (String) session.getAttribute("usersessionid");
 		        Record userinfo=BaseService.getUserInfo(username);
 		        session.setAttribute("userinfo", userinfo);
-		        //  Object test1=session.getAttribute("userinfo");
-		        //  String test0=((Record) test1).getStr("domain_uuid");
 			   log.info("用户信息绑定：user："+username+"  sessionId :["+sessionId+"]");
 		    }
 	 
