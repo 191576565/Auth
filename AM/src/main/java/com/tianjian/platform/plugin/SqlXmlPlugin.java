@@ -288,7 +288,7 @@ public class SqlXmlPlugin implements IPlugin {
 	 * @param doc
 	 */
 	private static void parseDoc(boolean isInit, String fileName, Document doc) {
-		System.out.println("parese+++++++++++++++++++++++++++++++++");
+		
 		Element root = doc.getRootElement();
 		String namespace = root.attributeValue("namespace");
 		if (StrKit.isBlank(namespace)) {

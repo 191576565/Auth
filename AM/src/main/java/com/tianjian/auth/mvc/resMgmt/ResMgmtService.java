@@ -45,7 +45,7 @@ public class ResMgmtService {
 	 */
 	public List<Record> getMenuPage(String sqlId, String userid, String resupuuid, String restype) {
 		String sql = ToolGetSql.getSql(sqlId);
-		List<Record> menupage = Db.find(sql, userid, resupuuid, restype);
+		List<Record> menupage = Db.find(sql, userid, resupuuid);//, restype);
 		return menupage;
 	}
 }
