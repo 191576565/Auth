@@ -55,7 +55,7 @@ public class ApiJsonController extends Controller {
         	}else{
              	renderJson("code:200;msg:api请求数据异常","data:"+user);}
     	}else{
-    		int ulogin=ApiJsonService.ulogin(username,usersession);
+    		int ulogin=ApiJsonService.ulogin(username);
     	   log.info("api请求"+ulogin+"个用户退出成功，用户["+username+"],["+usersession+"]！");
     		redirect("/ulogin");
     	}
@@ -96,7 +96,7 @@ public class ApiJsonController extends Controller {
         	}else{
         		data=user;}
     	}else{
-    		int ulogin=ApiJsonService.ulogin(username,usersession);
+    		int ulogin=ApiJsonService.ulogin(username);
     	    log.info("api请求"+ulogin+"个用户退出成功，用户["+username+"],["+usersession+"]！");
     	    code="101";
     	    msg ="api请求"+ulogin+"个用户退出成功，用户["+username+"],["+usersession+"]！";

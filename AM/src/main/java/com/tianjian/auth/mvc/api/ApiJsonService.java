@@ -68,16 +68,15 @@ public class ApiJsonService extends BaseService{
 	 * @exception 用户注销-外部系统请求
 	 * @author      谢 涛
 	 * */
-	public static int  ulogin(String username, String sessionid){
+	public static int  ulogin(String username){
 		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + username);
 		int updates='0';
 		if(user == null){
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", User.user_id);
-			param.put("session", User.user_sid);
 			param.put("table", User.table_name);
 			String sql = getSqlByBeetl("model.user.uloginw", param);
-            updates=Db.update(sql, username,sessionid);
+            updates=Db.update(sql, username);
 		}
 		return updates;
 	}
