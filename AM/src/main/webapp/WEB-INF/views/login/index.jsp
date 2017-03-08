@@ -28,7 +28,7 @@
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="nav-close"><i class="fa fa-times-circle"></i>
             </div>
-            <div class="sidebar-collapse">
+            <div class="sidebar-collapse" id="1">
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
@@ -42,6 +42,7 @@
                             </a>
                         </div>
                     </li>
+                    <!--  
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">基础配置</span>
                     </li>
@@ -84,7 +85,7 @@
                         	<span class="nav-label">系统日志</span>
                         	<span class="nav-label"></span></a>
                     </li>
-
+				-->
                 </ul>
             </div>
         </nav>
@@ -141,7 +142,7 @@
 
     <!-- 自定义js -->
     <script src="static/js/hAdmin.js?v=4.1.0"></script>
-    <script type="text/javascript" src="static/js/index.js"></script>
+    <script type="text/javascript" src="${ctxPath}/static/js/index.js"></script>
 
     <!-- 第三方插件 -->
     <script src="static/js/plugins/pace/pace.min.js"></script>

@@ -10,6 +10,6 @@ $.getJSON("getMenu",function(content){
 				resUrl = value;
 			}
 		})
-		$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb"><a href="'+resUrl+'"><img src="'+resIcon+'"></a></div></div>');
+		$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb"><a href="'+resUrl+'?userid=${userid }&sid=${sid }"><img src="'+resIcon+'"></a></div></div>');
 	})
 })
