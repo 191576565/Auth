@@ -12,7 +12,7 @@ function initdpgMgmtlist(){
  	search:  false,
  	showColumns: false, //是否显示所有的列
  	showRefresh: false, //是否显示刷新按钮
- 	clickToSelect: true, //是否启用点击选中行
+ 	clickToSelect: false, //是否启用点击选中行
  	uniqueId: "uuid", //每一行的唯一标识，一般为主键列
  	showToggle:false, //是否显示详细视图和列表视图的切换按钮
  	cardView: false, //是否显示详细视图
@@ -57,19 +57,50 @@ function initdpgMgmtlist(){
     	field: 'opt',
     	title: '操 作',
         width:'400',
+        events: operateEvents,
     	formatter:function(value,row,index){
-    		var e = '<a href="#" class="btn btn-info update edit">编辑</a> ';
-    		var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.id +'\')">删除</a> ';
-    		var f = '<a href="#" class="btn btn-primary create">数据权限</a> ';
+    		var e = '<button type="button" class="edit  btn-info update edit">编辑</button> ';
+    		var d = '<button type="button" class="delete  btn-danger delete">删除</button> ';
+    		var f = '<button type="button" class="access  btn-primary access">数据权限</button> ';
     		return e+d+f;
     	}
     },]
 });
    $('#table').bootstrapTable('hideColumn', 'uuid');
+//   $('#table').bootstrapTable('hideColumn', 'domain_id');
 };
 
-//yeqc
-//layer弹出自定义div
+window.operateEvents = {
+      'click .edit': function (e, value, row, index) {
+    	  var selRow = $("#table").bootstrapTable('getData');
+          $('#groupid').val(selRow[index].group_id);
+          $('#groupname').val(selRow[index].group_desc);
+          $('#guserid').val(selRow[index].users);
+          removeAll();
+          $.ajax({  
+                   url: "dpgMgmt/domaininfo",
+                   dataType: "json",  
+                   success: function (data) {  
+                        $.each(data, function (index, domaininfo) {
+                            $("#domaininfo").append("<option value='"+ domaininfo.domain_id +"'>" + domaininfo.domain_id + "</option>");
+                            });  
+                          },  
+                   error: function (XMLHttpRequest, textStatus, errorThrown) {  
+            	        layer.tips("抱歉，数据掉沟里了！", '#domaininfo');
+                    }  
+             });
+            $("#domaininfo").val(selRow[index].domain_id); 
+    	    sys_edit(selRow[index].uuid);
+      },
+      'click .delete': function (e, value, row, index) {
+    	  var selRow = $("#table").bootstrapTable('getData');
+          del(selRow[index].uuid);
+      },
+      'click .access': function (e, value, row, index) {
+                alert(index);            
+      }
+      };
+
 
 function sys_add(){
 	layer.open({
@@ -87,21 +118,22 @@ function sys_add(){
 	});
 };
 
-$('#table').on('click', '.edit', function() {
+function sys_edit(uuid){
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
 		skin: 'layui-layer-molv',
 		title: '权限组信息',
-		area: ['500px', '300px'],
+		area: ['400px', '310px'],
 		btn: ['保存']
         ,yes: function(index){
-        	updateform();
+        	updateform(uuid);
+        	location.reload();
             layer.closeAll(index);
         }
 	});
 	return false;
-});
+}
 
 $('#sys_add_div #form').on('click', '#tree', function() {
 	$.getJSON("js/demo/8_tree.json",function(result){
@@ -142,17 +174,13 @@ function removeAll(){
 	obj.options.length=0; 
 	} 
 
-function formValidate(){ 
-	$("#form").validate({
-	  });
-	}; 
-
 $('#groupid').blur(function() {
 		var domainid=$('#domaininfo').val();
 		var groupid=$('#groupid').val();
 		if(domainid==null || domainid=='Value'){
 			layer.tips("请先选择所属域!", '#domaininfo');
-			 return false;
+			$('#groupid').val("");
+		    return false;
 		 }
 		if(groupid==null || groupid==''){
 			layer.tips("组 id 不能为空!", '#groupid');
@@ -167,6 +195,7 @@ $('#groupid').blur(function() {
 	        		layer.tips("恭喜,组id可以使用！", '#groupid');
 	        	}else{
 	        		layer.tips("啊哦,组id已被占用,请重新输入！", '#groupid');
+	        		$('#groupid').val("");
 	        	}  	
 	        },  
 	        error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -295,8 +324,24 @@ function saveform(){
     }); 
 }
 
-function updateform(){
-	
+function updateform(uuid){
+	$.ajax({  
+        url: "dpgMgmt/updateform",
+        dataType: "json",
+        type:'post',
+        contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+        data:{uuid:uuid,domaininfo:$('#domaininfo').val(),groupid:$('#groupid').val(),groupname:$('#groupname').val(),guserid:$('#guserid').val()},
+        success: function (data) {
+        	if(data.status=='success'){
+        		layer.msg("数据保存成功");
+        	}else{
+        		layer.msg("数据保存失败");
+        	}  	
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+             	layer.msg("数据被城管抓走了！");
+        }  
+    }); 
 }
 
 $('#btn_add').on('click', function() {
@@ -324,6 +369,23 @@ $('#btn_add').on('click', function() {
      layer.tips("要先选择删除对象哦！", '#btn_add');
     }
 });
+
+function del(uuid){
+	$.ajax({  
+        url: "dpgMgmt/delform",
+        dataType: "json", 
+        data:{'uuid':uuid.toString()},
+        success: function (data) {
+            	if(data.status=='success'){
+            	    	layer.msg("数据删除成功,本次共删除"+data.delcount+"行数据！");
+            	   }else{
+            	    	layer.msg("数据删除失败咯！");}  	
+                   },
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+         	layer.msg("对象被城管抓走了！");}  
+           }); 
+    location.reload();
+}
 
 
 

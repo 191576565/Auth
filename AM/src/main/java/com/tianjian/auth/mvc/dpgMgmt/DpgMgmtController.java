@@ -1,7 +1,5 @@
 package com.tianjian.auth.mvc.dpgMgmt;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -160,6 +158,31 @@ public class DpgMgmtController extends Controller {
 					insertflag.put("status", "success");
 					insertflag.put("delcount", dpgmgmt);
 				 }else{
+					insertflag.put("status", "error");}
+				renderJson(insertflag);
+			}
+			
+			 /** 
+			 *@Function 更新权限组信息       
+			 *@Declare   更新权限组信息
+			 *@Author    谢涛
+			 *@Return    String  void
+			 */
+			public void updateform() {
+				Map<String, Object> mpara = new HashMap<String, Object>();
+				Map<String,Object> insertflag = new HashMap<String,Object>();
+				Object userinfo = getSessionAttr("userinfo");	
+				mpara.put("domainid", getPara("domaininfo"));
+				mpara.put("uuid", getPara("uuid"));
+				mpara.put("groupid", getPara("groupid"));
+				mpara.put("groupname", getPara("groupname"));
+				mpara.put("guserid", getPara("guserid"));
+				mpara.put("opuser", ((Record) userinfo).getStr("user_id"));
+				String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_upgroupinfo, mpara);
+				int dpgmgmt =Db.update(sql);
+				if(dpgmgmt==1){
+					insertflag.put("status", "success");
+				}else{
 					insertflag.put("status", "error");}
 				renderJson(insertflag);
 			}

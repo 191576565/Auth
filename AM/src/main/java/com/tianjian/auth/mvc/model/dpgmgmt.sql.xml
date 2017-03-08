@@ -63,6 +63,23 @@
     	]]>
 	</sql>
 	
+	<!-- 更新权限组信息 -->
+	<sql id="upgroupinfo">
+		<![CDATA[ 
+		update sys_group_info t
+        set t.group_id      =#'$groupid$'#,
+          t.group_desc    = #'$groupname$'#,
+          t.modified_date =sysdate,
+          t.modifier      =#'$opuser$'#,
+          t.users         =#'$guserid$'#,
+          t.domain_uuid  =
+          (select max(t.uuid)
+           from sys_domain_info t
+            where t.domain_id = #'$domainid$'#)
+         where t.uuid = #'$uuid$'#
+    	]]>
+	</sql>
+	
 	<!-- 删除权限组信息 -->
 	<sql id="deletegid">
 		<![CDATA[ 

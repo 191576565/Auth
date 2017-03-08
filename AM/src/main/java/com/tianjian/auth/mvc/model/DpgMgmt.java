@@ -24,6 +24,12 @@ public class DpgMgmt extends Model<DpgMgmt> {
 	public static final String sqlId_ingroupinfo = "tianjian.dpgmgmt.ingroupinfo";
 	
 	/*
+	 * 更新权限组数据 GROUP_INFO
+	 */
+	public static final String sqlId_upgroupinfo = "tianjian.dpgmgmt.upgroupinfo";
+	
+	
+	/*
 	 * 验证权限组id是否存在 GROUP_INFO
 	 */
 	public static final String sqlid_verifygid = "tianjian.dpgmgmt.verifygid";
