@@ -5,7 +5,7 @@
 		<![CDATA[ 
         	select uuid as id,res_up_uuid as pid,trim(res_name) name from SYS_RESOURCE_INFO 
 			start with res_up_uuid ='#' connect by prior uuid =res_up_uuid
-			order res_id asc
+			order by res_id asc
     	]]>
 	</sql>
 	<sql id="allresdata">
@@ -89,12 +89,13 @@ with TMP_ROLES as (
                 TU.RES_CSS ,               
                 TU.RES_COLOR,              
                 TU.RES_ICON,               
-                TU.RES_TYPE                
+                TU.RES_TYPE,
+                level lvl               
         FROM TMP_USERS  TU
         LEFT JOIN TMP_ROLES   TR ON  TU.USER_ID=TR.USER_ID
         START WITH RES_UP_UUID=?
         CONNECT  BY PRIOR RES_UUID=RES_UP_UUID)
-SELECT * FROM TMP_DATA WHERE RES_TYPE=? order by RES_ID 
+SELECT * FROM TMP_DATA where lvl<=2 order by RES_ID 
   <% } %>
     	]]>
 	</sql>
