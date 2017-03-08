@@ -43,6 +43,7 @@
             <div id="2" class="container">
                 <div id="3" class="row">
                     <div id="4" class="blog-masonry masonry-true">
+                    <!--
                         <div class="post-masonry col-md-4 col-sm-6">
                             <div class="post-thumb">
                                 <a href="auth"><img src="${ctxPath }/static/img/auth.png" alt=""></a>
@@ -58,6 +59,7 @@
                                 <a href="#"><img src="${ctxPath }/static/img/ftp.png" alt=""></a>
                             </div>
                         </div> 
+                    -->
                     </div>
                 </div>
             </div>
