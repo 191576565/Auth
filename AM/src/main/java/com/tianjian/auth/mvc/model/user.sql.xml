@@ -76,7 +76,7 @@
 	<!-- 不规则查询：查询Sessionid和用户信息权限  1 用户权限 -->
 	<sql id="rpmselect1">
 		<![CDATA[ 
-  with tmp_roles as (
+with tmp_roles as (
               select t0.user_id                                                           
               ,listagg(t1.role_id  , ',') within group(order by t1.role_id)  as role_id  
               ,listagg(t1.role_name, ',') within group(order by t1.role_id)  as role_name
@@ -89,7 +89,8 @@
                      ,t3.org_unit_id                                                     
                      ,t3.org_unit_desc                                                   
                      ,t0.user_id                                                         
-                     ,t0.user_name                                                       
+                     ,t0.user_name             
+                     ,t4.uuid             as res_uuid                                           
                      ,t4.res_id           as res_id      
                      ,t4.res_name         as res_name   
                      ,t4.res_url          as res_url
@@ -107,7 +108,7 @@
               left join sys_resource_info t5  on t4.res_up_uuid=t5.uuid
              where   ${column} = ? and ${session} = ? and loggin_status = '0'
               group  by
-               t2.domain_id     ,t2.domain_name     ,t3.org_unit_id   ,t3.org_unit_desc ,t0.user_id  ,t0.user_name ,t4.res_id
+               t2.domain_id     ,t2.domain_name     ,t3.org_unit_id   ,t3.org_unit_desc ,t0.user_id  ,t0.user_name ,t4.uuid    ,t4.res_id
                ,t4.res_name     ,t4.res_url   ,nvl(t5.res_id,'#') ,t4.res_class   ,t4.res_color     ,t4.res_icon   ,t4.res_type ,t4.sort_id        )
      select tu.domain_id,            
             tu.domain_name,         
@@ -125,20 +126,9 @@
             tu.res_color,           
             tu.res_icon,            
             tu.res_type             
-
-
-
-
-
-
-
-
-
-
-
-
     from tmp_users  tu 
     left join tmp_roles   tr on  tu.user_id=tr.user_id
+     start with res_uuid =domain_id   connect by prior res_id =res_up_id
     order by  tu.res_sort_id
     	]]>
 	</sql>
@@ -150,13 +140,7 @@
              ,ORG_UNIT_ID                                                                   
              ,ORG_UNIT_DESC                                                                 
              ,USER_ID                                                                       
-             ,USER_NAME                                                                     
-
-
-
-
-
-
+             ,USER_NAME 
              ,GROUP_ID
              ,REQ_URL
              ,CONDITION_TYPE
