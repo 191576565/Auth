@@ -26,6 +26,8 @@ function zTreeOnDblClickSimple(event, treeId, treeNode) {
 	
 	var index = layer.index; //获取当前弹层的索引号
 	layer.close(index); //关闭当前弹层
+	
+	$('#form').valid();
 };
 
 function zTreeOnClickSimple(event, treeId, treeNode) {
@@ -36,8 +38,11 @@ function zTreeOnClickSimple(event, treeId, treeNode) {
 };
 
 
+var valid;
 var rs;
 $(function(){
+	valid=$('#form').validate();
+	
 	initTable();
 	
 	$('.tree').click(function(){
@@ -98,6 +103,10 @@ $('#res_add').on('click', function() {
 	$('#form')[0].reset();
 	$('#uuid').val('');
 	
+	//去除上次表单验证的样式
+	valid.resetForm();
+	$('input').removeClass('error');
+	
 	var index=$('td input:checked').parent().parent().attr('index');
 	if(index){
 		var info=rs[index];
@@ -111,7 +120,7 @@ $('#res_add').on('click', function() {
 		content : $('#sys_add_div'),
 		// skin: 'layui-layer-molv',
 		title : '资源信息-新增',
-		area : [ '640px', '400px' ],
+		area :  '640px', 
 		maxmin: true
 	});
 });
@@ -128,21 +137,35 @@ function update(obj){
 		content : $('#sys_add_div'),
 		// skin: 'layui-layer-molv',
 		title : '资源信息-编辑',
-		area : [ '640px', '400px' ],
+		area :  '640px',
 		maxmin: true
 	});
 }
 
 $('.save').click(function(){
-	var data=$('#form').serialize();
-	if($('#uuid').val()==''){ //add
-		$.post('resMgmt/save?'+data, function(d){
-			
-		});
-	}else { //update
-		$.post('resMgmt/put?'+data, function(d){
-			
-		});
+	if($('#form').valid()){
+		var data=$('#form').serialize();
+		if($('#uuid').val()==''){ //add
+			$.post('resMgmt/save?'+data, function(d){
+				layer.close(layer.index);
+				if(d){
+					layer.msg('资源新增成功');
+					initTable();
+				}else {
+					layer.msg('资源新增失败');
+				}
+			});
+		}else { //update
+			$.post('resMgmt/put?'+data, function(d){
+				layer.close(layer.index);
+				if(d){
+					layer.msg('资源更新成功');
+					initTable();
+				}else {
+					layer.msg('资源更新失败');
+				}
+			});
+		}
 	}
 });
 
@@ -166,4 +189,9 @@ $('#res_del').click(function(){
 	}, function(){
 		layer.close(layer.index);
 	});
+});
+
+$("input").blur(function(){
+//	$(this).valid();
+	valid.element( this );
 });
