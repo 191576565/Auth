@@ -27,7 +27,7 @@ function zTreeOnDblClickSimple(event, treeId, treeNode) {
 	var index = layer.index; //获取当前弹层的索引号
 	layer.close(index); //关闭当前弹层
 	
-	$('#form').valid();
+	//$('#form').valid();
 };
 
 function zTreeOnClickSimple(event, treeId, treeNode) {
@@ -147,7 +147,6 @@ $('.save').click(function(){
 		var data=$('#form').serialize();
 		if($('#uuid').val()==''){ //add
 			$.post('resMgmt/save?'+data, function(d){
-				layer.close(layer.index);
 				if(d){
 					layer.msg('资源新增成功');
 					initTable();
@@ -157,7 +156,6 @@ $('.save').click(function(){
 			});
 		}else { //update
 			$.post('resMgmt/put?'+data, function(d){
-				layer.close(layer.index);
 				if(d){
 					layer.msg('资源更新成功');
 					initTable();
@@ -167,6 +165,7 @@ $('.save').click(function(){
 			});
 		}
 	}
+	layer.closeAll();
 });
 
 $('#res_del').click(function(){
