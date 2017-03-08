@@ -278,7 +278,9 @@ function getDisabled(){
 function saveform(){
 	$.ajax({  
         url: "dpgMgmt/saveform",
-        dataType: "json",  
+        dataType: "json",
+        type:'post',
+        contentType:'application/x-www-form-urlencoded; charset=UTF-8',
         data:{domaininfo:$('#domaininfo').val(),groupid:$('#groupid').val(),groupname:$('#groupname').val(),guserid:$('#guserid').val()},
         success: function (data) {
         	if(data.status=='success'){
