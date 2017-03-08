@@ -50,7 +50,12 @@
                         </div>
                         <div class="post-masonry col-md-4 col-sm-6">
                             <div class="post-thumb">
-                                <a href="http://172.168.173.3:9090/index.html?userid=${userid }&sid=${sid }"><img src="${ctxPath }/static/img/rpm.png" alt=""></a>
+                                <a href="http://172.168.171.241:8080/app-rpm/index.html?userid=${userid }&sid=${sid }"><img src="${ctxPath }/static/img/rpm.png" alt=""></a>
+                            </div>
+                        </div>
+                           <div class="post-masonry col-md-4 col-sm-6">
+                            <div class="post-thumb">
+                                <a href="http://172.168.173.3:9090/index.html?userid=${userid }&sid=${sid }"><img src="${ctxPath }/static/img/static/img/rpm_test.png" alt=""></a>
                             </div>
                         </div>
                         <div class="post-masonry col-md-4 col-sm-6">
