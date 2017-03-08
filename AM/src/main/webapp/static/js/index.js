@@ -2,7 +2,8 @@ $(function(){
 	$.getJSON("auth/getMenu",function(content){
 		var resName = '';
 		var resId = '';
-		var resUpId = ''
+		var resUpId = '';
+		var resUrl = '';
 		$.each(content, function(index, data){//遍历出第一层
 			$.each(data, function(key, value){
 				if(key=="res_uuid"){
@@ -32,8 +33,13 @@ $(function(){
 				}
 			})
 			$.each(data, function(key, value){
+				if(key=="res_url"){
+					resUrl = value;
+				}
+			})
+			$.each(data, function(key, value){
 				if(key=="lvl" && value==2){
-					$('#wrapper #1 #side-menu #'+resUpId).after('<li><a class="J_menuItem" href="sysMgmt"><i class="fa fa-desktop"></i><span class="nav-label">'+resName+'</span></a></li>');
+					$('#wrapper #1 #side-menu #'+resUpId).after('<li><a class="J_menuItem" href="'+resUrl+'"><i class="fa fa-desktop"></i><span class="nav-label">'+resName+'</span></a></li>');
 				}
 			})
 		})
