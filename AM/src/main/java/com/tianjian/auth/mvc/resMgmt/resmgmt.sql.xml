@@ -5,7 +5,7 @@
 		<![CDATA[ 
         	select uuid as id,res_up_uuid as pid,trim(res_name) name from SYS_RESOURCE_INFO 
 			start with res_up_uuid ='#' connect by prior uuid =res_up_uuid
-			order res_id asc
+			order by res_id asc
     	]]>
 	</sql>
 	<sql id="allresdata">

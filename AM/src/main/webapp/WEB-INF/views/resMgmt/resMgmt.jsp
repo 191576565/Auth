@@ -22,6 +22,9 @@
     		.table-striped>tbody>tr:nth-of-type(odd), .table-bordered > thead > tr > th, .table-bordered > thead > tr > td{
     			background-color: white;
     		}
+    		.input-group-btn{
+    			vertical-align: top;
+    		}
     	</style>
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
@@ -76,7 +79,7 @@
  			<ul id="res" class="ztree"></ul>
  		</div>
  		<div id="sys_add_div"  class="row" style="display:none;width:100%;margin:0px;">
- 			<form id="form" ></br>
+ 			</br>
 				<%-- <input id="uuid" 
  						name="res.uuid" 
  						type="hidden" 
@@ -99,62 +102,65 @@
 				<label>资源图标</label> <input id="res_icon" name="res.res_icon" type="text" placeholder="请输入角色名" ></br></br>
 				<label>排序编号</label> <input id="sort_id" name="res.sort_id" type="text" placeholder="请输入角色名" ></br></br>
 				<button id="resave" type="submit" class="btn btn-info ladda-button save" >保存</button> --%>
-                        <input type="hidden" name="res.uuid" id="uuid">
+                        
                         <div class="col-sm-12">
-                                <div class="form-group col-sm-6">
+                        		<form id="form" >
+                        		<input type="hidden" name="res.uuid" id="uuid">
+                                <div class="form-group col-sm-12">
                                     <label>资源编码</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_id" id="res_id">
+                                    <input type="text" placeholder="" class="form-control" name="res.res_id" id="res_id"required>
                                 </div>
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-12">
                                     <label>资源名称</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_name" id="res_name">
+                                    <input type="text" placeholder="" class="form-control" name="res.res_name" id="res_name"required>
                                 </div>
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-12">
                                     <label>上级资源</label>
                                     <div class="input-group">
                                     	<input type="hidden" name="res.res_up_uuid" id="res_up_uuid">
-	                                   <input type="text" class="form-control" name="res_up_name" id="up_res_name"> 
+	                                   <input type="text" class="form-control" name="res_up_name" id="up_res_name" required readonly="readonly"> 
 	                                   <span class="input-group-btn"> 
 	                                   		<button type="button" class="btn tree"><i class="fa fa-tree"></i></button> 
 	                                   </span>
 	                               </div>
                                 </div>
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-12">
                                     <label>资源URL</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_url" id="res_url">
+                                    <input type="text" placeholder="" class="form-control" name="res.res_url" id="res_url" required>
                                 </div>
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-12">
                                     <label>资源类型</label>
-                                    <select class="form-control" name="res.res_type" style="border-radius: 2px;" id="res_type">
+                                    <select class="form-control" name="res.res_type" style="border-radius: 2px;" id="res_type" required>
                                     	<option value="0">主菜单</option>
                                         <option value="1">子菜单</option>
                                         <option value="2">按钮</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-12">
                                     <label>资源样式</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_class" id="res_class">
+                                    <input type="text" placeholder="" class="form-control" name="res.res_class" id="res_class" required>
                                 </div>
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-12">
                                     <label>资源背景色</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_color" id="res_color">
+                                    <input type="text" placeholder="" class="form-control" name="res.res_color" id="res_color" required>
                                 </div>
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-12">
                                     <label>资源图标</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_icon" id="res_icon">
+                                    <input type="text" placeholder="" class="form-control" name="res.res_icon" id="res_icon" required>
                                 </div>
-                                <button class="btn btn-primary pull-right m-t-n-xs save"  style="margin-right:15px;">保存</button>
+                                </form>
+                                <button class="btn btn-primary pull-right m-t-n-xs save"  style="margin-right:15px;margin-bottom: 10px;">保存</button>
                         </div>
- 			</form>
+ 			
  		</div>
- 		<div id="sys_del_div" class="form-group" style="display:none;">
+ 		<!-- <div id="sys_del_div" class="form-group" style="display:none;">
  			<form id="del_form" action="" method="post">
  				<input type="hidden" id="deluuid" name="uuid"/>
 					确定要删除该系统信息吗？
 				</br>
 				<button id="resdelete" type="submit" class="btn btn-danger delete">确定删除</button>
 			</form>
-		</div>
+		</div> -->
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/jquery-form.js"></script>
@@ -178,6 +184,10 @@
     
     <!-- ztree -->
     <script src="${ctxPath }/static/js/plugins/zTree/jquery.ztree.all.min.js"></script>
+    
+    <!-- validate -->
+    <script src="${ctxPath }/static/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="${ctxPath }/static/js/plugins/validate/messages_zh.min.js"></script>
     <!--
     	作者：ys
     	时间：2017-03-06
