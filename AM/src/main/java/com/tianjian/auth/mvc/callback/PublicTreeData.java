@@ -22,7 +22,7 @@ public class GetTreeData implements ICallback {
 
 	@Override
 	public  String call(Connection conn) throws SQLException {
-		CallableStatement proc =conn.prepareCall("{ call proc_org_tree(?,?) }");
+		CallableStatement proc =conn.prepareCall("{ call proc_orguser_tree(?,?) }");
 		proc.setString(1, domain_id);
 		proc.registerOutParameter(2, Types.VARCHAR);
 		proc.execute();

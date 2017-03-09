@@ -175,6 +175,10 @@ $('#res_del').click(function(){
 		return;
 	}
 	var index=$('td input:checked').parent().parent().attr('index');
+	if(index=='0'){
+		layer.msg('顶层资源不能删除');
+		return ;
+	}
 	layer.confirm('是否删除该资源及其子资源？', {
 	  btn: ['删除','取消'] //按钮
 	}, function(){
