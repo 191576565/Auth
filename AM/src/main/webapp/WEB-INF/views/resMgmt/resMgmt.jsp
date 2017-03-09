@@ -113,11 +113,11 @@
                         		<input type="hidden" name="res.uuid" id="uuid">
                                 <div class="form-group col-sm-12">
                                     <label>资源编码</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_id" id="res_id"required>
+                                    <input type="text" placeholder="" class="form-control" name="res.res_id" id="res_id" required>
                                 </div>
                                 <div class="form-group col-sm-12">
                                     <label>资源名称</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_name" id="res_name"required>
+                                    <input type="text" placeholder="" class="form-control" name="res.res_name" id="res_name" required>
                                 </div>
                                 <div class="form-group col-sm-12">
                                     <label>上级资源</label>
@@ -136,6 +136,7 @@
                                 <div class="form-group col-sm-12">
                                     <label>资源类型</label>
                                     <select class="form-control" name="res.res_type" style="border-radius: 2px;" id="res_type" required>
+                                    	<option value="">请选择资源类型</option>
                                     	<option value="0">主菜单</option>
                                         <option value="1">子菜单</option>
                                         <option value="2">按钮</option>
