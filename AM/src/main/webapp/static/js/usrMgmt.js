@@ -108,7 +108,7 @@ $("#role").load(
 	        nSelectedText:'项被选中',
 	        includeSelectAllOption:true,
 	        selectAllText:'全选/取消全选',
-	        allSelectedText:'已选中所有渠道',
+	        allSelectedText:'已选中所有角色',
 			nonSelectedText: '请选择角色',
 			buttonWidth: '913px',
 			enableCaseInsensitiveFiltering: true

@@ -1,6 +1,9 @@
 package com.tianjian.auth.mvc.usrMgmt;
 
 import java.sql.Timestamp;
+
+import org.apache.commons.lang.StringUtils;
+
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.tianjian.auth.mvc.base.BaseSecurityMD5;
@@ -57,6 +60,7 @@ public class UsrMgmtController extends Controller {
 		//获取form中的信息
 		String userId = getPara("scopeCode");
 		String userName = getPara("usrName");
+		String roles = StringUtils.join(getParaValues("role"),",");
 		//获取密码并用MD5加密
 		String userPwd = BaseSecurityMD5.encodeMD5Hex(getPara("pwd"));
 		String userPhone = getPara("phone");
@@ -70,7 +74,7 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("domain_uuid", domainUUID);
 		usrMgmt.set("user_id", userId);
 		usrMgmt.set("org_uuid", orgUUID);
-		usrMgmt.set("roles", null);
+		usrMgmt.set("roles", roles);
 		usrMgmt.set("user_pwd", userPwd);
 		usrMgmt.set("user_name", userName);
 		usrMgmt.set("user_email", userEmail);
@@ -84,6 +88,7 @@ public class UsrMgmtController extends Controller {
 		//获取form中的信息
 		String uuid = getPara("uuid");
 		String userName = getPara("usrName");
+		String roles = StringUtils.join(getParaValues("role"),",");
 		//获取密码并用MD5加密
 		String userPwd = BaseSecurityMD5.encodeMD5Hex(getPara("pwd"));
 		String userPhone = getPara("phone");
@@ -94,11 +99,12 @@ public class UsrMgmtController extends Controller {
 		//将session中的userid作为创建者
 		String sessionUserId = getSessionAttr("user_id");
 		
+		
 		//将获得的字段与表字段对应
 		usrMgmt.set("uuid", uuid);
 		usrMgmt.set("domain_uuid", domainUUID);
 		usrMgmt.set("org_uuid", orgUUID);
-		usrMgmt.set("roles", null);
+		usrMgmt.set("roles", roles);
 		usrMgmt.set("user_pwd", userPwd);
 		usrMgmt.set("user_name", userName);
 		usrMgmt.set("user_email", userEmail);
