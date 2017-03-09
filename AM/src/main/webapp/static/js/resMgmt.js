@@ -28,6 +28,7 @@ function zTreeOnDblClickSimple(event, treeId, treeNode) {
 	layer.close(index); //关闭当前弹层
 	
 	//$('#form').valid();
+	valid.element( '#up_res_name' );
 };
 
 function zTreeOnClickSimple(event, treeId, treeNode) {
@@ -71,13 +72,13 @@ function initTable() {
 				if(e.lvl===1){
 					temp='<tr class="treegrid-'+e.uuid+'" lvl="'+e.lvl+'" index="'+index+'"><td style="width:40px;text-align:center;"><input type="radio" name="radio"/></td><td id="'+e.res_id+'">'+e.res_id+'</td><td>'+e.res_name+'</td><td>'
 							+e.up_res_name+'</td><td>'+e.res_url+'</td><td>'+e.res_type_name+'</td><td>'+e.res_class+'</td><td>'+e.res_color+'</td><td>'+e.res_icon
-							+'</td><td>-</td></tr>';
+							+'</td><td>-</td><td>-</td></tr>';
 					temp=temp.replace(/null/g, '-');
 					$('#table tbody').append(temp);
 				}else {
 					temp='<tr class="treegrid-'+e.uuid+' treegrid-parent-'+e.res_up_uuid+'" lvl="'+e.lvl+'" index="'+index+'"><td style="width:40px;text-align:center;"><input type="radio" name="radio"/></td><td id="'+e.res_id+'">'+e.res_id+'</td><td>'+e.res_name+'</td><td>'
 							+e.up_res_name+'</td><td>'+e.res_url+'</td><td>'+e.res_type_name+'</td><td>'+e.res_class+'</td><td>'+e.res_color+'</td><td>'+e.res_icon
-							+'</td><td><button type="button" class="btn btn-info btn-sm" onclick="update(this)"  index="'+index+'">编辑</button></td></tr>';
+							+'</td><td>'+e.sort_id+'</td><td><button type="button" class="btn btn-info btn-sm" onclick="update(this)"  index="'+index+'">编辑</button></td></tr>';
 					temp=	temp.replace(/null/g, '-');
 					$('#table tbody tr.treegrid-'+e.res_up_uuid).after(temp);
 				}
@@ -120,7 +121,7 @@ $('#res_add').on('click', function() {
 		content : $('#sys_add_div'),
 		// skin: 'layui-layer-molv',
 		title : '资源信息-新增',
-		area :  '640px', 
+		area : [ '640px', '640px' ], 
 		maxmin: true
 	});
 });
@@ -137,7 +138,7 @@ function update(obj){
 		content : $('#sys_add_div'),
 		// skin: 'layui-layer-molv',
 		title : '资源信息-编辑',
-		area :  '640px',
+		area : [ '640px', '640px' ], 
 		maxmin: true
 	});
 }
@@ -164,8 +165,8 @@ $('.save').click(function(){
 				}
 			});
 		}
+		layer.closeAll();
 	}
-	layer.closeAll();
 });
 
 $('#res_del').click(function(){

@@ -25,6 +25,10 @@
     		.input-group-btn{
     			vertical-align: top;
     		}
+    		select {
+			     -webkit-appearance: none;
+			     -webkit-border-radius: 0px;
+			}
     	</style>
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
@@ -68,6 +72,7 @@
 					<th>资源样式</th>
 					<th>资源背景色</th>
 					<th>资源图标</th>
+					<th>资源排序</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -147,6 +152,10 @@
                                 <div class="form-group col-sm-12">
                                     <label>资源图标</label>
                                     <input type="text" placeholder="" class="form-control" name="res.res_icon" id="res_icon" required>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label>资源排序</label>
+                                    <input type="text" placeholder="" class="form-control digits" name="res.sort_id" id="sort_id" required maxlength="4">
                                 </div>
                                 </form>
                                 <button class="btn btn-primary pull-right m-t-n-xs save"  style="margin-right:15px;margin-bottom: 10px;">保存</button>
