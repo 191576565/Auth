@@ -47,11 +47,10 @@
 				</ol>
 			</div>
 		</div>
-		<br/><br/><br/><br/>
  		<div class="row">
  			<div class="col-xs-4">
- 				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
- 				<button id="btn_del" type="button" class="btn btn-danger delete">删除</button>
+ 				<button id="sys_add" class="btn btn-primary create">新增</button>
+ 				<button id="btn_del" class="btn btn-danger delete">删除</button>
  			</div>
  		</div>
  		<table id="table"></table>
