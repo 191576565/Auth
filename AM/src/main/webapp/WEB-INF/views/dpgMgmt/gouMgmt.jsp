@@ -114,6 +114,7 @@
      <script type="text/javascript"> 
      <!-- 初始化界面数据 -->
      $(document).ready(function() {
+    	    dumainid="";
     	    groupuuid="${groupuuid}";
     	    initdpgMgmtlist(groupuuid);
     	});

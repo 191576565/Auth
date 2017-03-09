@@ -12,6 +12,7 @@ import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.callback.PrivateTreeData;
+import com.tianjian.auth.mvc.callback.PublicTreeData;
 import com.tianjian.auth.mvc.dpgMgmt.DpgMgmtController;
 import com.tianjian.auth.mvc.model.DpgMgmt;
 import com.tianjian.platform.pjson.PageJson;
@@ -180,6 +181,27 @@ public class DpgMgmtController extends Controller {
 				 TreeData.put("data", jsondata);
 				 renderJson(TreeData);
 			}
+			
+			/** 
+			 *@throws   SQLException 
+		    * @Function 获取机构树    [标准]   
+			 *@Declare   根据用户的权限获取域下面的机构数据
+			 *@Author    谢涛
+			 *@Return    String  void
+			 */
+			public void getTreeData() throws SQLException {
+				PublicTreeData  callback=new PublicTreeData();
+				Map<String,Object> TreeData = new HashMap<String,Object>();
+				callback.domain_id=getPara("domainid");
+				callback.dictcode=getPara("dictcode");
+				 String jsondata=(String) Db.execute(callback);
+				 if(jsondata.length()>0){
+					 TreeData.put("status", "success");
+				 }else{
+					 TreeData.put("status", "error");}
+				 TreeData.put("data", jsondata);
+				 renderJson(TreeData);
+			}
 
 			 /** 
 			 *@Function 保存权限组信息       
@@ -197,6 +219,31 @@ public class DpgMgmtController extends Controller {
 				mpara.put("guserid", getPara("guserid"));
 				mpara.put("opuser", ((Record) userinfo).getStr("user_id"));
 				String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_ingroupinfo, mpara);
+				int dpgmgmt =Db.update(sql);
+				if(dpgmgmt==1){
+					insertflag.put("status", "success");
+				}else{
+					insertflag.put("status", "error");}
+				renderJson(insertflag);
+			}
+			
+			 /** 
+			 *@Function 保存权限组信息       
+			 *@Declare   保存权限组信息
+			 *@Author    谢涛
+			 *@Return    String  void
+			 */
+			public void saveurlform() {
+				Map<String, Object> mpara = new HashMap<String, Object>();
+				Map<String,Object> insertflag = new HashMap<String,Object>();
+				Object userinfo = getSessionAttr("userinfo");	
+				mpara.put("groupuuid", getPara("groupuuid"));
+				mpara.put("urlid", getPara("urlid"));
+				mpara.put("urlname", getPara("urlname"));
+				mpara.put("dictcode", getPara("dictcode"));
+				mpara.put("dictinfo", getPara("dictinfo"));
+				mpara.put("opuser", ((Record) userinfo).getStr("user_id"));
+				String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_ingroup_url, mpara);
 				int dpgmgmt =Db.update(sql);
 				if(dpgmgmt==1){
 					insertflag.put("status", "success");
@@ -232,6 +279,32 @@ public class DpgMgmtController extends Controller {
 			}
 			
 			 /** 
+			 *@Function 删除权限组url数据      
+			 *@Declare   删除权限组数据   ,支持批量删除
+			 *@Author    谢涛
+			 *@Return    String  void
+			 */
+			public void delurlform() {
+				Map<String,Object> insertflag = new HashMap<String,Object>();
+				Map<String, Object> mpara = new HashMap<String, Object>();
+				StringBuffer  InString = new StringBuffer(); 
+				String[] duid = getPara("uuid").split(","); 
+				for (int i = 0; i < duid.length; i++) { 
+					InString.append("'").append(duid[i]).append("'").append(","); 
+					} 
+			    String para=InString.toString().substring(1, InString.length() - 2);
+				mpara.put("para", para.replaceAll("\\s*", ""));
+		        String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlid_deleteurl, mpara);
+			    int dpgmgmt =Db.update(sql);
+              	if(dpgmgmt>0){
+					insertflag.put("status", "success");
+					insertflag.put("delcount", dpgmgmt);
+				 }else{
+					insertflag.put("status", "error");}
+				renderJson(insertflag);
+			}
+			
+			 /** 
 			 *@Function 更新权限组信息       
 			 *@Declare   更新权限组信息
 			 *@Author    谢涛
@@ -248,6 +321,31 @@ public class DpgMgmtController extends Controller {
 				mpara.put("guserid", getPara("guserid"));
 				mpara.put("opuser", ((Record) userinfo).getStr("user_id"));
 				String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_upgroupinfo, mpara);
+				int dpgmgmt =Db.update(sql);
+				if(dpgmgmt==1){
+					insertflag.put("status", "success");
+				}else{
+					insertflag.put("status", "error");}
+				renderJson(insertflag);
+			}
+			
+			/** 
+			 *@Function 更新权限组url信息       
+			 *@Declare   更新权限组url信息  
+			 *@Author    谢涛
+			 *@Return    String  void
+			 */
+			public void updateurlform() {
+				Map<String, Object> mpara = new HashMap<String, Object>();
+				Map<String,Object> insertflag = new HashMap<String,Object>();
+				Object userinfo = getSessionAttr("userinfo");	
+				mpara.put("uuid", getPara("uuid"));
+				mpara.put("urlid", getPara("urlid"));
+				mpara.put("urlname", getPara("urlname"));
+				mpara.put("dictcode", getPara("dictcode"));
+				mpara.put("dictinfo", getPara("dictinfo"));
+				mpara.put("opuser", ((Record) userinfo).getStr("user_id"));
+				String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_upgroupurl, mpara);
 				int dpgmgmt =Db.update(sql);
 				if(dpgmgmt==1){
 					insertflag.put("status", "success");
