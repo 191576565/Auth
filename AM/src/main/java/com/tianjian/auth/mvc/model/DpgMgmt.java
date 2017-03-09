@@ -13,7 +13,6 @@ public class DpgMgmt extends Model<DpgMgmt> {
 	 */
 	public static final String sqlId_DM_selectfrom = "tianjian.dpgmgmt.pageAllFrom";
 	
-	
 	/*
 	 * 权限数据子页面select语句
 	 */
@@ -23,11 +22,15 @@ public class DpgMgmt extends Model<DpgMgmt> {
 	 */
 	public static final String sqlId_DG_selectfrom = "tianjian.dpgmgmt.gouAllFrom";
 	
-	
 	/*
 	 * 域信息获取语句
 	 */
 	public static final String sqlId_domaininfo = "tianjian.dpgmgmt.domaininfo";
+	
+	/*
+	 * 条件dictcode获取语句
+	 */
+	public static final String sqlId_dictcode = "tianjian.dpgmgmt.dictcode";
 	
 	/*
 	 * 保存权限组数据 GROUP_INFO
@@ -39,11 +42,16 @@ public class DpgMgmt extends Model<DpgMgmt> {
 	 */
 	public static final String sqlId_upgroupinfo = "tianjian.dpgmgmt.upgroupinfo";
 	
-	
 	/*
 	 * 验证权限组id是否存在 GROUP_INFO
 	 */
 	public static final String sqlid_verifygid = "tianjian.dpgmgmt.verifygid";
+	
+	/*
+	 * 验证权限组URL是否存在 
+	 */
+	public static final String sqlid_verifyurl = "tianjian.dpgmgmt.verifyurl";
+	
 	
 	/*
 	 * 删除权限组  DELETE GROUP_INFO

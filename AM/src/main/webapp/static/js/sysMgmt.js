@@ -90,7 +90,6 @@ $('#btn_del').on('click', function(){
 	if(sendData == ''){
 		alert('请选择一条数据');
 	}else{
-//		alert(sendData);
 		$.ajax({
 	        type: "POST",
 	        url: "sysMgmt/deleteMore",
@@ -99,8 +98,8 @@ $('#btn_del').on('click', function(){
 	        dataType: 'json',
 	        success: function (message) {
 	            if (message > 0) {
-	                alert("删除成功！");
-	                window.location.href = "sysMgmt";
+	            	layer.closeAll();
+					$('#table').bootstrapTable('refresh', {silent: true});
 	            }
 	        },
 	        error: function (message) {
@@ -160,7 +159,8 @@ $('#btn_beSure').click(function() {
 				alert('删除失败');
 				return;
 			}else{
-				window.location.href='sysMgmt';
+				layer.closeAll();
+				$('#table').bootstrapTable('refresh', {silent: true});
 			}
 		});
 		return false;
@@ -201,7 +201,8 @@ $('#sub').click(function(){
 					area: ['200px', '200px'],
 				});
 			}else{
-				window.location.href='sysMgmt';
+				layer.closeAll();
+				$('#table').bootstrapTable('refresh', {silent: true});
 			}
 		});
 		return false;//阻止表单默认提交
@@ -210,20 +211,19 @@ $('#sub').click(function(){
 	//修改操作
 	if($("#sys_add_div #form #uuid").val() != ''){
 		$("#form").attr("action", "sysMgmt/update");
-//		$('#form').submit(function(){
-			$('#form').ajaxSubmit(function(resultJson){
-				if(JSON.stringify(resultJson) === "true"){
-					window.location.href='sysMgmt';
-					return;
+		$('#form').ajaxSubmit(function(resultJson){
+			if(JSON.stringify(resultJson) === "true"){
+				layer.closeAll();
+				$('#table').bootstrapTable('refresh', {silent: true});
+				return;
+			}
+			$.each(resultJson, function(i, item){
+				if(item === "repeat"){
+					alert('域编码/域名重复，修改失败!');
 				}
-				$.each(resultJson, function(i, item){
-					if(item === "repeat"){
-						alert('域编码/域名重复，修改失败!');
-					}
-				})
-			});
-			return false;//阻止表单默认提交
-//		});
+			})
+		});
+		return false;//阻止表单默认提交
 	}
 	
 	

@@ -190,12 +190,10 @@ $('#groupid').blur(function() {
 		}else{
 	        $.ajax({  
 	        url: "dpgMgmt/verifygroupid",
-	        data:{domaininfo:$('#domaininfo').val(),groupid:$('#groupid').val()},
+	        data:{domaininfo:domainid,groupid:groupid},
 	        dataType: "json",  
 	        success: function (data) {
-	        	if(data.status=='success'){
-	        		layer.tips("恭喜,组id可以使用！", '#groupid');
-	        	}else{
+	        	if(data.status!='success'){
 	        		layer.tips("啊哦,组id已被占用,请重新输入！", '#groupid');
 	        		$('#groupid').val("");
 	        	}  	
@@ -234,7 +232,7 @@ $('#guserid').on('click', function() {
 
 function getTreeData() {
      $.ajax({ 
-		    url: "dpgMgmt/getTreeData",
+		    url: "dpgMgmt/getTreeOrguserData",
 	        dataType: "json",
 	        data:{domainid:$('#domaininfo').val()},
 	        success: function (data) {
