@@ -1,9 +1,11 @@
 package com.tianjian.auth.mvc.rolMgmt;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.rolMgmt.RolMgmtController;
 import com.tianjian.auth.mvc.sysMgmt.SysMgmt;
 import com.tianjian.auth.mvc.sysMgmt.SysMgmtService;
@@ -12,46 +14,46 @@ import com.tianjian.auth.mvc.sysMgmt.SysMgmtService;
  * 角色管理
  * --控制器，控制业务流转
  * @author caoguopeng
- * 
- * **/
+*/
 public class RolMgmtController extends Controller {
 	
 	private static final Log log = Log.getLog(RolMgmtController.class);
 	
 	RoleMgmtService mgmtService = new RoleMgmtService();
 	SysMgmtService sysMgmtService = new SysMgmtService();
+	
 	public void index() {
 		log.info("jump to sysMgmt");
-		
 		List<SysMgmt> sysList = sysMgmtService.getData();
-		
 		setAttr("domainlist", sysList);
-		
 		render("rolMgmt.jsp");
-
 	}
 	
+	/*
+	 * rolMgmt/showRol
+	 * 查询角色表数据
+	 */
 	public void showRol() {
 		renderJson(mgmtService.defaultSelect());
 	}
 	
 	//新增角色
 	public void save() {
-		
-		
 		RoleMgmt mgmt = new RoleMgmt();
 		mgmt.set("DOMAIN_UUID", getPara("domain_uuid"));
 		mgmt.set("ROLE_ID", getPara("role_id"));
 		mgmt.set("ROLE_NAME", getPara("role_name"));
-		mgmt.set("CREATOR", "caoguopeng");
-		
+		mgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
+		mgmt.set("CREATOR", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
+		mgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
+		mgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
+		mgmt.set("MEMO", getPara("memo"));
 		if(!mgmtService.notRepeated(getPara("role_id"), getPara("role_name"))) {
 			renderJson(false);
 			return;
 		}
 		mgmtService.save(mgmt);
 		renderJson(true);
-		
 	}
 	
 	//修改角色

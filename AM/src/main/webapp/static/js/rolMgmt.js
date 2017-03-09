@@ -6,7 +6,7 @@ $('#table').bootstrapTable({
  	pagination: true,
  	sortable: false,
  	pageNumber:1,
- 	pageSize: 5,
+ 	pageSize: 10,
  	search: true,
  	pageList: [10, 25, 50, 100],
    	clickToSelect: false,
@@ -40,8 +40,8 @@ function onFun(id){
 		layer.open({
 			type: 1,
 			content: (result),
-//			title: '系统信息',
-			area: ['768px', '432px'],
+			title: false,
+			maxmin: true, //开启最大化最小化按钮
 		});
 	});
 	

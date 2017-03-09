@@ -113,6 +113,10 @@
 					</select>
 				</div>
 				<div class="form-group">
+					<lable>备注</lable>
+					<textarea id="ipt_memo" class="form-control" name="memo"></textarea>
+				</div>
+				<div class="form-group">
 					<button class="btn btn-info ladda-button save" id="sub">保存</button>
 				</div>
  			</form>
