@@ -74,11 +74,8 @@
 						   ng-pattern="/^[A-Za-z0-9]+$/"
 						   required
  					/>
- 					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.role_id.$valid"></p>
-					<p class="error" ng-if="signUpForm.role_id.$error.required &&
-						signUpForm.role_id.$touched">
-					不可为空</p>
+ 					<p id="" class="fa fa-check input_result success"
+						ng-if="signUpForm.role_id.$valid && userdata.role_id!=''"></p>
 					<p class="error" ng-if="(signUpForm.role_id.$error.minlength ||
 						signUpForm.role_id.$error.maxlength) && 
 						signUpForm.role_id.$touched">
@@ -99,9 +96,6 @@
 					/>
 					<p class="fa fa-check input_result success"
 						ng-if="signUpForm.role_name.$valid"></p>
-					<p class="error" ng-if="signUpForm.role_name.$error.required &&
-						signUpForm.role_name.$touched">
-					不可为空</p>
 				</div>
 				<div class="form-group">
 					<label>所属域</label> 

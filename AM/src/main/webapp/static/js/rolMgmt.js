@@ -26,7 +26,7 @@ $('#table').bootstrapTable({
     	field: 'uuid',
     	title: '操 作',
     	formatter:function(value,row,index){
-	    	var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.role_id +'\',\''+ row.role_name +'\',\''+ row.domain_uuid +'\')">编辑</a> ';
+	    	var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.role_id +'\',\''+ row.role_name +'\',\''+ row.domain_uuid +'\',\''+ row.memo +'\')">编辑</a> ';
 	    	var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
 //	    	var f = '<a href="funList/showFunList?uuid='+row.uuid+'" class="btn btn-success">功能</a> ';
 	    	var f = '<a href="#" onclick="onFun(\''+ row.uuid +'\')" class="btn btn-success">功能</a> ';
@@ -44,15 +44,18 @@ function onFun(id){
 			maxmin: true, //开启最大化最小化按钮
 		});
 	});
-	
 }
 
 //layer弹出自定义div__新增
 $('#sys_add').on('click', function() {
-	var $role_uuid = $("#sys_add_div #form #uuid").val('');
-	var $role_id = $("#sys_add_div #form #role_id").val('');
-	var $role_name = $("#sys_add_div #form #role_name").val('');
-	var $domain_uuid=$("#sys_add_div #form #domain_uuid").val('');
+//	$("#sys_add_div #form #uuid").val('');
+//	$("#sys_add_div #form #role_id").val('');
+//	$("#sys_add_div #form #role_name").val('');
+//	$("#sys_add_div #form #domain_uuid").val('');
+//	$("#sys_add_div #form #ipt_memo").val('');
+	$("#sys_add_div #form")[0].reset();
+	$('#sys_add_div').html();
+	$('#form p.success').remove();
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
@@ -63,13 +66,13 @@ $('#sys_add').on('click', function() {
 });
 
 //layer弹出自定义div__修改
-function onEdit(id,roleid,rolename,domainuuid) {
+function onEdit(id,roleid,rolename,domainuuid,memo) {
 	//alert(id + ' ' + roleid + ' ' + rolename + ' ' + domainuuid);
-	var $uuid = $("#sys_add_div #form #uuid").val(id);
-	var $role_id = $("#sys_add_div #form #role_id").val(roleid);
-	var $role_name = $("#sys_add_div #form #role_name").val(rolename);
-	var $domain_uuid = $("#sys_add_div #form #domain_uuid").val(domainuuid);
-	
+	$("#sys_add_div #form #uuid").val(id);
+	$("#sys_add_div #form #role_id").val(roleid);
+	$("#sys_add_div #form #role_name").val(rolename);
+	$("#sys_add_div #form #domain_uuid").val(domainuuid);
+	$("#sys_add_div #form #ipt_memo").val(memo);
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
@@ -124,7 +127,8 @@ $('#sub').click(function(){
 				});
 				return;
 			}else{
-				window.location.href='rolMgmt';
+				layer.closeAll();
+				$('#table').bootstrapTable('refresh', {silent: true});
 			}
 		});
 		return false;//阻止表单默认提交
@@ -137,7 +141,6 @@ $('#sub').click(function(){
 			$(this).ajaxSubmit(function(resultJson){
 				if(JSON.stringify(resultJson) == "true"){
 					window.location.href='rolMgmt';
-					//alert('修改成功');
 				}else{
 					alert('修改失败!');
 				}

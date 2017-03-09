@@ -5,7 +5,7 @@
 
 	<sql id="defaultSelect">
 		<![CDATA[ 
-          Select ro.uuid,ro.Domain_uuid,Domain.Domain_Name,Ro.Role_Id,Ro.Role_Name From Sys_Role_Info Ro
+          Select ro.uuid,ro.Domain_uuid,Domain.Domain_Name,Ro.Role_Id,Ro.Role_Name,Ro.MEMO From Sys_Role_Info Ro
   		  Left Join Sys_Domain_Info Domain 
   		  On Ro.Domain_Uuid=Domain.Uuid
   		  ORDER BY Ro.MODIFIED_DATE DESC
