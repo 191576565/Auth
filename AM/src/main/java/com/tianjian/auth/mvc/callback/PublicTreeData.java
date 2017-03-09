@@ -2,7 +2,6 @@ package com.tianjian.auth.mvc.callback;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
@@ -13,16 +12,17 @@ import com.jfinal.plugin.activerecord.ICallback;
  * 存储过程调用
  * @author 董华健  dongcb678@163.com
  */
-public class GetTreeData implements ICallback {
+public class PublicTreeData implements ICallback {
 
-	@SuppressWarnings("unused")
-	private static final Log log = Log.getLog(GetTreeData.class);
+	private static final Log log = Log.getLog(PublicTreeData.class);
 	
-	public  String domain_id;
+	public  String domain_id; 
+	
+	public  String dictcode;
 
 	@Override
 	public  String call(Connection conn) throws SQLException {
-		CallableStatement proc =conn.prepareCall("{ call proc_orguser_tree(?,?) }");
+		CallableStatement proc =conn.prepareCall( "{call proc_"+dictcode+"_tree(?,?)}");
 		proc.setString(1, domain_id);
 		proc.registerOutParameter(2, Types.VARCHAR);
 		proc.execute();
