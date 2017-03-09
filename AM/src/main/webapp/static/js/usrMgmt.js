@@ -72,7 +72,7 @@ $("#domain").load(
 		//解析json
 		var dataObj=eval("("+data+")");
 		$.each(dataObj,function(idx,item){ 
-			var option = $("<option>").val(item.uuid).text(item.domain_name); 
+			var option = $("<option></option>").val(item.uuid).text(item.domain_name); 
 			$("#domain").append(option); 
 		})
 	}
@@ -85,7 +85,7 @@ $("#organization").load(
 		//解析json，将解析后的json放入orgList中
 		orgList=eval("("+data+")");
 		$.each(orgList,function(idx,item){ 
-			var option = $("<option>").val(item.uuid).text(item.org_unit_desc).attr("data-domain", item.domain_uuid);
+			var option = $("<option></option>").val(item.uuid).text(item.org_unit_desc);
 			$("#organization").append(option); 
 		})
 	}
@@ -97,12 +97,51 @@ $("#role").load(
 	function(data){
 		//解析json，将解析后的json放入orgList中
 		rolList=eval("("+data+")");
-		$.each(rolList,function(idx,item){ 
-			var option = $("<option>").val(item.uuid).text(item.role_name).attr("data-domain", item.domain_uuid);
+		$.each(rolList,function(idx,item){
+			var option = $("<option></option>").val(item.role_uuid).text(item.role_name);
 			$("#role").append(option); 
-		})
+		});
+		$("#role").multiselect({
+	        enableFiltering: true,
+	        filterPlaceholder:'搜索',
+	        nSelectedText:'项被选中',
+	        includeSelectAllOption:true,
+	        selectAllText:'全选/取消全选',
+	        allSelectedText:'已选中所有渠道',
+			nonSelectedText: '请选择角色',
+			buttonWidth: '800px',
+			enableCaseInsensitiveFiltering: true
+		});
 	}
+	
 );
+//根据域选择机构的option的方法
+var changeDomain = function(domainUUID){
+	//清空所有的机构select中的option
+	$("#organization").find("option").remove(); 
+	//将机构的domain_uuid与域selected的域的uuid做比较，相同的插入机构的select中
+	$.each(orgList,function(idx,item){
+		if(item.domain_uuid==domainUUID){
+			var option = $("<option></option>").val(item.uuid).text(item.org_unit_desc);
+			$("#organization").append(option); 
+		}
+	});
+	//清空所有的角色select中的option
+	$("#role").find("option").remove(); 
+	//将角色的domain_uuid与域selected的域的uuid做比较，相同的插入角色的select中
+	$.each(rolList,function(idx,item){
+		if(item.domain_uuid==domainUUID){
+			var option = $("<option></option>").val(item.role_uuid).text(item.role_name);
+			$("#role").append(option); 
+		}
+	});
+	$("#role").multiselect('rebuild');
+};
+//根据域选择机构的option的事件
+$('#domain').change(function(){	
+	var domainUUID = $('#domain').val();
+	changeDomain(domainUUID);
+});
 //新增的onclick事件
 $('#btn_add').on('click', function() {
 	//初始化form
@@ -190,23 +229,6 @@ $('#sub').click(function(){
 			window.location.href='usrMgmt';	
 		});
 	}
-});
-//根据域选择机构的option的方法
-var changeDomain = function(domainUUID){
-	//清空所有的机构select中的option
-	$("#organization").find("option").remove(); 
-	//将机构的domain_uuid与域selected的域的uuid做比较，相同的插入机构的select中
-	$.each(orgList,function(idx,item){
-		if(item.domain_uuid==domainUUID){
-			var option = $("<option>").val(item.uuid).text(item.org_unit_desc).attr("data-domain", item.domain_uuid);
-			$("#organization").append(option); 
-		}
-	});
-};
-//根据域选择机构的option的事件
-$('#domain').change(function(){	
-	var domainUUID = $('#domain').val();
-	changeDomain(domainUUID);
 });
 //批量删除
 $('#btn_del').click(function(){
