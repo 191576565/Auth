@@ -26,6 +26,7 @@ public class ResMgmtController extends Controller {
 		List<ResMgmt> all = reservice.get(ResMgmt.sqlId_res_select);
 		renderJson(all);
 	}
+
 	/*
 	 * 资源的--新增
 	 */
@@ -42,7 +43,7 @@ public class ResMgmtController extends Controller {
 		if (savesucess) {
 			// 写日志
 			setAttr(ConstantLog.log_optype, ConstantLog.res_add);
-			String msg = "新增资源" + "res_id:" + res.getStr(ResMgmt.column_res_id) + "res_name:"
+			String msg = "新增资源" + "资源id:" + res.getStr(ResMgmt.column_res_id) + "  资源名称:"
 					+ res.getStr(ResMgmt.column_res_name);
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
@@ -51,6 +52,7 @@ public class ResMgmtController extends Controller {
 		}
 
 	}
+
 	/*
 	 * 资源的--更改
 	 */
@@ -66,7 +68,7 @@ public class ResMgmtController extends Controller {
 		if (savesucess) {
 			// 写日志
 			setAttr(ConstantLog.log_optype, ConstantLog.res_chg);
-			String msg = "编辑资源" + "res_id:" + res.getStr(ResMgmt.column_res_id) + "res_name:"
+			String msg = "编辑资源" + "资源id:" + res.getStr(ResMgmt.column_res_id) + "  资源名称:"
 					+ res.getStr(ResMgmt.column_res_name);
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
@@ -75,6 +77,7 @@ public class ResMgmtController extends Controller {
 		}
 
 	}
+
 	/*
 	 * 资源的--删除
 	 */
@@ -85,12 +88,16 @@ public class ResMgmtController extends Controller {
 
 		int i = reservice.delmore(ResMgmt.sqlId_res_delete, uuid);
 		if (i >= 1) {
+			// 写日志
+			setAttr(ConstantLog.log_optype, ConstantLog.res_del);
+			String msg = "删除资源,资源头结点UUID为：" +uuid ;
+			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {
 			renderJson(false);
 		}
 	}
-	
+
 	/*
 	 * 资源的--资源树
 	 */
@@ -98,6 +105,7 @@ public class ResMgmtController extends Controller {
 		List<Record> restree = reservice.gettree(ResMgmt.sqlId_res_tree);
 		renderJson(restree);
 	}
+
 	/*
 	 * 根据res_type，res_up_uuid，user_id获取菜单 author： hujian
 	 * 
