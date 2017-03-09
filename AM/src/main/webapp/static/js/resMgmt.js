@@ -70,15 +70,15 @@ function initTable() {
 		if(rs!=null){
 			rs.forEach(function(e, index){
 				if(e.lvl===1){
-					temp='<tr class="treegrid-'+e.uuid+'" lvl="'+e.lvl+'" index="'+index+'"><td style="width:40px;text-align:center;"><input type="radio" name="radio"/></td><td id="'+e.res_id+'">'+e.res_id+'</td><td>'+e.res_name+'</td><td>'
+					temp='<tr class="treegrid-'+e.uuid+'" lvl="'+e.lvl+'" index="'+index+'"><td style="white-space: nowrap;" id="'+e.res_id+'">'+e.res_id+'</td><td>'+e.res_name+'</td><td>'
 							+e.up_res_name+'</td><td>'+e.res_url+'</td><td>'+e.res_type_name+'</td><td>'+e.res_class+'</td><td>'+e.res_color+'</td><td>'+e.res_icon
-							+'</td><td>-</td><td>-</td></tr>';
+							+'</td><td>-</td><td style="white-space: nowrap;">-</td></tr>';
 					temp=temp.replace(/null/g, '-');
 					$('#table tbody').append(temp);
 				}else {
-					temp='<tr class="treegrid-'+e.uuid+' treegrid-parent-'+e.res_up_uuid+'" lvl="'+e.lvl+'" index="'+index+'"><td style="width:40px;text-align:center;"><input type="radio" name="radio"/></td><td id="'+e.res_id+'">'+e.res_id+'</td><td>'+e.res_name+'</td><td>'
+					temp='<tr class="treegrid-'+e.uuid+' treegrid-parent-'+e.res_up_uuid+'" lvl="'+e.lvl+'" index="'+index+'"><td style="white-space: nowrap;" id="'+e.res_id+'">'+e.res_id+'</td><td>'+e.res_name+'</td><td>'
 							+e.up_res_name+'</td><td>'+e.res_url+'</td><td>'+e.res_type_name+'</td><td>'+e.res_class+'</td><td>'+e.res_color+'</td><td>'+e.res_icon
-							+'</td><td>'+e.sort_id+'</td><td><button type="button" class="btn btn-info btn-sm" onclick="update(this)"  index="'+index+'">编辑</button></td></tr>';
+							+'</td><td>'+e.sort_id+'</td><td style="white-space: nowrap;"><button type="button" class="btn btn-info btn-sm" onclick="update(this)"  index="'+index+'">编辑</button>&nbsp;<button type="button" class="btn btn-danger btn-sm" onclick="del(this)"  index="'+index+'">删除</button></td></tr>';
 					temp=	temp.replace(/null/g, '-');
 					$('#table tbody tr.treegrid-'+e.res_up_uuid).after(temp);
 				}
@@ -86,7 +86,7 @@ function initTable() {
 		}
 		
 		$('#table').treegrid({
-			treeColumn:1,
+			treeColumn:0,
             expanderExpandedClass: 'glyphicon glyphicon-minus',
             expanderCollapsedClass: 'glyphicon glyphicon-plus'
         });
@@ -94,9 +94,9 @@ function initTable() {
     		$('#table tbody tr[lvl=3]').treegrid('collapseRecursive');
     		
     		//tr点击单选钮选中
-        $('#table tbody tr').click(function(){
-        		$(this).find('input:radio')[0].checked=true;
-        });
+//        $('#table tbody tr').click(function(){
+//        		$(this).find('input:radio')[0].checked=true;
+//        });
 	});
 }
 
@@ -108,20 +108,20 @@ $('#res_add').on('click', function() {
 	valid.resetForm();
 	$('input').removeClass('error');
 	
-	var index=$('td input:checked').parent().parent().attr('index');
-	if(index){
-		var info=rs[index];
-		
-		$('#res_up_uuid').val(info.uuid);
-		$('#up_res_name').val(info.res_name);
-	}
+//	var index=$('td input:checked').parent().parent().attr('index');
+//	if(index){
+//		var info=rs[index];
+//		
+//		$('#res_up_uuid').val(info.uuid);
+//		$('#up_res_name').val(info.res_name);
+//	}
 	
 	layer.open({
 		type : 1,
 		content : $('#sys_add_div'),
 		// skin: 'layui-layer-molv',
 		title : '资源信息-新增',
-		area : [ '640px', '640px' ], 
+		area :  '640px', 
 		maxmin: true
 	});
 });
@@ -138,7 +138,7 @@ function update(obj){
 		content : $('#sys_add_div'),
 		// skin: 'layui-layer-molv',
 		title : '资源信息-编辑',
-		area : [ '640px', '640px' ], 
+		area :  '640px', 
 		maxmin: true
 	});
 }
@@ -168,6 +168,24 @@ $('.save').click(function(){
 		layer.closeAll();
 	}
 });
+
+function del(obj){
+	var index=$(obj).attr('index');
+	layer.confirm('是否删除该资源及其子资源？', {
+	  btn: ['删除','取消'] //按钮
+	}, function(){
+		$.post('resMgmt/delete?uuid='+rs[index].uuid, function(d){
+			if(d){
+				layer.msg('资源删除成功');
+			}else {
+				layer.msg('资源删除失败');
+			}
+			initTable();
+		});
+	}, function(){
+		layer.close(layer.index);
+	});
+}
 
 $('#res_del').click(function(){
 	if($('td input:checked').length===0){
