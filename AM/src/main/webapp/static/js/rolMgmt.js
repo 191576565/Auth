@@ -48,13 +48,7 @@ function onFun(id){
 
 //layer弹出自定义div__新增
 $('#sys_add').on('click', function() {
-//	$("#sys_add_div #form #uuid").val('');
-//	$("#sys_add_div #form #role_id").val('');
-//	$("#sys_add_div #form #role_name").val('');
-//	$("#sys_add_div #form #domain_uuid").val('');
-//	$("#sys_add_div #form #ipt_memo").val('');
 	$("#sys_add_div #form")[0].reset();
-	$('#sys_add_div').html();
 	$('#form p.success').remove();
 	layer.open({
 		type: 1,

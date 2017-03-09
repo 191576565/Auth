@@ -111,11 +111,7 @@ $('#btn_del').on('click', function(){
 
 //layer弹出自定义div__新增
 $('#sys_add').on('click', function() {
-	$("#sys_add_div #form #uuid").val('');
-	$("#sys_add_div #form #ipt_code").val('');
-	$("#sys_add_div #form #ipt_name").val('');
-	$("#sys_add_div #form #ipt_sort").val('');
-	$("#sys_add_div #form #ipt_memo").val('');
+	$("#sys_add_div #form")[0].reset();
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
