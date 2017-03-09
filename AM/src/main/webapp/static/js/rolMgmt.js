@@ -104,46 +104,30 @@ $('#btn_beSure').click(function() {
 	
 });
 
-
-
-
-
-
-
 angular.module('myApp', [])
 .controller('SignUpController',function($scope){
 	$scope.userdata = {};
 	$scope.submitForm = function(){}
 })
 
-
-
 $('#sub').click(function(){
 	//新增操作
 	if($("#sys_add_div #form #uuid").val() == ''){
 		$("#form").attr("action", "rolMgmt/save");
-		
-		$('#form').submit(function(){
-			
-			$(this).ajaxSubmit(function(resultJson){
-			
-				//回调操作
-				if(JSON.stringify(resultJson) == "false"){
-					layer.open({
-						type: 1,
-						content: '角色编码/角色名重复，新增失败!',
-						title: '新增失败',
-						area: ['200px', '200px'],
-					});
-					return;
-				}else{
-					
-					window.location.href='rolMgmt';
-				}
-			});
-					
-			return false;//阻止表单默认提交
+		$('#form').ajaxSubmit(function(resultJson){
+			if(JSON.stringify(resultJson) == "false"){
+				layer.open({
+					type: 1,
+					content: '角色编码/角色名重复，新增失败!',
+					title: '新增失败',
+					area: ['200px', '200px'],
+				});
+				return;
+			}else{
+				window.location.href='rolMgmt';
+			}
 		});
+		return false;//阻止表单默认提交
 	}
 	
 	//修改操作
@@ -161,8 +145,6 @@ $('#sub').click(function(){
 			return false;//阻止表单默认提交
 		});
 	}
-	
-	
 });
 
 
