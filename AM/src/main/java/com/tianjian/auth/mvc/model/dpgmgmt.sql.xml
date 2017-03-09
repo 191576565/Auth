@@ -56,6 +56,19 @@
     	]]>
 	</sql>
 	
+	<sql id="dictcode">
+		<![CDATA[
+		   select distinct t1.group_desc, t.dict_id,
+		   case when  t.dict_name is null then '解析字典出错！' else  t.dict_name  end dict_name
+               from 
+            ( select  group_desc,domain_uuid,uuid
+                   from sys_group_info 
+                   where uuid = #'$groupuuid$'#) t1
+               left   join  sys_dict_info t 
+               on t.domain_uuid =t1.domain_uuid
+    	]]>
+	</sql>
+	
 	<!-- 保存权限组信息 -->
 	<sql id="ingroupinfo">
 		<![CDATA[ 
@@ -117,6 +130,15 @@
         where t.domain_uuid = t1.uuid
         and t.group_id = #'$groupid$'#
         and t1.domain_id = #'$domainid$'#
+    	]]>
+	</sql>
+	
+	<!-- 验证权限组URL -->
+	<sql id="verifyurl">
+		<![CDATA[ 
+		select t.uuid from SYS_GROUP_URL_RELA t 
+		WHERE t.group_uuid=#'$groupuuid$'# 
+		  AND t.req_url=#'$urlid$'#
     	]]>
 	</sql>
 	

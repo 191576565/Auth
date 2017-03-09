@@ -1,4 +1,4 @@
-function initdpgMgmtlist(groupuuid){
+function initdpgMgmtlist(){
    $('#table').bootstrapTable({
 	url: 'goulist',
 // 	toolbar: '#toolbar', //工具按钮用哪个容器
@@ -117,7 +117,7 @@ function sys_add(){
 		type: 1,
 		content: $('#sys_add_div'),
 		skin: 'layui-layer-molv',
-		title: ' 权限组信息',
+		title: ' URL资源配置',
 		area: ['400px', '310px'],
 		btn: ['保存']
          ,yes: function(index){
@@ -162,50 +162,42 @@ $('#sys_add_div #form').on('click', '#tree', function() {
 
 $('#sys_add').on('click', function() {
 	removeAll();
-	$("#domaininfo").append("<option value='Value'>==请选择域==</option>");
+	$("#dictcode").append("<option value='Value'>请选择条件类型</option>");
     $.ajax({  
-        url: "dpgMgmt/domaininfo",
-        dataType: "json",  
+        url: "getdictcode",
+        dataType: "json",
+        data:{groupuuid:groupuuid},
         success: function (data) {  
-            $.each(data, function (index, domaininfo) {
-            	$("#domaininfo").append("<option value='"+ domaininfo.domain_id +"'>" + domaininfo.domain_id + "</option>");
+            $.each(data, function (index, groupuuid) {
+            	$("#groupid").val(groupuuid.group_desc);
+            	$("#dictcode").append("<option value='"+ groupuuid.dict_id +"'>" + groupuuid.dict_name + "</option>");
             });  
         },  
-         
-        error: function (XMLHttpRequest, textStatus, errorThrown) {  
-        	layer.tips("抱歉，数据掉沟里了！", '#domaininfo');
+        error: function (XMLHttpRequest, textStatus, errorThrown , data) {  
+        	layer.tips("请先配置组所属域的条件类型字典！", '#dictcode');
         }  
     }); 
     sys_add();
 });  
 
 function removeAll(){ 
-	var obj=document.getElementById('domaininfo'); 
+	var obj=document.getElementById('dictcode'); 
 	obj.options.length=0; 
 	} 
 
-$('#groupid').blur(function() {
-		var domainid=$('#domaininfo').val();
-		var groupid=$('#groupid').val();
-		if(domainid==null || domainid=='Value'){
-			layer.tips("请先选择所属域!", '#domaininfo');
-			$('#groupid').val("");
-		    return false;
-		 }
-		if(groupid==null || groupid==''){
-			layer.tips("组 id 不能为空!", '#groupid');
+$('#urlid').blur(function() {
+		var urlid=$('#urlid').val();
+		if(urlid==null || urlid==''){
+			layer.tips("URL 不能为空!", '#urlid');
 			 return false;
 		}else{
 	        $.ajax({  
-	        url: "dpgMgmt/verifygroupid",
-	        data:{domaininfo:$('#domaininfo').val(),groupid:$('#groupid').val()},
+	        url: "verifyurlid",
+	        data:{groupuuid:groupuuid,urlid:urlid},
 	        dataType: "json",  
 	        success: function (data) {
-	        	if(data.status=='success'){
-	        		layer.tips("恭喜,组id可以使用！", '#groupid');
-	        	}else{
-	        		layer.tips("啊哦,组id已被占用,请重新输入！", '#groupid');
-	        		$('#groupid').val("");
+	        	if(data.status!='success'){
+	        		layer.tips("啊哦,组id已被占用,请重新输入！", '#urlid');
 	        	}  	
 	        },  
 	        error: function (XMLHttpRequest, textStatus, errorThrown) {

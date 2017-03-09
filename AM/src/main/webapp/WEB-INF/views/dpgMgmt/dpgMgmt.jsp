@@ -62,7 +62,7 @@
 	 			</select></br></br>
 				<label style="margin-left: 5%;">组编码</label> <input id="groupid"  name="groupid" style="margin-left: 6%;" type="text" placeholder="1~30位字母数字下划线"  ></br></br><!--字母和数字(1~30位) -->
 				<label style="margin-left: 5%;">组名称</label> <input id="groupname"  name="groupname"  style="margin-left: 6%;" type="text" placeholder="请输入组名称" name="CustName">
-				<span id="groupnamemsg" name="groupnamemsg"  style="color:red;margin-left: 2%;"></span></br></br>
+				</br></br>
 				<label style="margin-left: 5%;">所属用户</label> <input id="guserid" name="guserid" style="margin-left: 2%;" type="text" />
 				</br></br></br>
  			</form>

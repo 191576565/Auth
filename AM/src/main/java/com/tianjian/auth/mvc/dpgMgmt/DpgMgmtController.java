@@ -11,7 +11,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.tianjian.auth.mvc.callback.GetTreeData;
+import com.tianjian.auth.mvc.callback.PrivateTreeData;
 import com.tianjian.auth.mvc.dpgMgmt.DpgMgmtController;
 import com.tianjian.auth.mvc.model.DpgMgmt;
 import com.tianjian.platform.pjson.PageJson;
@@ -106,6 +106,21 @@ public class DpgMgmtController extends Controller {
 	}
 	
 	 /** 
+		 *@Function 获取dictcode           
+		 *@Declare   根据组信息获取dictcode
+		 *@Author    谢涛
+		 *@Return    String  void
+		 */
+		public void getdictcode() {
+			Map<String, Object> mpara = new HashMap<String, Object>();
+			mpara.put("groupuuid", getPara("groupuuid"));
+			String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_dictcode, mpara);
+			// 获取数据
+			List<Record> dpgmgmt = (List<Record>) Db.find(sql);
+			renderJson(dpgmgmt);
+		}
+	
+	 /** 
 		 *@Function 校验组id是否存在       
 		 *@Declare   根据用户的权限获取域信息
 		 *@Author    谢涛
@@ -125,15 +140,36 @@ public class DpgMgmtController extends Controller {
 			renderJson(insertflag);
 		}
 		
+		
 		 /** 
-			 *@throws SQLException 
-		 * @Function 获取机构树       
+		 *@Function 校验URL是否存在       
+		 *@Declare   根据用户的权限获取域信息
+		 *@Author    谢涛
+		 *@Return    String  void
+		 */
+		public void verifyurlid() {
+			Map<String, Object> mpara = new HashMap<String, Object>();
+			Map<String,Object> insertflag = new HashMap<String,Object>();
+			mpara.put("groupuuid", getPara("groupuuid"));
+			mpara.put("urlid", getPara("urlid"));
+			String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlid_verifyurl, mpara);
+		    List<Record> dpgmgmt =Db.find(sql);
+			if(dpgmgmt.size()>0){
+				insertflag.put("status", "error");
+			}else{
+				insertflag.put("status", "success");}
+			renderJson(insertflag);
+		}
+		
+		 /** 
+			 *@throws   SQLException 
+		    * @Function 获取机构树    [非标准]   
 			 *@Declare   根据用户的权限获取域下面的机构数据
 			 *@Author    谢涛
 			 *@Return    String  void
 			 */
-			public void getTreeData() throws SQLException {
-				GetTreeData  callback=new GetTreeData();
+			public void getTreeOrguserData() throws SQLException {
+				PrivateTreeData  callback=new PrivateTreeData();
 				Map<String,Object> TreeData = new HashMap<String,Object>();
 				callback.domain_id=getPara("domainid");
 				 String jsondata=(String) Db.execute(callback);

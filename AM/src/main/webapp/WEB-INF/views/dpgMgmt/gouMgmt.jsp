@@ -36,7 +36,7 @@
 						<a href="${ctxPath }/dpgMgmt"/>数据权限组管理</a>
 					</li>
 					<li>
-						<a href="gouMgmt">权限组管理</a>
+						<a href="gouMgmt?groupuuid=${groupuuid}">权限组管理</a>
 					</li>
 				</ol>
 			</div>
@@ -58,14 +58,16 @@
  		</div>
  		<div id="sys_add_div" style="display:none;">
  			<form id="form"></br>
- 		     	<label style="margin-left: 5%;">所属域</label> 
-				<select id="domaininfo" name="domaininfo" nValidate="{required:true}" style="width: 120px; margin-left: 6%;">
-					<option value="default">请选择域</option>
+ 			    <label style="margin-left: 8%;">组编码</label> <input id="groupid"  name="groupid" readonly="true" style="margin-left: 6%;" type="text" placeholder="1~30位字母数字下划线"  ></br></br><!--字母和数字(1~30位) -->
+ 		     	<label style="margin-left: 11.5%;">URL</label> <input id="urlid"  name="urlid"  style="margin-left: 6%;" type="text" placeholder="请输入URL" >
+				</br></br>
+				<label style="margin-left: 5%;">URL描述</label> <input id="urlname"  name="urlname"  style="margin-left: 6%;" type="text" placeholder="请输入URL描述" >
+				</br></br>
+ 		     	<label style="margin-left: 5%;">条件类型</label> 
+				<select id="dictcode" name="dictcode" nValidate="{required:true}" style="width: 120px; margin-left: 6%;">
+					<option value="default">请选择类型</option>
 	 			</select></br></br>
-				<label style="margin-left: 5%;">组编码</label> <input id="groupid"  name="groupid" style="margin-left: 6%;" type="text" placeholder="1~30位字母数字下划线"  ></br></br><!--字母和数字(1~30位) -->
-				<label style="margin-left: 5%;">组名称</label> <input id="groupname"  name="groupname"  style="margin-left: 6%;" type="text" placeholder="请输入组名称" name="CustName">
-				<span id="groupnamemsg" name="groupnamemsg"  style="color:red;margin-left: 2%;"></span></br></br>
-				<label style="margin-left: 5%;">所属用户</label> <input id="guserid" name="guserid" style="margin-left: 2%;" type="text" />
+				<label style="margin-left: 8%;">条件值</label> <input id="dictinfo" name="dictinfo" style="margin-left: 6%;" type="text" />
 				</br></br></br>
  			</form>
  		</div>
@@ -112,7 +114,8 @@
      <script type="text/javascript"> 
      <!-- 初始化界面数据 -->
      $(document).ready(function() {
-    	    initdpgMgmtlist("${groupuuid}");
+    	    groupuuid="${groupuuid}";
+    	    initdpgMgmtlist(groupuuid);
     	});
 	</script>
 	</body>
