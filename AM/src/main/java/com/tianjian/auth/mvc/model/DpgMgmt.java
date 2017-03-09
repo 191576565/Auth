@@ -38,9 +38,20 @@ public class DpgMgmt extends Model<DpgMgmt> {
 	public static final String sqlId_ingroupinfo = "tianjian.dpgmgmt.ingroupinfo";
 	
 	/*
+	 * 保存权限组数据 GROUP_URL
+	 */
+	public static final String sqlId_ingroup_url = "tianjian.dpgmgmt.ingroupurl";
+	
+	/*
 	 * 更新权限组数据 GROUP_INFO
 	 */
 	public static final String sqlId_upgroupinfo = "tianjian.dpgmgmt.upgroupinfo";
+	
+	/*
+	 * 更新权限组数据 GROUP_URL
+	 */
+	public static final String sqlId_upgroupurl = "tianjian.dpgmgmt.upgroupurl";
+	
 	
 	/*
 	 * 验证权限组id是否存在 GROUP_INFO
@@ -57,4 +68,10 @@ public class DpgMgmt extends Model<DpgMgmt> {
 	 * 删除权限组  DELETE GROUP_INFO
 	 */
 	public static final String sqlid_deletegid = "tianjian.dpgmgmt.deletegid";
+	
+
+	/*
+	 * 删除权限组  DELETE GROUP_URL
+	 */
+	public static final String sqlid_deleteurl = "tianjian.dpgmgmt.deleteurl";
 }
