@@ -11,11 +11,13 @@
     	<meta name="keywords" content="">
     	<meta name="description" content="">
 
-    	<link rel="shortcut icon" href="favicon.ico"> <link href="${ctxPath }/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    	<link rel="shortcut icon" href="favicon.ico"> 
+    	<link href="${ctxPath }/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
    		<link href="${ctxPath }/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     	<link href="${ctxPath }/static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/animate.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/style.css?v=4.1.0" rel="stylesheet">
+		<link rel="stylesheet" href="${ctxPath }/static/css/bootstrap-multiselect.css" type="text/css"/>
     	<style type="text/css">
 			.input_result {
 				position: relative;
@@ -147,8 +149,8 @@
 				 	长度应在6~30位之间</p>
 				</div>
 				<div class="form-group">
-					<label>角色</label>
-					<select class="form-control" name="role" id="role"></select>
+					<label>角色</label><br>
+					<select class="form-control" name="role" id="role" multiple></select>
 				</div>
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.phone.$valid }">
 					<label>手机号</label> 
@@ -198,7 +200,6 @@
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="${ctxPath }/static/js/angular.min.js"></script>
     <script src="${ctxPath }/static/js/jquery-form.js"></script>
-
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>
 
@@ -207,6 +208,7 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="${ctxPath }/static/js/bootstrap-multiselect.js"></script>
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
