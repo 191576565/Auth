@@ -48,7 +48,7 @@
  		<div class="row">
  			<div class="col-xs-12">
  				<button id="res_add" type="button" class="btn btn-primary create">新增</button>
- 				<button id="res_del" type="button" class="btn btn-danger delete">删除</button>
+ 				<!-- <button id="res_del" type="button" class="btn btn-danger delete">删除</button> -->
  			</div>
  			<!-- <div class="col-xs-8 text-right">
 				<div class="form-inline">
@@ -63,7 +63,7 @@
  		<table id="table"  class="table table-striped table-bordered table-hover">
  			<thead>
 				<tr>
-					<td style='width:40px;'></td>
+					<!-- <td style='width:40px;'></td> -->
 					<th>资源编码</th>
 					<th>资源名称</th>
 					<th>上级资源编码</th>
@@ -111,55 +111,68 @@
                         <div class="col-sm-12">
                         		<form id="form" >
                         		<input type="hidden" name="res.uuid" id="uuid">
-                                <div class="form-group col-sm-12">
-                                    <label>资源编码</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_id" id="res_id" required>
+                                <div class="col-sm-12">
+                                	<div class="form-group col-sm-6">
+	                                    <label>资源编码</label>
+	                                    <input type="text" placeholder="" class="form-control" name="res.res_id" id="res_id" required>
+	                                </div>
+	                                <div class="form-group col-sm-6">
+	                                    <label>资源名称</label>
+	                                    <input type="text" placeholder="" class="form-control" name="res.res_name" id="res_name" required>
+	                                </div>
                                 </div>
-                                <div class="form-group col-sm-12">
-                                    <label>资源名称</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_name" id="res_name" required>
+                                <div class="col-sm-12">
+                                	<div class="form-group col-sm-6">
+	                                    <label>上级资源</label>
+	                                    <div class="input-group">
+	                                    	<input type="hidden" name="res.res_up_uuid" id="res_up_uuid">
+		                                   <input type="text" class="form-control" name="res_up_name" id="up_res_name" required readonly="readonly"> 
+		                                   <span class="input-group-btn"> 
+		                                   		<button type="button" class="btn tree"><i class="fa fa-tree"></i></button> 
+		                                   </span>
+		                               </div>
+	                                </div>
+	                                <div class="form-group col-sm-6">
+	                                    <label>资源URL</label>
+	                                    <input type="text" placeholder="" class="form-control" name="res.res_url" id="res_url" required>
+	                                </div>
                                 </div>
-                                <div class="form-group col-sm-12">
-                                    <label>上级资源</label>
-                                    <div class="input-group">
-                                    	<input type="hidden" name="res.res_up_uuid" id="res_up_uuid">
-	                                   <input type="text" class="form-control" name="res_up_name" id="up_res_name" required readonly="readonly"> 
-	                                   <span class="input-group-btn"> 
-	                                   		<button type="button" class="btn tree"><i class="fa fa-tree"></i></button> 
-	                                   </span>
-	                               </div>
+                                <div class="col-sm-12">
+                                	<div class="form-group col-sm-6">
+	                                    <label>资源类型</label>
+	                                    <select class="form-control" name="res.res_type" style="border-radius: 2px;" id="res_type" required>
+	                                    	<option value="">请选择资源类型</option>
+	                                    	<option value="0">主菜单</option>
+	                                        <option value="1">子菜单</option>
+	                                        <option value="2">按钮</option>
+	                                    </select>
+	                                </div>
+	                                <div class="form-group col-sm-6">
+	                                    <label>资源样式</label>
+	                                    <input type="text" placeholder="" class="form-control" name="res.res_class" id="res_class" required>
+	                                </div>
                                 </div>
-                                <div class="form-group col-sm-12">
-                                    <label>资源URL</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_url" id="res_url" required>
+                                <div class="col-sm-12">
+                                	<div class="form-group col-sm-6">
+	                                    <label>资源背景色</label>
+	                                    <input type="text" placeholder="" class="form-control" name="res.res_color" id="res_color" required>
+	                                </div>
+	                                <div class="form-group col-sm-6">
+	                                    <label>资源图标</label>
+	                                    <input type="text" placeholder="" class="form-control" name="res.res_icon" id="res_icon" required>
+	                                </div>
                                 </div>
-                                <div class="form-group col-sm-12">
-                                    <label>资源类型</label>
-                                    <select class="form-control" name="res.res_type" style="border-radius: 2px;" id="res_type" required>
-                                    	<option value="">请选择资源类型</option>
-                                    	<option value="0">主菜单</option>
-                                        <option value="1">子菜单</option>
-                                        <option value="2">按钮</option>
-                                    </select>
+                                <div class="col-sm-12">
+                                	<div class="form-group col-sm-6">
+	                                    <label>资源排序</label>
+	                                    <input type="text" placeholder="" class="form-control digits" name="res.sort_id" id="sort_id" required maxlength="4">
+	                                </div>
                                 </div>
-                                <div class="form-group col-sm-12">
-                                    <label>资源样式</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_class" id="res_class" required>
-                                </div>
-                                <div class="form-group col-sm-12">
-                                    <label>资源背景色</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_color" id="res_color" required>
-                                </div>
-                                <div class="form-group col-sm-12">
-                                    <label>资源图标</label>
-                                    <input type="text" placeholder="" class="form-control" name="res.res_icon" id="res_icon" required>
-                                </div>
-                                <div class="form-group col-sm-12">
-                                    <label>资源排序</label>
-                                    <input type="text" placeholder="" class="form-control digits" name="res.sort_id" id="sort_id" required maxlength="4">
+                                <div class="col-sm-12">
+                                	<hr>
                                 </div>
                                 </form>
-                                <button class="btn btn-primary pull-right m-t-n-xs save"  style="margin-right:15px;margin-bottom: 10px;">保存</button>
+                                <button class="btn btn-primary pull-right m-t-n-xs save"  style="margin-right:30px;margin-bottom: 10px;">保存</button>
                         </div>
  			
  		</div>
