@@ -77,6 +77,7 @@ window.operateEvents = {
           $('#groupid').val(selRow[index].group_id);
           $('#groupname').val(selRow[index].group_desc);
           $('#guserid').val(selRow[index].users);
+          var domain_id=selRow[index].domain_id;
           removeAll();
           $.ajax({  
                    url: "dpgMgmt/domaininfo",
@@ -84,13 +85,14 @@ window.operateEvents = {
                    success: function (data) {  
                         $.each(data, function (index, domaininfo) {
                             $("#domaininfo").append("<option value='"+ domaininfo.domain_id +"'>" + domaininfo.domain_id + "</option>");
+                            if(domaininfo.domain_id==domain_id){
+                          	  $("#domaininfo").val(domain_id); }
                             });  
                           },  
                    error: function (XMLHttpRequest, textStatus, errorThrown) {  
             	        layer.tips("抱歉，数据掉沟里了！", '#domaininfo');
                     }  
              });
-            $("#domaininfo").val(selRow[index].domain_id); 
     	    sys_edit(selRow[index].uuid);
       },
       'click .delete': function (e, value, row, index) {

@@ -90,6 +90,7 @@ window.operateEvents = {
           $('#urlid').val(selRow[index].req_url);
           $('#urlname').val(selRow[index].req_url_desc);
           $('#dictinfo').val(selRow[index].condition_content);
+          var condition_type=selRow[index].condition_type;
           removeAll();
           $.ajax({  
                    url: "getdictcode",
@@ -97,14 +98,16 @@ window.operateEvents = {
                    data:{groupuuid:groupuuid},
                    success: function (data) {  
                 	    $.each(data, function (index, groupuuid) {
+                	    	dumainid=groupuuid.domain_id;
                         	$("#dictcode").append("<option value='"+ groupuuid.dict_id +"'>" + groupuuid.dict_name + "</option>");
-                        });  
+                        	if(groupuuid.dict_id==selRow[index].condition_type){
+                        	  $("#dictcode").val(condition_type); }
+                	    });  
                     },  
                     error: function (XMLHttpRequest, textStatus, errorThrown , data) {  
                     	layer.tips("请先配置组所属域的条件类型字典！", '#dictcode');
                     } 
              });
-            $("#dictcode").val(selRow[index].condition_type); 
     	    sys_edit(selRow[index].uuid);
       },
       'click .delete': function (e, value, row, index) {
@@ -391,6 +394,18 @@ function del(uuid){
            }); 
     location.reload();
 }
+
+function setSelectChecked(selectId, checkValue){  
+    var select = document.getElementById(selectId); 
+    alert(select.options.length);
+    for(var i=0; i<select.options.length; i++){
+    	 alert(select.options[i].innerHTML);alert(checkValue);
+        if(select.options[i].innerHTML == checkValue){  
+            select.options[i].selected = true;  
+            break;  
+        }  
+    }  
+};  
 
 
 
