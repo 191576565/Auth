@@ -15,9 +15,9 @@ public class UsrMgmtService {
 		return org;
 	}
 	//初始化查询，查询session用户所能看到的用户
-	public List<Record> initSelect(String orgUUID,String user_id){
+	public List<Record> initSelect(String orgUUID){
 		String sql = ToolGetSql.getSql("tianjian.usrMgmt.initSelect");
-		List<Record> list = Db.find(sql,orgUUID,user_id);
+		List<Record> list = Db.find(sql,orgUUID);
 		return list;
 	}
 	//校验用户是否存在
