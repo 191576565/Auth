@@ -252,3 +252,37 @@ $('#btn_del').click(function(){
 		return false;
 	}
 });
+
+//批量重置密码
+$('#btn_reset').click(function(){
+	//获得bootstraptable，如果 要解析，用json.stringify(data)方法解析。
+	var selectContent = $('#table').bootstrapTable('getSelections');
+	//获得UUID[]，传到后台
+	var arrUUID = $.map(selectContent,function(row){return row.uuid});
+	//获得userName，confirm的时候用
+	var arrUser = $.map(selectContent,function(row){return row.user_name});
+	//确认删除
+//	var msg = "请再次确认您要删除的用户：\n"+arrUser+"\n";
+//	if(confirm(msg)){
+//		$.get("usrMgmt/batchDel",{"uuid[]":arrUUID},function(data){
+//			if(data){
+//				window.location.href='usrMgmt';	
+//			}
+//		});
+//	}else{
+//		return false;
+//	}
+	layer.confirm('是否重置选中用户的密码？', {
+		  btn: ['确定','取消'] //按钮
+		}, function(){
+			$.post('usrMgmt/batchReset', {"uuid[]":arrUUID},function(d){
+				if(d){
+					layer.msg('重置密码成功');
+				}else {
+					layer.msg('重置密码失败');
+				}
+			});
+		}, function(){
+			layer.close(layer.index);
+		});
+});

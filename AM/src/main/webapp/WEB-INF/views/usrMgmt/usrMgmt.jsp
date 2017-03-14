@@ -45,6 +45,7 @@
  				<!-- <button type="button" class="btn btn-primary create">重置密码</button> -->
  				<button id="btn_add" type="button" class="btn btn-primary create">新增</button>
  				<button id="btn_del" type="button" class="btn btn-danger delete">删除</button>
+ 				<button id="btn_reset" type="button" class="btn btn-warning delete">重置密码</button>
  			</div>
  <!-- 			<div class="col-xs-8 text-right">
 				<div class="form-inline">

@@ -103,5 +103,9 @@
         	DELETE FROM SYS_USER_INFO WHERE UUID IN (?)
     	]]>
 	</sql>
-	
+	<sql id="batchReset">
+		<![CDATA[ 
+        	UPDATE SYS_USER_INFO SET USER_PWD=? WHERE UUID IN (?)
+    	]]>
+	</sql>
 </sql-statement>

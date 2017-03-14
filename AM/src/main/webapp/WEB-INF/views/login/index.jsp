@@ -101,7 +101,7 @@
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#chevron-down">
-                               	<%=((Record)session.getAttribute("userinfo")).getStr("user_name") %>
+                               	欢迎您，<%=((Record)session.getAttribute("userinfo")).getStr("user_name") %>
                                 <i class="fa fa-chevron-down"></i>
                             </a>
                             <ul class="dropdown-menu yeqc-size">                               
@@ -116,7 +116,7 @@
                                 <li>
                                     <div class="text-center link-block">
                                         <a class="J_menuItem" href="ulogin/userexit">
-                                            <i class="fa fa-bell-slash"></i> <strong> 退出登录</strong>
+                                            <i class="fa fa-sign-out"></i> <strong> 退出登录</strong>
                                         </a>
                                         </form>
                                     </div>

@@ -3,6 +3,7 @@ package com.tianjian.auth.mvc.usrMgmt;
 import java.util.List;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.tianjian.auth.mvc.base.BaseSecurityMD5;
 import com.tianjian.platform.tools.ToolGetSql;
 
 public class UsrMgmtService {
@@ -57,4 +58,22 @@ public class UsrMgmtService {
 		}
 		return feedback;
 	}
+	
+	//批量删除
+		public boolean batchResetUUID(String[] uuids){
+			boolean feedback = false;
+			String sql = ToolGetSql.getSql("tianjian.usrMgmt.batchReset");
+			String pwd=BaseSecurityMD5.encodeMD5Hex("123456");
+			Object[][] obj = new Object[uuids.length][2];
+			for (int i = 0; i < uuids.length; i++) {
+				obj[i][0] = pwd;
+				obj[i][1] = uuids[i];
+			}
+			System.out.println(obj);
+			int[] size = Db.batch(sql, obj, 10);
+			if(!size.equals(null)&&size.length>0){
+				feedback = true;
+			}
+			return feedback;
+		}
 }

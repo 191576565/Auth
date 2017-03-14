@@ -127,4 +127,10 @@ public class UsrMgmtController extends Controller {
 		String[] uuids = getParaValues("uuid[]");
 		renderJson(ums.batchDeleteUUID(uuids));
 	}
+	
+	//批量删除用户
+		public void batchReset(){
+			String[] uuids = getParaValues("uuid[]");
+			renderJson(ums.batchResetUUID(uuids));
+		}
 }

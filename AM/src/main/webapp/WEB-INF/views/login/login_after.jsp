@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="com.jfinal.plugin.activerecord.*"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -33,7 +33,17 @@
         <div class="site-top">
             <div class="site-header clearfix">
                 <div class="container">
-                    <a href="#" class="site-brand pull-left"><strong>TianJian</strong> 重庆天健金管科技服务有限公司</a>
+                	<div class="row">
+                		<div class="col-sm-10">
+                			<a href="#" class="site-brand pull-left"><strong>TianJian</strong> 重庆天健金管科技服务有限公司</a>
+                		</div>
+                		<div class="col-sm-2 pull-right">
+                			<i class="fa fa-user">&nbsp; <%=((Record)session.getAttribute("userinfo")).getStr("user_name") %></i>&nbsp; &nbsp; 
+                			<a class="" href="ulogin/userexit" style="color:white;">
+                                <i class="fa fa-sign-out">&nbsp; 注销</i>
+                            </a>
+                		</div>
+                	</div>
                 </div>
             </div> <!-- .site-header -->
         </div> <!-- .site-top -->
@@ -72,6 +82,7 @@
         <script src="${ctxPath }/static/js/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="${ctxPath }/static/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="${ctxPath }/static/js/plugins/min/plugins.min.js"></script>
+        <script type="text/javascript" src="${ctxPath}/static/js/index.js"></script>
 
         <!-- Preloader -->
         <script type="text/javascript">
