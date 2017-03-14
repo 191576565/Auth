@@ -27,7 +27,7 @@ public class UsrMgmtController extends Controller {
 		//查询到的org_uuid
 		String orgUUID = ums.selectInitOrganization(sessionUserId);
 		//查询该用户所属机构下所能展示的用户
-		renderJson(ums.initSelect(orgUUID,sessionUserId));
+		renderJson(ums.initSelect(orgUUID));
 	}
 	//初始化域
 	public void selDmn(){

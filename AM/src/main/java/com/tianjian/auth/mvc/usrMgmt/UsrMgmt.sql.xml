@@ -32,7 +32,7 @@
 			    ON INSTR(A.ROLES, C.UUID) > 0
 			  LEFT JOIN SYS_DOMAIN_INFO D
 			    ON A.DOMAIN_UUID = D.UUID
-			 WHERE A.USER_ID <> ?
+			 WHERE A.USER_ID <> 'sys'
 			 GROUP BY A.UUID,
 			          A.DOMAIN_UUID,
 			          D.DOMAIN_NAME,
