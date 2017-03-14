@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="com.jfinal.plugin.activerecord.*"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,7 +35,7 @@
                             <a data-toggle="dropdown" class="dropdown-toggle J_menuItem" href="${ctxPath }/static/welcome.jsp">
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
-                                        <i class="fa fa-desktop"></i>
+                                        <i class="fa fa-home"></i>
                                         <strong class="font-bold">Auth</strong>
                                     </span>
                                 </span>
@@ -101,7 +101,7 @@
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#chevron-down">
-                                admins
+                               	<%=((Record)session.getAttribute("userinfo")).getStr("user_name") %>
                                 <i class="fa fa-chevron-down"></i>
                             </a>
                             <ul class="dropdown-menu yeqc-size">                               
