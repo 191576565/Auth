@@ -47,11 +47,10 @@
 				</ol>
 			</div>
 		</div>
-		<br/><br/><br/><br/>
  		<div class="row">
  			<div class="col-xs-4">
- 				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
- 				<button id="btn_del" type="button" class="btn btn-danger delete">删除</button>
+ 				<button id="sys_add" class="btn btn-primary create">新增</button>
+ 				<button id="btn_del" class="btn btn-danger delete">删除</button>
  			</div>
  		</div>
  		<table id="table"></table>
@@ -131,13 +130,6 @@
 				</div>
  			</form>
  		</div>
- 		<div id="sys_del_div" class="form-group" style="display:none;">
- 			<form id="del_form" action="" method="post">
- 				<input type="hidden" name="UUID" id="del_uuid"/>
-				确定要删除该系统信息吗？
-				<button id="btn_beSure" class="btn btn-danger delete">删除</button>
-			</form>
-		</div>
 
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>

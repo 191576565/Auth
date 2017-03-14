@@ -56,6 +56,21 @@
     	]]>
 	</sql>
 	
+	<sql id="dictcode">
+		<![CDATA[
+		   select distinct t1.group_desc, t.dict_id,
+		   case when  t.dict_name is null then '解析字典出错！' else  t.dict_name  end dict_name,t2.domain_id
+               from 
+            ( select  group_desc,domain_uuid,uuid
+                   from sys_group_info 
+                   where uuid = #'$groupuuid$'#) t1
+               left   join  sys_dict_info t 
+               on t.domain_uuid =t1.domain_uuid
+               LEFT JOIN sys_domain_info t2
+               on t1.domain_uuid=t2.uuid
+    	]]>
+	</sql>
+	
 	<!-- 保存权限组信息 -->
 	<sql id="ingroupinfo">
 		<![CDATA[ 
@@ -85,6 +100,38 @@
     	]]>
 	</sql>
 	
+	<!-- 保存权限组数据 URL-->
+	<sql id="ingroupurl">
+		<![CDATA[ 
+		insert into sys_group_url_rela
+ 		 (UUID,
+  		 GROUP_UUID,
+  		 GROUP_NAME,
+  		 REQ_URL,
+  		 REQ_URL_DESC,
+ 		  CONDITION_TYPE,
+ 		  CONDITION_CONTENT,
+ 		  CREATED_DATE,
+ 		  CREATOR,
+  		 MODIFIED_DATE,
+ 		  MODIFIER,
+ 		  MEMO)
+		values (
+ 		 sys_guid(),
+ 		  #'$groupuuid$'#,
+  		 null,
+ 		  #'$urlid$'#,
+  		 #'$urlname$'#,
+ 		  #'$dictcode$'#,
+  		 #'$dictinfo$'#,
+ 		  sysdate,
+  		 #'$opuser$'#,
+  		  sysdate,
+ 		  #'$opuser$'#,
+ 		  null )
+    	]]>
+	</sql>
+	
 	<!-- 更新权限组信息 -->
 	<sql id="upgroupinfo">
 		<![CDATA[ 
@@ -102,10 +149,31 @@
     	]]>
 	</sql>
 	
+	<!-- 更新权限组URL信息 -->
+	<sql id="upgroupurl">
+		<![CDATA[ 
+		update sys_group_url_rela t
+           set t.req_url           =  #'$urlid$'#,
+           t.req_url_desc          =  #'$urlname$'#,
+           t.condition_type        =  #'$dictcode$'#,
+           t.condition_content     =  #'$dictinfo$'#,
+           t.modified_date         =  sysdate,
+           t.modifier              =  #'$opuser$'#
+         where t.uuid = #'$uuid$'#
+    	]]>
+	</sql>
+	
 	<!-- 删除权限组信息 -->
 	<sql id="deletegid">
 		<![CDATA[ 
 		delete from sys_group_info t where  t.uuid in (#'$para$'#)
+    	]]>
+	</sql>
+	
+	<!-- 删除权限组url信息 -->
+	<sql id="deleteurl">
+		<![CDATA[ 
+		delete from sys_group_url_rela t where  t.uuid in (#'$para$'#)
     	]]>
 	</sql>
 	
@@ -117,6 +185,15 @@
         where t.domain_uuid = t1.uuid
         and t.group_id = #'$groupid$'#
         and t1.domain_id = #'$domainid$'#
+    	]]>
+	</sql>
+	
+	<!-- 验证权限组URL -->
+	<sql id="verifyurl">
+		<![CDATA[ 
+		select t.uuid from SYS_GROUP_URL_RELA t 
+		WHERE t.group_uuid=#'$groupuuid$'# 
+		  AND t.req_url=#'$urlid$'#
     	]]>
 	</sql>
 	

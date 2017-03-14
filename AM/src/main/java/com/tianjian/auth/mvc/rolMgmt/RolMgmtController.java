@@ -57,12 +57,7 @@ public class RolMgmtController extends Controller {
 	}
 	
 	//修改角色
-	
 	public void update() {
-		
-		System.out.println("update 方法被调用");
-		
-		System.out.println(getPara("uuid"));
 		RoleMgmt mgmt = new RoleMgmt();
 		mgmt.set("UUID", getPara("UUID"));
 		mgmt.set("DOMAIN_UUID", getPara("domain_uuid"));
@@ -78,7 +73,6 @@ public class RolMgmtController extends Controller {
 	}
 	
 	//删除角色
-	
 	public void delete() {
 		RoleMgmt mgmt = new RoleMgmt();
 		mgmt.set("UUID", getPara("UUID"));

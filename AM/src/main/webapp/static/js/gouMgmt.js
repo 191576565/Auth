@@ -1,4 +1,4 @@
-function initdpgMgmtlist(groupuuid){
+function initdpgMgmtlist(){
    $('#table').bootstrapTable({
 	url: 'goulist',
 // 	toolbar: '#toolbar', //工具按钮用哪个容器
@@ -87,22 +87,24 @@ window.operateEvents = {
       'click .edit': function (e, value, row, index) {
     	  var selRow = $("#table").bootstrapTable('getData');
           $('#groupid').val(selRow[index].group_id);
-          $('#groupname').val(selRow[index].group_desc);
-          $('#guserid').val(selRow[index].users);
+          $('#urlid').val(selRow[index].req_url);
+          $('#urlname').val(selRow[index].req_url_desc);
+          $('#dictinfo').val(selRow[index].condition_content);
           removeAll();
           $.ajax({  
-                   url: "dpgMgmt/domaininfo",
-                   dataType: "json",  
+                   url: "getdictcode",
+                   dataType: "json",
+                   data:{groupuuid:groupuuid},
                    success: function (data) {  
-                        $.each(data, function (index, domaininfo) {
-                            $("#domaininfo").append("<option value='"+ domaininfo.domain_id +"'>" + domaininfo.domain_id + "</option>");
-                            });  
-                          },  
-                   error: function (XMLHttpRequest, textStatus, errorThrown) {  
-            	        layer.tips("抱歉，数据掉沟里了！", '#domaininfo');
-                    }  
+                	    $.each(data, function (index, groupuuid) {
+                        	$("#dictcode").append("<option value='"+ groupuuid.dict_id +"'>" + groupuuid.dict_name + "</option>");
+                        });  
+                    },  
+                    error: function (XMLHttpRequest, textStatus, errorThrown , data) {  
+                    	layer.tips("请先配置组所属域的条件类型字典！", '#dictcode');
+                    } 
              });
-            $("#domaininfo").val(selRow[index].domain_id); 
+            $("#dictcode").val(selRow[index].condition_type); 
     	    sys_edit(selRow[index].uuid);
       },
       'click .delete': function (e, value, row, index) {
@@ -117,11 +119,11 @@ function sys_add(){
 		type: 1,
 		content: $('#sys_add_div'),
 		skin: 'layui-layer-molv',
-		title: ' 权限组信息',
+		title: ' URL资源配置',
 		area: ['400px', '310px'],
 		btn: ['保存']
          ,yes: function(index){
-        	  saveform();
+        	  saveurlform();
               location.reload();
               layer.closeAll(index);
          }
@@ -137,7 +139,7 @@ function sys_edit(uuid){
 		area: ['400px', '310px'],
 		btn: ['保存']
         ,yes: function(index){
-        	updateform(uuid);
+        	updateurlform(uuid);
         	location.reload();
             layer.closeAll(index);
         }
@@ -162,50 +164,43 @@ $('#sys_add_div #form').on('click', '#tree', function() {
 
 $('#sys_add').on('click', function() {
 	removeAll();
-	$("#domaininfo").append("<option value='Value'>==请选择域==</option>");
+	$("#dictcode").append("<option value='Value'>请选择条件类型</option>");
     $.ajax({  
-        url: "dpgMgmt/domaininfo",
-        dataType: "json",  
+        url: "getdictcode",
+        dataType: "json",
+        data:{groupuuid:groupuuid},
         success: function (data) {  
-            $.each(data, function (index, domaininfo) {
-            	$("#domaininfo").append("<option value='"+ domaininfo.domain_id +"'>" + domaininfo.domain_id + "</option>");
+            $.each(data, function (index, groupuuid) {
+            	$("#groupid").val(groupuuid.group_desc);
+            	dumainid=groupuuid.domain_id;
+            	$("#dictcode").append("<option value='"+ groupuuid.dict_id +"'>" + groupuuid.dict_name + "</option>");
             });  
         },  
-         
-        error: function (XMLHttpRequest, textStatus, errorThrown) {  
-        	layer.tips("抱歉，数据掉沟里了！", '#domaininfo');
+        error: function (XMLHttpRequest, textStatus, errorThrown , data) {  
+        	layer.tips("请先配置组所属域的条件类型字典！", '#dictcode');
         }  
     }); 
     sys_add();
 });  
 
 function removeAll(){ 
-	var obj=document.getElementById('domaininfo'); 
+	var obj=document.getElementById('dictcode'); 
 	obj.options.length=0; 
 	} 
 
-$('#groupid').blur(function() {
-		var domainid=$('#domaininfo').val();
-		var groupid=$('#groupid').val();
-		if(domainid==null || domainid=='Value'){
-			layer.tips("请先选择所属域!", '#domaininfo');
-			$('#groupid').val("");
-		    return false;
-		 }
-		if(groupid==null || groupid==''){
-			layer.tips("组 id 不能为空!", '#groupid');
+$('#urlid').blur(function() {
+		var urlid=$('#urlid').val();
+		if(urlid==null || urlid==''){
+			layer.tips("URL 不能为空!", '#urlid');
 			 return false;
 		}else{
 	        $.ajax({  
-	        url: "dpgMgmt/verifygroupid",
-	        data:{domaininfo:$('#domaininfo').val(),groupid:$('#groupid').val()},
+	        url: "verifyurlid",
+	        data:{groupuuid:groupuuid,urlid:urlid},
 	        dataType: "json",  
 	        success: function (data) {
-	        	if(data.status=='success'){
-	        		layer.tips("恭喜,组id可以使用！", '#groupid');
-	        	}else{
-	        		layer.tips("啊哦,组id已被占用,请重新输入！", '#groupid');
-	        		$('#groupid').val("");
+	        	if(data.status!='success'){
+	        		layer.tips("啊哦,组id已被占用,请重新输入！", '#urlid');
 	        	}  	
 	        },  
 	        error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -215,16 +210,16 @@ $('#groupid').blur(function() {
 	}
 });
 
-$('#guserid').on('click', function() {
-	var domainid=$('#domaininfo').val();
-	if(domainid==null || domainid=='Value'){
-		layer.tips("请先选择所属域!", '#domaininfo');
+$('#dictinfo').on('click', function() {
+	var dictcode=$('#dictcode').val();
+	if(dictcode==null || dictcode=='Value'){
+		layer.tips("条件类型!", '#dictcode');
 		 return false;
 	 }else{
-	    getTreeData();
+	    getTreeData(dictcode);
 	    layer.open({
 	    	  type: 1,
-	    	  title: '选择用户',
+	    	  title: '选择'+dictcode,
 	    	  skin: 'layui-layer-molv',
 	    	  area: ['500px', '550px'],
 	    	  content: $('#sys_user_div'),
@@ -240,11 +235,11 @@ $('#guserid').on('click', function() {
 	}
 }); 
 
-function getTreeData() {
+function getTreeData(dictcode) {
      $.ajax({ 
-		    url: "dpgMgmt/getTreeData",
+		    url: "getTreeData",
 	        dataType: "json",
-	        data:{domainid:$('#domaininfo').val()},
+	        data:{dictcode:dictcode,domainid:dumainid},
 	        success: function (data) {
                 var defaultData = eval(data.data);
                 $('#user_in_div').treeview({
@@ -303,24 +298,24 @@ function dosome( num){
 
 function getDisabled(){
 	var checkedArr = $('#user_in_div').treeview('getChecked','');
-	var userid="";
+	var dictinfo="";
 	for(var i = 0; i < checkedArr.length; i++){
           if(i == 0){
-        	  userid=checkedArr[i].id;
+        	  dictinfo=checkedArr[i].id;
           }else{
-        	  userid=userid+","+checkedArr[i].id;
+        	  dictinfo=dictinfo+","+checkedArr[i].id;
            }
 	    }
-	$('#guserid').val(userid);
+	$('#dictinfo').val(dictinfo);
 }
 
-function saveform(){
+function saveurlform(){
 	$.ajax({  
-        url: "dpgMgmt/saveform",
+        url: "saveurlform",
         dataType: "json",
         type:'post',
         contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-        data:{domaininfo:$('#domaininfo').val(),groupid:$('#groupid').val(),groupname:$('#groupname').val(),guserid:$('#guserid').val()},
+        data:{groupuuid:groupuuid,urlid:$('#urlid').val(),urlname:$('#urlname').val(),dictcode:$('#dictcode').val(),dictinfo:$('#dictinfo').val()},
         success: function (data) {
         	if(data.status=='success'){
         		layer.msg("数据保存成功");
@@ -334,13 +329,13 @@ function saveform(){
     }); 
 }
 
-function updateform(uuid){
+function updateurlform(uuid){
 	$.ajax({  
-        url: "dpgMgmt/updateform",
+        url: "updateurlform",
         dataType: "json",
         type:'post',
         contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-        data:{uuid:uuid,domaininfo:$('#domaininfo').val(),groupid:$('#groupid').val(),groupname:$('#groupname').val(),guserid:$('#guserid').val()},
+        data:{uuid:uuid,urlid:$('#urlid').val(),urlname:$('#urlname').val(),dictcode:$('#dictcode').val(),dictinfo:$('#dictinfo').val()},
         success: function (data) {
         	if(data.status=='success'){
         		layer.msg("数据保存成功");
@@ -362,7 +357,7 @@ $('#btn_add').on('click', function() {
     		uuid.push(this.uuid);
     		});
         $.ajax({  
-            url: "dpgMgmt/delform",
+            url: "delurlform",
             dataType: "json", 
             data:{'uuid':uuid.toString()},
             success: function (data) {
@@ -382,7 +377,7 @@ $('#btn_add').on('click', function() {
 
 function del(uuid){
 	$.ajax({  
-        url: "dpgMgmt/delform",
+        url: "delurlform",
         dataType: "json", 
         data:{'uuid':uuid.toString()},
         success: function (data) {

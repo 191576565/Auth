@@ -62,13 +62,7 @@ angular.module('myApp', [])
 //新增机构_弹出层
 $('#org_add').on('click', function() {
 	//初始化表单
-	$("#org_add_div #form #up_org").html("");
-	$("#org_add_div #form #uuid").val("");
-	$("#org_add_div #form #scop_n").val("");
-	$("#org_add_div #form #org_code").val("");
-	$("#org_add_div #form #org_name").val("");
-	$("#org_add_div #form #ipt_memo").val("");
-	$("#org_add_div #form #domain_uuid").val("");
+	$("#org_add_div #form")[0].reset();
 	//获取域
 	$.getJSON("orgMgmt/getId",function(data){
 		$.each(data, function(i, item){

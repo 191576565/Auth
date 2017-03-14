@@ -14,6 +14,7 @@
          ,t.res_id  
          ,t.res_name 
          ,t.res_up_uuid
+         ,t.sort_id
          ,t1.res_name as up_res_name  
          ,t.res_url
            ,case  t.res_type when '#' then '初始顶层'

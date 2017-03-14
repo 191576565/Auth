@@ -1,7 +1,7 @@
 $('#table').bootstrapTable({
 	url: 					'sysMgmt/sysData', 		//请求后台的URL（*）
 	method: 				'get', 					//请求方式（*）
-	toolbar: 				'#toolbar', 			//工具按钮用哪个容器
+	toolbar: 				'#sys_add,#btn_del', 	//工具按钮用哪个容器
 	striped: 				false, 					//是否显示行间隔色
 	cache: 					false, 					//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 	pagination: 			true, 					//是否显示分页（*）
@@ -88,9 +88,8 @@ $('#btn_del').on('click', function(){
 		i++;
 	})
 	if(sendData == ''){
-		alert('请选择一条数据');
+		layer.msg('请选择要删除的系统信息');
 	}else{
-//		alert(sendData);
 		$.ajax({
 	        type: "POST",
 	        url: "sysMgmt/deleteMore",
@@ -99,12 +98,12 @@ $('#btn_del').on('click', function(){
 	        dataType: 'json',
 	        success: function (message) {
 	            if (message > 0) {
-	                alert("删除成功！");
-	                window.location.href = "sysMgmt";
+	            	layer.closeAll();
+					$('#table').bootstrapTable('refresh', {silent: true});
 	            }
 	        },
 	        error: function (message) {
-	           alert("提交数据失败！");
+	        	layer.msg('提交数据失败');
 	        }
 	    });
 	}	
@@ -112,11 +111,7 @@ $('#btn_del').on('click', function(){
 
 //layer弹出自定义div__新增
 $('#sys_add').on('click', function() {
-	var $ipt_uuid = $("#sys_add_div #form #uuid").val('');
-	var $ipt_code = $("#sys_add_div #form #ipt_code").val('');
-	var $ipt_name = $("#sys_add_div #form #ipt_name").val('');
-	var $ipt_sort = $("#sys_add_div #form #ipt_sort").val('');
-	var $ipt_memo = $("#sys_add_div #form #ipt_memo").val('');
+	$("#sys_add_div #form")[0].reset();
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
@@ -129,11 +124,11 @@ $('#sys_add').on('click', function() {
 //layer弹出自定义div__修改
 function onEdit(id,code,name,sort,memo) {
 //	alert(id + ' ' + code + ' ' + name + ' ' + sort);
-	var $ipt_uuid = $("#sys_add_div #form #uuid").val(id);
-	var $ipt_code = $("#sys_add_div #form #ipt_code").val(code);
-	var $ipt_name = $("#sys_add_div #form #ipt_name").val(name);
-	var $ipt_sort = $("#sys_add_div #form #ipt_sort").val(sort);
-	var $ipt_memo = $("#sys_add_div #form #ipt_memo").val(memo);
+	$("#sys_add_div #form #uuid").val(id);
+	$("#sys_add_div #form #ipt_code").val(code);
+	$("#sys_add_div #form #ipt_name").val(name);
+	$("#sys_add_div #form #ipt_sort").val(sort);
+	$("#sys_add_div #form #ipt_memo").val(memo);
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
@@ -145,28 +140,21 @@ function onEdit(id,code,name,sort,memo) {
 //删除
 function onDel(id) {
 	var $ipt_uuid = $("#sys_del_div #del_form #del_uuid").val(id);
-	layer.open({
-		type: 1,
-		content: $('#sys_del_div'),
-		title: '系统提示',
-		area: ['300px', '100px'],
-	});
-};
-$('#btn_beSure').click(function() {
-	$('#del_form').attr("action", "sysMgmt/delete");
-	$('#del_form').submit(function(){
-		$(this).ajaxSubmit(function(resultJson){
-			if(JSON.stringify(resultJson) == "false"){
-				alert('删除失败');
-				return;
-			}else{
-				window.location.href='sysMgmt';
-			}
+	layer.confirm('是否删除该系统信息？', {
+		  btn: ['删除','取消'] //按钮
+		}, function(){
+			$.post('sysMgmt/delete?UUID='+id, function(d){
+				if(d){
+					layer.msg('资源删除成功');
+				}else {
+					layer.msg('资源删除失败');
+				}
+				$('#table').bootstrapTable('refresh', {silent: true});
+			});
+		}, function(){
+			layer.closeAll();
 		});
-		return false;
-	});
-	
-});
+};
 
 //表单验证
 angular.module('myApp', [])
@@ -201,7 +189,8 @@ $('#sub').click(function(){
 					area: ['200px', '200px'],
 				});
 			}else{
-				window.location.href='sysMgmt';
+				layer.closeAll();
+				$('#table').bootstrapTable('refresh', {silent: true});
 			}
 		});
 		return false;//阻止表单默认提交
@@ -210,20 +199,19 @@ $('#sub').click(function(){
 	//修改操作
 	if($("#sys_add_div #form #uuid").val() != ''){
 		$("#form").attr("action", "sysMgmt/update");
-//		$('#form').submit(function(){
-			$('#form').ajaxSubmit(function(resultJson){
-				if(JSON.stringify(resultJson) === "true"){
-					window.location.href='sysMgmt';
-					return;
+		$('#form').ajaxSubmit(function(resultJson){
+			if(JSON.stringify(resultJson) === "true"){
+				layer.closeAll();
+				$('#table').bootstrapTable('refresh', {silent: true});
+				return;
+			}
+			$.each(resultJson, function(i, item){
+				if(item === "repeat"){
+					alert('域编码/域名重复，修改失败!');
 				}
-				$.each(resultJson, function(i, item){
-					if(item === "repeat"){
-						alert('域编码/域名重复，修改失败!');
-					}
-				})
-			});
-			return false;//阻止表单默认提交
-//		});
+			})
+		});
+		return false;//阻止表单默认提交
 	}
 	
 	
