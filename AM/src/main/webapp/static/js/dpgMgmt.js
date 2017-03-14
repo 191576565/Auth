@@ -115,9 +115,11 @@ function sys_add(){
 		area: ['400px', '310px'],
 		btn: ['保存']
          ,yes: function(index){
-        	  saveform();
-              location.reload();
-              layer.closeAll(index);
+        	  if(fromcheck()){
+        		  saveform();
+        		  location.reload();
+                  layer.closeAll(index);
+        	  };
          }
 	});
 };
@@ -131,9 +133,11 @@ function sys_edit(uuid){
 		area: ['400px', '310px'],
 		btn: ['保存']
         ,yes: function(index){
+         if(fromcheck()){
         	updateform(uuid);
         	location.reload();
             layer.closeAll(index);
+         };
         }
 	});
 	return false;
@@ -155,6 +159,9 @@ $('#sys_add_div #form').on('click', '#tree', function() {
 });
 
 $('#sys_add').on('click', function() {
+	$('#groupid').val('');
+    $('#groupname').val('');
+    $('#guserid').val('');
 	removeAll();
 	$("#domaininfo").append("<option value='Value'>==请选择域==</option>");
     $.ajax({  
@@ -186,10 +193,11 @@ $('#groupid').blur(function() {
 			$('#groupid').val("");
 		    return false;
 		 }
-		if(groupid==null || groupid==''){
-			layer.tips("组 id 不能为空!", '#groupid');
+		if(!isgroupid(groupid)){
+			layer.tips("组 id 只能是1~30位字母数字组合！", '#groupid');
 			 return false;
-		}else{
+		}
+		else{
 	        $.ajax({  
 	        url: "dpgMgmt/verifygroupid",
 	        data:{domaininfo:domainid,groupid:groupid},
@@ -306,6 +314,24 @@ function getDisabled(){
 	$('#guserid').val(userid);
 }
 
+function fromcheck(){
+	var domaininfo = $('#domaininfo').val();
+	var groupid = $('#groupid').val();
+	var guserid = $('#guserid').val();
+	if(domaininfo==null || domaininfo=='Value'){
+		layer.tips("请先选择所属域!", '#domaininfo');
+		 return false;
+	 }
+	if(!isgroupid(groupid)){
+		layer.tips("组 id 只能是1~30位字母数字组合！", '#groupid');
+		 return false;
+	}
+	if(isnull(guserid)){
+		layer.tips("请选择用户！", '#guserid');
+		 return false;
+	}else{return true;};
+}
+
 function saveform(){
 	$.ajax({  
         url: "dpgMgmt/saveform",
@@ -387,6 +413,18 @@ function del(uuid){
          	layer.msg("对象被城管抓走了！");}  
            }); 
     location.reload();
+}
+
+function isgroupid(str){
+	/**正则表达式:只能是1~30位字母数字组合**/
+    var rg = /^[a-zA-Z0-9]{1,30}$/;
+    return rg.test(str);
+}
+
+function isnull(str){
+	/**正则表达式:整个字符串为空或者都是空白字符 **/
+	var rg = /^[\s]{0,}$/;
+    return rg.test(str);
 }
 
 

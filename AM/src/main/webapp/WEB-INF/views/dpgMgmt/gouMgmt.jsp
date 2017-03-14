@@ -68,7 +68,7 @@
 					<option value="default">请选择类型</option>
 	 			</select></br></br>
 				<label style="margin-left: 8%;">条件值</label> <input id="dictinfo" name="dictinfo" style="margin-left: 6%;" type="text" />
-				</br></br></br>
+				</br>
  			</form>
  		</div>
  		<table id="table"></table>

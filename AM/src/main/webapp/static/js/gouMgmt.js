@@ -126,9 +126,11 @@ function sys_add(){
 		area: ['400px', '310px'],
 		btn: ['保存']
          ,yes: function(index){
+        	if(fromcheck()){
         	  saveurlform();
               location.reload();
               layer.closeAll(index);
+        	 };
          }
 	});
 };
@@ -142,12 +144,32 @@ function sys_edit(uuid){
 		area: ['400px', '310px'],
 		btn: ['保存']
         ,yes: function(index){
+          if(fromcheck()){
         	updateurlform(uuid);
         	location.reload();
             layer.closeAll(index);
+           };
         }
 	});
 	return false;
+}
+
+function fromcheck(){
+	var urlid=$('#urlid').val();
+    var dictcode=$('#dictcode').val();
+    var dictinfo=$('#dictinfo').val();
+    if(isnull(urlid)){
+		layer.tips("请输入URL！", '#urlid');
+		return false;
+	}
+	if(dictcode==null || dictcode=='Value'){
+		layer.tips("请选择条件类型!", '#dictcode');
+		 return false;
+	 }
+	if(isnull(dictinfo)){
+		layer.tips("请输入条件参数！", '#dictinfo');
+		 return false;
+	}else{return true;};
 }
 
 $('#sys_add_div #form').on('click', '#tree', function() {
@@ -166,6 +188,9 @@ $('#sys_add_div #form').on('click', '#tree', function() {
 });
 
 $('#sys_add').on('click', function() {
+     $('#urlid').val('');
+     $('#urlname').val('');
+     $('#dictinfo').val('');
 	removeAll();
 	$("#dictcode").append("<option value='Value'>请选择条件类型</option>");
     $.ajax({  
@@ -395,17 +420,24 @@ function del(uuid){
     location.reload();
 }
 
-function setSelectChecked(selectId, checkValue){  
-    var select = document.getElementById(selectId); 
-    alert(select.options.length);
-    for(var i=0; i<select.options.length; i++){
-    	 alert(select.options[i].innerHTML);alert(checkValue);
-        if(select.options[i].innerHTML == checkValue){  
-            select.options[i].selected = true;  
-            break;  
-        }  
-    }  
-};  
+function ismail(str){
+    var rg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+    return rg.test(str);
+}
+
+
+function isgroupid(str){
+	/**正则表达式:只能是1~30位字母数字组合**/
+    var rg = /^[a-zA-Z0-9]{1,30}$/;
+    return rg.test(str);
+}
+
+function isnull(str){
+	/**正则表达式:整个字符串为空或者都是空白字符 **/
+	var rg = /^[\s]{0,}$/;
+    return rg.test(str);
+}
+
 
 
 

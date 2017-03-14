@@ -58,16 +58,18 @@
 	
 	<sql id="dictcode">
 		<![CDATA[
-		   select distinct t1.group_desc, t.dict_id,
+		select t3.group_desc, t3.dict_id,t3.sort,t3.dict_name,t3.domain_id from (
+		   select distinct  t1.group_desc, t.dict_id,t.sort,
 		   case when  t.dict_name is null then '解析字典出错！' else  t.dict_name  end dict_name,t2.domain_id
                from 
             ( select  group_desc,domain_uuid,uuid
                    from sys_group_info 
                    where uuid = #'$groupuuid$'#) t1
                left   join  sys_dict_info t 
-               on t.domain_uuid =t1.domain_uuid
+               on t.domain_uuid =t1.domain_uuid and t.dict_visible='0'
                LEFT JOIN sys_domain_info t2
-               on t1.domain_uuid=t2.uuid
+               on t1.domain_uuid=t2.uuid ) t3
+               order by t3.sort
     	]]>
 	</sql>
 	
