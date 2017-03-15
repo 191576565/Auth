@@ -29,5 +29,11 @@ public class FunListService {
 //		}
 		return list;
 	}
+	
+	public List<Record> selectExit(String uuid){
+		String sql = ToolGetSql.getSql("tianjian.roleMgmt.selectExit");
+		List<Record> list = Db.find(sql,uuid);
+		return list;
+	}
 
 }
