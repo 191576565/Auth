@@ -50,6 +50,8 @@ $(function(){
 		
 		$.get('resMgmt/restree', function(data){
 			$.fn.zTree.init($("#res"), s, data); //树
+			var treeObj = $.fn.zTree.getZTreeObj("res");
+			treeObj.expandAll(true);
 			
 			layer.open({
 				type : 1,
