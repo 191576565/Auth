@@ -33,6 +33,11 @@ public class FunListService {
 	public List<Record> selectExit(String uuid){
 		String sql = ToolGetSql.getSql("tianjian.roleMgmt.selectExit");
 		List<Record> list = Db.find(sql,uuid);
+		for(int i=0; i<list.size(); i++){
+			String resources = list.get(i).getStr("resources");
+			String[] sourceArr = resources.split(",");
+			list.get(i).set("resources", sourceArr);
+		}
 		return list;
 	}
 
