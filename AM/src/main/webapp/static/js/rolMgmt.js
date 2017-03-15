@@ -92,11 +92,10 @@ function onFun(id){
 	    	type:"GET",
 	    	url:"funList/showExit?uuid="+id,
 	    	success:function(d){
-	    		//var treeObj = $.fn.zTree.getZTreeObj("res");
-				d.forEach(function(e){
-					var node =  treeObj.getNodeByParam("id", e.id, null);
-					treeObj.checkNode(node, true, true);
-				});
+				for(var key in d){
+					var node =  treeObj.getNodeByParam("id", key, null);
+					treeObj.checkNode(node, true, false);
+				}
 	    	}
 	    });
 		
