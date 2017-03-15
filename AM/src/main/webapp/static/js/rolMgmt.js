@@ -1,3 +1,37 @@
+var s = {
+	view: {
+		dblClickExpand: false,
+		selectedMulti: false
+	},
+	data: {
+		simpleData: {
+			enable: true,
+			idKey: "id",
+			pIdKey: "pid"
+		}
+	},
+	callback: {
+		onDblClick: zTreeOnDblClickSimple,
+		onClick: zTreeOnClickSimple
+	},
+	check: {
+		enable: true,
+		chkboxType: {
+			"Y": "ps",
+			"N": "s"
+		}
+	}
+};
+function zTreeOnDblClickSimple(event, treeId, treeNode) {
+};
+
+function zTreeOnClickSimple(event, treeId, treeNode) {
+	var treeObj = $.fn.zTree.getZTreeObj(treeId);
+	treeObj.expandNode(treeNode, null, null, null);
+
+	return true;
+};
+
 $('#table').bootstrapTable({
     url: 'rolMgmt/showRol',
  	toolbar: '#toolbar',	
@@ -38,22 +72,34 @@ $('#table').bootstrapTable({
 //功能
 function onFun(id){
 	//拼接tree结构
-	$.get("funList/showFunList?uuid="+id,function(content){
-		content.forEach(function(e){
-			if(e.lvl===1){
-//            	alert(e.lvl);
-			}
+	$.get("funList/showFunList",function(data){
+		var rs=[];
+		data.forEach(function(e){
+			e.chkDisabled=e.chkdisabled;
+			rs.push(e);
 		});
-		$('#container #tree').treeview({
-			data:result,
-			showCheckbox:true
+		$.fn.zTree.init($("#res"), s, rs); //树
+		
+		layer.open({
+			type : 1,
+			content : $('.t'),
+			title : '选择上级资源',
+			area : [ '400px', '600px' ],
+			maxmin: true,
+			btn: ['保存', '取消'],
+			yes: function(index, layero){
+			    console.log('1');
+			},
+			btn2: function(index, layero){
+				console.log('2');
+		    }
 		});
 	});
-	layer.open({
-		type:1,
-		content:$('#container'),
-		area:['800px','450px']
-	});
+//	layer.open({
+//		type:1,
+//		content:$('#container'),
+//		area:['800px','450px']
+//	});
 }
 
 //layer弹出自定义div__新增

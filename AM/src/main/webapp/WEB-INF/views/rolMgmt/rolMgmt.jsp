@@ -25,7 +25,7 @@
 		<link href="${ctxPath }/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 		<!-- Sweet Alert -->
 		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-		<link href="${ctxPath }/static/css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
+		<link href="${ctxPath }/static/css/plugins/ztree/zTreeStyle.css" rel="stylesheet">
 		<style type="text/css">
 			.input_result {
 				position: relative;
@@ -122,9 +122,9 @@
 				<button id="btn_beSure" class="btn btn-danger delete">删除</button>
 			</form>
 		</div>
-		<div id="container" style="display:none">
-			<div id="tree"></div>
-		</div>
+		<div class="t" style="display: none;">
+ 			<ul id="res" class="ztree"></ul>
+ 		</div>
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
@@ -144,6 +144,9 @@
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
+    
+    <!-- ztree -->
+    <script src="${ctxPath }/static/js/plugins/zTree/jquery.ztree.all.min.js"></script>
     <!--
     	作者：yeqc
     	时间：2017-02-09
