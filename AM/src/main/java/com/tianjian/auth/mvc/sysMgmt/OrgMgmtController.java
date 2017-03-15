@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Record;
+import com.tianjian.auth.mvc.constant.ConstantLog;
 
 public class OrgMgmtController extends Controller {
 	
@@ -73,6 +74,10 @@ public class OrgMgmtController extends Controller {
 			return;
 		}
 		orgMgmtService.save(orgMgmt);
+		setAttr(ConstantLog.log_optype, ConstantLog.res_add);
+		String msg = "新增机构" + "机构id:" + getPara("orgCode") + "  机构名称:"
+				+ getPara("orgName");
+		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}
 	
@@ -94,6 +99,10 @@ public class OrgMgmtController extends Controller {
 			return;
 		}
 		if(orgMgmtService.update(orgMgmt)){
+			setAttr(ConstantLog.log_optype, ConstantLog.res_chg);
+			String msg = "编辑机构" + "域id:" + getPara("orgCode") + "  机构名称:"
+					+ getPara("orgName");
+			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		}
 	}
@@ -107,6 +116,9 @@ public class OrgMgmtController extends Controller {
 			renderJson(true);
 			return;
 		}
+		setAttr(ConstantLog.log_optype, ConstantLog.res_del);
+		String msg = "删除机构,头结点UUID为："+getPara("UUID") ;
+		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(false);
 	}
 }
