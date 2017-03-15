@@ -133,12 +133,6 @@
 		                               </div>
 	                                </div>
 	                                <div class="form-group col-sm-6">
-	                                    <label>资源URL</label>
-	                                    <input type="text" placeholder="" class="form-control" name="res.res_url" id="res_url" required>
-	                                </div>
-                                </div>
-                                <div class="col-sm-12">
-                                	<div class="form-group col-sm-6">
 	                                    <label>资源类型</label>
 	                                    <select class="form-control" name="res.res_type" style="border-radius: 2px;" id="res_type" required>
 	                                    	<option value="">请选择资源类型</option>
@@ -147,19 +141,25 @@
 	                                        <option value="2">按钮</option>
 	                                    </select>
 	                                </div>
+                                </div>
+                                <div class="col-sm-12">
+                                	<div class="form-group col-sm-6">
+	                                    <label>资源URL</label>
+	                                    <input type="text" placeholder="" class="form-control" name="res.res_url" id="res_url">
+	                                </div>
 	                                <div class="form-group col-sm-6">
 	                                    <label>资源样式</label>
-	                                    <input type="text" placeholder="" class="form-control" name="res.res_class" id="res_class" required>
+	                                    <input type="text" placeholder="" class="form-control" name="res.res_class" id="res_class">
 	                                </div>
                                 </div>
                                 <div class="col-sm-12">
                                 	<div class="form-group col-sm-6">
 	                                    <label>资源背景色</label>
-	                                    <input type="text" placeholder="" class="form-control" name="res.res_color" id="res_color" required>
+	                                    <input type="text" placeholder="" class="form-control" name="res.res_color" id="res_color">
 	                                </div>
 	                                <div class="form-group col-sm-6">
 	                                    <label>资源图标</label>
-	                                    <input type="text" placeholder="" class="form-control" name="res.res_icon" id="res_icon" required>
+	                                    <input type="text" placeholder="" class="form-control" name="res.res_icon" id="res_icon">
 	                                </div>
                                 </div>
                                 <div class="col-sm-12">
