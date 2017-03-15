@@ -38,6 +38,10 @@ public class FunListController extends Controller {
 //		render("funList.jsp");
 	}
 	
+	public void showExit(){
+		renderJson(funListService.selectExit(getPara("uuid")));
+	}
+	
 	//角色对应功能保存
 	
 	public void funSave() {
