@@ -26,7 +26,27 @@ public class ResMgmtController extends Controller {
 		List<ResMgmt> all = reservice.get(ResMgmt.sqlId_res_select);
 		renderJson(all);
 	}
-
+	/*
+	 * 资源的--id校验
+	 */
+	public void resIdcheck() {	
+		log.info("resid ");
+		if (reservice.resIdisRepeated(ResMgmt.sqlId_res_residrepeated,getPara("resId"))){
+			renderJson(true);
+		}else{
+			renderJson(false);
+		}
+	}
+	/*
+	 * 资源的--name校验
+	 */
+	public void resNamecheck() {	
+		if (reservice.resNameisRepeated(ResMgmt.sqlId_res_resnamerepeated,getPara("resName"))){
+			renderJson(true);
+		}else{
+			renderJson(false);
+		}
+	}
 	/*
 	 * 资源的--新增
 	 */

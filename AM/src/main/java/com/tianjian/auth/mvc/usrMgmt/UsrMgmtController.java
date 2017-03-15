@@ -62,7 +62,8 @@ public class UsrMgmtController extends Controller {
 		String userName = getPara("usrName");
 		String roles = StringUtils.join(getParaValues("role"),",");
 		//获取密码并用MD5加密
-		String userPwd = BaseSecurityMD5.encodeMD5Hex(getPara("pwd"));
+//		String userPwd = BaseSecurityMD5.encodeMD5Hex(getPara("pwd"));
+		String userPwd = BaseSecurityMD5.encodeMD5Hex("123456");
 		String userPhone = getPara("phone");
 		String userEmail = getPara("email");
 		String domainUUID = getPara("domain");
@@ -90,7 +91,7 @@ public class UsrMgmtController extends Controller {
 		String userName = getPara("usrName");
 		String roles = StringUtils.join(getParaValues("role"),",");
 		//获取密码并用MD5加密
-		String userPwd = BaseSecurityMD5.encodeMD5Hex(getPara("pwd"));
+//		String userPwd = BaseSecurityMD5.encodeMD5Hex(getPara("pwd"));
 		String userPhone = getPara("phone");
 		String userEmail = getPara("email");
 		//前台没做domainUUID和orgUUID，先暂用常量代替
@@ -105,7 +106,7 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("domain_uuid", domainUUID);
 		usrMgmt.set("org_uuid", orgUUID);
 		usrMgmt.set("roles", roles);
-		usrMgmt.set("user_pwd", userPwd);
+//		usrMgmt.set("user_pwd", userPwd);
 		usrMgmt.set("user_name", userName);
 		usrMgmt.set("user_email", userEmail);
 		usrMgmt.set("user_phone", userPhone);
