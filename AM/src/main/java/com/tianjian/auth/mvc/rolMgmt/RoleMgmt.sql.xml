@@ -22,52 +22,7 @@
 	
 	<sql id="selectExit">
 		<![CDATA[ 
-          WITH TMP_USERS  AS ( SELECT  T2.DOMAIN_ID
-                 ,T2.DOMAIN_NAME
-                 ,min(t4.RES_ID) over(partition by t2.domain_id  ) AS   TOP_RES_ID
-                 ,T4.UUID             AS RES_UUID
-                 ,T4.RES_UP_UUID      AS RES_UP_UUID
-                 ,T4.RES_ID           AS RES_ID
-                 ,T4.RES_NAME         AS RES_NAME
-                 ,T4.RES_URL          AS RES_URL
-                 ,nvl(T5.RES_ID,'#')  AS RES_UP_ID
-                 ,T4.RES_CLASS        AS RES_CSS
-                 ,T4.RES_COLOR        AS RES_COLOR
-                 ,T4.RES_ICON         AS RES_ICON
-                 ,T4.RES_TYPE         AS RES_TYPE
-               FROM SYS_ROLE_INFO     T1
-          LEFT JOIN SYS_DOMAIN_INFO   T2  ON T1.DOMAIN_UUID=T2.UUID
-          LEFT JOIN SYS_RESOURCE_INFO T4  ON INSTR(T1.RESOURCES  ,T4.UUID)>0
-          LEFT JOIN SYS_RESOURCE_INFO T5  ON T4.RES_UP_UUID=T5.UUID
-          where t1.uuid=?
-          group  by
-           T2.DOMAIN_ID     ,T2.DOMAIN_NAME   ,T4.UUID    ,T4.RES_UP_UUID ,T4.RES_ID
-           ,T4.RES_NAME     ,T4.RES_URL   ,nvl(T5.RES_ID,'#') ,T4.RES_CLASS   ,T4.RES_COLOR     ,T4.RES_ICON   ,T4.RES_TYPE )
-  ,TMP_USER_RES AS (        SELECT  t.DOMAIN_ID,
-                  t.DOMAIN_NAME,
-
-                  t.TOP_RES_ID,
-                  t.RES_UUID,
-                  t.RES_UP_UUID,
-                  t.RES_ID,
-                  t.RES_NAME,
-                  t.RES_URL,
-                  t.RES_UP_ID,
-                  t.RES_CSS,
-                  t.RES_COLOR,
-                  t.RES_ICON,
-                  t.RES_TYPE,
-                  level as  lvl
-                  FROM TMP_USERS t
-          start with res_id =TOP_RES_ID
-           connect by prior res_uuid =res_up_uuid
-)
-
-select sri.uuid as id,sri.res_up_uuid as pid,trim(sri.res_name) name, nvl2(tur.RES_UUID,'false','true') IS_CHECKED from SYS_RESOURCE_INFO sri
-      JOIN TMP_USER_RES  tur ON  tur.RES_UUID=sri.uuid
-      start with sri.res_up_uuid ='#' connect by prior sri.uuid =sri.res_up_uuid
-
-      order by  nvl2(tur.RES_UUID,'false','true'),sri.res_id asc
+          select t.* from sys_role_info t where t.uuid=?
     	]]>
 	</sql>
 	
