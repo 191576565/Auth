@@ -22,8 +22,54 @@
 	
 	<sql id="selectFunList">
 		<![CDATA[ 
-          select t2.uuid,t1.role_id,t1.Role_Name,t1.res_id,t1.res_name from V_Api_Rpm02 t1 left join
-          sys_resource_info t2 on t1.res_id=T2.Res_Id
+          WITH TMP_USERS  AS ( SELECT  T2.DOMAIN_ID
+                 ,T2.DOMAIN_NAME
+                 ,T3.ORG_UNIT_ID
+                 ,T3.ORG_UNIT_DESC
+                 ,T0.USER_ID
+                 ,T0.USER_NAME
+                 ,min(t4.RES_ID) over(partition by t2.domain_id  ) AS   TOP_RES_ID
+                 ,T4.UUID             AS RES_UUID
+                 ,T4.RES_UP_UUID      AS RES_UP_UUID
+                 ,T4.RES_ID           AS RES_ID
+                 ,T4.RES_NAME         AS RES_NAME
+                 ,T4.RES_URL          AS RES_URL
+                 ,nvl(T5.RES_ID,'#')  AS RES_UP_ID
+                 ,T4.RES_CLASS        AS RES_CSS
+                 ,T4.RES_COLOR        AS RES_COLOR
+                 ,T4.RES_ICON         AS RES_ICON
+                 ,T4.RES_TYPE         AS RES_TYPE
+               FROM SYS_USER_INFO     T0
+          LEFT JOIN SYS_ROLE_INFO     T1  ON INSTR(T0.ROLES  ,T1.UUID)>0
+          LEFT JOIN SYS_DOMAIN_INFO   T2  ON T0.DOMAIN_UUID=T2.UUID
+          LEFT JOIN SYS_ORG_INFO      T3  ON T0.ORG_UUID=T3.UUID and t0.domain_uuid=t3.domain_uuid
+          LEFT JOIN SYS_RESOURCE_INFO T4  ON INSTR(T1.RESOURCES  ,T4.UUID)>0
+          LEFT JOIN SYS_RESOURCE_INFO T5  ON T4.RES_UP_UUID=T5.UUID
+          where  USER_ID =?
+          group  by
+           T2.DOMAIN_ID     ,T2.DOMAIN_NAME     ,T3.ORG_UNIT_ID   ,T3.ORG_UNIT_DESC ,T0.USER_ID  ,T0.USER_NAME,T4.UUID    ,T4.RES_UP_UUID ,T4.RES_ID
+           ,T4.RES_NAME     ,T4.RES_URL   ,nvl(T5.RES_ID,'#') ,T4.RES_CLASS   ,T4.RES_COLOR     ,T4.RES_ICON   ,T4.RES_TYPE )
+          SELECT  t.DOMAIN_ID,
+                  t.DOMAIN_NAME,
+                  t.ORG_UNIT_ID,
+                  t.ORG_UNIT_DESC,
+                  t.USER_ID,
+                  t.USER_NAME,
+                  t.TOP_RES_ID,
+                  t.RES_UUID,
+                  t.RES_UP_UUID,
+                  t.RES_ID,
+                  t.RES_NAME,
+                  t.RES_URL,
+                  t.RES_UP_ID,
+                  t.RES_CSS,
+                  t.RES_COLOR,
+                  t.RES_ICON,
+                  t.RES_TYPE,
+                  level as  lvl
+                  FROM TMP_USERS t
+          start with res_id =TOP_RES_ID
+           connect by prior res_uuid =res_up_uuid
     	]]>
 	</sql>
 	

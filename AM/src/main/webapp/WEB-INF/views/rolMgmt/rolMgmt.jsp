@@ -122,32 +122,9 @@
 				<button id="btn_beSure" class="btn btn-danger delete">删除</button>
 			</form>
 		</div>
-		<div id="funList" style="margin-left:1% ; display:none">
- 			<form id="form" method="post" action="funSave">
-				
-			<input type="hidden" id="fun_uuid" name="fun_uuid" value="${funuuid }"/>	
-			<table class="table table-hover table-bordered">
-  				<thead><th>功能名称</th></thead>
-   				<tbody>
-  				<c:forEach items="${funlist }" var="fun">
-  				 
-   					<tr>
-   					<td>
-   					<input name="fun_list" id="fun_list"  type="checkbox"  value="${fun.uuid }" style="margin-left: 9%;"/>${fun.res_name }
-   					</td>
-
-   					</tr>
-  				 </c:forEach>
-   				</tbody>
-  			</table>
-  			<div class="row">
- 			<div class="col-xs-4">
- 				<button id="sys_add" type="submit" class="btn btn-primary create">保存</button>
- 				<button id="btn_add" type="button" class="btn btn-danger delete">刷新</button>
- 			</div>
- 		</div>
- 			</form>
- 		</div>
+		<div id="container" style="display:none">
+			<div id="tree"></div>
+		</div>
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
@@ -162,6 +139,8 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- Bootstrap-Treeview plugin javascript -->
+    <script src="${ctxPath }/static/js/plugins/treeview/bootstrap-treeview.js"></script>
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>

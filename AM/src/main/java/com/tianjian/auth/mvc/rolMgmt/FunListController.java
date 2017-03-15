@@ -12,10 +12,6 @@ import com.tianjian.auth.mvc.rolMgmt.FunListController;
  * --角色（业务功能选择）
  *   --跳转流程控制类
  * 
- * 
- * 
- * 
- * 
  * **/
 
 public class FunListController extends Controller {
@@ -28,18 +24,16 @@ public class FunListController extends Controller {
 	public void index() {
 		log.info("jump to sysMgmt");
 		render("funList.jsp");
-
 	}
 	
 	//角色对应功能列表查询
 	
 	public void showFunList() {
 		
-		System.out.println("showfunlist 方法被调用");
-		System.out.println(getPara("uuid"));
-		setAttr("funuuid", getPara("uuid"));
-		setAttr("funlist", funListService.selectFunList());
-		render("funList.jsp");
+//		setAttr("funuuid", getPara("uuid"));
+//		setAttr("funlist", funListService.selectFunList());
+		renderJson(funListService.selectFunList("rpm"));
+//		render("funList.jsp");
 	}
 	
 	//角色对应功能保存

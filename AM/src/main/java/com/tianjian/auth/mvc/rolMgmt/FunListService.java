@@ -16,10 +16,9 @@ import com.tianjian.platform.tools.ToolGetSql;
  * ***/
 public class FunListService {
 	
-	
-	public List<Record> selectFunList() {
+	public List<Record> selectFunList(String userId) {
 		String sql = ToolGetSql.getSql("tianjian.roleMgmt.selectFunList");
-		List<Record> list = Db.find(sql);
+		List<Record> list = Db.find(sql,userId);
 		return list;
 	}
 

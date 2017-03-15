@@ -35,14 +35,24 @@ $('#table').bootstrapTable({
     },]
 });
 
+//功能
 function onFun(id){
-	$.get("funList/showFunList?uuid="+id,function(result){
-		layer.open({
-			type: 1,
-			content: (result),
-			title: false,
-			maxmin: true, //开启最大化最小化按钮
+	//拼接tree结构
+	$.get("funList/showFunList?uuid="+id,function(content){
+		content.forEach(function(e){
+			if(e.lvl===1){
+//            	alert(e.lvl);
+			}
 		});
+		$('#container #tree').treeview({
+			data:result,
+			showCheckbox:true
+		});
+	});
+	layer.open({
+		type:1,
+		content:$('#container'),
+		area:['800px','450px']
 	});
 }
 
