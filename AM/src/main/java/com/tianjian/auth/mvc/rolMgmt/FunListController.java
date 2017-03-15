@@ -51,12 +51,13 @@ public class FunListController extends Controller {
 	//	System.out.println(StringUtils.join(getParaValues("fun_list"),","));
 		
 		RoleMgmt mgmt = new RoleMgmt();
-		mgmt.set("uuid", getPara("fun_uuid"));
+		mgmt.set("uuid", getPara("uuid"));
+		mgmt.set("resources", getPara("resources"));
 		
-		mgmt.set("resources", StringUtils.join(getParaValues("fun_list"),","));
+//		mgmt.set("resources", StringUtils.join(getParaValues("fun_list"),","));
 		if(!mgmtService.update(mgmt)){
 			return ;
 		}
-		redirect("/rolMgmt");
+		renderJson(true);
 	}
 }
