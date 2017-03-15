@@ -217,3 +217,29 @@ $("input").blur(function(){
 //	$(this).valid();
 	valid.element( this );
 });
+
+jQuery.validator.addMethod("chkResId", function(value, element) {   
+    var flag=true;
+    $.ajax({
+    	async:false,
+    	type:"GET",
+    	url:'resMgmt/resIdcheck?resId='+value,
+    	success:function(data){
+    		flag=data;
+    	}
+    });
+    return this.optional(element) || flag;
+}, "<i class='fa fa-times-circle'></i>输入的资源编码已存在，不能重复");
+
+jQuery.validator.addMethod("chkResName", function(value, element) {   
+    var flag=true;
+    $.ajax({
+    	async:false,
+    	type:"GET",
+    	url:'resMgmt/resNamecheck?resName='+value,
+    	success:function(data){
+    		flag=data;
+    	}
+    });
+    return this.optional(element) || flag;
+}, "<i class='fa fa-times-circle'></i>输入的资源名称已存在，不能重复");

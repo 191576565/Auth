@@ -114,11 +114,11 @@
                                 <div class="col-sm-12">
                                 	<div class="form-group col-sm-6">
 	                                    <label>资源编码</label>
-	                                    <input type="text" placeholder="" class="form-control" name="res.res_id" id="res_id" required>
+	                                    <input type="text" placeholder="" class="form-control chkResId" name="res.res_id" id="res_id" required>
 	                                </div>
 	                                <div class="form-group col-sm-6">
 	                                    <label>资源名称</label>
-	                                    <input type="text" placeholder="" class="form-control" name="res.res_name" id="res_name" required>
+	                                    <input type="text" placeholder="" class="form-control chkResName" name="res.res_name" id="res_name" required>
 	                                </div>
                                 </div>
                                 <div class="col-sm-12">
