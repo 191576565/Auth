@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.rolMgmt.FunListController;
 
 
@@ -32,7 +33,8 @@ public class FunListController extends Controller {
 		
 //		setAttr("funuuid", getPara("uuid"));
 //		setAttr("funlist", funListService.selectFunList());
-		renderJson(funListService.selectFunList("rpm"));
+		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
+		renderJson(funListService.selectFunList(userId));
 //		render("funList.jsp");
 	}
 	
