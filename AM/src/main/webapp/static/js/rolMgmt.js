@@ -80,6 +80,20 @@ function onFun(id){
 		});
 		$.fn.zTree.init($("#res"), s, rs); //树
 		
+		//勾选已经存在的资源
+		$.ajax({
+	    	async:false,
+	    	type:"GET",
+	    	url:"funList/showExit?uuid="+id,
+	    	success:function(d){
+	    		var treeObj = $.fn.zTree.getZTreeObj("res");
+				d.forEach(function(e){
+					var node =  treeObj.getNodeByParam("id", e.id, null);
+					treeObj.checkNode(node, true, true);
+				});
+	    	}
+	    });
+		
 		layer.open({
 			type : 1,
 			content : $('.t'),
@@ -88,18 +102,18 @@ function onFun(id){
 			maxmin: true,
 			btn: ['保存', '取消'],
 			yes: function(index, layero){
-			    console.log('1');
+				var treeObj = $.fn.zTree.getZTreeObj("res");
+				var nodes = treeObj.getCheckedNodes(true);
+				var uuid=[];
+				nodes.forEach(function(e){
+					uuid.push(e.id);
+				});
 			},
 			btn2: function(index, layero){
 				console.log('2');
 		    }
 		});
 	});
-//	layer.open({
-//		type:1,
-//		content:$('#container'),
-//		area:['800px','450px']
-//	});
 }
 
 //layer弹出自定义div__新增
