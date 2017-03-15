@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.tianjian.auth.mvc.sysMgmt.OrgMgmt;
 import com.tianjian.platform.tools.ToolGetSql;
 
 public class ResMgmtService {
@@ -39,6 +40,20 @@ public class ResMgmtService {
 		String sql = ToolGetSql.getSql(sqlId);
 		int i=Db.update(sql,uuid);
 		return i;
+	}
+	
+	/**
+	 * 功能:资源id，name是否重复
+	 * 输入:
+	 * 输出:boolean
+	 */
+	public boolean resIdisRepeated(String sqlId,String resId){
+		String sql = ToolGetSql.getSql(sqlId);
+		return ResMgmt.dao.find(sql,resId).isEmpty();			
+	}
+	public boolean resNameisRepeated(String sqlId,String resName){
+		String sql = ToolGetSql.getSql(sqlId);
+		return ResMgmt.dao.find(sql,resName).isEmpty();			
 	}
 	/*
 	 * 根据res_type，res_up_uuid，user_id获取菜单 author： hujian

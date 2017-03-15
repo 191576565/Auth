@@ -28,20 +28,28 @@ public class ResMgmt extends Model<ResMgmt> {
 	// ==============================================
 
 	/*
-	 * 日志select语句
+	 * 资源select语句
 	 */
 	public static final String sqlId_res_select = "tianjian.res.allresdata";
 	/*
-	 * 日志select语句
+	 * 资源select语句
 	 */
 	public static final String sqlId_res_tree = "tianjian.res.restree";
 	/*
-	 * 日志select语句
+	 * 资源select语句
 	 */
 	public static final String sqlId_resmenu_select = "tianjian.res.menuSelect";
 	/*
-	 * 日志delete语句
+	 *资源delete语句
 	 */
 	public static final String sqlId_res_delete = "tianjian.res.resdatadelete";
+	/*
+	 *资源id查重复语句
+	 */
+	public static final String sqlId_res_residrepeated = "tianjian.res.residrepeated";
+	/*
+	 *资源nAME查重复语句
+	 */
+	public static final String sqlId_res_resnamerepeated = "tianjian.res.resnamerepeated";
 
 }

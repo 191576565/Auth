@@ -8,6 +8,20 @@
 			order by res_id asc
     	]]>
 	</sql>
+	<sql id="residrepeated">
+		<![CDATA[ 
+        	 select * from SYS_RESOURCE_INFO t 
+        		where 1=1 
+        			and t.res_id = ? 
+    	]]>
+	</sql>
+	<sql id="resnamerepeated">
+		<![CDATA[ 
+        	 select * from SYS_RESOURCE_INFO t 
+        		where 1=1 
+        			and  res_name = ?
+    	]]>
+	</sql>
 	<sql id="allresdata">
 		<![CDATA[ 
         	select    t.uuid       
