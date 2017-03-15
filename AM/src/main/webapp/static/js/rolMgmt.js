@@ -69,9 +69,7 @@ $('#table').bootstrapTable({
     },]
 });
 
-//功能
-function onFun(id){
-	//拼接tree结构
+$(function(){
 	$.get("funList/showFunList",function(data){
 		var rs=[];
 		data.forEach(function(e){
@@ -79,6 +77,14 @@ function onFun(id){
 			rs.push(e);
 		});
 		$.fn.zTree.init($("#res"), s, rs); //树
+	});
+})
+
+//功能
+function onFun(id){
+		var treeObj = $.fn.zTree.getZTreeObj("res");
+		treeObj.checkAllNodes(false); //取消所有勾选
+		treeObj.expandAll(true);
 		
 		//勾选已经存在的资源
 		$.ajax({
@@ -86,11 +92,10 @@ function onFun(id){
 	    	type:"GET",
 	    	url:"funList/showExit?uuid="+id,
 	    	success:function(d){
-	    		var treeObj = $.fn.zTree.getZTreeObj("res");
-				d.forEach(function(e){
-					var node =  treeObj.getNodeByParam("id", e.id, null);
-					treeObj.checkNode(node, true, true);
-				});
+				for(var key in d){
+					var node =  treeObj.getNodeByParam("id", key, null);
+					treeObj.checkNode(node, true, false);
+				}
 	    	}
 	    });
 		
@@ -102,18 +107,25 @@ function onFun(id){
 			maxmin: true,
 			btn: ['保存', '取消'],
 			yes: function(index, layero){
-				var treeObj = $.fn.zTree.getZTreeObj("res");
+				//var treeObj = $.fn.zTree.getZTreeObj("res");
 				var nodes = treeObj.getCheckedNodes(true);
 				var uuid=[];
 				nodes.forEach(function(e){
 					uuid.push(e.id);
 				});
+				$.post("funList/funSave?resources="+uuid.join()+"&uuid="+id, function(d){
+					if(d){
+						layer.closeAll();
+						layer.msg('角色资源赋予成功');
+					}else {
+						layer.msg('角色资源赋予失败');
+					}
+				});
 			},
 			btn2: function(index, layero){
-				console.log('2');
+				
 		    }
 		});
-	});
 }
 
 //layer弹出自定义div__新增
