@@ -19,6 +19,14 @@ public class FunListService {
 	public List<Record> selectFunList(String userId) {
 		String sql = ToolGetSql.getSql("tianjian.roleMgmt.selectFunList");
 		List<Record> list = Db.find(sql,userId);
+		for(int i=0; i<list.size(); i++){
+			if(list.get(i).getStr("chkdisabled").equals("true")){
+				list.get(i).set("chkdisabled", true);
+			};
+			if(list.get(i).getStr("chkdisabled").equals("false")){
+				list.get(i).set("chkdisabled", false);
+			};
+		}
 		return list;
 	}
 

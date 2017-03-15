@@ -128,6 +128,7 @@
 					<label>所属机构</label>
 					<select class="form-control" name="organization" id="organization"></select>
 				</div>
+				<!-- 
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.pwd.$valid }">
 					<label>密码</label> 
 					<input name="pwd" 
@@ -149,6 +150,7 @@
 						signUpForm.pwd.$touched">
 				 	长度应在6~30位之间</p>
 				</div>
+				 -->
 				<div class="form-group">
 					<label>角色</label><br>
 					<select class="form-control" name="role" id="role" multiple></select>
