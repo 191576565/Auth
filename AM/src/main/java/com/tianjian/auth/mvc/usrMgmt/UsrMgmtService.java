@@ -59,21 +59,21 @@ public class UsrMgmtService {
 		return feedback;
 	}
 	
-	//批量删除
-		public boolean batchResetUUID(String[] uuids){
-			boolean feedback = false;
-			String sql = ToolGetSql.getSql("tianjian.usrMgmt.batchReset");
-			String pwd=BaseSecurityMD5.encodeMD5Hex("123456");
-			Object[][] obj = new Object[uuids.length][2];
-			for (int i = 0; i < uuids.length; i++) {
-				obj[i][0] = pwd;
-				obj[i][1] = uuids[i];
-			}
-			System.out.println(obj);
-			int[] size = Db.batch(sql, obj, 10);
-			if(!size.equals(null)&&size.length>0){
-				feedback = true;
-			}
-			return feedback;
+	//重置密码
+	public boolean batchResetUUID(String[] uuids){
+		boolean feedback = false;
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.batchReset");
+		String pwd=BaseSecurityMD5.encodeMD5Hex("123456");
+		Object[][] obj = new Object[uuids.length][2];
+		for (int i = 0; i < uuids.length; i++) {
+			obj[i][0] = pwd;
+			obj[i][1] = uuids[i];
 		}
+		System.out.println(obj);
+		int[] size = Db.batch(sql, obj, 10);
+		if(!size.equals(null)&&size.length>0){
+			feedback = true;
+		}
+		return feedback;
+	}
 }

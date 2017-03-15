@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.tianjian.auth.mvc.base.BaseSecurityMD5;
+import com.tianjian.auth.mvc.constant.ConstantLog;
 import com.tianjian.auth.mvc.usrMgmt.UsrMgmtController;
 
 public class UsrMgmtController extends Controller {
@@ -83,6 +84,11 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("creator", sessionUserId);
 		
 		usrMgmt.save();
+
+		setAttr(ConstantLog.log_optype, ConstantLog.user_add);
+		String msg = "新增用户（用户名）："+userId;
+		setAttr(ConstantLog.log_opcontent, msg);
+		
 	}
 	//编辑用户
 	public void updtUsr(){
@@ -113,6 +119,10 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("modifier", sessionUserId);
 		usrMgmt.set("modified_date", new Timestamp(System.currentTimeMillis()));
 		usrMgmt.update();
+
+		setAttr(ConstantLog.log_optype, ConstantLog.user_chg);
+		String msg = "编辑用户（uuid）："+uuid;
+		setAttr(ConstantLog.log_opcontent, msg);
 	}
 	//删除用户
 	public void delUsr(){
@@ -122,16 +132,28 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("uuid", uuid);
 		
 		usrMgmt.delete();
+		
+		setAttr(ConstantLog.log_optype, ConstantLog.user_del);
+		String msg = "删除用户（uuid）："+uuid;
+		setAttr(ConstantLog.log_opcontent, msg);
 	}
 	//批量删除用户
 	public void batchDel(){
 		String[] uuids = getParaValues("uuid[]");
 		renderJson(ums.batchDeleteUUID(uuids));
+		
+		setAttr(ConstantLog.log_optype, ConstantLog.user_del);
+		String msg = "删除用户（uuid）："+uuids;
+		setAttr(ConstantLog.log_opcontent, msg);
 	}
 	
-	//批量删除用户
-		public void batchReset(){
-			String[] uuids = getParaValues("uuid[]");
-			renderJson(ums.batchResetUUID(uuids));
-		}
+	//重置密码
+	public void batchReset(){
+		String[] uuids = getParaValues("uuid[]");
+		renderJson(ums.batchResetUUID(uuids));
+		
+		setAttr(ConstantLog.log_optype, ConstantLog.user_chg);
+		String msg = "重置用户（uuid）："+uuids+" 的密码";
+		setAttr(ConstantLog.log_opcontent, msg);
+	}
 }
