@@ -1,14 +1,29 @@
 package com.tianjian.auth.mvc.sysMgmt;
 
 import java.util.List;
+
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.platform.tools.ToolGetSql;
 
 public class SysMgmtService {
 	
-	//查询系统信息
+	//root用户查询系统信息
 	public List<SysMgmt> getData(){
 		String sql = ToolGetSql.getSql(SysMgmt.sqlId_sys_select);
 		return SysMgmt.dao.find(sql);
+	}
+	
+	//非root用户查询系统信息
+	public List<Record> notRootData(String userId){
+		String sql = ToolGetSql.getSql("tianjian.sys.notRootpageSelect");
+		return Db.find(sql,userId);
+	}
+	
+	//查询用户角色
+	public List<Record> userRole(String userId){
+		String sql = ToolGetSql.getSql("tianjian.sys.roleSelect");
+		return Db.find(sql,userId);
 	}
 	
 	//查询root域uuid

@@ -23,7 +23,13 @@ public class SysMgmtController extends Controller {
 	 * 查询系统信息
 	 */
 	public void sysData(){
-		renderJson(sysMgmtService.getData());
+		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
+		String userRole = sysMgmtService.userRole(userId).get(0).getStr("domain_id");
+		if("root".equals(userRole)){
+			renderJson(sysMgmtService.getData());
+			return;
+		}
+		renderJson(sysMgmtService.notRootData(userId));
 	}
 	
 	/*

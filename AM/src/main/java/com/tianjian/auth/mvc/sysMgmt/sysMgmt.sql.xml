@@ -10,6 +10,23 @@
     	]]>
 	</sql>
 	
+	<sql id="roleSelect">
+		<![CDATA[ 
+        	SELECT   t2.domain_id
+     			FROM SYS_USER_INFO     T0                                                            
+				LEFT JOIN SYS_DOMAIN_INFO   T2  ON T0.DOMAIN_UUID=T2.UUID
+				where t0.user_id  = ? 
+    	]]>
+	</sql>
+	
+	<sql id="notRootpageSelect">
+		<![CDATA[ 
+        	select * from sys_domain_info t 
+  				where t.uuid=(select t.domain_uuid from sys_user_info　t where t.user_id=?)
+            	order by t.modified_date desc
+    	]]>
+	</sql>
+	
 	<sql id="repeatSelect">
 		<![CDATA[ 
         	select * from sys_domain_info t 
