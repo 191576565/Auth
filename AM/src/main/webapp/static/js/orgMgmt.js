@@ -12,7 +12,7 @@ function initTable() {
 						if(e.level===1){
 							temp='<tr class="treegrid-'+e.uuid+'" lvl="'+e.level+'"><td>'+e.org_unit_id+'</td><td>'+e.domain_name+'</td><td>'
 									+e.org_unit_desc+'</td><td>'+e.up_org_unit_desc
-									+'</td><td><button id="" type="button" class="btn btn-info btn-sm tbl-upt" onclick="upt(\''+ e.uuid
+									+'</td><td><button id="" type="button" class="btn btn-info update" onclick="upt(\''+ e.uuid
 									+'\',\''+ e.org_unit_id 
 									+'\',\''+ e.domain_name
 									+'\',\''+ e.domain_uuid
@@ -20,13 +20,13 @@ function initTable() {
 									+'\',\''+ e.up_org_unit_desc 
 									+'\',\''+ e.org_up_uuid 
 									+'\',\''+ e.memo 
-									+'\')">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger btn-sm" onclick="del(\''+ e.uuid
+									+'\')">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger delete" onclick="del(\''+ e.uuid
 									+'\')">删除</button></td></tr>';
 							$('#table tbody').append(temp);
 						}else {
 							temp='<tr class="treegrid-'+e.uuid+' treegrid-parent-'+e.org_up_uuid+'" lvl="'+e.level+'"><td>'+e.org_unit_id+'</td><td>'+e.domain_name+'</td><td>'
 									+e.org_unit_desc+'</td><td>'+e.up_org_unit_desc
-									+'</td><td><button id="" type="button" class="btn btn-info btn-sm tbl-upt" onclick="upt(\''+ e.uuid
+									+'</td><td><button id="" type="button" class="btn btn-info update" onclick="upt(\''+ e.uuid
 									+'\',\''+ e.org_unit_id 
 									+'\',\''+ e.domain_name
 									+'\',\''+ e.domain_uuid
@@ -34,7 +34,7 @@ function initTable() {
 									+'\',\''+ e.up_org_unit_desc 
 									+'\',\''+ e.org_up_uuid 
 									+'\',\''+ e.memo
-									+'\')">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger btn-sm" onclick="del(\''+ e.uuid
+									+'\')">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger delete" onclick="del(\''+ e.uuid
 									+'\')">删除</button></td></tr>';
 							$('#table tbody tr.treegrid-'+e.org_up_uuid).after(temp);
 						}
