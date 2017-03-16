@@ -102,21 +102,17 @@ function initTable() {
 	});
 }
 
+var chk=0;
 $('#res_add').on('click', function() {
 	$('#form')[0].reset();
 	$('#uuid').val('');
+	$('#res_id').removeAttr('readonly');
+	
+	chk=1;
 	
 	//去除上次表单验证的样式
 	valid.resetForm();
 	$('input').removeClass('error');
-	
-//	var index=$('td input:checked').parent().parent().attr('index');
-//	if(index){
-//		var info=rs[index];
-//		
-//		$('#res_up_uuid').val(info.uuid);
-//		$('#up_res_name').val(info.res_name);
-//	}
 	
 	layer.open({
 		type : 1,
@@ -129,6 +125,9 @@ $('#res_add').on('click', function() {
 });
 
 function update(obj){
+	chk=0;
+	
+	$('#res_id').attr('readonly', 'readonly');
 	var info=rs[$(obj).attr('index')];
 	
 	for(var key in info){
@@ -221,11 +220,17 @@ $("input").blur(function(){
 });
 
 jQuery.validator.addMethod("chkResId", function(value, element) {   
-    var flag=true;
+    var flag=true, url='';
+    if(chk==0){ //编辑后台不校验是否重复
+    	url='resMgmt/resIdcheck?resId='+value;
+    }else { //新增需要校验编码是否重复
+    	url='resMgmt/resIdcheck?resId='+value+'&checkflag=1';
+    }
+    
     $.ajax({
     	async:false,
     	type:"GET",
-    	url:'resMgmt/resIdcheck?resId='+value,
+    	url:url,
     	success:function(data){
     		flag=data;
     	}
@@ -233,15 +238,15 @@ jQuery.validator.addMethod("chkResId", function(value, element) {
     return this.optional(element) || flag;
 }, "<i class='fa fa-times-circle'></i>输入的资源编码已存在，不能重复");
 
-jQuery.validator.addMethod("chkResName", function(value, element) {   
-    var flag=true;
-    $.ajax({
-    	async:false,
-    	type:"GET",
-    	url:'resMgmt/resNamecheck?resName='+value,
-    	success:function(data){
-    		flag=data;
-    	}
-    });
-    return this.optional(element) || flag;
-}, "<i class='fa fa-times-circle'></i>输入的资源名称已存在，不能重复");
+//jQuery.validator.addMethod("chkResName", function(value, element) {   
+//    var flag=true;
+//    $.ajax({
+//    	async:false,
+//    	type:"GET",
+//    	url:'resMgmt/resNamecheck?resName='+value,
+//    	success:function(data){
+//    		flag=data;
+//    	}
+//    });
+//    return this.optional(element) || flag;
+//}, "<i class='fa fa-times-circle'></i>输入的资源名称已存在，不能重复");
