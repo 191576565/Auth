@@ -156,10 +156,11 @@ $('#sub').click(function(){
 		$("#form").attr("action", "orgMgmt/save");
 		$('#form').ajaxSubmit(function(resultJson){
 			if(JSON.stringify(resultJson) == "false"){
-				alert("机构编码不能重复!");
+				layer.msg('机构编码不能重复!');
 				return;
 			}
-			window.location.href='orgMgmt';
+			initTable();
+			layer.closeAll();
 		});
 		return false;//阻止表单默认提交
 	}
@@ -168,12 +169,13 @@ $('#sub').click(function(){
 		$("#form").attr("action", "orgMgmt/update");
 		$('#form').ajaxSubmit(function(resultJson){
 			if(JSON.stringify(resultJson) == "true"){
-				window.location.href='orgMgmt';
+				initTable();
+				layer.closeAll();
 				return;
 			}
 			$.each(resultJson, function(i, item){
 				if(item === "repeat"){
-					alert('机构编码重复，修改失败!');
+					layer.msg('机构编码重复，修改失败!');
 				}
 			})
 		});
@@ -185,26 +187,22 @@ $('#sub').click(function(){
 
 //删除
 function del(id) {
-	var $ipt_uuid = $("#sys_del_div #del_form #del_uuid").val(id);
-	layer.open({
-		type: 1,
-		content: $('#sys_del_div'),
-		title: '系统提示',
-		area: ['300px', '100px'],
-	});
-};
-$('#btn_beSure').click(function() {
-	$('#del_form').attr("action", "orgMgmt/delete");
-//	$('#del_form').submit(function(){
-		$('#del_form').ajaxSubmit(function(resultJson){
-			if(JSON.stringify(resultJson) == "false"){
-				alert('删除失败');
-				return;
-			}else{
-				window.location.href='orgMgmt';
+	layer.confirm('是否删除该系统信息？', 
+			{
+			  btn: ['删除','取消'] //按钮
+			}, 
+			function(){
+				$.post('orgMgmt/delete?UUID='+id, function(d){
+					if(d){
+						layer.msg('资源删除成功');
+					}else {
+						layer.msg('删除失败');
+					}
+					initTable();
+				});
+			}, 
+			function(){
+				layer.closeAll();
 			}
-		});
-		return false;
-//	});
-	
-});
+	);
+};

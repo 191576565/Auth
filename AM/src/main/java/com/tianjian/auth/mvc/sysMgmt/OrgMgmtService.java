@@ -19,15 +19,26 @@ public class OrgMgmtService {
 		return Db.find(sql,userId, userId);
 	}
 	
-	//获取域信息
+	//root用户获取域信息
 	public List<Record> getScopeInfo(String uuid){
 		return Db.find("select t.* from SYS_DOMAIN_INFO t where t.UUID = ?",uuid);
 	}
 	
-	//获取机构信息
+	//非root用户获取域信息
+	public List<Record> notRootScopeInfo(String userId){
+		String sql = ToolGetSql.getSql("tianjian.org.notRootScopeInfo");
+		return Db.find(sql,userId);
+	}
+	
+	//root用户获取机构信息
 	public List<OrgMgmt> getOrgInfo(String uuid){
 		String sql = ToolGetSql.getSql(OrgMgmt.sqlId_getOrgInfo);
 		return OrgMgmt.dao.find(sql,uuid);
+	}
+	
+	//非root用户获取机构信息
+	public List<Record> notRootOrgInfo(String userId){
+		return notRootData(userId);
 	}
 	
 	//新增机构信息

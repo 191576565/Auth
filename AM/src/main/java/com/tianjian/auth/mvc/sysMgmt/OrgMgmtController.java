@@ -49,7 +49,13 @@ public class OrgMgmtController extends Controller {
 	 * 发送域信息查询结果
 	 */
 	public void getId(){
-		renderJson(orgMgmtService.getScopeInfo(g_uuid));
+		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
+		String userRole = sysMgmtService.userRole(userId).get(0).getStr("domain_id");
+		if("root".equals(userRole)){
+			renderJson(orgMgmtService.getScopeInfo(g_uuid));
+			return;
+		}
+		renderJson(orgMgmtService.notRootScopeInfo(userId));
 	}
 	
 	/*
@@ -57,7 +63,13 @@ public class OrgMgmtController extends Controller {
 	 * 发送机构信息查询结果
 	 */
 	public void getOrg(){
-		renderJson(orgMgmtService.getOrgInfo(g_uuid));
+		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
+		String userRole = sysMgmtService.userRole(userId).get(0).getStr("domain_id");
+		if("root".equals(userRole)){
+			renderJson(orgMgmtService.getOrgInfo(g_uuid));
+			return;
+		}
+		renderJson(orgMgmtService.notRootOrgInfo(userId));
 	}
 	
 	/*

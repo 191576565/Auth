@@ -132,9 +132,11 @@ function onEdit(id,code,name,sort,memo) {
 //删除
 function onDel(id) {
 	var $ipt_uuid = $("#sys_del_div #del_form #del_uuid").val(id);
-	layer.confirm('是否删除该系统信息？', {
+	layer.confirm('是否删除该系统信息？', 
+		{
 		  btn: ['删除','取消'] //按钮
-		}, function(){
+		}, 
+		function(){
 			$.post('sysMgmt/delete?UUID='+id, function(d){
 				if(d){
 					layer.msg('资源删除成功');
@@ -143,9 +145,11 @@ function onDel(id) {
 				}
 				$('#table').bootstrapTable('refresh', {silent: true});
 			});
-		}, function(){
+		}, 
+		function(){
 			layer.closeAll();
-		});
+		}
+	);
 };
 
 //表单验证
@@ -174,12 +178,7 @@ $('#sub').click(function(){
 		$("#form").attr("action", "sysMgmt/save");
 		$('#form').ajaxSubmit(function(resultJson){
 			if(JSON.stringify(resultJson) == "false"){
-				layer.open({
-					type: 1,
-					content: '域编码/域名重复，新增失败!',
-					title: '新增失败',
-					area: ['200px', '200px'],
-				});
+				layer.msg('域编码/域名不能重复');
 			}else{
 				layer.closeAll();
 				$('#table').bootstrapTable('refresh', {silent: true});
@@ -199,7 +198,7 @@ $('#sub').click(function(){
 			}
 			$.each(resultJson, function(i, item){
 				if(item === "repeat"){
-					alert('域编码/域名重复，修改失败!');
+					layer.msg('域编码/域名不能重复');
 				}
 			})
 		});

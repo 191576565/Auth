@@ -91,4 +91,12 @@
     	]]>
 	</sql>
 	
+	<sql id="notRootScopeInfo">
+		<![CDATA[ 
+        	SELECT T.* FROM SYS_DOMAIN_INFO T 
+        		WHERE T.UUID=(SELECT T.DOMAIN_UUID FROM SYS_USER_INFO T WHERE T.USER_ID=?)
+    	]]>
+	</sql>
+	
+	
 </sql-statement>
