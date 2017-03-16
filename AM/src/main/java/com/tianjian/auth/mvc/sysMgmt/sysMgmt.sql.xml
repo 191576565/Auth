@@ -51,6 +51,13 @@
         			and t.domain_up_uuid = '#'
     	]]>
 	</sql>
+	
+	<sql id="orgSelect">
+		<![CDATA[ 
+        	SELECT T.* FROM SYS_ORG_INFO T 
+        		WHERE T.DOMAIN_UUID = ?
+    	]]>
+	</sql>
 
 	
 </sql-statement>

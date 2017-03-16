@@ -90,22 +90,14 @@ $('#btn_del').on('click', function(){
 	if(sendData == ''){
 		layer.msg('请选择要删除的系统信息');
 	}else{
-		$.ajax({
-	        type: "POST",
-	        url: "sysMgmt/deleteMore",
-	        cache : false,
-	        data: {"uuid":sendData},
-	        dataType: 'json',
-	        success: function (message) {
-	            if (message > 0) {
-	            	layer.closeAll();
-					$('#table').bootstrapTable('refresh', {silent: true});
-	            }
-	        },
-	        error: function (message) {
-	        	layer.msg('提交数据失败');
-	        }
-	    });
+		$.post('sysMgmt/deleteMore?uuid='+sendData, function(d){
+			if(d){
+				layer.msg('资源删除成功');
+			}else {
+				layer.msg('删除失败，检查是否已关联机构');
+			}
+			$('#table').bootstrapTable('refresh', {silent: true});
+		});
 	}	
 })
 
@@ -147,7 +139,7 @@ function onDel(id) {
 				if(d){
 					layer.msg('资源删除成功');
 				}else {
-					layer.msg('资源删除失败');
+					layer.msg('删除失败，检查是否已关联机构');
 				}
 				$('#table').bootstrapTable('refresh', {silent: true});
 			});

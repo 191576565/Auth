@@ -62,17 +62,28 @@ public class SysMgmtService {
 		return sysMgmt.delete();
 	}
 	
+	//判断是否关联机构
+	public boolean orgSelect(String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.sys.orgSelect");
+		List<Record> list = Db.find(sql,domainUuid);
+		if(list.size()>0){
+			return true;
+		}
+		return false;
+	}
+	
 	//批量删除系统信息
 	public boolean deleteMore(String idValues){
 		String[] idValue = idValues.split(",");
 		boolean[] flags = new boolean[idValue.length];
+		//若没有关联机构则允许删除
 		for (int i=0; i<idValue.length; i++){
-			flags[i] = SysMgmt.dao.deleteById(idValue[i]);
-		}
-		for (int i=0; i<flags.length; i++){
-			if(flags[i] == false){
+			if(orgSelect(idValue[i])){
 				return false;
 			}
+		}
+		for(int i=0; i<idValue.length; i++){
+			SysMgmt.dao.deleteById(idValue[i]);
 		}
 		return true;
 	}

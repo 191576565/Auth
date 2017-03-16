@@ -10,7 +10,8 @@ import com.tianjian.auth.mvc.constant.ConstantLog;
 public class OrgMgmtController extends Controller {
 	
 	private static final Log log = Log.getLog(OrgMgmtController.class);
-	public OrgMgmtService orgMgmtService =  new OrgMgmtService();
+	private OrgMgmtService orgMgmtService =  new OrgMgmtService();
+	private SysMgmtService sysMgmtService = new SysMgmtService();
 	//保存接收参数("uuid")
 	public static String g_uuid = "";
 	
@@ -22,11 +23,12 @@ public class OrgMgmtController extends Controller {
 	
 	/*
 	 * orgMgmt/orgData
-	 * root用户查询机构信息
+	 * 查询机构信息
 	 */
 	public void orgData(){
 		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
-		if("root".equals(userId)){
+		String userRole = sysMgmtService.userRole(userId).get(0).getStr("domain_id");
+		if("root".equals(userRole)){
 			renderJson(orgMgmtService.getData(g_uuid));
 			return;
 		}
