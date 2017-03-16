@@ -26,27 +26,37 @@ public class ResMgmtController extends Controller {
 		List<ResMgmt> all = reservice.get(ResMgmt.sqlId_res_select);
 		renderJson(all);
 	}
+
 	/*
 	 * 资源的--id校验
 	 */
-	public void resIdcheck() {	
-		log.info("resid ");
-		if (reservice.resIdisRepeated(ResMgmt.sqlId_res_residrepeated,getPara("resId"))){
-			renderJson(true);
+	public void resIdcheck() {
+
+		String checkFlag = getPara("checkflag");
+		if (checkFlag != null) {
+			
+			if (reservice.resIdisRepeated(ResMgmt.sqlId_res_residrepeated, getPara("resId"))) {
+				renderJson(true);
+			} else {
+				renderJson(false);
+			}
 		}else{
-			renderJson(false);
+			
+			renderJson(true);
 		}
 	}
+
 	/*
 	 * 资源的--name校验
 	 */
-	public void resNamecheck() {	
-		if (reservice.resNameisRepeated(ResMgmt.sqlId_res_resnamerepeated,getPara("resName"))){
+	public void resNamecheck() {
+		if (reservice.resNameisRepeated(ResMgmt.sqlId_res_resnamerepeated, getPara("resName"))) {
 			renderJson(true);
-		}else{
+		} else {
 			renderJson(false);
 		}
 	}
+
 	/*
 	 * 资源的--新增
 	 */
@@ -110,7 +120,7 @@ public class ResMgmtController extends Controller {
 		if (i >= 1) {
 			// 写日志
 			setAttr(ConstantLog.log_optype, ConstantLog.res_del);
-			String msg = "删除资源,资源头结点UUID为：" +uuid ;
+			String msg = "删除资源,资源头结点UUID为：" + uuid;
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {
