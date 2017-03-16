@@ -25,7 +25,12 @@ public class OrgMgmtController extends Controller {
 	 * root用户查询机构信息
 	 */
 	public void orgData(){
-		renderJson(orgMgmtService.getData(g_uuid));
+		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
+		if("root".equals(userId)){
+			renderJson(orgMgmtService.getData(g_uuid));
+			return;
+		}
+		renderJson(orgMgmtService.notRootData(userId));
 	}
 	
 	/*

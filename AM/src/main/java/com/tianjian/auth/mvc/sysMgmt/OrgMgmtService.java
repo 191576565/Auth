@@ -13,6 +13,12 @@ public class OrgMgmtService {
 		return OrgMgmt.dao.find(sql,uuid);
 	}
 	
+	//非root用户机构查询
+	public List<Record> notRootData(String userId){
+		String sql = ToolGetSql.getSql("tianjian.org.notRootSelect");
+		return Db.find(sql,userId, userId);
+	}
+	
 	//获取域信息
 	public List<Record> getScopeInfo(String uuid){
 		return Db.find("select t.* from SYS_DOMAIN_INFO t where t.UUID = ?",uuid);
