@@ -66,7 +66,7 @@
 					<!-- <td style='width:40px;'></td> -->
 					<th>资源编码</th>
 					<th>资源名称</th>
-					<th>上级资源编码</th>
+					<th>上级资源</th>
 					<th>资源URL</th>
 					<th>资源类型</th>
 					<th>资源样式</th>
