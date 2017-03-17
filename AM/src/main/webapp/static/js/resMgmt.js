@@ -92,8 +92,8 @@ function initTable() {
             expanderExpandedClass: 'glyphicon glyphicon-minus',
             expanderCollapsedClass: 'glyphicon glyphicon-plus'
         });
-		//收起第二级及一下的机构
-    		$('#table tbody tr[lvl=3]').treegrid('collapseRecursive');
+		//收起第二级及以下的机构
+    		$('#table tbody tr[lvl=2]').treegrid('collapseRecursive');
     		
     		//tr点击单选钮选中
 //        $('#table tbody tr').click(function(){
