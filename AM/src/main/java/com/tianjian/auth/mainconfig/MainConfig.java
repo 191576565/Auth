@@ -11,6 +11,7 @@ import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
+import com.jfinal.plugin.activerecord.SqlReporter;
 import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.dialect.OracleDialect;
@@ -56,7 +57,9 @@ public class MainConfig extends JFinalConfig {
 		me.setViewType(ViewType.JSP);
 		//设置开发模式
 		me.setDevMode(PropKit.getBoolean("config.devMode"));
-
+		if (PropKit.getBoolean("config.devMode")){
+			SqlReporter.setLog(true);
+		}
 	}
 
 	@Override
@@ -82,7 +85,7 @@ public class MainConfig extends JFinalConfig {
 		String jdbcUrl = db.getJdbcUrl();
 		String username = db.getUserName();
 		String password = db.getPassWord();
-
+		
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		System.out.println("db_type:" + db_type);
 		C3p0Plugin c3p0Plugin = new C3p0Plugin(jdbcUrl, username, password, driverClass);
@@ -90,7 +93,7 @@ public class MainConfig extends JFinalConfig {
 		// ORM
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		arp.setShowSql(true);
-
+		
 		arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));//
 		// 数据库类型
 		if (db_type.equals(ConstantInit.db_type_postgresql)) {
