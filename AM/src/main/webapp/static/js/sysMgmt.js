@@ -104,6 +104,7 @@ $('#btn_del').on('click', function(){
 //layer弹出自定义div__新增
 $('#sys_add').on('click', function() {
 	$("#sys_add_div #form")[0].reset();
+	$('.error').empty();
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
@@ -115,7 +116,8 @@ $('#sys_add').on('click', function() {
 
 //layer弹出自定义div__修改
 function onEdit(id,code,name,sort,memo) {
-//	alert(id + ' ' + code + ' ' + name + ' ' + sort);
+	$("#sys_add_div #form")[0].reset();
+	$('.error').empty();
 	$("#sys_add_div #form #uuid").val(id);
 	$("#sys_add_div #form #ipt_code").val(code);
 	$("#sys_add_div #form #ipt_name").val(name);
@@ -165,7 +167,7 @@ $('#sub').click(function(){
 	var flag = true;
 	$(".notNull").each(function(){
         if($(this).val()==""){
-        	alert($(this).attr('nullName')+"不能为空");
+        	layer.msg($(this).attr('nullName')+"不能为空");
         	flag = false;
         	return false;
         }
