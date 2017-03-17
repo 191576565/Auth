@@ -47,10 +47,10 @@
 				</ol>
 			</div>
 		</div>
-		<br/><br/><br/><br/>
+		<hr/>
  		<div class="row">
  			<div class="col-xs-4">
- 				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
+ 				<button id="sys_add" type="button" class="btn btn-primary create" style="margin:0px 3px 0px 0px">新增</button>
  				<button id="btn_del" type="button" class="btn btn-danger delete">删除</button>
  			</div>
  		</div>
