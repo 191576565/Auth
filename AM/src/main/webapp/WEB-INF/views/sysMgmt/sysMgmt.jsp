@@ -75,8 +75,6 @@
 						   ng-pattern="/^[A-Za-z0-9]+$/"
 						   required
 					/>
-					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.scopeCode.$valid"></p>
 					<p class="error" ng-if="(signUpForm.scopeCode.$error.minlength ||
 						signUpForm.scopeCode.$error.maxlength) && 
 						signUpForm.scopeCode.$touched">
@@ -98,8 +96,6 @@
 						   ng-maxlength="32"
 						   required
 					/>
-					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.scopeName.$valid"></p>
 					<p class="error" ng-if="(signUpForm.scopeName.$error.minlength ||
 						signUpForm.scopeName.$error.maxlength) && 
 						signUpForm.scopeName.$touched">

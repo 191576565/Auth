@@ -34,7 +34,7 @@ function zTreeOnClickSimple(event, treeId, treeNode) {
 
 $('#table').bootstrapTable({
     url: 'rolMgmt/showRol',
- 	toolbar: '#toolbar',	
+ 	toolbar: '#sys_add, #btn_del',	
 	method: 'get',    
  	striped: false,
  	pagination: true,
