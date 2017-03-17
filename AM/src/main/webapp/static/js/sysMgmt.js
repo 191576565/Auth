@@ -167,7 +167,7 @@ $('#sub').click(function(){
 	var flag = true;
 	$(".notNull").each(function(){
         if($(this).val()==""){
-        	alert($(this).attr('nullName')+"不能为空");
+        	layer.msg($(this).attr('nullName')+"不能为空");
         	flag = false;
         	return false;
         }
