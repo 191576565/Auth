@@ -58,6 +58,7 @@ public class MainConfig extends JFinalConfig {
 		//设置开发模式
 		me.setDevMode(PropKit.getBoolean("config.devMode"));
 		if (PropKit.getBoolean("config.devMode")){
+			System.out.println("999999999999999999999999999999999999999999999999999");
 			SqlReporter.setLog(true);
 		}
 	}
