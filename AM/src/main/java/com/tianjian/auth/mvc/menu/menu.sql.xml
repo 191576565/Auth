@@ -26,7 +26,7 @@
           LEFT JOIN SYS_ROLE_INFO     T1  ON INSTR(T0.ROLES  ,T1.UUID)>0                            
           LEFT JOIN SYS_DOMAIN_INFO   T2  ON T0.DOMAIN_UUID=T2.UUID                                 
           LEFT JOIN SYS_ORG_INFO      T3  ON T0.ORG_UUID=T3.UUID and t0.domain_uuid=t3.domain_uuid  
-          LEFT JOIN SYS_RESOURCE_INFO T4  ON INSTR(T1.RESOURCES  ,T4.UUID)>0
+          LEFT JOIN SYS_RESOURCE_INFO T4  ON decode(t2.domain_id,'root',1,INSTR(T1.RESOURCES  ,T4.UUID))>0
           LEFT JOIN SYS_RESOURCE_INFO T5  ON T4.RES_UP_UUID=T5.UUID
           where  user_id =?
           group  by
@@ -59,7 +59,7 @@
           LEFT JOIN SYS_ROLE_INFO     T1  ON INSTR(T0.ROLES  ,T1.UUID)>0
           LEFT JOIN SYS_DOMAIN_INFO   T2  ON T0.DOMAIN_UUID=T2.UUID
           LEFT JOIN SYS_ORG_INFO      T3  ON T0.ORG_UUID=T3.UUID and t0.domain_uuid=t3.domain_uuid
-          LEFT JOIN SYS_RESOURCE_INFO T4  ON INSTR(T1.RESOURCES  ,T4.UUID)>0
+          LEFT JOIN SYS_RESOURCE_INFO T4  ON decode(t2.domain_id,'root',1,INSTR(T1.RESOURCES  ,T4.UUID))>0
           LEFT JOIN SYS_RESOURCE_INFO T5  ON T4.RES_UP_UUID=T5.UUID
           where  USER_ID =?
           group  by
