@@ -20,7 +20,7 @@ $('#table').bootstrapTable({
  	strictSearch: true,                                                                                                       
  	showColumns: false, //是否显示所有的列                                                                                             
  	showRefresh: false, //是否显示刷新按钮                                                                                             
- 	clickToSelect: true, //是否启用点击选中行                                                                                          
+ 	clickToSelect: false, //是否启用点击选中行                                                                                          
  	uniqueId: "uuid", //每一行的唯一标识，一般为主键列                                                                                         
  	showToggle:false, //是否显示详细视图和列表视图的切换按钮                                                                                     
  	cardView: false, //是否显示详细视图                                                                                               

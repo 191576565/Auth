@@ -55,9 +55,15 @@
  			</div>
  		</div>
  		<table id="table"></table>
- 		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
- 			<form id="form" name="signUpForm" ng-submit="submitForm()" action="" method="post">
- 				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
+ 		<div class="wrapper" id="sys_add_div" style="display:none;">
+ 			<form ng-app="myApp" 
+ 				ng-controller="validateCtrl" 
+ 				id="form" 
+ 				name="myForm" 
+ 				action="" 
+ 				method="post" 
+ 				novalidate>
+ 				<div class="form-group">
  					<input id="uuid" 
  						name="UUID" 
  						type="hidden" 
@@ -69,21 +75,21 @@
 						   nullName="域编码"
 						   id="ipt_code" 
 						   placeholder="2~32位数字/字母"
-						   ng-model="userdata.scopeCode"
+						   ng-model="scopeCode"
 						   ng-minlength="2"
 						   ng-maxlength="32"
 						   ng-pattern="/^[A-Za-z0-9]+$/"
 						   required
 					/>
-					<p class="error" ng-if="(signUpForm.scopeCode.$error.minlength ||
-						signUpForm.scopeCode.$error.maxlength) && 
-						signUpForm.scopeCode.$touched">
-					域编码长度应在2~32位之间</p>
-					<p class="error" ng-if="signUpForm.scopeCode.$error.pattern &&
-						signUpForm.scopeCode.$touched">
+					<p class="error" ng-if="(myForm.scopeCode.$error.minlength ||
+						myForm.scopeCode.$error.maxlength) && 
+						myForm.scopeCode.$touched">
+					长度应在2~32位之间</p>
+					<p class="error" ng-if="myForm.scopeCode.$error.pattern &&
+						myForm.scopeCode.$touched">
 					只能是字母/数字组合</p>
 				</div>
-				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeName.$valid }">
+				<div class="form-group">
 					<label>域名称</label> 
 					<input name="scopeName" 
 						   type="text" 
@@ -91,39 +97,22 @@
 						   nullName="域名称"
 						   id="ipt_name" 
 						   placeholder="请输入域名称"
-						   ng-model="userdata.scopeName"
+						   ng-model="scopeName"
 						   ng-minlength="2"
 						   ng-maxlength="32"
 						   required
 					/>
-					<p class="error" ng-if="(signUpForm.scopeName.$error.minlength ||
-						signUpForm.scopeName.$error.maxlength) && 
-						signUpForm.scopeName.$touched">
-					域编码长度应在2~32位之间</p>
-				</div>
-				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeName.$valid }">
-					<label>排序</label> 
-					<input name="scopeSort"
-						   class="form-control notNull"
-						   nullName="排序"
-						   id="ipt_sort" 
-						   type="number"
-						   ng-model="userdata.scopeSort"
-						   ng-minlength="1"
-						   ng-maxlength="5"
-						   required
-					/>
-					<p class="error" ng-if="(signUpForm.scopeSort.$error.minlength ||
-						signUpForm.scopeSort.$error.maxlength) && 
-						signUpForm.scopeSort.$touched">
-					域编码长度应在1~5位之间</p>
+					<p class="error" ng-if="(myForm.scopeName.$error.minlength ||
+						myForm.scopeName.$error.maxlength) && 
+						myForm.scopeName.$touched">
+					长度应在2~32位之间</p>
 				</div>
 				<div class="form-group">
-					<lable>备注</lable>
+					<label>备注</label>
 					<textarea id="ipt_memo" class="form-control" name="memo" rows="" cols=""></textarea>
 				</div>
 				<div class="form-group">
-					<button id="sub" class="btn btn-primary" onsubmit="return check()">保存</button>
+					<button id="sub" class="btn btn-primary">保存</button>
 				</div>
  			</form>
  		</div>
@@ -151,5 +140,11 @@
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/sysMgmt.js"></script>
+    <script>
+  	//表单验证
+    var app = angular.module('myApp', []);
+    app.controller('validateCtrl',function($scope){
+    });
+    </script>
 	</body>
 </html>

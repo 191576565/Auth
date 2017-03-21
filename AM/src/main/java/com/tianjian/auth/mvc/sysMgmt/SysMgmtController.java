@@ -123,6 +123,7 @@ public class SysMgmtController extends Controller {
 			String msg = "批量删除域,头结点UUID为："+getPara("uuid") ;
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
+			return;
 		}
 		renderJson(false);
 	}
