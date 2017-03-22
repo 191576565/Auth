@@ -21,6 +21,7 @@ function zTreeOnDblClickSimple(event, treeId, treeNode) {
 //		toastr.warning('资源编码与上级资源编码冲突');
 //		return;
 //	}
+	//console.log(treeNode);
 	$('#res_up_uuid').val(treeNode.id);
 	$('#up_res_name').val(treeNode.name);
 	
@@ -58,7 +59,24 @@ $(function(){
 				content : $('.t'),
 				title : '选择上级资源',
 				area : [ '400px', '400px' ],
-				maxmin: true
+				maxmin: true,
+				btn: ['确定', '取消'],
+				yes: function(index, layero){
+					var treeObj = $.fn.zTree.getZTreeObj("res");
+					var nodes = treeObj.getSelectedNodes();
+					
+					$('#res_up_uuid').val(nodes[0].id);
+					$('#up_res_name').val(nodes[0].name);
+					
+					var index = layer.index; //获取当前弹层的索引号
+					layer.close(index); //关闭当前弹层
+					
+					//$('#form').valid();
+					valid.element( '#up_res_name' );
+				},
+				btn2: function(index, layero){
+					
+			    }
 			});
 		})
 	})
@@ -182,6 +200,10 @@ function del(obj){
 				layer.msg('资源删除失败');
 			}
 			initTable();
+//			var p=$(obj).parent().parent().treegrid('getParentNode');
+//			console.log(p);
+//			$(obj).parent().parent().remove();
+//			p.treegrid('render');
 		});
 	}, function(){
 		layer.close(layer.index);
