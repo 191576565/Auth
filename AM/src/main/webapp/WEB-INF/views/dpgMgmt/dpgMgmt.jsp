@@ -24,7 +24,7 @@
 		<link href="${ctxPath }/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 		<!-- Sweet Alert -->
 		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-		<link href="${ctxPath }/static/css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
+		<link href="${ctxPath }/static/css/plugins/ztree/zTreeStyle.css" rel="stylesheet">
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
  		<div class="row">
@@ -41,9 +41,9 @@
 		</div>
 		<br/>
  		<div class="row">
- 			<div class="col-xs-4">
+ 			<div class="col-xs-4" >
  				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
- 				<button id="btn_add" type="button" class="btn btn-danger delete">删除</button>
+ 				<button id="delete" type="button" class="btn btn-danger delete">删除</button>
  			</div>
  			  <div class="col-xs-8 text-right">
 				<div class="form-inline">
@@ -55,17 +55,45 @@
 			</div>
  		</div>
  		<div id="sys_add_div" style="display:none;">
- 			<form id="form"></br>
- 		     	<label style="margin-left: 5%;">所属域</label> 
+ 			<form id="form">
+ 				<input type="hidden" name="uuid" id="uuid"/>
+ 		     	<!-- <label style="margin-left: 5%;">所属域</label> 
 				<select id="domaininfo" name="domaininfo" nValidate="{required:true}" style="width: 120px; margin-left: 6%;">
 					<option value="default">请选择域</option>
 	 			</select></br></br>
-				<label style="margin-left: 5%;">组编码</label> <input id="groupid"  name="groupid" style="margin-left: 6%;" type="text" placeholder="1~30位字母数字"  ></br></br><!--字母和数字(1~30位) -->
+				<label style="margin-left: 5%;">组编码</label> <input id="groupid"  name="groupid" style="margin-left: 6%;" type="text" placeholder="1~30位字母数字"  ></br></br>字母和数字(1~30位)
 				<label style="margin-left: 5%;">组名称</label> <input id="groupname"  name="groupname"  style="margin-left: 6%;" type="text" placeholder="请输入组名称" name="CustName">
 				</br></br>
 				<label style="margin-left: 5%;">所属用户</label> <input id="guserid" name="guserid" style="margin-left: 2%;" type="text" />
-				</br></br></br>
+				</br></br></br> -->
+				<div class="form-group col-sm-12">
+                     <label>所属域:</label>
+                     <div >
+                         <select class="form-control" name="domaininfo" style="border-radius: 2px;" id="domain_id" >
+                         	<option value="">请选择域</option>
+                        </select>
+                     </div>
+                 </div>
+                 <div class="form-group col-sm-12">
+                     <label>组编码:</label>
+                     <div>
+                         <input type="text" class="form-control"  id="group_id"  name="groupid"> 
+                     </div>
+                 </div>
+                 <div class="form-group col-sm-12">
+                     <label>组名称:</label>
+                     <div>
+                         <input type="text" class="form-control" id="group_desc"  name="groupname"> 
+                     </div>
+                 </div>
  			</form>
+ 				<div class="form-group col-sm-12">
+                     <label>所属用户:</label>
+                     <div>
+                         <!-- <input type="text" class="form-control" id="guserid" name="guserid">  -->
+                         <button class="btn btn-block btn-default users">选择用户</button>
+                     </div>
+                 </div>
  		</div>
  		<table id="table"></table>
  		<div id="opn_tree" class="ibox float-e-margins" style="display:none;">
@@ -74,9 +102,10 @@
                 </div>
             </div>
  		<div id="sys_user_div" style="display:none;">
- 			<form id="userform"></br>
+ 			<!-- <form id="userform"></br>
  		     	<div id="user_in_div" style="margin-left: 2%;"></div>
- 			</form>
+ 			</form> -->
+ 			<ul id="tree" class="ztree"></ul>
  		</div>
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
@@ -97,7 +126,8 @@
     <!-- Peity -->
     <script src="${ctxPath }/static/js/demo/bootstrap-table-demo.js"></script>
     
-   
+   <!-- ztree -->
+    <script src="${ctxPath }/static/js/plugins/zTree/jquery.ztree.all.min.js"></script>
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
@@ -107,11 +137,5 @@
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/dpgMgmt.js"></script>
-     <script type="text/javascript"> 
-     <!-- 初始化界面数据 -->
-     $(document).ready(function() {
-    	    initdpgMgmtlist();
-    	});
-	</script>
 	</body>
 </html>

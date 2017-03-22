@@ -85,29 +85,6 @@
  		</div>
  		<div id="sys_add_div"  class="row" style="display:none;width:100%;margin:0px;">
  			</br>
-				<%-- <input id="uuid" 
- 						name="res.uuid" 
- 						type="hidden" 
- 				/>
-				<label>资源编码</label> <input id="res_id" name="res.res_id" value="${res.res_id }" type="text" placeholder="1~30位字母/数字/下划线" ></br></br><!--字母和数字(1~30位) -->
-				<label>资源名称</label> <input id="res_name" name="res.res_name" value="${res.re_name }" type="text" placeholder="请输入角色名" ></br></br>
-				<label>上级资源名称</label> <input id="res_up_uuid" name="res.res_up_uuid" value="" type="text" placeholder="请输入角色名" ></br></br>
-				<label>资源url</label> <input id="res_url" name="res.res_url" type="text" placeholder="请输入角色名" ></br></br>
-				<label>资源类型</label> 
-				<select style="width: 120px;">
-					<option value="1">叶子</option>
-					<option value="0">节点</option>
-				</select></br>
-				<label>资源CSS</label> <input id="res_class" name="res.res_class" type="text" placeholder="请输入角色名" ></br></br>
-				<label>资源颜色</label> 
-				<select style="width: 120px;">
-					<option value="red">red</option>
-					<option value="yello">yello</option>
-				</select></br>
-				<label>资源图标</label> <input id="res_icon" name="res.res_icon" type="text" placeholder="请输入角色名" ></br></br>
-				<label>排序编号</label> <input id="sort_id" name="res.sort_id" type="text" placeholder="请输入角色名" ></br></br>
-				<button id="resave" type="submit" class="btn btn-info ladda-button save" >保存</button> --%>
-                        
                         <div class="col-sm-12">
                         		<form id="form" >
                         		<input type="hidden" name="res.uuid" id="uuid">
