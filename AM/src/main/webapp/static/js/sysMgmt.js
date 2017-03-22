@@ -101,6 +101,7 @@ $('#btn_del').on('click', function(){
 //layer弹出自定义div__新增
 $('#sys_add').on('click', function() {
 	$("#sys_add_div #form")[0].reset();
+	$("#sys_add_div #form #ipt_memo").html('');
 	$('.error').empty();
 	layer.open({
 		type: 1,
@@ -113,13 +114,18 @@ $('#sys_add').on('click', function() {
 
 //layer弹出自定义div__修改
 function onEdit(id,code,name,sort,memo) {
+	//字符串替换
+	var reg = /<br ><\/a>/g;
+	var reg2 = /<br \/>/g;
+	memo = memo.replace(reg,'&#13;&#10;');
+	memo = memo.replace(reg2,'&#13;&#10;');
 	$("#sys_add_div #form")[0].reset();
 	$('.error').empty();
 	$("#sys_add_div #form #uuid").val(id);
 	$("#sys_add_div #form #ipt_code").val(code);
 	$("#sys_add_div #form #ipt_name").val(name);
 	$("#sys_add_div #form #ipt_sort").val(sort);
-	$("#sys_add_div #form #ipt_memo").val(memo);
+	$("#sys_add_div #form #ipt_memo").html(memo);
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),

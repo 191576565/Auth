@@ -24,8 +24,6 @@ public class RolMgmtController extends Controller {
 	
 	public void index() {
 		log.info("jump to sysMgmt");
-		List<SysMgmt> sysList = sysMgmtService.getData();
-		setAttr("domainlist", sysList);
 		render("rolMgmt.jsp");
 	}
 	

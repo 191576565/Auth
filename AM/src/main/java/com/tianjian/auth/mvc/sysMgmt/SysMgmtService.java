@@ -5,13 +5,19 @@ import java.util.List;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.platform.tools.ToolGetSql;
+import com.tianjian.platform.tools.ToolYeqc;
 
 public class SysMgmtService {
 	
 	//root用户查询系统信息
-	public List<SysMgmt> getData(){
+	public List<Record> getData(){
 		String sql = ToolGetSql.getSql(SysMgmt.sqlId_sys_select);
-		return SysMgmt.dao.find(sql);
+		List<Record> list = Db.find(sql);
+//		for(int i=0; i<list.size(); i++){
+//			String memo = list.get(i).getStr("memo");
+//			list.get(i).set("memo", ToolYeqc.HtmlToText(memo));
+//		}
+		return list;
 	}
 	
 	//非root用户查询系统信息

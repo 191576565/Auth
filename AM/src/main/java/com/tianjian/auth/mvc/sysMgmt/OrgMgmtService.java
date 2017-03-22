@@ -85,7 +85,6 @@ public class OrgMgmtService {
 		List<OrgMgmt> list = OrgMgmt.dao.find(sql,uuid);
 		String[] subIds = new String[list.size()];
 		for(int i=0; i<list.size(); i++){
-			System.err.println(list.get(i).getStr("uuid"));
 			subIds[i] = list.get(i).getStr("uuid");
 		}
 		return subIds;
