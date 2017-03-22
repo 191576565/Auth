@@ -155,6 +155,8 @@
     <script src="${ctxPath }/static/js/plugins/treegrid/jquery.treegrid.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/treegrid/jquery.treegrid.bootstrap3.js"></script>
     
+    <!-- ztree -->
+    <script src="${ctxPath }/static/js/plugins/zTree/jquery.ztree.all.min.js"></script>
     <!--
     	作者：yeqc
     	时间：2017-02-09

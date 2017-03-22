@@ -31,9 +31,6 @@ $('#table').bootstrapTable({
 		field: 'domain_name',
 		title: '域 名'
 	}, {
-		field: 'sort_id',
-		title: '排 序'
-	}, {
 		field: 'uuid',
 		title: '操 作',
 		formatter: function(value, row, index) {
@@ -154,27 +151,27 @@ function onDel(id) {
 	);
 };
 
-//表单验证
-angular.module('myApp', [])
-.controller('SignUpController',function($scope){
-	$scope.userdata = {};
-	$scope.submitForm = function(){};
-})
-
 //"#sub"是隐藏在div中的表单的"保存"按钮
 $('#sub').click(function(){
 	//非空验证
 	var flag = true;
 	$(".notNull").each(function(){
-        if($(this).val()==""){
+        if(""==$(this).val()){
         	layer.msg($(this).attr('nullName')+"不能为空");
         	flag = false;
         	return false;
         }
     });
-	 if(!flag){
- 		return;
- 	}
+	//合法验证
+	$("p.error").each(function(){
+		if(""!=$(this).text()){
+			flag = false;
+		}
+	});
+	//输入非法则不提交
+	if(false==flag){
+		return false;
+	}
 	//新增操作
 	if($("#sys_add_div #form #uuid").val() == ''){
 		$("#form").attr("action", "sysMgmt/save");

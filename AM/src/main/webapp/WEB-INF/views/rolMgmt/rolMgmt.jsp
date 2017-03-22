@@ -57,6 +57,16 @@
  		<table id="table"></table>
  		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
  			<form id="form" name="signUpForm" ng-submit="submitForm()" action="" method="post">
+ 				<br />
+ 				<div class="form-group">
+					<label>所属域</label> 
+					<select class="form-control" name="domain_uuid" id="domain_uuid">
+						<c:forEach items="${domainlist }" var="dlist">
+						<option value="${dlist.uuid }">${dlist.domain_name }</option>
+						</c:forEach>
+						
+					</select>
+				</div>
  				<div class="form-group" ng-class="{ 'has-success': signUpForm.CustCode.$valid }">
  				<input id="uuid" 
  						name="UUID" 
@@ -96,15 +106,6 @@
 					/>
 					<p class="fa fa-check input_result success"
 						ng-if="signUpForm.role_name.$valid"></p>
-				</div>
-				<div class="form-group">
-					<label>所属域</label> 
-					<select class="form-control" name="domain_uuid" id="domain_uuid">
-						<c:forEach items="${domainlist }" var="dlist">
-						<option value="${dlist.uuid }">${dlist.domain_name }</option>
-						</c:forEach>
-						
-					</select>
 				</div>
 				<div class="form-group">
 					<lable>备注</lable>
