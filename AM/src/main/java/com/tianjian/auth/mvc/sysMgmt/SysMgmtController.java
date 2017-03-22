@@ -1,11 +1,13 @@
 package com.tianjian.auth.mvc.sysMgmt;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.constant.ConstantLog;
+import com.tianjian.platform.tools.ToolYeqc;
 
 public class SysMgmtController extends Controller {
 	
@@ -46,7 +48,7 @@ public class SysMgmtController extends Controller {
 		sysMgmt.set("DOMAIN_UP_UUID", sysMgmtService.getRoot().get(0).get("uuid"));
 		sysMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
 		sysMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
-		sysMgmt.set("MEMO", getPara("memo"));
+		sysMgmt.set("MEMO", ToolYeqc.Text2Html(getPara("memo")));
 		if(!sysMgmtService.notRepeated(getPara("scopeCode"), getPara("scopeName"))){
 			renderJson(false);
 			return;
@@ -69,7 +71,7 @@ public class SysMgmtController extends Controller {
 		sysMgmt.set("DOMAIN_ID", getPara("scopeCode"));
 		sysMgmt.set("DOMAIN_NAME", getPara("scopeName"));
 		sysMgmt.set("SORT_ID", getPara("scopeSort"));
-		sysMgmt.set("MEMO", getPara("memo"));
+		sysMgmt.set("MEMO", ToolYeqc.Text2Html(getPara("memo")));
 		sysMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
 		sysMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 		if(sysMgmtService.uptRepeated(getPara("scopeCode"), getPara("scopeName"), getPara("UUID"))==true){
