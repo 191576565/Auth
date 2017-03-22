@@ -39,7 +39,6 @@ public class SysMgmtController extends Controller {
 	 * 新增系统信息
 	 */
 	public void save(){
-		System.err.println(ToolYeqc.Text2Html(getPara("memo")));
 		SysMgmt sysMgmt = new SysMgmt();
 		sysMgmt.set("DOMAIN_ID", getPara("scopeCode"));
 		sysMgmt.set("DOMAIN_NAME", getPara("scopeName"));
