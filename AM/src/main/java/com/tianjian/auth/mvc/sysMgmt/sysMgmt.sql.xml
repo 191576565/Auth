@@ -62,7 +62,7 @@
 	<sql id="paramSelect">
 		<![CDATA[ 
         	SELECT T.* from SYS_DOMAIN_INFO T 
-  				WHERE (upper(T.DOMAIN_ID LIKE) ? OR upper(T.DOMAIN_NAME) LIKE ?)
+  				WHERE (T.DOMAIN_ID LIKE ? OR T.DOMAIN_NAME LIKE ?)
   					and t.DOMAIN_UP_UUID != '#' 
         				order by t.modified_date desc
     	]]>
