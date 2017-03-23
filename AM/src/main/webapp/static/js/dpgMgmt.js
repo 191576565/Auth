@@ -29,16 +29,37 @@ function zTreeOnClickSimple(event, treeId, treeNode) {
 	return true;
 };
 
+var valid;
 $(function() {
+	valid=$('#form').validate();
 	// 初始化用户树
 	initTree()
 	//初始化表格
 	initdpgMgmtlist();
 	
-	
 	$.get("dpgMgmt/domaininfo", function(data){
 		data.forEach(function(e){
 			$('#domain_id').append('<option value="'+e.domain_id+'">'+e.domain_name+'</option>');
+		});
+	})
+	
+	$('.users').click(function(){
+		console.log("users", users);
+		layer.open({
+			type : 1,
+			content : $('.t'),
+			title : '选择所属用户',
+			area : [ '400px', '400px' ],
+			maxmin: true,
+			btn: ['确定', '取消'],
+			yes: function(index, layero){
+				var treeObj = $.fn.zTree.getZTreeObj("res");
+				var nodes = treeObj.getSelectedNodes();
+				
+			},
+			btn2: function(index, layero){
+				
+		    }
 		});
 	})
 })
@@ -102,6 +123,7 @@ function initdpgMgmtlist() {
 								{
 									field : 'opt',
 									title : '操 作',
+									width:250,
 									formatter : function(value, row, index) {
 										var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\''+ index +'\')">编辑</a> ';
 								    	var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
@@ -112,12 +134,19 @@ function initdpgMgmtlist() {
 					});
 };
 
-var users='';//保存所属用户
+var users='', chk;//保存所属用户
 $('#sys_add').click(function(){
 	$("#sys_add_div #form")[0].reset();
-	users='';
+	$('#group_id').removeAttr('readonly');
+	users='', chk=1;;
 	$('.users').text('请选择所属用户');
 	$('#form p.success').remove();
+	
+	//去除上次表单验证的样式
+	valid.resetForm();
+	$('input').removeClass('error');
+	$('select').removeClass('error');
+	
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
@@ -125,25 +154,27 @@ $('#sys_add').click(function(){
 		area: '400px',
 		btn: ['保存', '取消'],
 		yes: function(index, layero){
-			$.ajax({
-				url : "dpgMgmt/saveform?"+$('#form').serialize()+"&guserid="+users,
-				dataType : "json",
-				type : 'post',
-				contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-				success : function(data) {
-					if (data.status == 'success') {
-						layer.msg("数据保存成功");
-					} else {
-						layer.msg("数据保存失败");
+			if($('#form').valid()){
+				$.ajax({
+					url : "dpgMgmt/saveform?"+$('#form').serialize()+"&guserid="+users,
+					dataType : "json",
+					type : 'post',
+					contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+					success : function(data) {
+						if (data.status == 'success') {
+							layer.msg("数据保存成功");
+						} else {
+							layer.msg("数据保存失败");
+						}
+						 refresh();
+					},
+					error : function(
+							XMLHttpRequest,
+							textStatus, errorThrown) {
+						layer.msg("数据被城管抓走了！");
 					}
-					 refresh();
-				},
-				error : function(
-						XMLHttpRequest,
-						textStatus, errorThrown) {
-					layer.msg("数据被城管抓走了！");
-				}
-			});
+				});
+			}
 		},
 		btn2: function(index, layero){}
 	});
@@ -151,6 +182,8 @@ $('#sys_add').click(function(){
 });
 
 function onEdit(index){
+	chk=0;
+	$('#group_id').attr('readonly', 'readonly');
 	var info=table.bootstrapTable('getData')[index];
 	for(var key in info){
 		$('#'+key).val(info[key]);
@@ -169,24 +202,25 @@ function onEdit(index){
 		area: '400px',
 		btn: ['保存', '取消'],
 		yes: function(index, layero){
-			$.ajax({
-				 url: "dpgMgmt/updateform?"+$('#form').serialize()+"&guserid="+users,
-				 dataType: "json",
-				 type:'post',
-				 contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-				 //data:{uuid:uuid,domaininfo:$('#domaininfo').val(),groupid:$('#groupid').val(),groupname:$('#groupname').val(),guserid:$('#guserid').val()},
-				 success: function (data) {
-					 if(data.status=='success'){
-						 layer.msg("数据保存成功");
-					 }else{
-						 layer.msg("数据保存失败");
+			if($('#form').valid()){
+				$.ajax({
+					 url: "dpgMgmt/updateform?"+$('#form').serialize()+"&guserid="+users,
+					 dataType: "json",
+					 type:'post',
+					 contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+					 success: function (data) {
+						 if(data.status=='success'){
+							 layer.msg("数据保存成功");
+						 }else{
+							 layer.msg("数据保存失败");
+						 }
+						 refresh();
+					 },
+					 error: function (XMLHttpRequest, textStatus, errorThrown) {
+						 layer.msg("数据被城管抓走了！");
 					 }
-					 refresh();
-				 },
-				 error: function (XMLHttpRequest, textStatus, errorThrown) {
-					 layer.msg("数据被城管抓走了！");
-				 }
-			});
+				});
+			}
 		},
 		btn2: function(index, layero){}
 	});
@@ -262,6 +296,43 @@ function refresh(){
 	 layer.closeAll();
 	 table.bootstrapTable('refresh');
 }
+
+$("input").blur(function(){
+	valid.element( this );
+});
+
+
+jQuery.validator.addMethod("chkGroudId", function(value, element) {  
+	var dd=$('#domain_id').val();
+	if(dd==""){
+		layer.tips("请先选择所属域！", '#domain_id');
+		return true;
+	}
+	
+	var flag=false, d={};
+    if(chk==0){ //编辑后台不校验是否重复
+    	d={domaininfo:dd,groupid:value};
+    }else { //新增需要校验编码是否重复
+    	d={domaininfo:dd,groupid:value, chk:1}
+    }
+	
+	$.ajax({
+		 async:false,
+		 url: "dpgMgmt/verifygroupid",
+		 data:d,
+		 dataType: "json",
+		 success: function (data) {
+			 if(data.status=='success'){
+				 flag=true;
+			 }
+		 }
+	});
+    
+    return this.optional(element) || flag;
+}, "<i class='fa fa-times-circle'></i>所属域下已存在该组编码，不能重复");
+
+
+
 //
 // window.operateEvents = {
 // 'click .edit': function (e, value, row, index) {

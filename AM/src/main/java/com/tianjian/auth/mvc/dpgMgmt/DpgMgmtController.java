@@ -132,12 +132,20 @@ public class DpgMgmtController extends Controller {
 			Map<String,Object> insertflag = new HashMap<String,Object>();
 			mpara.put("domainid", getPara("domaininfo"));
 			mpara.put("groupid", getPara("groupid"));
+			String chk=getPara("chk");
+			if(chk==null || "".equals(chk)){
+				insertflag.put("status", "success");
+				renderJson(insertflag);
+				return ;
+			}
+			
 			String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlid_verifygid, mpara);
 		    List<Record> dpgmgmt =Db.find(sql);
 			if(dpgmgmt.size()>0){
 				insertflag.put("status", "error");
 			}else{
-				insertflag.put("status", "success");}
+				insertflag.put("status", "success");
+			}
 			renderJson(insertflag);
 		}
 		

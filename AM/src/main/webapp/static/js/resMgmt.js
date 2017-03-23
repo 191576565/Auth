@@ -131,6 +131,7 @@ $('#res_add').on('click', function() {
 	//去除上次表单验证的样式
 	valid.resetForm();
 	$('input').removeClass('error');
+	$('select').removeClass('error');
 	
 	layer.open({
 		type : 1,

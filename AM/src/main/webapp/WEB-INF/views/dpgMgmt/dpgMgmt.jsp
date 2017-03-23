@@ -69,7 +69,7 @@
 				<div class="form-group col-sm-12">
                      <label>所属域:</label>
                      <div >
-                         <select class="form-control" name="domaininfo" style="border-radius: 2px;" id="domain_id" >
+                         <select class="form-control" name="domaininfo" style="border-radius: 2px;" id="domain_id"  required>
                          	<option value="">请选择域</option>
                         </select>
                      </div>
@@ -77,13 +77,13 @@
                  <div class="form-group col-sm-12">
                      <label>组编码:</label>
                      <div>
-                         <input type="text" class="form-control"  id="group_id"  name="groupid"> 
+                         <input type="text" class="form-control chkGroudId"  id="group_id"  name="groupid" required> 
                      </div>
                  </div>
                  <div class="form-group col-sm-12">
                      <label>组名称:</label>
                      <div>
-                         <input type="text" class="form-control" id="group_desc"  name="groupname"> 
+                         <input type="text" class="form-control" id="group_desc"  name="groupname" required> 
                      </div>
                  </div>
  			</form>
@@ -96,12 +96,7 @@
                  </div>
  		</div>
  		<table id="table"></table>
- 		<div id="opn_tree" class="ibox float-e-margins" style="display:none;">
-                <div class="ibox-content">
-                    <div id="treeview12" class="test"></div>
-                </div>
-            </div>
- 		<div id="sys_user_div" style="display:none;">
+ 		<div class="t" style="display:none;">
  			<!-- <form id="userform"></br>
  		     	<div id="user_in_div" style="margin-left: 2%;"></div>
  			</form> -->
@@ -131,6 +126,10 @@
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
+    
+     <!-- validate -->
+    <script src="${ctxPath }/static/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="${ctxPath }/static/js/plugins/validate/messages_zh.min.js"></script>
     <!--
     	作者：yeqc
     	时间：2017-02-09
