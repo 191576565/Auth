@@ -17,7 +17,7 @@ var s = {
 		enable : true,
 		chkboxType : {
 			"Y" : "ps",
-			"N" : "s"
+			"N" : "ps"
 		}
 	}
 };
@@ -32,8 +32,6 @@ function zTreeOnClickSimple(event, treeId, treeNode) {
 var valid;
 $(function() {
 	valid=$('#form').validate();
-	// 初始化用户树
-	initTree()
 	//初始化表格
 	initdpgMgmtlist();
 	
@@ -44,33 +42,38 @@ $(function() {
 	})
 	
 	$('.users').click(function(){
-		console.log("users", users);
-		layer.open({
-			type : 1,
-			content : $('.t'),
-			title : '选择所属用户',
-			area : [ '400px', '400px' ],
-			maxmin: true,
-			btn: ['确定', '取消'],
-			yes: function(index, layero){
-				var treeObj = $.fn.zTree.getZTreeObj("res");
-				var nodes = treeObj.getSelectedNodes();
-				
-			},
-			btn2: function(index, layero){
-				
-		    }
-		});
+		var domainId=$('#domain_id').val();
+		if(domainId==""){
+			layer.tips("请先选择所属域！", '#domain_id');
+			return true;
+		}
+		//生成域下的机构用户树
+		$.get('dpgMgmt/userTree?domainUuid='+domainId, function(data){
+			$.fn.zTree.init($("#tree"), s, data); //树
+			var treeObj = $.fn.zTree.getZTreeObj("tree");
+			treeObj.expandAll(true);
+		
+			layer.open({
+				type : 1,
+				content : $('.t'),
+				title : '选择所属用户',
+				area : [ '400px', '600px' ],
+				maxmin: true,
+				btn: ['确定', '取消'],
+				yes: function(index, layero){
+					var treeObj = $.fn.zTree.getZTreeObj("res");
+					var nodes = treeObj.getSelectedNodes();
+					
+				},
+				btn2: function(index, layero){
+					
+			    }
+			});
+		})
+		
+		
 	})
 })
-
-function initTree(){
-	$.get('resMgmt/restree', function(data){
-		$.fn.zTree.init($("#tree"), s, data); //树
-		var treeObj = $.fn.zTree.getZTreeObj("tree");
-		treeObj.expandAll(true);
-	})
-}
 
 var table;
 function initdpgMgmtlist() {
@@ -188,7 +191,7 @@ function onEdit(index){
 	for(var key in info){
 		$('#'+key).val(info[key]);
 	}
-	users=info.users;
+	users=info.users==null?"":info.users;
 	if(users=="" || users==null){
 		$('.users').text('请选择所属用户');
 	}else {
@@ -310,23 +313,23 @@ jQuery.validator.addMethod("chkGroudId", function(value, element) {
 	}
 	
 	var flag=false, d={};
-    if(chk==0){ //编辑后台不校验是否重复
-    	d={domaininfo:dd,groupid:value};
-    }else { //新增需要校验编码是否重复
+    if(chk!=0){ 
+    	 //新增需要校验编码是否重复
     	d={domaininfo:dd,groupid:value, chk:1}
+    	$.ajax({
+	   		 async:false,
+	   		 url: "dpgMgmt/verifygroupid",
+	   		 data:d,
+	   		 dataType: "json",
+	   		 success: function (data) {
+	   			 if(data.status=='success'){
+	   				 flag=true;
+	   			 }
+	   		 }
+	   	});
+    }else {
+    	return true;
     }
-	
-	$.ajax({
-		 async:false,
-		 url: "dpgMgmt/verifygroupid",
-		 data:d,
-		 dataType: "json",
-		 success: function (data) {
-			 if(data.status=='success'){
-				 flag=true;
-			 }
-		 }
-	});
     
     return this.optional(element) || flag;
 }, "<i class='fa fa-times-circle'></i>所属域下已存在该组编码，不能重复");
