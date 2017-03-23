@@ -361,5 +361,14 @@ public class DpgMgmtController extends Controller {
 					insertflag.put("status", "error");}
 				renderJson(insertflag);
 			}
+			
+			/*
+			 * dpgMgmt/userTree
+			 * 获取用户树
+			 */
+			public void userTree(String domainUuid){
+				List<Record> list = dpgmgmtservice.userTree(domainUuid);
+				renderJson(list);
+			}
 
 }

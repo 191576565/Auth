@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.jfinal.plugin.activerecord.Db;
@@ -81,6 +82,13 @@ public class DpgMgmtService extends BaseService {
 		PageJson<DpgMgmt> myjson = new PageJson<DpgMgmt>();
 		myjson.buildJson(logall);
 		return myjson;
+	}
+	
+	//获取用户树
+	public List<Record> userTree(String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.userTree");
+		List<Record> list = Db.find(sql,domainUuid);
+		return list;
 	}
 
 }
