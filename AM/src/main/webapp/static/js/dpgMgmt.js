@@ -53,6 +53,14 @@ $(function() {
 			var treeObj = $.fn.zTree.getZTreeObj("tree");
 			treeObj.expandAll(true);
 		
+			var u=users.split(',');
+			if(users!="" && users!=null){
+				u.forEach(function(e){
+					var node = treeObj.getNodeByParam("id", e);
+					treeObj.checkNode(node, true, true);
+				});
+			}
+			
 			layer.open({
 				type : 1,
 				content : $('.t'),
@@ -61,13 +69,20 @@ $(function() {
 				maxmin: true,
 				btn: ['确定', '取消'],
 				yes: function(index, layero){
-					var treeObj = $.fn.zTree.getZTreeObj("res");
-					var nodes = treeObj.getSelectedNodes();
-					
+					var nodes = treeObj.getCheckedNodes(true);
+					var us=[];
+					nodes.forEach(function(e){
+						if(e.flag==1){
+							us.push(e.id);
+						}
+					});
+					users=us.join();
+					if(users!=null && users!=''){
+						$('.users').text('编辑所属用户');
+					}
+					layer.close(index);
 				},
-				btn2: function(index, layero){
-					
-			    }
+				btn2: function(index, layero){}
 			});
 		})
 		
@@ -191,6 +206,7 @@ function onEdit(index){
 	for(var key in info){
 		$('#'+key).val(info[key]);
 	}
+	
 	users=info.users==null?"":info.users;
 	if(users=="" || users==null){
 		$('.users').text('请选择所属用户');
