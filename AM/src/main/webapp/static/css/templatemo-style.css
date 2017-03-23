@@ -424,7 +424,7 @@ h5 {
 }
 
 .post-masonry .post-thumb {
-    border: 10px solid #fff;
+    border: 1px solid #fff;
     overflow: hidden;
     position: relative;
 }

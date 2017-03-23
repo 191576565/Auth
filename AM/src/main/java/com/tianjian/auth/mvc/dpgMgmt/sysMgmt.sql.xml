@@ -4,7 +4,7 @@
 	<sql id="userTree">
 		<![CDATA[ 
         	with org_user as (
-SELECT  t4.uuid   org_user_uuid ,t4.user_name  org_user_name , T3.ORG_UP_UUID ,'1'    flag
+SELECT  t4.uuid   org_user_uuid ,t4.user_name  org_user_name , T3.UUID org_up_uuid ,'1'    flag
   FROM  sys_user_info t4
   JOIN (SELECT T3.UUID
                  ,T3.ORG_UNIT_ID
@@ -12,7 +12,7 @@ SELECT  t4.uuid   org_user_uuid ,t4.user_name  org_user_name , T3.ORG_UP_UUID ,'
                  ,T3.ORG_UP_UUID
                  FROM SYS_ORG_INFO      T3
             LEFT JOIN SYS_DOMAIN_INFO   T2  ON T3.DOMAIN_UUID=T2.UUID
-        where t2.uuid=?
+        where t2.DOMAIN_ID=?
             start with    t3.ORG_UP_UUID= (select uuid from sys_org_info c where  c.org_up_uuid='#')  connect by prior t3.uuid =t3.org_up_uuid)   T3   on t4.org_uuid=T3 .uuid
   union all
 SELECT
@@ -22,10 +22,10 @@ SELECT
        ,'0'     flag
      FROM SYS_ORG_INFO      T3
 LEFT JOIN SYS_DOMAIN_INFO   T2  ON T3.DOMAIN_UUID=T2.UUID
-      where t2.uuid=?
+      where t2.DOMAIN_ID=?
 start with     t3.ORG_UP_UUID= (select uuid from sys_org_info c where  c.org_up_uuid='#')  connect by prior t3.uuid =t3.org_up_uuid
 )
-select   t.org_user_uuid,t.org_user_name,t.org_up_uuid,t.flag
+select   t.org_user_uuid id,t.org_user_name name,t.org_up_uuid pid,t.flag
 from org_user t
     	]]>
 	</sql>
