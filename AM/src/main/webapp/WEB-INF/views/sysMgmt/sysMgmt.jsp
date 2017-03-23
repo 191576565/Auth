@@ -25,13 +25,6 @@
 		<!-- Sweet Alert -->
 		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 		<link href="${ctxPath }/static/css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
-		<style type="text/css">
-			.input_result {
-				position: relative;
-				top: -27px;
-				left: 685px;
-			}
-		</style>
 		
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
@@ -53,6 +46,14 @@
  				<button id="sys_add" class="btn btn-primary create" style="margin:0px 3px 0px 0px">新增</button>
  				<button id="btn_del" class="btn btn-danger delete">删除</button>
  			</div>
+ 			<div class="col-xs-8 text-right">
+				<div class="form-inline">
+					<div class="form-group">
+						<input id="iptSearch" type="text" placeholder="输入域编码/域名" style="width: 200px;" class="form-control">
+					</div>
+					<button id="search" class="btn btn-default search"><i class="fa fa-search"></i></button>
+				</div>
+			</div>
  		</div>
  		<table id="table"></table>
  		<div class="wrapper" id="sys_add_div" style="display:none;">
@@ -147,10 +148,15 @@
     -->
     <script src="${ctxPath }/static/js/sysMgmt.js"></script>
     <script>
-  	//表单验证
-    var app = angular.module('myApp', []);
-    app.controller('validateCtrl',function($scope){
-    });
+    $(document).ready(function () { 
+		 initsystable();
+		 //条件搜索
+		 $("#search").bind("click", initsystable);
+	})
+	//表单验证
+	var app = angular.module('myApp', []);
+	app.controller('validateCtrl',function($scope){
+	});
     </script>
 	</body>
 </html>

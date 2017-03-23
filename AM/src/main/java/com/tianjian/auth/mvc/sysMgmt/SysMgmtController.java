@@ -27,10 +27,18 @@ public class SysMgmtController extends Controller {
 	public void sysData(){
 		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
 		String userRole = sysMgmtService.userRole(userId).get(0).getStr("domain_id");
+		String param = getPara("sendParam");
+		//条件查询
+		if(!"".equals(param)){
+			renderJson(sysMgmtService.paramSelect(param));
+			return;
+		}
+		//Root用户
 		if("root".equals(userRole)){
 			renderJson(sysMgmtService.getData());
 			return;
 		}
+		//非root用户
 		renderJson(sysMgmtService.notRootData(userId));
 	}
 	
@@ -128,6 +136,15 @@ public class SysMgmtController extends Controller {
 			return;
 		}
 		renderJson(false);
+	}
+	
+	/*
+	 * sysMgmt/paramSelect
+	 * 条件搜索
+	 */
+	public void paramSelect(){
+		String param = getPara("param");
+		renderJson(sysMgmtService.paramSelect(param));
 	}
 	
 }
