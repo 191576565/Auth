@@ -87,7 +87,7 @@ public class DpgMgmtService extends BaseService {
 	//获取用户树
 	public List<Record> userTree(String domainUuid){
 		String sql = ToolGetSql.getSql("tianjian.dpg.userTree");
-		List<Record> list = Db.find(sql,domainUuid);
+		List<Record> list = Db.find(sql,domainUuid,domainUuid);
 		return list;
 	}
 
