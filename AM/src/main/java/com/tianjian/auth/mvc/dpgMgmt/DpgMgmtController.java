@@ -366,7 +366,8 @@ public class DpgMgmtController extends Controller {
 			 * dpgMgmt/userTree
 			 * 获取用户树
 			 */
-			public void userTree(String domainUuid){
+			public void userTree(){
+				String domainUuid = getPara("domainUuid");
 				List<Record> list = dpgmgmtservice.userTree(domainUuid);
 				renderJson(list);
 			}
