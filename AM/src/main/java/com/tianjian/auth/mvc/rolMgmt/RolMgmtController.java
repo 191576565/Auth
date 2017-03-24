@@ -32,7 +32,11 @@ public class RolMgmtController extends Controller {
 	 * 查询角色表数据
 	 */
 	public void showRol() {
-		renderJson(mgmtService.defaultSelect());
+		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
+		List<Record> list = mgmtService.paramSelect(userId);
+		String domainUuid = list.get(0).getStr("uuid");
+		String domainId = list.get(0).getStr("domain_id");
+		renderJson(mgmtService.defaultSelect(domainUuid,domainId));
 	}
 	
 	//新增角色

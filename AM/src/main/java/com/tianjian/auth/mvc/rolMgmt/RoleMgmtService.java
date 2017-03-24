@@ -14,12 +14,17 @@ import com.tianjian.platform.tools.ToolGetSql;
  */
 
 public class RoleMgmtService {
-	//查询角色信息表，用于前端页面展示
-	public List<Record> defaultSelect() {
-		//通过配置文件获取查询sql语句
+	
+	public List<Record> defaultSelect(String domainUuid, String domainId) {
 		String sql = ToolGetSql.getSql("tianjian.roleMgmt.defaultSelect");
-		//将查询结果存入集合，返回给客户端
-		List<Record> list = Db.find(sql);
+		List<Record> list = Db.find(sql,domainId,domainUuid);
+		return list;
+	}
+	
+	//根据userId获取域uuid和域编码
+	public List<Record> paramSelect(String userId) {
+		String sql = ToolGetSql.getSql("tianjian.roleMgmt.paramSelect");
+		List<Record> list = Db.find(sql,userId);
 		return list;
 	}
 	
