@@ -96,14 +96,24 @@ $('#btn_del').on('click', function(){
 	if(sendData == ''){
 		layer.msg('请选择要删除的系统信息');
 	}else{
-		$.post('sysMgmt/deleteMore?uuid='+sendData, function(d){
-			if(d){
-				layer.msg('资源删除成功');
-			}else {
-				layer.msg('删除失败，检查是否已关联机构');
-			}
-			$('#table').bootstrapTable('refresh', {silent: true});
-		});
+		layer.confirm('是否删除选定的系统信息？', 
+				{
+				  btn: ['删除','取消'] //按钮
+				}, 
+				function(){
+					$.post('sysMgmt/deleteMore?uuid='+sendData, function(d){
+						if(d){
+							layer.msg('删除成功');
+						}else {
+							layer.msg('删除失败，检查是否已关联机构');
+						}
+						$('#table').bootstrapTable('refresh', {silent: true});
+					});
+				}, 
+				function(){
+					layer.closeAll();
+				}
+		);
 	}	
 })
 
