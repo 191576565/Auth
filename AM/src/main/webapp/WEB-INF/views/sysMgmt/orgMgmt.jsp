@@ -11,6 +11,7 @@
    		<link href="${ctxPath }/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     	<link href="${ctxPath }/static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/plugins/treegrid/jquery.treegrid.css" rel="stylesheet">
+    	<link href="${ctxPath }/static/css/plugins/ztree/zTreeStyle.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/animate.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/style.css?v=4.1.0" rel="stylesheet">
 		<style type="text/css">
@@ -58,6 +59,9 @@
                  
             </tbody>
  		</table>
+ 		<div class="t" style="display: none;">
+ 			<ul id="org" class="ztree"></ul>
+ 		</div>
  		<div class="wrapper" id="org_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
  			<form id="form" name="signUpForm" ng-submit="submitForm()" action="" method="post">
  				<div class="form-group">
@@ -119,10 +123,15 @@
 						signUpForm.orgName.$touched">
 					长度应在1~30位之间</p>
 				</div>
-				<div class="form-group" ng-class="{ 'has-success': signUpForm.upOrg.$valid }">
+				<div class="form-group">
 					<label>上级机构</label> 
-					<select id="up_org" name="upOrg" class="form-control">
-					</select>
+					<div class="input-group">
+						<input type="hidden" name="org_up_uuid" id="org_up_uuid">
+			            <input type="text" class="form-control" name="org_up_name" id="up_org_name" required readonly="readonly"> 
+			            <span class="input-group-btn"> 
+			            	<button type="button" class="btn tree"><i class="fa fa-tree"></i></button> 
+			            </span>
+		            </div>
 				</div>
 				<div class="form-group">
 					<lable>备注</lable>

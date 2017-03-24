@@ -37,8 +37,10 @@ public class OrgMgmtService {
 	}
 	
 	//非root用户获取机构信息
-	public List<Record> notRootOrgInfo(String userId){
-		return notRootData(userId);
+	public List<Record> notRootOrgInfo(String orgUuid, String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.org.notRootOrgInfo");
+		List<Record> list = Db.find(sql,orgUuid,domainUuid);
+		return list;
 	}
 	
 	//新增机构信息

@@ -63,13 +63,15 @@ public class OrgMgmtController extends Controller {
 	 * 发送机构信息查询结果
 	 */
 	public void getOrg(){
+		String domainUuid = ((Record)getSessionAttr("userinfo")).getStr("domain_uuid");
+		String orgUuid = ((Record)getSessionAttr("userinfo")).getStr("org_uuid");
 		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
 		String userRole = sysMgmtService.userRole(userId).get(0).getStr("domain_id");
 		if("root".equals(userRole)){
 			renderJson(orgMgmtService.getOrgInfo(g_uuid));
 			return;
 		}
-		renderJson(orgMgmtService.notRootOrgInfo(userId));
+		renderJson(orgMgmtService.notRootOrgInfo(orgUuid,domainUuid));
 	}
 	
 	/*
@@ -81,7 +83,7 @@ public class OrgMgmtController extends Controller {
 		orgMgmt.set("DOMAIN_UUID", getPara("domainUUID"));
 		orgMgmt.set("ORG_UNIT_ID", getPara("orgCode"));
 		orgMgmt.set("ORG_UNIT_DESC", getPara("orgName"));
-		orgMgmt.set("ORG_UP_UUID", getPara("upOrg"));
+		orgMgmt.set("ORG_UP_UUID", getPara("org_up_uuid"));
 		orgMgmt.set("IS_ENABLE", "Y");
 		orgMgmt.set("MEMO", getPara("memo"));
 		orgMgmt.set("CREATOR", ((Record)getSessionAttr("userinfo")).getStr("user_id"));

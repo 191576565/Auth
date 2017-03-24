@@ -1,5 +1,62 @@
+var s = {
+	view: {
+		dblClickExpand: false,
+		selectedMulti: false
+	},
+	data: {
+		simpleData: {
+			enable: true,
+			idKey: "id",
+			pIdKey: "pid",
+			rootPId: '#'
+		}
+	},
+	callback: {
+		onDblClick: zTreeOnDblClickSimple,
+		onClick: zTreeOnClickSimple
+	}
+};
+function zTreeOnDblClickSimple(event, treeId, treeNode) {
+	$('#org_up_uuid').val(treeNode.id);
+	$('#up_org_name').val(treeNode.name);
+	
+	var index = layer.index; //获取当前弹层的索引号
+	layer.close(index); //关闭当前弹层
+};
+
+function zTreeOnClickSimple(event, treeId, treeNode) {
+	var treeObj = $.fn.zTree.getZTreeObj(treeId);
+	treeObj.expandNode(treeNode, null, null, null);
+
+	return true;
+};
 $(function(){
-	initTable()
+	initTable();
+	$('.tree').click(function(){
+		$.get('orgMgmt/getOrg', function(data){
+			$.fn.zTree.init($("#org"), s, data); //树
+			var treeObj = $.fn.zTree.getZTreeObj("org");
+			treeObj.expandAll(true);
+			layer.open({
+					type : 1,
+					content : $('.t'),
+					title : '选择上级机构',
+					area : [ '400px', '400px' ],
+					maxmin: true,
+					btn: ['确定', '取消'],
+					yes: function(index, layero){
+						var treeObj = $.fn.zTree.getZTreeObj("org");
+						var nodes = treeObj.getSelectedNodes();
+						$('#org_up_uuid').val(nodes[0].id);
+						$('#up_org_name').val(nodes[0].name);
+						var index = layer.index; //获取当前弹层的索引号
+						layer.close(index); //关闭当前弹层
+					},
+					btn2: function(index, layero){	
+					}
+			});
+		})
+	})
 })
 
 function initTable() {
@@ -77,21 +134,21 @@ $('#org_add').on('click', function() {
 		})
 	})
 	//获取机构
-	$.getJSON("orgMgmt/getOrg",function(data){
-		$.each(data, function(i, item){
-			var up_id = '';
-			$.each(item, function(key,value){
-				if(key === "uuid"){
-					up_id = value;
-				}
-			})
-			$.each(item, function(key,value){
-				if(key === "org_unit_desc"){
-					$('#up_org').append("<option value="+up_id+">" + value + "</option>");
-				}
-			})
-		})
-	})
+//	$.getJSON("orgMgmt/getOrg",function(data){
+//		$.each(data, function(i, item){
+//			var up_id = '';
+//			$.each(item, function(key,value){
+//				if(key === "uuid"){
+//					up_id = value;
+//				}
+//			})
+//			$.each(item, function(key,value){
+//				if(key === "org_unit_desc"){
+//					$('#up_org').append("<option value="+up_id+">" + value + "</option>");
+//				}
+//			})
+//		})
+//	})
 	layer.open({
 		type: 1,
 		content: $('#org_add_div'),
