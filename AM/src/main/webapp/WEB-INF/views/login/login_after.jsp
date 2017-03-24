@@ -52,12 +52,14 @@
             <div id="2" class="container">
                 <div id="3" class="row">
                     <div id="4" class="blog-masonry masonry-true">
-                    <!--
+                    	<!-- 
                         <div class="post-masonry col-md-4 col-sm-6">
-                            <div class="post-thumb">
-                                <a href="auth"><img src="${ctxPath }/static/img/auth.png" alt=""></a>
+                            <div class="post-thumb effect">
+                                <a href="auth"><img src="${ctxPath }/static/img/Auth_03.png" alt=""></a>
                             </div>
                         </div>
+                    
+                     
                         <div class="post-masonry col-md-4 col-sm-6">
                             <div class="post-thumb">
                                 <a href="http://172.168.171.241:8080/app-rpm/index.html?userid=${userid }&sid=${sid }"><img src="${ctxPath }/static/img/rpm.png" alt=""></a>
@@ -106,8 +108,20 @@
             				resUrl = value;
             			}
             		})
-            		$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb"><a href="'+resUrl+'?userid=${userid }&sid=${sid }"><img src="'+resIcon+'"></a></div></div>');
-            	})
+            		$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb effect"><a href="'+resUrl+'?userid=${userid }&sid=${sid }"><img src="'+resIcon+'"></a></div></div>');
+            	});
+            	$(".effect").mouseover(function(){
+            	    $(this).css({
+            	   	"border": "2px solid rgba(141,39,142,.75)",
+            	    "overflow": "hidden",
+            	    "position": "relative"})
+            	});
+            	$(".effect").mouseleave(function(){
+            	    $(this).css({
+            	   	"border": "1px solid #fff",
+            	    "overflow": "hidden",
+            	    "position": "relative"})
+            	});
             })
         </script>
 	<!-- templatemo 434 masonry -->
