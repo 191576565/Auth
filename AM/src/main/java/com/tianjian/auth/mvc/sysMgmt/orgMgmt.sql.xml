@@ -76,7 +76,6 @@
            SELECT T3.UUID AS ID
         ,T3.ORG_UNIT_DESC AS NAME
         ,T3.ORG_UP_UUID AS PID
-      --  ,rownum as rnum
       FROM SYS_ORG_INFO T3
       LEFT JOIN SYS_DOMAIN_INFO T2
           ON T3.DOMAIN_UUID = T2.UUID
@@ -89,7 +88,6 @@
          SELECT T3.UUID AS ID
         ,T3.ORG_UNIT_DESC AS NAME
         ,T3.ORG_UP_UUID AS PID
-       -- ,rownum as rnum
       FROM SYS_ORG_INFO T3
       LEFT JOIN SYS_DOMAIN_INFO T2
           ON T3.DOMAIN_UUID = T2.UUID
