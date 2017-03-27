@@ -24,6 +24,14 @@ public class RolMgmtController extends Controller {
 	
 	public void index() {
 		log.info("jump to sysMgmt");
+		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
+		String userRole = sysMgmtService.userRole(userId).get(0).getStr("domain_id");
+		//Root用户
+		if("root".equals(userRole)){
+			setAttr("domainlist",sysMgmtService.getData());
+		}else{
+			setAttr("domainlist",sysMgmtService.notRootData(userId));
+		}
 		render("rolMgmt.jsp");
 	}
 	
