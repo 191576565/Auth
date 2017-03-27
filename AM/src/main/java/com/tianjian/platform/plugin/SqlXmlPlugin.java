@@ -47,9 +47,9 @@ public class SqlXmlPlugin implements IPlugin {
 
 	//@Override
 	public boolean start() {
-		 initByPath(true); // 根据绝对路径查找，使用普通构建项目
+		 //initByPath(true); // 根据绝对路径查找，使用普通构建项目
 
-		//initByClassLoader(true); // 根据ClassLoader查找，maven项目和普通构建项目兼容
+		initByClassLoader(true); // 根据ClassLoader查找，maven项目和普通构建项目兼容
 
 		return true;
 	}

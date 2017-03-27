@@ -71,7 +71,8 @@ public abstract class ToolDirFile {
 			 * 2.兼容jboss war部署
 			 */
 			classesPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
-		}
+
+			}
 		return classesPath;
 	}
 

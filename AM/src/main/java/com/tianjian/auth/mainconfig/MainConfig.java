@@ -58,7 +58,6 @@ public class MainConfig extends JFinalConfig {
 		//设置开发模式
 		me.setDevMode(PropKit.getBoolean("config.devMode"));
 		if (PropKit.getBoolean("config.devMode")){
-			System.out.println("999999999999999999999999999999999999999999999999999");
 			SqlReporter.setLog(true);
 		}
 	}
@@ -88,7 +87,6 @@ public class MainConfig extends JFinalConfig {
 		String password = db.getPassWord();
 		
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		System.out.println("db_type:" + db_type);
 		C3p0Plugin c3p0Plugin = new C3p0Plugin(jdbcUrl, username, password, driverClass);
 
 		// ORM
@@ -101,7 +99,6 @@ public class MainConfig extends JFinalConfig {
 			arp.setDialect(new PostgreSqlDialect());
 
 		} else if (db_type.equals(ConstantInit.db_type_mysql)) {
-			System.out.println("mysql init");
 			arp.setDialect(new MysqlDialect());
 
 		} else if (db_type.equals(ConstantInit.db_type_oracle)) {
@@ -127,7 +124,6 @@ public class MainConfig extends JFinalConfig {
 
 		me.add(arp);
 		// 启动encache
-		System.out.println(ToolCache.getCacheType());
 		if (ToolCache.getCacheType().equals(ConstantCache.cache_type_ehcache)) {
 			me.add(new EhCachePlugin());
 		}
