@@ -144,6 +144,9 @@ function onEdit(id,code,name,sort,memo) {
 	$("#sys_add_div #form #ipt_code").val(code);
 	$("#sys_add_div #form #ipt_name").val(name);
 	$("#sys_add_div #form #ipt_sort").val(sort);
+	if("null" == memo){
+		memo = ' ';
+	}
 	$("#sys_add_div #form #ipt_memo").html(memo);
 	layer.open({
 		type: 1,

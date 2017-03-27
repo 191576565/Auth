@@ -166,7 +166,9 @@ function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 	$("#org_add_div #form #scop_n").val(dName);
 	$("#org_add_div #form #org_code").val(orgCode);
 	$("#org_add_div #form #org_name").val(orgDesc);
-	$('#org_add_div #form #up_org').append("<option value="+upOrgID+">" + upOrgDesc + "</option>");
+	$("#org_add_div #form #org_up_uuid").val(upOrgID);
+	$("#org_add_div #form #up_org_name").val(upOrgDesc);
+//	$('#org_add_div #form #up_org').append("<option value="+upOrgID+">" + upOrgDesc + "</option>");
 	$("#org_add_div #form #ipt_memo").val(memo);
 	$("#org_add_div #form #domain_uuid").val(dId);
 	
