@@ -145,8 +145,7 @@ with tmp_roles as (
              ,REQ_URL
              ,CONDITION_TYPE
              ,CONDITION_CONTENT
-             ,CONTENT_ORG_ID
-             ,CONTENT_ORG_DESC
+             ,CONTENT_DESC
            FROM V_API_RPM  where  1=1  or  ( 1 = ? and 1 = ?) 
     	]]>
 	</sql>
