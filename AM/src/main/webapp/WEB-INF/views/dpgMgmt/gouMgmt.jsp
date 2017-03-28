@@ -56,19 +56,30 @@
 				</div><br/>
 			</div>
  		</div>
- 		<div id="sys_add_div" style="display:none;">
- 			<form id="form"></br>
- 			    <label style="margin-left: 8%;">组编码</label> <input id="groupid"  name="groupid" readonly="true" style="margin-left: 6%;" type="text" placeholder="1~30位字母数字下划线"  ></br></br><!--字母和数字(1~30位) -->
- 		     	<label style="margin-left: 11.5%;">URL</label> <input id="urlid"  name="urlid"  style="margin-left: 6%;" type="text" placeholder="请输入URL" >
-				</br></br>
-				<label style="margin-left: 5%;">URL描述</label> <input id="urlname"  name="urlname"  style="margin-left: 6%;" type="text" placeholder="请输入URL描述" >
-				</br></br>
- 		     	<label style="margin-left: 5%;">条件类型</label> 
-				<select id="dictcode" name="dictcode" nValidate="{required:true}" style="width: 120px; margin-left: 6%;">
-					<option value="default">请选择类型</option>
-	 			</select></br></br>
-				<label style="margin-left: 8%;">条件值</label> <input id="dictinfo" name="dictinfo" style="margin-left: 6%;" type="text" />
-				</br>
+ 		<div class="wrapper" id="sys_add_div" style="display:none;">
+ 			<form id="form">
+ 				<div class="form-group">
+	 			    <label>组编码</label> 
+	 			    <input id="groupid"  name="groupid" readonly="true" class="form-control" type="text">
+	 			</div>
+	 			<div class="form-group">
+ 		     		<label>URL</label> 
+ 		     		<input id="urlid" name="urlid" class="form-control" type="text" placeholder="请输入URL" >
+				</div>
+				<div class="form-group">
+					<label>URL描述</label> 
+					<input id="urlname"  name="urlname"  class="form-control" type="text" placeholder="请输入URL描述" >
+				</div>
+				<div class="form-group">
+	 		     	<label>条件类型</label> 
+					<select id="dictcode" name="dictcode" nValidate="{required:true}" class="form-control">
+						<option value="default">请选择类型</option>
+		 			</select>
+	 			</div>
+	 			<div class="form-group">
+					<label>条件值</label> 
+					<input id="dictinfo" name="dictinfo" class="form-control" type="text" />
+				</div>
  			</form>
  		</div>
  		<table id="table"></table>
@@ -97,9 +108,6 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-    
-    <!-- Peity -->
-    <script src="${ctxPath }/static/js/demo/bootstrap-table-demo.js"></script>
     
    
     

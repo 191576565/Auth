@@ -64,17 +64,13 @@ function initdpgMgmtlist(){
         title: '条件类型',
         width:'60',
     }, {
-        field: 'condition_content',
-        title: '条件值',
-        width:'400',
-    }, {
     	field: 'opt',
     	title: '操 作',
         width:'170',
         events: operateEvents,
     	formatter:function(value,row,index){
-    		var e = '<button type="button" class="edit  btn-info update edit">编辑</button> ';
-    		var d = '<button type="button" class="delete  btn-danger delete">删除</button> ';
+    		var e = '<button type="button" class="btn btn-info update edit">编辑</button> ';
+    		var d = '<button type="button" class="btn btn-danger delete">删除</button> ';
     		return e+d;
     	}
     },]
@@ -121,9 +117,8 @@ function sys_add(){
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		skin: 'layui-layer-molv',
 		title: ' URL资源配置',
-		area: ['400px', '310px'],
+		area: ['600px', '450px'],
 		btn: ['保存']
          ,yes: function(index){
         	if(fromcheck()){
