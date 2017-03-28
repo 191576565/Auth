@@ -29,6 +29,11 @@ public class User extends BaseModel<User> {
 	
 	public static final User dao = new User();
 
+	/*
+	 * user
+	 */
+	public static final String model_user_applogin = "tianjian.app.applogin";
+
 	/**
 	 *表名称
 	 */
@@ -81,9 +86,11 @@ public class User extends BaseModel<User> {
 	
 	//CHAR(1)    Y 用户登录状态           0 登录  1 未登录
 	public static final String loggin_status = "loggin_status";
-		
+	public static final String loggin_status_m = "loggin_status_m";
+
 	//VARCHAR2(60)  Y  用户SESSION_ID
 	public static final String user_sid = "user_sid";
+	public static final String user_sid_m = "user_sid_m";
 	
 
 	public  String getUuid() {
