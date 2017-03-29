@@ -1,6 +1,6 @@
 function initdpgMgmtlist(){
    $('#table').bootstrapTable({
-	url: 'goulist',
+	url: 'gouMgmt/goulist',
 // 	toolbar: '#toolbar', //工具按钮用哪个容器
  	striped: true, //是否显示行间隔色
  	pagination: true, //是否显示分页（*）
@@ -187,22 +187,34 @@ $('#sys_add').on('click', function() {
      $('#urlname').val('');
      $('#dictinfo').val('');
 	removeAll();
-	$("#dictcode").append("<option value='Value'>请选择条件类型</option>");
     $.ajax({  
-        url: "getdictcode",
+        url: "gouMgmt/getdictcode",
         dataType: "json",
         data:{groupuuid:groupuuid},
         success: function (data) {  
             $.each(data, function (index, groupuuid) {
             	$("#groupid").val(groupuuid.group_desc);
-            	dumainid=groupuuid.domain_id;
-            	$("#dictcode").append("<option value='"+ groupuuid.dict_id +"'>" + groupuuid.dict_name + "</option>");
             });  
         },  
         error: function (XMLHttpRequest, textStatus, errorThrown , data) {  
         	layer.tips("请先配置组所属域的条件类型字典！", '#dictcode');
         }  
-    }); 
+    });
+    var urlUuid = "";
+	$('#urlid').change(function(){
+    	$("#dictcode").html("");
+    	$("#dictcode").append("<option value=''>请选择URL描述</option>");
+    	var conType = $(this).children('option:selected').val();
+    	$.getJSON("dpgMgmt/typeUrl?type="+conType,function(data){    	    		
+    		$.each(data, function (index, groupuuid) {
+            	$("#dictcode").append("<option value='"+ groupuuid.uuid +"'>" + groupuuid.req_url_desc + "</option>");
+            }); 
+    	});
+    });
+	$('#dictcode').change(function(){
+		var url = $(this).children('option:selected').val();
+		$('#urlname').val(url);
+	});
     sys_add();
 });  
 
@@ -218,7 +230,7 @@ $('#urlid').blur(function() {
 			 return false;
 		}else{
 	        $.ajax({  
-	        url: "verifyurlid",
+	        url: "gouMgmt/verifyurlid",
 	        data:{groupuuid:groupuuid,urlid:urlid},
 	        dataType: "json",  
 	        success: function (data) {

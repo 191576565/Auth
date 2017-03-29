@@ -30,5 +30,31 @@ from org_user t
     	]]>
 	</sql>
 	
+	<sql id="urlSelect">
+		<![CDATA[ 
+        	SELECT T1.DOMAIN_NAME
+      ,T.REQ_URL 
+      ,T.REQ_URL_DESC
+      ,T.CONDITION_TYPE
+      ,T2.DICT_NAME
+      ,T.UUID
+FROM SYS_GROUP_URL_MAPPING T
+LEFT JOIN SYS_DOMAIN_INFO  T1 ON T.DOMAIN_UUID=T1.UUID
+LEFT JOIN SYS_DICT_INFO    T2 ON T.CONDITION_TYPE=T2.DICT_ID AND  T2.DICT_TYPE='effecive_flag'
+where t1.domain_id= ?
+    	]]>
+	</sql>
+	
+	<sql id="typeSelect">
+		<![CDATA[ 
+        	SELECT DISTINCT T.CONDITION_TYPE FROM SYS_GROUP_URL_MAPPING T
+    	]]>
+	</sql>
+	
+	<sql id="typeUrlSelect">
+		<![CDATA[ 
+        	SELECT T.UUID,T.REQ_URL_DESC,T.CONDITION_TYPE FROM SYS_GROUP_URL_MAPPING T WHERE T.CONDITION_TYPE = ?
+    	]]>
+	</sql>
 	
 </sql-statement>

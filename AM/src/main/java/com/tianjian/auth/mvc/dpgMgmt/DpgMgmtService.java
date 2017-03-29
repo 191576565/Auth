@@ -90,5 +90,25 @@ public class DpgMgmtService extends BaseService {
 		List<Record> list = Db.find(sql,domainUuid,domainUuid);
 		return list;
 	}
-
+	
+	//获取url
+	public List<Record> getUrl(String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.urlSelect");
+		List<Record> list = Db.find(sql,domainUuid);
+		return list;
+	}
+	
+	//获取条件类型
+	public List<Record> getConditionType(){
+		String sql = ToolGetSql.getSql("tianjian.dpg.typeSelect");
+		List<Record> list = Db.find(sql);
+		return list;
+	}
+	
+	//条件类型下的url
+	public List<Record> typeUrl(String type){
+		String sql = ToolGetSql.getSql("tianjian.dpg.typeUrlSelect");
+		List<Record> list = Db.find(sql,type);
+		return list;
+	}
 }

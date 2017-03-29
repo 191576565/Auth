@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -63,19 +64,21 @@
 	 			    <input id="groupid"  name="groupid" readonly="true" class="form-control" type="text">
 	 			</div>
 	 			<div class="form-group">
- 		     		<label>URL</label> 
- 		     		<input id="urlid" name="urlid" class="form-control" type="text" placeholder="请输入URL" >
+ 		     		<label>条件类型</label> 
+ 		     		<select id="urlid" name="urlid" class="form-control">
+ 		     			<c:forEach items="${condition }" var="dlist">
+						<option value="${dlist.condition_type }">${dlist.condition_type }</option>
+						</c:forEach>
+ 		     		</select>
 				</div>
 				<div class="form-group">
-					<label>URL描述</label> 
-					<input id="urlname"  name="urlname"  class="form-control" type="text" placeholder="请输入URL描述" >
-				</div>
-				<div class="form-group">
-	 		     	<label>条件类型</label> 
+	 		     	<label>URL描述</label> 
 					<select id="dictcode" name="dictcode" nValidate="{required:true}" class="form-control">
-						<option value="default">请选择类型</option>
 		 			</select>
 	 			</div>
+				<div class="form-group">
+					<input id="urlname"  name="urlname"  class="form-control" readonly="true" type="hidden">
+				</div>
 	 			<div class="form-group">
 					<label>条件值</label> 
 					<input id="dictinfo" name="dictinfo" class="form-control" type="text" />

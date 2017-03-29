@@ -145,7 +145,7 @@ function initdpgMgmtlist() {
 									formatter : function(value, row, index) {
 										var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\''+ index +'\')">编辑</a> ';
 								    	var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
-								    	var f = '<a href="#" onclick="onFun(\''+ row.uuid +'\')" class="btn btn-success">数据权限</a> ';
+								    	var f = '<a href="#" onclick="onFun(\''+ row.uuid +'\',\''+ row.domain_id +'\')" class="btn btn-success">数据权限</a> ';
 								    	return e+d+f;
 									}
 								}, ]
@@ -307,8 +307,8 @@ $('#delete').click(function(){
 		});
 });
 
-function onFun(uuid){
-	 window.location="dpgMgmt/gouMgmt?groupuuid="+uuid;
+function onFun(uuid,domainid){
+	 window.location="gouMgmt?groupuuid="+uuid+"&domainid="+domainid;
 }
 
 function refresh(){
