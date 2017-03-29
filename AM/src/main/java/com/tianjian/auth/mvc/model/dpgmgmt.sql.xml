@@ -204,7 +204,7 @@ select  t8.uuid
 	<!-- 验证权限组URL -->
 	<sql id="verifyurl">
 		<![CDATA[ 
-		select t.uuid from SYS_GROUP_URL_RELA t 
+		select t.uuid from SYS_GROUP_URL_RELA1 t 
 		WHERE t.group_uuid=#'$groupuuid$'# 
 		  AND t.req_url=#'$urlid$'#
     	]]>
