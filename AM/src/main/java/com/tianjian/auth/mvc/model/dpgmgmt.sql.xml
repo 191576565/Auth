@@ -186,7 +186,7 @@ select  t8.uuid
 	<!-- 删除权限组url信息 -->
 	<sql id="deleteurl">
 		<![CDATA[ 
-		delete from sys_group_url_rela t where  t.uuid in (#'$para$'#)
+		delete from sys_group_url_rela1 t where  t.uuid in (#'$para$'#)
     	]]>
 	</sql>
 	
