@@ -24,22 +24,33 @@
 	
 	<sql id="gouAllSelect">
 		<![CDATA[ 
-         select t.uuid,t1.domain_name,
-       t2.group_id,
-       t2.group_desc,
-       t.req_url,
-       t.req_url_desc,
-       t.condition_type,
-       t.condition_content 
+select  t8.uuid   
+     ,T10.DOMAIN_NAME
+     ,T11.GROUP_ID
+     ,T11.GROUP_DESC
+     ,T81.REQ_URL
+     ,T81.REQ_URL_DESC
+     ,T12.DICT_NAME  CONDITION_TYPE
+     ,LISTAGG(t9.org_unit_id  , ',') WITHIN GROUP(ORDER BY t9.org_unit_id)  AS condition_content
     	]]>
 	</sql>
 	
 	<sql id="gouAllFrom">
 		<![CDATA[ 
-		  from sys_group_url_rela t, sys_domain_info t1, sys_group_info t2
-           where t.group_uuid = t2.uuid
-             and t2.domain_uuid = t1.uuid
-             and t2.uuid=#'$groupuuid$'#
+		from  sys_group_url_rela1  T8
+      LEFT JOIN SYS_GROUP_URL_MAPPING T81  ON T8.REQ_URL=T81.UUID
+      LEFT JOIN SYS_ORG_INFO        T9  ON INSTR( T8.CONDITION_CONTENT ,T9.uuid   )>0 AND T9.DOMAIN_UUID=T81.DOMAIN_UUID
+      left join sys_domain_info   t10  ON T10.UUID=T81.DOMAIN_UUID
+      LEFT JOIN SYS_GROUP_INFO    T11  ON T11.UUID=T8.GROUP_UUID
+      LEFT JOIN SYS_DICT_INFO    T12   ON T12.DICT_ID =T81.CONDITION_TYPE  AND  T12.DICT_TYPE='effective_flag'
+     where  t8.group_uuid=#'$groupuuid$'#  
+      group by   t8.uuid 
+               ,T10.DOMAIN_NAME
+               ,T11.GROUP_ID
+               ,T11.GROUP_DESC
+               ,T12.DICT_NAME
+               ,T81.REQ_URL_DESC
+               ,T81.REQ_URL	
     	]]>
 	</sql>
 	
