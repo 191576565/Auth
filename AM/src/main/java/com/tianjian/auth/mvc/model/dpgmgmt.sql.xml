@@ -26,7 +26,6 @@
 		<![CDATA[ 
 select  t8.uuid   
      ,T10.DOMAIN_NAME
-     ,T11.UUID
      ,T11.GROUP_ID
      ,T11.GROUP_DESC
      ,T81.REQ_URL
@@ -47,7 +46,6 @@ select  t8.uuid
      where  t8.group_uuid=#'$groupuuid$'#  
       group by   t8.uuid 
                ,T10.DOMAIN_NAME
-               ,T11.UUID
                ,T11.GROUP_ID
                ,T11.GROUP_DESC
                ,T12.DICT_NAME
