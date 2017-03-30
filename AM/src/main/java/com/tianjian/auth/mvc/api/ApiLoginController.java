@@ -12,12 +12,23 @@ import com.tianjian.auth.mvc.handler.GlobalInterceptor;
 import com.tianjian.auth.mvc.login.LoginService;
 import com.tianjian.auth.mvc.model.User;
 
+/**
+ *rpm app 登录api
+ *
+ * @author  [hujian]
+ * @version [1.0]
+ * @date    [2017年3月30日]
+ */
+
 public class ApiLoginController extends Controller {
 
 	private static final Log log = Log.getLog(ApiLoginController.class);
 	private LoginService loginservice = new LoginService();
 	private ApiLoginService apiservice = new ApiLoginService();
 
+	/**
+	 * 登录  传递session id  修改登录状态字段名
+	 */
 	@Clear(GlobalInterceptor.class)
 	public void appValidLogin() {
 		String username = getPara("username");
@@ -64,11 +75,33 @@ public class ApiLoginController extends Controller {
 		}
 	}
 
+	/**
+	 * 退出   修改登录状态字段
+	 */
+	@Clear(GlobalInterceptor.class)
 	public void appLogout() {
 		String sid = getSession().getId();
 		String username = getPara("username");
-		apiservice.appLogout(User.model_user_applogin, username, sid, "1");
+		Map<String, Object> userinfo = new HashMap<String, Object>();
+		String code = "200";
+		String msg = username + "用户登出成功！";
+		Object data = null;
+		int n=apiservice.appLogout(User.model_user_applogin, username, sid, "1");
+		if (n>0){
+			
+		}else{
+			 code = "400";
+			 msg = username + "用户登出失败！";
+		}
+		userinfo.put("code", code);
+		userinfo.put("msg", msg);
+		userinfo.put("data", data);
+		renderJson(userinfo);
 	}
+	/**
+	 * 接口请求数据   和原pc请求一样
+	 */
+	@Clear(GlobalInterceptor.class)
 	public void rpmParam() {
 		// 允许跨域操作
 		// getResponse().addHeader("Access-Control-Allow-Origin", "*");

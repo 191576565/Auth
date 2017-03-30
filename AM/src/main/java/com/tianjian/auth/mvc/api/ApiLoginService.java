@@ -12,14 +12,24 @@ import com.tianjian.platform.plugin.ParamInitPlugin;
 import com.tianjian.platform.tools.ToolCache;
 import com.tianjian.platform.tools.ToolGetSql;
 
+
+
+/**
+ * rpm app 登录api的service层
+ *
+ * @author  [hujian]
+ * @version [1.0]
+ * @date    [2017年3月30日]
+ */
 public class ApiLoginService extends BaseService {
 	public void appLogin(String sqlId,String userid,String sid,String loginstatus){
 		String sql = ToolGetSql.getSql(sqlId);
 		Db.update(sql, loginstatus,sid,userid);
 	}
-	public void appLogout(String sqlId,String userid,String sid,String loginstatus){
+	
+	public int appLogout(String sqlId,String userid,String sid,String loginstatus){
 		String sql = ToolGetSql.getSql(sqlId);
-		Db.update(sql, loginstatus,sid,userid);
+		return Db.update(sql, loginstatus,sid,userid);
 	}
 	public static  List<Record> getSelectlist(String username, String sessionid, String type){
 		List<Record> user = ToolCache.get(ParamInitPlugin.cacheStart_user + username);
