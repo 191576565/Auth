@@ -40,6 +40,7 @@
        t0.uuid as user_uuid,
        t0.user_id,
        t0.user_name,
+       t0.user_pwd,
        listagg(t1.uuid, ',') within group(order by t1.role_id) as role_uuids,
        listagg(t1.role_id, ',') within group(order by t1.role_id) as role_ids,
        listagg(t1.role_name, ',') within group(order by t1.role_id) as role_names
@@ -60,7 +61,8 @@
           t3.org_unit_desc,
           t0.uuid,
           t0.user_id,
-          t0.user_name
+          t0.user_name,
+           t0.user_pwd
     	]]>
 	</sql>
 	

@@ -100,14 +100,14 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#chevron-down">
+                            <a herf="#" class="dropdown-toggle count-info" data-toggle="dropdown" >
                                	欢迎您，<%=((Record)session.getAttribute("userinfo")).getStr("user_name") %>
                                 <i class="fa fa-chevron-down"></i>
                             </a>
                             <ul class="dropdown-menu yeqc-size">                               
                                 <li>
-                                    <div class="text-center link-block">
-                                        <a class="J_menuItem" href="uptPwd">
+                                    <div class="box text-center link-block">
+                                       <a class="J_menuItem" href="uptPwd">
                                             <i class="fa fa-cog"></i> <strong> 修改密码</strong>
                                         </a>
                                     </div>
@@ -151,6 +151,9 @@
     	document.forms[0].action="userexit";
     	document.forms[0].submit();
     	}
+    $(document).on("click",".box", function () {
+     alert(1);
+   	});
     </script>
 
 </body>

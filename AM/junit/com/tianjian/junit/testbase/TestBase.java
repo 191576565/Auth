@@ -1,4 +1,4 @@
-package com.junit;
+package com.tianjian.junit.testbase;
 
 import org.junit.BeforeClass;
 
@@ -21,45 +21,39 @@ import com.tianjian.auth.mvc.rolMgmt.RoleMgmt;
 import com.tianjian.auth.mvc.sysMgmt.OrgMgmt;
 import com.tianjian.auth.mvc.sysMgmt.SysMgmt;
 import com.tianjian.auth.mvc.usrMgmt.UsrMgmt;
+import com.tianjian.platform.constant.ConstantCache;
 import com.tianjian.platform.constant.ConstantInit;
 import com.tianjian.platform.dto.DataBase;
 import com.tianjian.platform.plugin.SqlXmlPlugin;
+import com.tianjian.platform.tools.ToolCache;
 import com.tianjian.platform.tools.ToolDataBase;
 
-public class TestBase {
-	private static final Log log = Log.getLog(TestBase.class);
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		log.info("启动ConfigCore start ......");
-		initJfinal();
-		log.info("启动ConfigCore end ......");
-	}
-
-	public static void initJfinal() {
-		PropKit.use("authconfig.properties");
-		//
-		DataBase db = ToolDataBase.getDbInfo();
+public  class TestBase {
+private static final Log log = Log.getLog(TestBase.class);
+	
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+    	log.info("启动 start ......");
+    	PropKit.use("authconfig.properties");
+    	DataBase db = ToolDataBase.getDbInfo();
 		String driverClass = db.getDriverClass();
 		String jdbcUrl = db.getJdbcUrl();
 		String username = db.getUserName();
 		String password = db.getPassWord();
-
+		
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		System.out.println("db_type:" + db_type);
 		C3p0Plugin c3p0Plugin = new C3p0Plugin(jdbcUrl, username, password, driverClass);
 
 		// ORM
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		arp.setShowSql(true);
-
+		
 		arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));//
 		// 数据库类型
 		if (db_type.equals(ConstantInit.db_type_postgresql)) {
 			arp.setDialect(new PostgreSqlDialect());
 
 		} else if (db_type.equals(ConstantInit.db_type_mysql)) {
-			System.out.println("mysql init");
 			arp.setDialect(new MysqlDialect());
 
 		} else if (db_type.equals(ConstantInit.db_type_oracle)) {
@@ -73,21 +67,23 @@ public class TestBase {
 		}
 
 		// 添加表映射
-		arp.addMapping("SYS_LOG", "UUID", OpLog.class);
-		arp.addMapping("SYS_USER_INFO", "UUID", User.class);
-		arp.addMapping("SYS_GROUP_INFO", "UUID", DpgMgmt.class);
-		arp.addMapping("sys_domain_info", "UUID", SysMgmt.class);
+		arp.addMapping("SYS_LOG","UUID" ,OpLog.class);
+		arp.addMapping("SYS_USER_INFO","UUID",User.class);
+		arp.addMapping("SYS_GROUP_INFO","UUID",DpgMgmt.class);
+		arp.addMapping("sys_domain_info","UUID", SysMgmt.class);
 		arp.addMapping("SYS_ORG_INFO", "UUID", OrgMgmt.class);
-		arp.addMapping("SYS_USER_INFO", "UUID", UsrMgmt.class);
-		arp.addMapping("SYS_ROLE_INFO", "UUID", RoleMgmt.class);
-		arp.addMapping("SYS_RESOURCE_INFO", "UUID", ResMgmt.class);
+		arp.addMapping("SYS_USER_INFO","UUID", UsrMgmt.class);
+		arp.addMapping("SYS_ROLE_INFO","UUID", RoleMgmt.class);
+		arp.addMapping("SYS_RESOURCE_INFO","UUID", ResMgmt.class);
+		
 		c3p0Plugin.start();
-
 		arp.start();
 		// 启动encache
+		
 		new EhCachePlugin().start();
-
-		// 配置sql解析
+	
 		new SqlXmlPlugin().start();
-	}
+		// -----
+    	log.info("启动 end ......");
+    }
 }
