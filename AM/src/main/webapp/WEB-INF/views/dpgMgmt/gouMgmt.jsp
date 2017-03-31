@@ -69,7 +69,7 @@
  		     		<label>条件类型</label> 
  		     		<select id="urlid" name="urlid" class="form-control">
  		     			<c:forEach items="${condition }" var="dlist">
-						<option value="${dlist.condition_type }">${dlist.condition_type }</option>
+						<option value="${dlist.dict_id }">${dlist.dict_name }</option>
 						</c:forEach>
  		     		</select>
 				</div>

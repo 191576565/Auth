@@ -22,7 +22,7 @@ public class GouMgmtController extends Controller{
 	public void index() {
 		log.info("jump to gouMgmt");
 		setAttr("domainlist",dpgmgmtservice.getUrl(getPara("domainid")));
-		setAttr("condition",dpgmgmtservice.getConditionType());
+		setAttr("condition",dpgmgmtservice.getConditionType(domain_id));
 		/*权限管理组模块子页面*/
 		setAttr("groupuuid", getPara("groupuuid"));
 		render("gouMgmt.jsp");
@@ -130,5 +130,15 @@ public class GouMgmtController extends Controller{
 	 */
 	public void getGroupCode(){
 		renderJson(dpgmgmtservice.getGroupCode(g_id));
+	}
+	
+	/*
+	 * gouMgmt/loadEditPara
+	 * 加载编辑数据
+	 */
+	public void loadEditPara(){
+		String uuid = getPara("uuid");
+		List<Record> list = dpgmgmtservice.loadEditPara(uuid);
+		renderJson(list);
 	}
 }

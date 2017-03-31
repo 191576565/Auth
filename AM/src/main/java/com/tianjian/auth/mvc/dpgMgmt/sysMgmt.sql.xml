@@ -47,7 +47,9 @@ where t1.domain_id= ?
 	
 	<sql id="typeSelect">
 		<![CDATA[ 
-        	SELECT DISTINCT T.CONDITION_TYPE FROM SYS_GROUP_URL_MAPPING T
+        	SELECT  DISTINCT  T2.DICT_ID,T2.DICT_NAME  FROM SYS_GROUP_URL_MAPPING T
+  JOIN SYS_DOMAIN_INFO   T1 ON  T.DOMAIN_UUID=T1.UUID  AND  T1.DOMAIN_ID=?
+LEFT JOIN SYS_DICT_INFO    T2 ON    T.CONDITION_TYPE=T2.DICT_ID  AND T2.DICT_TYPE='effective_flag'
     	]]>
 	</sql>
 	
@@ -78,6 +80,31 @@ where t1.domain_id= ?
     from  SYS_GROUP_INFO         T7 
 LEFT JOIN SYS_DOMAIN_INFO        T2  ON T7.DOMAIN_UUID=T2.UUID   
   WHERE     T7.UUID=? 
+    	]]>
+	</sql>
+	
+	<sql id="loadEditParam">
+		<![CDATA[ 
+        	SELECT  /*  T2.DOMAIN_ID
+         ,T2.DOMAIN_NAME*/
+          T7.UUID                                                                   AS  GROUP_UUID 
+         ,T7.Group_Desc
+         ,t8.uuid                                                                   AS  URL_UUID
+         ,T81.REQ_URL
+         ,T81.CONDITION_TYPE
+         ,LISTAGG(T9.ORG_UNIT_ID    , ',') WITHIN GROUP(ORDER BY T9.ORG_UNIT_ID)    AS CONDITION_CONTENT
+         ,LISTAGG(T9.ORG_UNIT_DESC  , ',') WITHIN GROUP(ORDER BY T9.ORG_UNIT_ID)    AS CONTENT_DESC
+     FROM SYS_GROUP_URL_RELA1    T8
+     JOIN SYS_GROUP_INFO         T7  ON T8.GROUP_UUID=T7.UUID
+LEFT JOIN SYS_DOMAIN_INFO        T2  ON T7.DOMAIN_UUID=T2.UUID
+LEFT JOIN SYS_GROUP_URL_MAPPING  T81 ON T8.REQ_URL=T81.UUID
+LEFT JOIN SYS_ORG_INFO           T9  ON INSTR(T8.CONDITION_CONTENT  ,T9.UUID)>0 AND T9.DOMAIN_UUID=T2.UUID
+WHERE     T8.UUID=?
+GROUP BY  T7.UUID 
+         ,T7.Group_Desc
+         ,t8.uuid 
+         ,T81.REQ_URL
+         ,T81.CONDITION_TYPE
     	]]>
 	</sql>
 	

@@ -106,9 +106,9 @@ public class DpgMgmtService extends BaseService {
 	}
 	
 	//获取条件类型
-	public List<Record> getConditionType(){
+	public List<Record> getConditionType(String domainId){
 		String sql = ToolGetSql.getSql("tianjian.dpg.typeSelect");
-		List<Record> list = Db.find(sql);
+		List<Record> list = Db.find(sql,domainId);
 		return list;
 	}
 	
@@ -130,4 +130,12 @@ public class DpgMgmtService extends BaseService {
 		List<Record> list = Db.find(sql,groupUuid);
 		return list;
 	}
+	
+	//加载编辑信息
+	public List<Record> loadEditPara(String uuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.loadEditParam");
+		List<Record> list = Db.find(sql,uuid);
+		return list;
+	}
+	
 }

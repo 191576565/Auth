@@ -139,9 +139,8 @@ function initTable(){
     	field: 'opt',
     	title: '操 作',
         width:'170',
-        events: operateEvents,
     	formatter:function(value,row,index){
-    		var e = '<button type="button" class="btn btn-info update edit">编辑</button> ';
+    		var e = '<button type="button" class="btn btn-info update edit" onclick="onEdit(\''+ row.uuid +'\')">编辑</button> ';
     		var d = '<button type="button" class="btn btn-danger delete">删除</button> ';
     		return e+d;
     	}
@@ -151,38 +150,57 @@ function initTable(){
    $('#table').bootstrapTable('hideColumn', 'domain_id');
 };
 
-window.operateEvents = {
-      'click .edit': function (e, value, row, index) {
-    	  var selRow = $("#table").bootstrapTable('getData');
-          $('#groupid').val(selRow[index].group_id);
-          $('#urlid').val(selRow[index].req_url);
-          $('#urlname').val(selRow[index].req_url_desc);
-          $('#dictinfo').val(selRow[index].condition_content);
-          var condition_type=selRow[index].condition_type;
-          removeAll();
-          $.ajax({  
-                   url: "getdictcode",
-                   dataType: "json",
-                   data:{groupuuid:groupuuid},
-                   success: function (data) {  
-                	    $.each(data, function (index, groupuuid) {
-                	    	dumainid=groupuuid.domain_id;
-                        	$("#dictcode").append("<option value='"+ groupuuid.dict_id +"'>" + groupuuid.dict_name + "</option>");
-                        	if(groupuuid.dict_id==selRow[index].condition_type){
-                        	  $("#dictcode").val(condition_type); }
-                	    });  
-                    },  
-                    error: function (XMLHttpRequest, textStatus, errorThrown , data) {  
-                    	layer.tips("请先配置组所属域的条件类型字典！", '#dictcode');
-                    } 
-             });
-    	    sys_edit(selRow[index].uuid);
-      },
-      'click .delete': function (e, value, row, index) {
-    	  var selRow = $("#table").bootstrapTable('getData');
-          del(selRow[index].uuid);
-      }
-      };
+//layer弹出自定义div__修改
+function onEdit(uuid) {
+	$("#sys_add_div #form")[0].reset();
+	$("#sys_add_div #form #urlid").html("");
+	$("#sys_add_div #form #dictcode").html("");
+	$.getJSON("gouMgmt/loadEditPara?uuid="+uuid,function(content){
+		content.forEach(function(e){
+			$('#groupid').val(e.group_desc);
+			$("#urlid").append("<option value='"+ e.uuid +"'>" + e.condition_type + "</option>");
+		});
+	});
+	layer.open({
+		type: 1,
+		content: $('#sys_add_div'),
+		title: '系统信息',
+		area: ['768px', '432px'],
+	});
+};
+
+//window.operateEvents = {
+//      'click .edit': function (e, value, row, index) {
+//    	  var selRow = $("#table").bootstrapTable('getData');
+//          $('#groupid').val(selRow[index].group_id);
+//          $('#urlid').val(selRow[index].req_url);
+//          $('#urlname').val(selRow[index].req_url_desc);
+//          $('#dictinfo').val(selRow[index].condition_content);
+//          var condition_type=selRow[index].condition_type;
+//          removeAll();
+//          $.ajax({  
+//                   url: "getdictcode",
+//                   dataType: "json",
+//                   data:{groupuuid:groupuuid},
+//                   success: function (data) {  
+//                	    $.each(data, function (index, groupuuid) {
+//                	    	dumainid=groupuuid.domain_id;
+//                        	$("#dictcode").append("<option value='"+ groupuuid.dict_id +"'>" + groupuuid.dict_name + "</option>");
+//                        	if(groupuuid.dict_id==selRow[index].condition_type){
+//                        	  $("#dictcode").val(condition_type); }
+//                	    });  
+//                    },  
+//                    error: function (XMLHttpRequest, textStatus, errorThrown , data) {  
+//                    	layer.tips("请先配置组所属域的条件类型字典！", '#dictcode');
+//                    } 
+//             });
+//    	    sys_edit(selRow[index].uuid);
+//      },
+//      'click .delete': function (e, value, row, index) {
+//    	  var selRow = $("#table").bootstrapTable('getData');
+//          del(selRow[index].uuid);
+//      }
+//      };
 
 var orgs = '';
 function sys_add(){
