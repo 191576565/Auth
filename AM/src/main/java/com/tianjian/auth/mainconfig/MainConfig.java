@@ -21,6 +21,7 @@ import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.tianjian.auth.mvc.dpgMgmt.GouMgmt;
 import com.tianjian.auth.mvc.handler.GlobalHandler;
 import com.tianjian.auth.mvc.handler.GlobalInterceptor;
 import com.tianjian.auth.mvc.model.DpgMgmt;
@@ -120,6 +121,7 @@ public class MainConfig extends JFinalConfig {
 		arp.addMapping("SYS_USER_INFO","UUID", UsrMgmt.class);
 		arp.addMapping("SYS_ROLE_INFO","UUID", RoleMgmt.class);
 		arp.addMapping("SYS_RESOURCE_INFO","UUID", ResMgmt.class);
+		arp.addMapping("SYS_GROUP_URL_RELA1","UUID", GouMgmt.class);
 		me.add(c3p0Plugin);
 
 		me.add(arp);

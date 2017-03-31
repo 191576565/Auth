@@ -91,6 +91,13 @@ public class DpgMgmtService extends BaseService {
 		return list;
 	}
 	
+	//获取机构树
+	public List<Record> orgTree(String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.orgTree");
+		List<Record> list = Db.find(sql,domainUuid);
+		return list;
+	}
+	
 	//获取url
 	public List<Record> getUrl(String domainUuid){
 		String sql = ToolGetSql.getSql("tianjian.dpg.urlSelect");
@@ -109,6 +116,18 @@ public class DpgMgmtService extends BaseService {
 	public List<Record> typeUrl(String type){
 		String sql = ToolGetSql.getSql("tianjian.dpg.typeUrlSelect");
 		List<Record> list = Db.find(sql,type);
+		return list;
+	}
+	
+	//新增URL资源配置
+	public void save(GouMgmt gouMgmt){
+		gouMgmt.save();
+	}
+	
+	//获取组信息
+	public List<Record> getGroupCode(String groupUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.groupCodeSelect");
+		List<Record> list = Db.find(sql,groupUuid);
 		return list;
 	}
 }

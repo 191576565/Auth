@@ -118,7 +118,7 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
     
-   <!-- ztree -->
+   　<!-- ztree -->
     <script src="${ctxPath }/static/js/plugins/zTree/jquery.ztree.all.min.js"></script>
     
     <!-- layer javascript -->

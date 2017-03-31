@@ -57,4 +57,28 @@ where t1.domain_id= ?
     	]]>
 	</sql>
 	
+	<sql id="orgTree">
+		<![CDATA[ 
+        	SELECT T3.UUID   AS ID 
+                 ,T3.ORG_UNIT_DESC  AS NAME
+                 ,T3.ORG_UP_UUID    AS PID 
+                 FROM SYS_ORG_INFO      T3
+            LEFT JOIN SYS_DOMAIN_INFO   T2  ON T3.DOMAIN_UUID=T2.UUID
+      where T2.DOMAIN_ID=? 
+            start with    t3.ORG_UP_UUID= (select uuid from sys_org_info c where  c.org_up_uuid='#')  connect by prior t3.uuid =t3.org_up_uuid
+
+        	
+    	]]>
+	</sql>
+	
+	<sql id="groupCodeSelect">
+		<![CDATA[ 
+        	select  T7.UUID                             AS  GROUP_UUID 
+         ,T7.Group_Desc 
+    from  SYS_GROUP_INFO         T7 
+LEFT JOIN SYS_DOMAIN_INFO        T2  ON T7.DOMAIN_UUID=T2.UUID   
+  WHERE     T7.UUID=? 
+    	]]>
+	</sql>
+	
 </sql-statement>

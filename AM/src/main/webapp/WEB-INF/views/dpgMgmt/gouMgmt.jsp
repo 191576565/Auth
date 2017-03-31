@@ -25,6 +25,7 @@
 		<!-- Sweet Alert -->
 		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 		<link href="${ctxPath }/static/css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
+		<link href="${ctxPath }/static/css/plugins/ztree/zTreeStyle.css" rel="stylesheet">
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
  		<div class="row">
@@ -59,11 +60,12 @@
  		</div>
  		<div class="wrapper" id="sys_add_div" style="display:none;">
  			<form id="form">
- 				<div class="form-group">
+ 				<div class="form-group col-sm-12">
 	 			    <label>组编码</label> 
 	 			    <input id="groupid"  name="groupid" readonly="true" class="form-control" type="text">
+	 			    <input id="groupUuid" name="groupUuid" type="hidden">
 	 			</div>
-	 			<div class="form-group">
+	 			<div class="form-group col-sm-12">
  		     		<label>条件类型</label> 
  		     		<select id="urlid" name="urlid" class="form-control">
  		     			<c:forEach items="${condition }" var="dlist">
@@ -71,19 +73,21 @@
 						</c:forEach>
  		     		</select>
 				</div>
-				<div class="form-group">
+				<div class="form-group col-sm-12">
 	 		     	<label>URL描述</label> 
 					<select id="dictcode" name="dictcode" nValidate="{required:true}" class="form-control">
 		 			</select>
 	 			</div>
-				<div class="form-group">
+				<div class="form-group col-sm-12">
 					<input id="urlname"  name="urlname"  class="form-control" readonly="true" type="hidden">
 				</div>
-	 			<div class="form-group">
-					<label>条件值</label> 
-					<input id="dictinfo" name="dictinfo" class="form-control" type="text" />
-				</div>
  			</form>
+ 				<div class="form-group col-sm-12">
+					<label>条件值</label> 
+					<div>
+						<button　type="button" class="btn btn-block btn-default tree">选择条件值</button>
+					</div>
+				</div>
  		</div>
  		<table id="table"></table>
  		<div id="opn_tree" class="ibox float-e-margins" style="display:none;">
@@ -95,6 +99,9 @@
  			<form id="userform"></br>
  		     	<div id="user_in_div" style="margin-left: 2%;"></div>
  			</form>
+ 		</div>
+ 		<div class="t" style="display:none;">
+ 			<ul id="org" class="ztree"></ul>
  		</div>
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
@@ -112,23 +119,18 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
     
-   
+   <!-- ztree -->
+    <script src="${ctxPath }/static/js/plugins/zTree/jquery.ztree.all.min.js"></script>
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
-    <!--
+
+
+	<!--
     	作者：yeqc
     	时间：2017-02-09
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/gouMgmt.js"></script>
-     <script type="text/javascript"> 
-     <!-- 初始化界面数据 -->
-     $(document).ready(function() {
-    	    dumainid="";
-    	    groupuuid="${groupuuid}";
-    	    initdpgMgmtlist(groupuuid);
-    	});
-	</script>
 	</body>
 </html>

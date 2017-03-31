@@ -1,4 +1,77 @@
-function initdpgMgmtlist(){
+var s = {
+	view: {
+		dblClickExpand: false,
+		selectedMulti: false
+	},
+	data: {
+		simpleData: {
+			enable: true,
+			idKey: "id",
+			pIdKey: "pid"
+		}
+	},
+	callback: {
+		onClick: zTreeOnClickSimple
+	},
+	check : {
+		enable : true,
+		chkboxType : {
+			"Y" : "ps",
+			"N" : "ps"
+		}
+	}
+};
+
+function zTreeOnClickSimple(event, treeId, treeNode) {
+	var treeObj = $.fn.zTree.getZTreeObj(treeId);
+	treeObj.expandNode(treeNode, null, null, null);
+
+	return true;
+};
+
+$(function(){
+	initTable();
+	$('.tree').click(function(){
+		$.get('gouMgmt/orgTree', function(data){
+			$.fn.zTree.init($("#org"), s, data); //树
+			var treeObj = $.fn.zTree.getZTreeObj("org");
+			treeObj.expandAll(true);
+			
+			var u=orgs.split(',');
+			if(orgs!="" && orgs!=null){
+				u.forEach(function(e){
+					var node = treeObj.getNodeByParam("id", e);
+					treeObj.checkNode(node, true, true);
+				});
+			}
+			
+			layer.open({
+					type : 1,
+					content : $('.t'),
+					title : '选择机构',
+					area : [ '400px', '400px' ],
+					maxmin: true,
+					btn: ['确定', '取消'],
+					yes: function(index, layero){
+						var nodes = treeObj.getCheckedNodes(true);
+						var us=[];
+						nodes.forEach(function(e){
+							us.push(e.id);
+						});
+						orgs=us.join();
+						if(orgs!=null && orgs!=''){
+							$('.tree').text('编辑条件值');
+						}
+						layer.close(index);
+					},
+					btn2: function(index, layero){	
+					}
+			});
+		})
+	})
+})
+
+function initTable(){
    $('#table').bootstrapTable({
 	url: 'gouMgmt/goulist',
 // 	toolbar: '#toolbar', //工具按钮用哪个容器
@@ -20,7 +93,6 @@ function initdpgMgmtlist(){
  	sidePagination: "server",
  	queryParams: function queryParams(params) {   //设置查询参数  
         var param = {
-        	groupuuid :groupuuid,
             pageNumber: params.pageNumber,    
             pageSize: params.pageSize,  
             user_id : $("#userid").val()
@@ -112,21 +184,32 @@ window.operateEvents = {
       }
       };
 
-
+var orgs = '';
 function sys_add(){
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
 		title: ' URL资源配置',
 		area: ['600px', '450px'],
-		btn: ['保存']
-         ,yes: function(index){
-        	if(fromcheck()){
-        	  saveurlform();
-              location.reload();
-              layer.closeAll(index);
-        	 };
-         }
+		btn: ['保存','取消'],
+        yes: function(index){
+        	$.ajax({
+				url : "gouMgmt/save?"+$('#form').serialize()+"&orgs="+orgs,
+				dataType : "json",
+				type : 'post',
+				contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+				success : function(data) {
+					layer.closeAll();
+					$('#table').bootstrapTable('refresh', {silent: true});
+				},
+				error : function(
+						XMLHttpRequest,
+						textStatus, errorThrown) {
+					layer.msg("数据被城管抓走了！");
+				}
+			});
+        },
+		btn2: function(index, layero){}
 	});
 };
 
@@ -188,12 +271,12 @@ $('#sys_add').on('click', function() {
      $('#dictinfo').val('');
 	removeAll();
     $.ajax({  
-        url: "gouMgmt/getdictcode",
+        url: "gouMgmt/getGroupCode",
         dataType: "json",
-        data:{groupuuid:groupuuid},
         success: function (data) {  
             $.each(data, function (index, groupuuid) {
             	$("#groupid").val(groupuuid.group_desc);
+            	$("#groupUuid").val(groupuuid.group_uuid);
             });  
         },  
         error: function (XMLHttpRequest, textStatus, errorThrown , data) {  
@@ -231,7 +314,7 @@ $('#urlid').blur(function() {
 		}else{
 	        $.ajax({  
 	        url: "gouMgmt/verifyurlid",
-	        data:{groupuuid:groupuuid,urlid:urlid},
+	        data:{urlid:urlid},
 	        dataType: "json",  
 	        success: function (data) {
 	        	if(data.status!='success'){
@@ -283,12 +366,6 @@ function getTreeData(dictcode) {
                     levels:10,
                     color: "#000000",
                     showBorder: false,
-                //  backColor:"#0000FF",
-                //  onhoverColor:"7EC0EE",
-                //  multiSelect:true,
-                //  checkedIcon:"glyphicon glyphicon-check",
-                //  selectable: true,
-                //  showBorder: false,
                     onNodeChecked: function(event, data){
                    	if(data.nodes != null)
                    	{
@@ -342,26 +419,6 @@ function getDisabled(){
            }
 	    }
 	$('#dictinfo').val(dictinfo);
-}
-
-function saveurlform(){
-	$.ajax({  
-        url: "saveurlform",
-        dataType: "json",
-        type:'post',
-        contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-        data:{groupuuid:groupuuid,urlid:$('#urlid').val(),urlname:$('#urlname').val(),dictcode:$('#dictcode').val(),dictinfo:$('#dictinfo').val()},
-        success: function (data) {
-        	if(data.status=='success'){
-        		layer.msg("数据保存成功");
-        	}else{
-        		layer.msg("数据保存失败");
-        	}  	
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) { 
-             	layer.msg("数据被城管抓走了！");
-        }  
-    }); 
 }
 
 function updateurlform(uuid){
