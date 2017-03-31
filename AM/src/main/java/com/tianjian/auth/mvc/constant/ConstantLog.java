@@ -4,52 +4,52 @@ public interface ConstantLog {
 	/**
 	 * AUTH 三层标题
 	 */
-	public static final String basemgr  =" BASEMGR";  // 基础配置
-	public static final String userauth = "USERAUTH" ; //用户权限
-	public static final String syslog   = "SYSLOG" ;   //系统日志
+	public static final String basemgr  =" 基础配置";  // 基础配置
+	public static final String userauth = "用户权限" ; //用户权限
+	public static final String syslog   = "系统日志" ;   //系统日志
 	
 	/**
 	 * 域操作信息
 	 */	
-	public static final String dmn     = basemgr+"-DMN";
-	public static final String dmn_add = dmn+"-ADD";
-	public static final String dmn_chg = dmn+"-CHG";
-	public static final String dmn_del = dmn+"-DEL";	
+	public static final String dmn     = basemgr+"-域管理";
+	public static final String dmn_add = dmn+"-新增";
+	public static final String dmn_chg = dmn+"-编辑";
+	public static final String dmn_del = dmn+"-删除";	
 	/**
 	 * 机构操作信息
 	 */	
-	public static final String org     = basemgr+"-ORG";
-	public static final String org_add = org+"-ADD";
-	public static final String org_chg = org+"-CHG";
-	public static final String org_del = org+"-DEL";	
+	public static final String org     = basemgr+"-机构管理";
+	public static final String org_add = org+"-新增";
+	public static final String org_chg = org+"-编辑";
+	public static final String org_del = org+"-删除";	
 	/**
 	 * 用户操作信息
 	 */
-	public static final String user     = userauth+"-USER" ;
-	public static final String user_add = user+"-ADD";
-	public static final String user_chg = user+"-CHG";
-	public static final String user_del = user+"-DEL";	
+	public static final String user     = userauth+"-用户管理" ;
+	public static final String user_add = user+"-新增";
+	public static final String user_chg = user+"-编辑";
+	public static final String user_del = user+"-删除";	
 	/**
 	 * 角色操作信息
 	 */	
-	public static final String role     = userauth+"-ROLE" ;
-	public static final String role_add = role+"-ADD";
-	public static final String role_chg = role+"-CHG";
-	public static final String role_del = role+"-DEL";	
+	public static final String role     = userauth+"-角色管理" ;
+	public static final String role_add = role+"-新增";
+	public static final String role_chg = role+"-编辑";
+	public static final String role_del = role+"-删除";	
 	/**
 	 * 资源操作信息
 	 */	
-	public static final String res     = userauth+"RES"; 
-	public static final String res_add = res+"-ADD";
-	public static final String res_chg = res+"-CHG";
-	public static final String res_del = res+"-DEL";	
+	public static final String res     = userauth+"资源管理"; 
+	public static final String res_add = res+"-新增";
+	public static final String res_chg = res+"-编辑";
+	public static final String res_del = res+"-删除";	
 	/**
 	 * 数据权限组操作信息
 	 */
-	public static final String grp      =userauth+"-GRP";	 
-	public static final String grp_add = grp+"-ADD";
-	public static final String grp_chg = grp+"-CHG";
-	public static final String grp_del = grp+"-DEL";	
+	public static final String grp      =userauth+"-数据权限组管理";	 
+	public static final String grp_add = grp+"-新增";
+	public static final String grp_chg = grp+"-编辑";
+	public static final String grp_del = grp+"-删除";	
 	/**
 	 * 日志  操作信息
 	 */
