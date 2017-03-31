@@ -27,14 +27,14 @@ public class DpgMgmtController extends Controller {
 		render("dpgMgmt.jsp");
 	}
 	
-	public void gouMgmt() {
-		log.info("jump to gouMgmt");
-		setAttr("domainlist",dpgmgmtservice.getUrl(getPara("domainid")));
-		setAttr("condition",dpgmgmtservice.getConditionType());
-		/*权限管理组模块子页面*/
-		setAttr("groupuuid", getPara("groupuuid"));
-		render("gouMgmt.jsp");
-	}
+//	public void gouMgmt() {
+//		log.info("jump to gouMgmt");
+//		setAttr("domainlist",dpgmgmtservice.getUrl(getPara("domainid")));
+//		setAttr("condition",dpgmgmtservice.getConditionType());
+//		/*权限管理组模块子页面*/
+//		setAttr("groupuuid", getPara("groupuuid"));
+//		render("gouMgmt.jsp");
+//	}
 	
 	 /** 
 	 *@Function 获取数据权限组管理list清单           
@@ -324,5 +324,5 @@ public class DpgMgmtController extends Controller {
 				List<Record> list = dpgmgmtservice.typeUrl(type);
 				renderJson(list);
 			}
-
+			
 }

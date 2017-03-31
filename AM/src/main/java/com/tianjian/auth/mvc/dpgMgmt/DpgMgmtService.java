@@ -91,6 +91,13 @@ public class DpgMgmtService extends BaseService {
 		return list;
 	}
 	
+	//获取机构树
+	public List<Record> orgTree(String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.orgTree");
+		List<Record> list = Db.find(sql,domainUuid);
+		return list;
+	}
+	
 	//获取url
 	public List<Record> getUrl(String domainUuid){
 		String sql = ToolGetSql.getSql("tianjian.dpg.urlSelect");
@@ -99,9 +106,9 @@ public class DpgMgmtService extends BaseService {
 	}
 	
 	//获取条件类型
-	public List<Record> getConditionType(){
+	public List<Record> getConditionType(String domainId){
 		String sql = ToolGetSql.getSql("tianjian.dpg.typeSelect");
-		List<Record> list = Db.find(sql);
+		List<Record> list = Db.find(sql,domainId);
 		return list;
 	}
 	
@@ -111,4 +118,24 @@ public class DpgMgmtService extends BaseService {
 		List<Record> list = Db.find(sql,type);
 		return list;
 	}
+	
+	//新增URL资源配置
+	public void save(GouMgmt gouMgmt){
+		gouMgmt.save();
+	}
+	
+	//获取组信息
+	public List<Record> getGroupCode(String groupUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.groupCodeSelect");
+		List<Record> list = Db.find(sql,groupUuid);
+		return list;
+	}
+	
+	//加载编辑信息
+	public List<Record> loadEditPara(String uuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.loadEditParam");
+		List<Record> list = Db.find(sql,uuid);
+		return list;
+	}
+	
 }

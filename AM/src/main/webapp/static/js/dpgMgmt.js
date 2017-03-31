@@ -308,7 +308,21 @@ $('#delete').click(function(){
 });
 
 function onFun(uuid,domainid){
-	 window.location="gouMgmt?groupuuid="+uuid+"&domainid="+domainid;
+		$.ajax({
+	        type: "POST",
+	        url: "gouMgmt/accept",
+	        cache : false,
+	        data: {"uuid":uuid,"domainid":domainid},
+	        dataType: 'json',
+	        success: function (message) {
+	            if (message > 0) {
+	                window.location.href = "gouMgmt";
+	            }
+	        },
+	        error: function (message) {
+	           alert("提交数据失败！");
+	        }
+	    });
 }
 
 function refresh(){
