@@ -17,6 +17,7 @@ public class GouMgmtController extends Controller{
 	private DpgMgmtService dpgmgmtservice = new DpgMgmtService();
 	//保存接收参数("groupUUid")
 	public static String g_id = "";
+	public static String domain_id = "";
 	
 	public void index() {
 		log.info("jump to gouMgmt");
@@ -92,9 +93,7 @@ public class GouMgmtController extends Controller{
 	 * 获取机构树
 	 */
 	public void orgTree(){
-		Object userinfo = getSessionAttr("userinfo");
-		String domainId = ((Record) userinfo).getStr("domain_id");
-		List<Record> list = dpgmgmtservice.orgTree(domainId);
+		List<Record> list = dpgmgmtservice.orgTree(domain_id);
 		renderJson(list);
 	}
 	
@@ -104,6 +103,7 @@ public class GouMgmtController extends Controller{
 	 */
 	public void accept(){
 		g_id = getPara("uuid");
+		domain_id = getPara("domainid");
 		renderJson(true);
 	}
 	
