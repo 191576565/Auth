@@ -269,6 +269,8 @@ $('#sys_add').on('click', function() {
      $('#urlid').val('');
      $('#urlname').val('');
      $('#dictinfo').val('');
+     orgs = '';
+     $('.tree').text('选择条件值');
 	removeAll();
     $.ajax({  
         url: "gouMgmt/getGroupCode",
