@@ -31,6 +31,7 @@ select  t8.uuid
      ,T81.REQ_URL
      ,T81.REQ_URL_DESC
      ,T12.DICT_NAME  CONDITION_TYPE
+     ,LISTAGG(t9.uuid  , ',') WITHIN GROUP(ORDER BY t9.org_unit_id)  AS condition_content_uuid
      ,LISTAGG(t9.org_unit_id  , ',') WITHIN GROUP(ORDER BY t9.org_unit_id)  AS condition_content
     	]]>
 	</sql>
