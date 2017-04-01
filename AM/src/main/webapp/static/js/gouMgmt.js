@@ -140,7 +140,7 @@ function initTable(){
     	title: '操 作',
         width:'170',
     	formatter:function(value,row,index){
-    		var e = '<button type="button" class="btn btn-info update edit" onclick="onEdit(\''+ row.uuid +'\')">编辑</button> ';
+    		var e = '<button type="button" class="btn btn-info update edit" onclick="onEdit(\''+ row.uuid +'\',\''+ row.condition_content_uuid +'\')">编辑</button> ';
     		var d = '<button type="button" class="btn btn-danger delete">删除</button> ';
     		return e+d;
     	}
@@ -151,21 +151,64 @@ function initTable(){
 };
 
 //layer弹出自定义div__修改
-function onEdit(uuid) {
+function onEdit(uuid,content) {
+	orgs = content==null?"":content;
 	$("#sys_add_div #form")[0].reset();
 	$("#sys_add_div #form #urlid").html("");
 	$("#sys_add_div #form #dictcode").html("");
 	$.getJSON("gouMgmt/loadEditPara?uuid="+uuid,function(content){
+		var start = "";//保存初始默认值
 		content.forEach(function(e){
 			$('#groupid').val(e.group_desc);
-			$("#urlid").append("<option value='"+ e.uuid +"'>" + e.condition_type + "</option>");
+			$("#urlid").append("<option value='"+ e.condition_type +"'>" + e.condition_type_name + "</option>");
+			$("#dictcode").append("<option value='"+ e.url_uuid +"'>" + e.req_url_desc + "</option>");
+			start = e.condition_type;
+		});
+		$.getJSON("gouMgmt/getCondition",function(content){
+			content.forEach(function(e1){
+				if(start != e1.dict_id){
+					$("#urlid").append("<option value='"+ e1.dict_id +"'>" + e1.dict_name + "</option>");
+				}
+			});
 		});
 	});
+	
+	$('#urlid').change(function(){
+		orgs = "";
+    	$("#dictcode").html("");
+    	$("#dictcode").append("<option value=''>请选择URL描述</option>");
+    	var conType = $(this).children('option:selected').val();
+    	$.getJSON("dpgMgmt/typeUrl?type="+conType,function(data){    	    		
+    		$.each(data, function (index, groupuuid) {
+            	$("#dictcode").append("<option value='"+ groupuuid.uuid +"'>" + groupuuid.req_url_desc + "</option>");
+            }); 
+    	});
+    });
+	
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
 		title: '系统信息',
 		area: ['768px', '432px'],
+		btn: ['保存','取消'],
+		yes: function(index){
+        	$.ajax({
+				url : "gouMgmt/update?"+$('#form').serialize()+"&orgs="+orgs+"&uuid="+uuid,
+				dataType : "json",
+				type : 'post',
+				contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+				success : function(data) {
+					layer.closeAll();
+					$('#table').bootstrapTable('refresh', {silent: true});
+				},
+				error : function(
+						XMLHttpRequest,
+						textStatus, errorThrown) {
+					layer.msg("数据被城管抓走了！");
+				}
+			});
+        },
+		btn2: function(index, layero){}
 	});
 };
 

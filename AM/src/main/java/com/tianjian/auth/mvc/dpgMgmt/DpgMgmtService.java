@@ -124,6 +124,12 @@ public class DpgMgmtService extends BaseService {
 		gouMgmt.save();
 	}
 	
+	//编辑URL资源配置
+	public void update(GouMgmt gouMgmt){
+		gouMgmt.update();
+	}
+	
+	
 	//获取组信息
 	public List<Record> getGroupCode(String groupUuid){
 		String sql = ToolGetSql.getSql("tianjian.dpg.groupCodeSelect");

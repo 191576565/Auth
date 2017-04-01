@@ -28,6 +28,14 @@ public class GouMgmtController extends Controller{
 		render("gouMgmt.jsp");
 	}
 	
+	/*
+	 * gouMgmt/getCondition
+	 * 获取条件值
+	 */
+	public void getCondition(){
+		renderJson(dpgmgmtservice.getConditionType(domain_id));
+	}
+	
 	/** 
 	 *@Function 获取数据权限组管理-权限管理子页面list清单           
 	 *@Declare   init 获取数据权限组管理-权限管理子页面list清单  
@@ -121,6 +129,21 @@ public class GouMgmtController extends Controller{
 		gouMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
 		gouMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 		dpgmgmtservice.save(gouMgmt);
+		renderJson(true);
+	}
+	
+	/*
+	 * gouMgmt/update
+	 * 编辑URL资源配置
+	 */
+	public void update(){
+		GouMgmt gouMgmt = new GouMgmt();
+		gouMgmt.set("UUID", getPara("uuid"));
+		gouMgmt.set("REQ_URL", getPara("dictcode"));
+		gouMgmt.set("CONDITION_CONTENT", getPara("orgs"));
+		gouMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
+		gouMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
+		dpgmgmtservice.update(gouMgmt);
 		renderJson(true);
 	}
 	
