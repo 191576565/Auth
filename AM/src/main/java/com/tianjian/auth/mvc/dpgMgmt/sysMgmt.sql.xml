@@ -88,7 +88,7 @@ LEFT JOIN SYS_DOMAIN_INFO        T2  ON T7.DOMAIN_UUID=T2.UUID
         	SELECT  
           T7.UUID                                                                   AS GROUP_UUID 
          ,T7.Group_Desc
-         ,t8.uuid                                                                   AS URL_UUID
+         ,t81.uuid                                                                   AS URL_UUID
          ,T81.REQ_URL
          ,t81.req_url_desc
          ,T10.DICT_ID                                                               AS CONDITION_TYPE
@@ -104,7 +104,7 @@ LEFT JOIN SYS_DICT_INFO          T10 ON T10.DICT_ID=T81.CONDITION_TYPE   AND  T1
 WHERE     T8.UUID=?
 GROUP BY  T7.UUID 
          ,T7.Group_Desc
-         ,t8.uuid 
+         ,t81.uuid 
          ,T81.REQ_URL
          ,t81.req_url_desc
          ,T10.DICT_ID                                                           
