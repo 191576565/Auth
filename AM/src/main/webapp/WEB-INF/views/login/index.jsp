@@ -99,16 +99,16 @@
                     		<i class="fa fa-bars"></i> </a>
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
-                        <li class="dropdown">
+                        <li id="idropdown" class="dropdown">
                             <a herf="#" class="dropdown-toggle count-info" data-toggle="dropdown" >
                                	欢迎您，<%=((Record)session.getAttribute("userinfo")).getStr("user_name") %>
                                 <i class="fa fa-chevron-down"></i>
                             </a>
                             <ul class="dropdown-menu yeqc-size">                               
                                 <li>
-                                    <div class="box text-center link-block">
-                                       <a class="J_menuItem" href="uptPwd">
-                                            <i class="fa fa-cog"></i> <strong> 修改密码</strong>
+                                    <div id="div1" class="text-center link-block" >
+                                       <a id="div2" class="J_menuItem" onclick="modclick()">
+                                            <i class=" fa fa-cog" ></i> <strong > 修改密码</strong>
                                         </a>
                                     </div>
                                 </li>
@@ -151,9 +151,13 @@
     	document.forms[0].action="userexit";
     	document.forms[0].submit();
     	}
-    $(document).on("click",".box", function () {
-     alert(1);
-   	});
+    function modclick(){
+    	//window.location.href='uptPwd';
+    	 $("#idropdown").removeClass('open'); 
+    	// $('.dropdown-toggle').dropdown();
+    	var url='uptPwd';
+    	 $("#J_iframe").attr('src',url);
+    }
     </script>
 
 </body>

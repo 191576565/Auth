@@ -1,16 +1,19 @@
 package com.tianjian.auth.mvc.uptPwd;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseSecurityMD5;
 import com.tianjian.auth.mvc.usrMgmt.UsrMgmt;
+import com.tianjian.platform.tools.ToolGetSql;
 
 public class UptPwdController extends Controller {
-
+	private UsrMgmt usrMgmt = new UsrMgmt();
 	private static final Log log = Log.getLog(UptPwdController.class);
 
 	public void index() {
@@ -46,7 +49,30 @@ public class UptPwdController extends Controller {
 			renderJson(false);
 		}
 	}
-
+//界面修改用户信息
+	public void userinfoMod(){
+		Object userinfo = getSessionAttr("userinfo");
+		String useruuid = ((Record) userinfo).getStr("user_uuid");
+		System.out.println("user_uuid:"+useruuid);
+		String sql=ToolGetSql.getSql("tianjian.usrMgmt.findsingle");
+		Record su =Db.findFirst(sql, useruuid);
+		renderJson(su);
+	}
+	public void userinfoupt(){
+		String uuid = getPara("uuid");
+		String userName = getPara("username");
+		String userPhone = getPara("userphone");
+		String userEmail = getPara("useremail");
+		usrMgmt.set("uuid", uuid);
+		usrMgmt.set("user_name", userName);
+		usrMgmt.set("user_email", userEmail);
+		usrMgmt.set("user_phone", userPhone);
+		usrMgmt.update();
+		//forwardAction("/validLogin");
+		//render("/login/login_after.jsp");
+		renderJson(true);	
+	}
+	
 	public void newplenCheck() {
 		String newp = getPara("newpassword");
 

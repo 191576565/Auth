@@ -108,4 +108,23 @@
         	UPDATE SYS_USER_INFO SET USER_PWD=? WHERE UUID IN (?)
     	]]>
 	</sql>
+	<sql id="findsingle">
+		<![CDATA[ 
+        	select t.uuid,
+        	t.user_id,
+       t.user_name,
+       t.roles,
+       t.user_phone,
+        t.user_email,
+       a.org_unit_desc,
+       b.domain_name 
+  from SYS_USER_INFO t
+ inner join SYS_ORG_INFO a
+    on t.org_uuid = a.uuid
+ inner join sys_domain_info b
+    on t.domain_uuid = b.uuid
+ where t.uuid = ?
+
+    	]]>
+	</sql>
 </sql-statement>
