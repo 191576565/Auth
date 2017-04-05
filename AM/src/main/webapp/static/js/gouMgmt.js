@@ -16,8 +16,8 @@ var s = {
 	check : {
 		enable : true,
 		chkboxType : {
-			"Y" : "ps",
-			"N" : "ps"
+			"Y" : "",
+			"N" : ""
 		}
 	}
 };
@@ -152,7 +152,8 @@ function initTable(){
 
 //layer弹出自定义div__修改
 function onEdit(uuid,content) {
-	orgs = content==null?"":content;
+	orgs = content=="null"?"":content;
+	console.log(orgs);
 	$("#sys_add_div #form")[0].reset();
 	$("#sys_add_div #form #urlid").html("");
 	$("#sys_add_div #form #dictcode").html("");
