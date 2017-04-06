@@ -172,6 +172,52 @@ function onDel(uuid){
 		);
 };
 
+//批量删除
+$('#btn_del').on('click', function(){
+	var selectContent = $('#table').bootstrapTable('getSelections');
+	var len = selectContent.length;//获取对象数组的长度
+	var arr = new Array();//初始化数组
+	var i = 0;//初始化数组下标
+	var sendData = '';//初始化发送数据
+	var sep = ",";
+	$.each(selectContent, function(index, data){//遍历对象数组
+		//遍历对象,拼接数据
+		$.each(data, function(key, value){
+			if(key === "uuid"){
+				sendData += value;
+			}
+		})
+		if(index < len-1){
+			sendData += sep;
+		}else{
+			sendData = sendData;
+		}
+		i++;
+	})
+	if(sendData == ''){
+		layer.msg('请选择要删除的内容');
+	}else{
+		layer.confirm('是否删除选定的内容？', 
+				{
+				  btn: ['删除','取消'] //按钮
+				}, 
+				function(){
+					$.post('gouMgmt/deleteMore?uuid='+sendData, function(d){
+						if(d){
+							layer.msg('删除成功');
+						}else {
+							layer.msg('删除失败');
+						}
+						$('#table').bootstrapTable('refresh', {silent: true});
+					});
+				}, 
+				function(){
+					layer.closeAll();
+				}
+		);
+	}	
+})
+
 //layer弹出自定义div__修改
 function onEdit(uuid,content) {
 	orgs = content=="null"?"":content;

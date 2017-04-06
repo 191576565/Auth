@@ -1,9 +1,5 @@
 package com.tianjian.auth.mvc.dpgMgmt;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,12 +10,8 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseService;
 import com.tianjian.auth.mvc.model.DpgMgmt;
-import com.tianjian.auth.mvc.model.User;
-import com.tianjian.auth.mvc.oplog.OpLog;
 import com.tianjian.platform.constant.ConstantRender;
 import com.tianjian.platform.pjson.PageJson;
-import com.tianjian.platform.plugin.ParamInitPlugin;
-import com.tianjian.platform.tools.ToolCache;
 import com.tianjian.platform.tools.ToolGetSql;
 import com.tianjian.platform.tools.ToolSqlXml;
 
@@ -147,6 +139,15 @@ public class DpgMgmtService extends BaseService {
 	//删除数据权限
 	public boolean delete(GouMgmt gouMgmt){
 		return gouMgmt.delete();
+	}
+	
+	//批量删除
+	public boolean deleteMore(String idValues){
+		String[] idValue = idValues.split(",");
+		for(int i=0; i<idValue.length; i++){
+			GouMgmt.dao.deleteById(idValue[i]);
+		}
+		return true;
 	}
 	
 }

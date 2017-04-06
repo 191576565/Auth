@@ -183,7 +183,12 @@ public class GouMgmtController extends Controller{
 	 * gouMgmt/deleteMore
 	 * 批量删除
 	 */
-	public void delteMore(){
-		
+	public void deleteMore(){
+		String uuids = getPara("uuid");
+		if(dpgmgmtservice.deleteMore(uuids)){
+			renderJson(true);
+			return;
+		}
+		renderJson(false);
 	}
 }
