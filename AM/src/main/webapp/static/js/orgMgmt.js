@@ -109,17 +109,11 @@ function initTable() {
 			});
 		}
 
-//表单验证
-angular.module('myApp', [])
-.controller('SignUpController',function($scope){
-	$scope.userdata = {};
-	$scope.submitForm = function(){};
-})
-
 //新增机构_弹出层
 $('#org_add').on('click', function() {
-	//初始化表单
 	$("#org_add_div #form")[0].reset();
+	$("#sys_add_div #form #ipt_memo").html('');
+	$('.error').empty();
 	//获取域
 	$.getJSON("orgMgmt/getId",function(data){
 		$.each(data, function(i, item){
@@ -133,27 +127,29 @@ $('#org_add').on('click', function() {
 			})
 		})
 	})
-	//获取机构
-//	$.getJSON("orgMgmt/getOrg",function(data){
-//		$.each(data, function(i, item){
-//			var up_id = '';
-//			$.each(item, function(key,value){
-//				if(key === "uuid"){
-//					up_id = value;
-//				}
-//			})
-//			$.each(item, function(key,value){
-//				if(key === "org_unit_desc"){
-//					$('#up_org').append("<option value="+up_id+">" + value + "</option>");
-//				}
-//			})
-//		})
-//	})
 	layer.open({
 		type: 1,
 		content: $('#org_add_div'),
 		title: '机构信息',
-		area: ['960px', '540px'],
+		area: ['500px', '500px'],
+		maxmin: true,
+		btn: ['确定', '取消'],
+		yes: function(index, layero){
+			if (!validate()) {
+				return false;
+			}
+			$("#form").attr("action", "orgMgmt/save");
+			$('#form').ajaxSubmit(function(resultJson){
+				if(JSON.stringify(resultJson) == "false"){
+					layer.msg('机构编码不能重复!');
+					return;
+				}
+				initTable();
+				layer.closeAll();
+			});
+		},
+		btn2: function(index, layero){	
+		}
 	});
 	return false;
 });
@@ -168,7 +164,6 @@ function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 	$("#org_add_div #form #org_name").val(orgDesc);
 	$("#org_add_div #form #org_up_uuid").val(upOrgID);
 	$("#org_add_div #form #up_org_name").val(upOrgDesc);
-//	$('#org_add_div #form #up_org').append("<option value="+upOrgID+">" + upOrgDesc + "</option>");
 	$("#org_add_div #form #ipt_memo").val(memo);
 	$("#org_add_div #form #domain_uuid").val(dId);
 	
@@ -192,7 +187,29 @@ function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 		type: 1,
 		content: $('#org_add_div'),
 		title: '机构信息',
-		area: ['960px', '540px'],
+		area: ['500px', '500px'],
+		maxmin: true,
+		btn: ['确定', '取消'],
+		yes: function(index, layero){
+			if (!validate()) {
+				return false;
+			}
+			$("#form").attr("action", "orgMgmt/update");
+			$('#form').ajaxSubmit(function(resultJson){
+				if(JSON.stringify(resultJson) == "true"){
+					initTable();
+					layer.closeAll();
+					return;
+				}
+				$.each(resultJson, function(i, item){
+					if(item === "repeat"){
+						layer.msg('机构编码重复，修改失败!');
+					}
+				})
+			});
+		},
+		btn2: function(index, layero){	
+		}
 	});
 	return false;
 }
@@ -265,3 +282,22 @@ function del(id) {
 			}
 	);
 };
+
+function validate(){
+	//非空验证
+	var flag = true;
+	$(".notNull").each(function(){
+        if(""==$(this).val()){
+        	layer.msg($(this).attr('nullName')+"不能为空");
+        	flag = false;
+        	return false;
+        }
+    });
+	//合法验证
+	$("p.error").each(function(){
+		if(""!=$(this).text()){
+			flag = false;
+		}
+	});
+	return flag;
+}

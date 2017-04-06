@@ -34,13 +34,18 @@ function initsystable(){
 			checkbox: true
 		}, {
 			field: 'domain_id',
-			title: '域编码'
+			title: '域编码',
+			align: 'center',
+			width: '30%'
 		}, {
 			field: 'domain_name',
-			title: '域 名'
+			title: '域 名',
+			align: 'center'
 		}, {
 			field: 'uuid',
 			title: '操 作',
+			width: '188px',
+			align: 'center',
 			formatter: function(value, row, index) {
 				var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.domain_id +'\',\''+ row.domain_name +'\',\''+ row.sort_id +'\',\''+ row.memo +'\')">编辑</a> ';
 				var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
@@ -126,7 +131,25 @@ $('#sys_add').on('click', function() {
 		type: 1,
 		content: $('#sys_add_div'),
 		title: '系统信息',
-		area: ['768px', '432px'],
+		area: ['400px', '400px'],
+		maxmin: true,
+		btn: ['确定', '取消'],
+		yes: function(index, layero){
+			if (!validate()) {
+				return false;
+			}
+			$("#form").attr("action", "sysMgmt/save");
+			$('#form').ajaxSubmit(function(resultJson){
+				if(JSON.stringify(resultJson) == "false"){
+					layer.msg('域编码/域名不能重复');
+				}else{
+					layer.closeAll();
+					$('#table').bootstrapTable('refresh', {silent: true});
+				}
+			});
+		},
+		btn2: function(index, layero){	
+		}
 	});
 	return false;
 });
@@ -152,7 +175,29 @@ function onEdit(id,code,name,sort,memo) {
 		type: 1,
 		content: $('#sys_add_div'),
 		title: '系统信息',
-		area: ['768px', '432px'],
+		area: ['400px', '400px'],
+		maxmin: true,
+		btn: ['确定', '取消'],
+		yes: function(index, layero){
+			if (!validate()) {
+				return false;
+			}
+			$("#form").attr("action", "sysMgmt/update");
+			$('#form').ajaxSubmit(function(resultJson){
+				if(JSON.stringify(resultJson) === "true"){
+					layer.closeAll();
+					$('#table').bootstrapTable('refresh', {silent: true});
+					return;
+				}
+				$.each(resultJson, function(i, item){
+					if(item === "repeat"){
+						layer.msg('域编码/域名不能重复');
+					}
+				})
+			});
+		},
+		btn2: function(index, layero){	
+		}
 	});
 };
 
@@ -179,8 +224,7 @@ function onDel(id) {
 	);
 };
 
-//"#sub"是隐藏在div中的表单的"保存"按钮
-$('#sub').click(function(){
+function validate(){
 	//非空验证
 	var flag = true;
 	$(".notNull").each(function(){
@@ -196,41 +240,6 @@ $('#sub').click(function(){
 			flag = false;
 		}
 	});
-	//输入非法则不提交
-	if(false==flag){
-		return false;
-	}
-	//新增操作
-	if($("#sys_add_div #form #uuid").val() == ''){
-		$("#form").attr("action", "sysMgmt/save");
-		$('#form').ajaxSubmit(function(resultJson){
-			if(JSON.stringify(resultJson) == "false"){
-				layer.msg('域编码/域名不能重复');
-			}else{
-				layer.closeAll();
-				$('#table').bootstrapTable('refresh', {silent: true});
-			}
-		});
-		return false;//阻止表单默认提交
-	}
-	
-	//修改操作
-	if($("#sys_add_div #form #uuid").val() != ''){
-		$("#form").attr("action", "sysMgmt/update");
-		$('#form').ajaxSubmit(function(resultJson){
-			if(JSON.stringify(resultJson) === "true"){
-				layer.closeAll();
-				$('#table').bootstrapTable('refresh', {silent: true});
-				return;
-			}
-			$.each(resultJson, function(i, item){
-				if(item === "repeat"){
-					layer.msg('域编码/域名不能重复');
-				}
-			})
-		});
-		return false;//阻止表单默认提交
-	}	
-	
-});
+	return flag;
+}
 

@@ -14,13 +14,6 @@
     	<link href="${ctxPath }/static/css/plugins/ztree/zTreeStyle.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/animate.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/style.css?v=4.1.0" rel="stylesheet">
-		<style type="text/css">
-			.input_result {
-				position: relative;
-				top: -27px;
-				left: 880px;
-			}
-		</style>
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
  		<div class="row">
@@ -62,8 +55,14 @@
  		<div class="t" style="display: none;">
  			<ul id="org" class="ztree"></ul>
  		</div>
- 		<div class="wrapper" id="org_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
- 			<form id="form" name="signUpForm" ng-submit="submitForm()" action="" method="post">
+ 		<div class="wrapper" id="org_add_div" style="display:none;">
+ 			<form ng-app="myApp"
+ 				ng-controller="validateCtrl"
+ 				id="form" 
+ 				name="myForm" 
+ 				action="" 
+ 				method="post"
+ 				novalidate>
  				<div class="form-group">
  					<input id="uuid" 
  						name="UUID" 
@@ -78,31 +77,29 @@
  					/>
 					<input name="scopeName" 
 						   type="text"
-						   disabled="true"
 						   class="form-control"
 						   id="scop_n"
+						   disabled="true"
 					/>
 				</div>
-				<div class="form-group" ng-class="{ 'has-success': signUpForm.orgCode.$valid }">
+				<div class="form-group">
 					<label>机构编码</label> 
 					<input name="orgCode"
 						   class="form-control notNull"
 						   nullName="机构编码"
 						   id="org_code"
-						   ng-model="userdata.orgCode"
+						   ng-model="orgCode"
 						   ng-minlength="1"
 						   ng-maxlength="30"
 						   ng-pattern="/^[A-Za-z0-9]+$/"
 						   required
 					/>
-					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.orgCode.$valid"></p>
-					<p class="error" ng-if="(signUpForm.orgCode.$error.minlength ||
-						signUpForm.orgCode.$error.maxlength) && 
-						signUpForm.orgCode.$touched">
+					<p class="error" ng-if="(myForm.orgCode.$error.minlength ||
+						myForm.orgCode.$error.maxlength) && 
+						myForm.orgCode.$touched">
 					长度应在1~30位之间</p>
-					<p class="error" ng-if="signUpForm.orgCode.$error.pattern &&
-						signUpForm.orgCode.$touched">
+					<p class="error" ng-if="myForm.orgCode.$error.pattern &&
+						myForm.orgCode.$touched">
 					只能是字母/数字组合</p>
 				</div>
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.orgName.$valid }">
@@ -111,23 +108,21 @@
 						   class="form-control notNull"
 						   nullName="机构名称"
 						   id="org_name"
-						   ng-model="userdata.orgName"
+						   ng-model="orgName"
 						   ng-minlength="1"
 						   ng-maxlength="30"
 						   required
 					/>
-					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.orgName.$valid"></p>
-					<p class="error" ng-if="(signUpForm.orgName.$error.minlength ||
-						signUpForm.orgName.$error.maxlength) && 
-						signUpForm.orgName.$touched">
+					<p class="error" ng-if="(myForm.orgName.$error.minlength ||
+						myForm.orgName.$error.maxlength) && 
+						myForm.orgName.$touched">
 					长度应在1~30位之间</p>
 				</div>
 				<div class="form-group">
 					<label>上级机构</label> 
 					<div class="input-group">
 						<input type="hidden" name="org_up_uuid" id="org_up_uuid">
-			            <input type="text" class="form-control" name="org_up_name" id="up_org_name" required readonly="readonly"> 
+			            <input type="text" class="form-control notNull" nullName="上级机构" name="org_up_name" id="up_org_name" required readonly="readonly"> 
 			            <span class="input-group-btn"> 
 			            	<button type="button" class="btn tree"><i class="fa fa-tree"></i></button> 
 			            </span>
@@ -137,9 +132,7 @@
 					<lable>备注</lable>
 					<textarea id="ipt_memo" class="form-control" name="memo" rows="" cols=""></textarea>
 				</div>
-				<div class="form-group">
-					<button id="sub" class="btn btn-primary">保存</button>
-				</div>
+				
  			</form>
  		</div>
 	<!-- 全局js -->
@@ -172,5 +165,11 @@
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/orgMgmt.js"></script>
+    <script>
+	//表单验证
+	var app = angular.module('myApp', []);
+	app.controller('validateCtrl',function($scope){
+	});
+    </script>
 	</body>
 </html>

@@ -112,15 +112,7 @@
 					<label>备注</label>
 					<textarea id="ipt_memo" class="form-control" name="memo" type="input"></textarea>
 				</div>
-				<!--    
-				<div class="form-group">
-					<label>备注2</label>
-					<textarea id="ipt_memo2" class="form-control" name="memo2" type="input">11&#13;&#10;</textarea>
-				</div>
-				-->
-				<div class="form-group">
-					<button id="sub" class="btn btn-primary">保存</button>
-				</div>
+				
  			</form>
  		</div>
 
