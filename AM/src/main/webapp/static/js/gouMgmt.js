@@ -16,8 +16,8 @@ var s = {
 	check : {
 		enable : true,
 		chkboxType : {
-			"Y" : "",
-			"N" : ""
+			"Y" : "s",
+			"N" : "s"
 		}
 	}
 };

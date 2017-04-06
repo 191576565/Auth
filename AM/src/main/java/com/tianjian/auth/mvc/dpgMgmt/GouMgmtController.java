@@ -178,4 +178,12 @@ public class GouMgmtController extends Controller{
 		}
 		renderJson(true);
 	}
+	
+	/*
+	 * gouMgmt/deleteMore
+	 * 批量删除
+	 */
+	public void delteMore(){
+		
+	}
 }
