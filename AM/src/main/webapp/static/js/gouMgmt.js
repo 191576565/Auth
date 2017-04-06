@@ -141,13 +141,35 @@ function initTable(){
         width:'170',
     	formatter:function(value,row,index){
     		var e = '<button type="button" class="btn btn-info update edit" onclick="onEdit(\''+ row.uuid +'\',\''+ row.condition_content_uuid +'\')">编辑</button> ';
-    		var d = '<button type="button" class="btn btn-danger delete">删除</button> ';
+    		var d = '<button type="button" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</button> ';
     		return e+d;
     	}
     },]
 });
    $('#table').bootstrapTable('hideColumn', 'uuid');
    $('#table').bootstrapTable('hideColumn', 'domain_id');
+};
+
+//删除
+function onDel(uuid){
+	layer.confirm('是否删除？', 
+			{
+			  btn: ['删除','取消'] //按钮
+			}, 
+			function(){
+				$.post('gouMgmt/delete?uuid='+uuid, function(d){
+					if(d){
+						layer.msg('删除成功');
+					}else {
+						layer.msg('删除失败');
+					}
+					$('#table').bootstrapTable('refresh', {silent: true});
+				});
+			}, 
+			function(){
+				layer.closeAll();
+			}
+		);
 };
 
 //layer弹出自定义div__修改

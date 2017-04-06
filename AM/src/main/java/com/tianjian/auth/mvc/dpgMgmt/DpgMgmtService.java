@@ -144,4 +144,9 @@ public class DpgMgmtService extends BaseService {
 		return list;
 	}
 	
+	//删除数据权限
+	public boolean delete(GouMgmt gouMgmt){
+		return gouMgmt.delete();
+	}
+	
 }
