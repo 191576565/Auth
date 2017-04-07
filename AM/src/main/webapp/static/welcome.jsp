@@ -1,47 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<title>全兼容的HTML九宫格布局</title>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link href="css/welcome.css" rel="stylesheet">
-	</head>
+<head>
 
-	<body>
-		<div class="xttblog">
-			<ul class="box">
-				<li>
-					<a href="${ctxPath }/sysMgmt" title="1"><strong style="font-size: larger;">系统管理</strong></a>
-				</li>
-				<li>
-					<a href="${ctxPath }/usrMgmt" title="2"><strong style="font-size: larger;">用户管理</strong></a>
-				</li>
-				<li>
-					<a href="${ctxPath }/rolMgmt" title="3"><strong style="font-size: larger;">角色管理</strong></a>
-				</li>
-				<li>
-					<a href="${ctxPath }/resMgmt" title="4"><strong style="font-size: larger;">资源管理</strong></a>
-				</li>
-				<li>
-					<a href="${ctxPath }/dpgMgmt" title="5"><strong style="font-size: larger;">数据权限组管理</strong></a>
-				</li>
-				<li>
-					<a href="${ctxPath }/syslog" title="6"><strong style="font-size: larger;">系统日志</strong></a>
-				</li>
-				<!--<li>
-						<a href="#" title="7"><img src="tb.jpg" /></a>
-					</li>
-					<li>
-						<a href="#" title="8"><img src="tb.jpg" /></a>
-					</li>
-					<li>
-						<a href="#" title="9"><img src="tb.jpg" /></a>
-					</li>-->
-			</ul>
+<meta charset="UTF-8">
+
+<title>HTML5仿Apple Watch时钟动画DEMO演示</title>
+
+<link rel="stylesheet" href="watch/css/style.css" media="screen"
+	type="text/css" />
+<style>
+.first {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 1px #333 solid;
+	background: #160805;
+}
+</style>
+
+</head>
+
+<body>
+
+	<!--
+Recreating Apple Watch's Utility face <http://www.apple.com/watch/design/> in HTML+CSS+JS
+-->
+	<div class="first">
+		<div class="fill">
+
+			<div class="clock" id="utility-clock">
+				<div class="centre">
+					<div class="dynamic"></div>
+					<div class="expand round circle-1"></div>
+					<div class="anchor hour">
+						<div class="element thin-hand"></div>
+						<div class="element fat-hand"></div>
+					</div>
+					<div class="anchor minute">
+						<div class="element thin-hand"></div>
+						<div class="element fat-hand minute-hand"></div>
+					</div>
+					<div class="anchor second">
+						<div class="element second-hand"></div>
+					</div>
+					<div class="expand round circle-2"></div>
+					<div class="expand round circle-3"></div>
+				</div>
+			</div>
 		</div>
-	</body>
+	</div>
+	<script src="watch/js/index.js"></script>
+
+</body>
 
 </html>
