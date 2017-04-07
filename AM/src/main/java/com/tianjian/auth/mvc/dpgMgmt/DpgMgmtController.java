@@ -319,4 +319,14 @@ public class DpgMgmtController extends Controller {
 				renderJson(list);
 			}
 			
+			/*
+			 * dpgMgmt/getUsers
+			 * 获取users
+			 */
+			public void getUsers(){
+				String uuid = getPara("uuid");
+				List<Record> list = dpgmgmtservice.getUsers(uuid);
+				renderJson(list);
+			}
+			
 }

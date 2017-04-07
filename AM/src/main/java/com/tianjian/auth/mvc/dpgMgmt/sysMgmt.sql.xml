@@ -121,4 +121,11 @@ GROUP BY  T7.UUID
     	]]>
 	</sql>
 	
+	<sql id="getUsers">
+		<![CDATA[ 
+        	select USERS from sys_group_info  where uuid=?
+        	
+    	]]>
+	</sql>
+	
 </sql-statement>

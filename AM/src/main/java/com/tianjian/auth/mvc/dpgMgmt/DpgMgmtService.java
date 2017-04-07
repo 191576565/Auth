@@ -157,4 +157,10 @@ public class DpgMgmtService extends BaseService {
 		return true;
 	}
 	
+	//获取users
+	public List<Record> getUsers(String uuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.getUsers");
+		List<Record> list = Db.find(sql,uuid);
+		return list;
+	}
 }
