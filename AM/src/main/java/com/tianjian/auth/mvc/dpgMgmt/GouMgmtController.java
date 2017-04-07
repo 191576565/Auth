@@ -164,4 +164,31 @@ public class GouMgmtController extends Controller{
 		List<Record> list = dpgmgmtservice.loadEditPara(uuid);
 		renderJson(list);
 	}
+	
+	/*
+	 * gouMgmt/delete
+	 * 删除数据
+	 */
+	public void delete(){
+		GouMgmt gouMgmt = new GouMgmt();
+		gouMgmt.set("UUID", getPara("uuid"));
+		if(!dpgmgmtservice.delete(gouMgmt)){
+			renderJson(false);
+			return;
+		}
+		renderJson(true);
+	}
+	
+	/*
+	 * gouMgmt/deleteMore
+	 * 批量删除
+	 */
+	public void deleteMore(){
+		String uuids = getPara("uuid");
+		if(dpgmgmtservice.deleteMore(uuids)){
+			renderJson(true);
+			return;
+		}
+		renderJson(false);
+	}
 }

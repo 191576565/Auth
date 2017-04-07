@@ -121,7 +121,7 @@ public class MainConfig extends JFinalConfig {
 		arp.addMapping("SYS_USER_INFO","UUID", UsrMgmt.class);
 		arp.addMapping("SYS_ROLE_INFO","UUID", RoleMgmt.class);
 		arp.addMapping("SYS_RESOURCE_INFO","UUID", ResMgmt.class);
-		arp.addMapping("SYS_GROUP_URL_RELA1","UUID", GouMgmt.class);
+		arp.addMapping("SYS_GROUP_URL_RELA","UUID", GouMgmt.class);
 		me.add(c3p0Plugin);
 
 		me.add(arp);

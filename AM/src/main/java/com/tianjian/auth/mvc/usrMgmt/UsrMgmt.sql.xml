@@ -43,6 +43,7 @@
 			          A.USER_EMAIL,
 			          B.ORG_UNIT_ID,
 			          B.ORG_UNIT_DESC
+            order by  D.DOMAIN_NAME, B.ORG_UNIT_ID,A.USER_ID			          
     	]]>
 	</sql>
 	<sql id="selectDomain">
@@ -110,10 +111,10 @@
 	</sql>
 	<sql id="findsingle">
 		<![CDATA[ 
-        	select t.uuid,
-        	t.user_id,
+          select t.uuid,
+          t.user_id,
        t.user_name,
-       t.roles,
+       LISTAGG(C.ROLE_NAME, ',') WITHIN GROUP(ORDER BY C.ROLE_ID)   as   roles,
        t.user_phone,
         t.user_email,
        a.org_unit_desc,
@@ -123,7 +124,16 @@
     on t.org_uuid = a.uuid
  inner join sys_domain_info b
     on t.domain_uuid = b.uuid
- where t.uuid = ?
+LEFT JOIN SYS_ROLE_INFO     c  ON INSTR(t.ROLES  ,c.UUID)>0     
+ where t.uuid = ? 
+group by  t.uuid,
+          t.user_id,
+       t.user_name,
+       t.user_phone,
+        t.user_email,
+       a.org_unit_desc,
+       b.domain_name  
+
 
     	]]>
 	</sql>

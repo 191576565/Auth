@@ -17,7 +17,7 @@
         <% } else if(!isEmpty(domain_id)){%>
         and t1.domain_id=#'$domain_id$'#
         <% } %>
-        
+        order by t1.domain_id, t.group_id
     	]]>
 	</sql>
 	
@@ -38,7 +38,7 @@ select  t8.uuid
 	
 	<sql id="gouAllFrom">
 		<![CDATA[ 
-		from  sys_group_url_rela1  T8
+		from  sys_group_url_rela  T8
       LEFT JOIN SYS_GROUP_URL_MAPPING T81  ON T8.REQ_URL=T81.UUID
       LEFT JOIN SYS_ORG_INFO        T9  ON INSTR( T8.CONDITION_CONTENT ,T9.uuid   )>0 AND T9.DOMAIN_UUID=T81.DOMAIN_UUID
       left join sys_domain_info   t10  ON T10.UUID=T81.DOMAIN_UUID
@@ -187,7 +187,7 @@ select  t8.uuid
 	<!-- 删除权限组url信息 -->
 	<sql id="deleteurl">
 		<![CDATA[ 
-		delete from sys_group_url_rela1 t where  t.uuid in (#'$para$'#)
+		delete from sys_group_url_rela t where  t.uuid in (#'$para$'#)
     	]]>
 	</sql>
 	
@@ -205,7 +205,7 @@ select  t8.uuid
 	<!-- 验证权限组URL -->
 	<sql id="verifyurl">
 		<![CDATA[ 
-		select t.uuid from SYS_GROUP_URL_RELA1 t 
+		select t.uuid from sys_group_url_rela t 
 		WHERE t.group_uuid=#'$groupuuid$'# 
 		  AND t.req_url=#'$urlid$'#
     	]]>

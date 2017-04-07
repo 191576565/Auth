@@ -16,8 +16,8 @@ var s = {
 	check : {
 		enable : true,
 		chkboxType : {
-			"Y" : "",
-			"N" : ""
+			"Y" : "s",
+			"N" : "s"
 		}
 	}
 };
@@ -141,7 +141,7 @@ function initTable(){
         width:'170',
     	formatter:function(value,row,index){
     		var e = '<button type="button" class="btn btn-info update edit" onclick="onEdit(\''+ row.uuid +'\',\''+ row.condition_content_uuid +'\')">编辑</button> ';
-    		var d = '<button type="button" class="btn btn-danger delete">删除</button> ';
+    		var d = '<button type="button" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</button> ';
     		return e+d;
     	}
     },]
@@ -150,10 +150,77 @@ function initTable(){
    $('#table').bootstrapTable('hideColumn', 'domain_id');
 };
 
+//删除
+function onDel(uuid){
+	layer.confirm('是否删除？', 
+			{
+			  btn: ['删除','取消'] //按钮
+			}, 
+			function(){
+				$.post('gouMgmt/delete?uuid='+uuid, function(d){
+					if(d){
+						layer.msg('删除成功');
+					}else {
+						layer.msg('删除失败');
+					}
+					$('#table').bootstrapTable('refresh', {silent: true});
+				});
+			}, 
+			function(){
+				layer.closeAll();
+			}
+		);
+};
+
+//批量删除
+$('#btn_del').on('click', function(){
+	var selectContent = $('#table').bootstrapTable('getSelections');
+	var len = selectContent.length;//获取对象数组的长度
+	var arr = new Array();//初始化数组
+	var i = 0;//初始化数组下标
+	var sendData = '';//初始化发送数据
+	var sep = ",";
+	$.each(selectContent, function(index, data){//遍历对象数组
+		//遍历对象,拼接数据
+		$.each(data, function(key, value){
+			if(key === "uuid"){
+				sendData += value;
+			}
+		})
+		if(index < len-1){
+			sendData += sep;
+		}else{
+			sendData = sendData;
+		}
+		i++;
+	})
+	if(sendData == ''){
+		layer.msg('请选择要删除的内容');
+	}else{
+		layer.confirm('是否删除选定的内容？', 
+				{
+				  btn: ['删除','取消'] //按钮
+				}, 
+				function(){
+					$.post('gouMgmt/deleteMore?uuid='+sendData, function(d){
+						if(d){
+							layer.msg('删除成功');
+						}else {
+							layer.msg('删除失败');
+						}
+						$('#table').bootstrapTable('refresh', {silent: true});
+					});
+				}, 
+				function(){
+					layer.closeAll();
+				}
+		);
+	}	
+})
+
 //layer弹出自定义div__修改
 function onEdit(uuid,content) {
 	orgs = content=="null"?"":content;
-	console.log(orgs);
 	$("#sys_add_div #form")[0].reset();
 	$("#sys_add_div #form #urlid").html("");
 	$("#sys_add_div #form #dictcode").html("");
@@ -173,18 +240,6 @@ function onEdit(uuid,content) {
 			});
 		});
 	});
-	
-	$('#urlid').change(function(){
-		orgs = "";
-    	$("#dictcode").html("");
-    	$("#dictcode").append("<option value=''>请选择URL描述</option>");
-    	var conType = $(this).children('option:selected').val();
-    	$.getJSON("dpgMgmt/typeUrl?type="+conType,function(data){    	    		
-    		$.each(data, function (index, groupuuid) {
-            	$("#dictcode").append("<option value='"+ groupuuid.uuid +"'>" + groupuuid.req_url_desc + "</option>");
-            }); 
-    	});
-    });
 	
 	layer.open({
 		type: 1,
@@ -212,39 +267,6 @@ function onEdit(uuid,content) {
 		btn2: function(index, layero){}
 	});
 };
-
-//window.operateEvents = {
-//      'click .edit': function (e, value, row, index) {
-//    	  var selRow = $("#table").bootstrapTable('getData');
-//          $('#groupid').val(selRow[index].group_id);
-//          $('#urlid').val(selRow[index].req_url);
-//          $('#urlname').val(selRow[index].req_url_desc);
-//          $('#dictinfo').val(selRow[index].condition_content);
-//          var condition_type=selRow[index].condition_type;
-//          removeAll();
-//          $.ajax({  
-//                   url: "getdictcode",
-//                   dataType: "json",
-//                   data:{groupuuid:groupuuid},
-//                   success: function (data) {  
-//                	    $.each(data, function (index, groupuuid) {
-//                	    	dumainid=groupuuid.domain_id;
-//                        	$("#dictcode").append("<option value='"+ groupuuid.dict_id +"'>" + groupuuid.dict_name + "</option>");
-//                        	if(groupuuid.dict_id==selRow[index].condition_type){
-//                        	  $("#dictcode").val(condition_type); }
-//                	    });  
-//                    },  
-//                    error: function (XMLHttpRequest, textStatus, errorThrown , data) {  
-//                    	layer.tips("请先配置组所属域的条件类型字典！", '#dictcode');
-//                    } 
-//             });
-//    	    sys_edit(selRow[index].uuid);
-//      },
-//      'click .delete': function (e, value, row, index) {
-//    	  var selRow = $("#table").bootstrapTable('getData');
-//          del(selRow[index].uuid);
-//      }
-//      };
 
 var orgs = '';
 function sys_add(){
@@ -312,25 +334,11 @@ function fromcheck(){
 	}else{return true;};
 }
 
-$('#sys_add_div #form').on('click', '#tree', function() {
-	$.getJSON("js/demo/8_tree.json",function(result){
-		$('#treeview12').treeview({
-        	data: result
-    	});
-	});
-	layer.open({
-		type: 1,
-		content: $('#opn_tree'),
-		title: '权限组信息',
-		area: ['300px', '500px']
-	});
-	return false;
-});
-
 $('#sys_add').on('click', function() {
      $('#urlid').val('');
      $('#urlname').val('');
      $('#dictinfo').val('');
+     $("#dictcode").html("");
      orgs = '';
      $('.tree').text('选择条件值');
 	removeAll();
@@ -348,22 +356,24 @@ $('#sys_add').on('click', function() {
         }  
     });
     var urlUuid = "";
-	$('#urlid').change(function(){
-    	$("#dictcode").html("");
-    	$("#dictcode").append("<option value=''>请选择URL描述</option>");
-    	var conType = $(this).children('option:selected').val();
-    	$.getJSON("dpgMgmt/typeUrl?type="+conType,function(data){    	    		
-    		$.each(data, function (index, groupuuid) {
-            	$("#dictcode").append("<option value='"+ groupuuid.uuid +"'>" + groupuuid.req_url_desc + "</option>");
-            }); 
-    	});
-    });
-	$('#dictcode').change(function(){
-		var url = $(this).children('option:selected').val();
-		$('#urlname').val(url);
-	});
     sys_add();
-});  
+});
+
+$('#urlid').change(function(){
+	orgs = "";
+	$("#dictcode").html("");
+	$("#dictcode").append("<option value=''>请选择URL描述</option>");
+	var conType = $(this).children('option:selected').val();
+	$.getJSON("dpgMgmt/typeUrl?type="+conType,function(data){    	    		
+		$.each(data, function (index, groupuuid) {
+        	$("#dictcode").append("<option value='"+ groupuuid.uuid +"'>" + groupuuid.req_url_desc + "</option>");
+        }); 
+	});
+});
+$('#dictcode').change(function(){
+	var url = $(this).children('option:selected').val();
+	$('#urlname').val(url);
+});
 
 function removeAll(){ 
 	var obj=document.getElementById('dictcode'); 

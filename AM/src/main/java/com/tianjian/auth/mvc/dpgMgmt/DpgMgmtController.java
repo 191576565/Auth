@@ -27,15 +27,6 @@ public class DpgMgmtController extends Controller {
 		render("dpgMgmt.jsp");
 	}
 	
-//	public void gouMgmt() {
-//		log.info("jump to gouMgmt");
-//		setAttr("domainlist",dpgmgmtservice.getUrl(getPara("domainid")));
-//		setAttr("condition",dpgmgmtservice.getConditionType());
-//		/*权限管理组模块子页面*/
-//		setAttr("groupuuid", getPara("groupuuid"));
-//		render("gouMgmt.jsp");
-//	}
-	
 	 /** 
 	 *@Function 获取数据权限组管理list清单           
 	 *@Declare   init 数据权限组管理清单
@@ -78,11 +69,14 @@ public class DpgMgmtController extends Controller {
 		Map<String, Object> mpara = new HashMap<String, Object>();
 		Object userinfo = getSessionAttr("userinfo");	
 		String domain_id=((Record) userinfo).getStr("domain_id");
-		mpara.put("domain_id", domain_id);
-		String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_domaininfo, mpara);
+		String domain_uuid=((Record) userinfo).getStr("domain_uuid");
+		List<Record> list = dpgmgmtservice.domainInfo(domain_id, domain_uuid);
+//		mpara.put("domain_id", domain_id);
+//		mpara.put("domain_uuid", domain_uuid);
+//		String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_domaininfo, mpara);
 		// 获取数据
-		List<Record> dpgmgmt = (List<Record>) Db.find(sql);
-		renderJson(dpgmgmt);
+//		List<Record> dpgmgmt = (List<Record>) Db.find(sql);
+		renderJson(list);
 	}
 	
 	 /** 
