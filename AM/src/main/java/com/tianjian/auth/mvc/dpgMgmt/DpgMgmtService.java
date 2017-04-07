@@ -17,6 +17,13 @@ import com.tianjian.platform.tools.ToolSqlXml;
 
 public class DpgMgmtService extends BaseService {
 	
+	//获取权限组信息
+	public List<Record> domainInfo(String domainId, String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.domainInfo");
+		List<Record> list = Db.find(sql,domainId,domainUuid);
+		return list;
+	}
+	
 	public static String getSqlByBeetl(String sqlId, Map<String, Object> param){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl);
     }

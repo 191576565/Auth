@@ -112,4 +112,13 @@ GROUP BY  T7.UUID
     	]]>
 	</sql>
 	
+	<sql id="domainInfo">
+		<![CDATA[ 
+        	select * from SYS_DOMAIN_INFO t
+  start with  decode(?,'root',domain_up_uuid,uuid)=?  connect by prior uuid = domain_up_uuid
+
+        	
+    	]]>
+	</sql>
+	
 </sql-statement>
