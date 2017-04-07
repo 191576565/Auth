@@ -17,7 +17,7 @@
         <% } else if(!isEmpty(domain_id)){%>
         and t1.domain_id=#'$domain_id$'#
         <% } %>
-        
+        order by t1.domain_id, t.group_id
     	]]>
 	</sql>
 	
