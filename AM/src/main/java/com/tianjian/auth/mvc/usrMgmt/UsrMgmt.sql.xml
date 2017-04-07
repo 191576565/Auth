@@ -43,6 +43,7 @@
 			          A.USER_EMAIL,
 			          B.ORG_UNIT_ID,
 			          B.ORG_UNIT_DESC
+            order by  D.DOMAIN_NAME, B.ORG_UNIT_ID,A.USER_ID			          
     	]]>
 	</sql>
 	<sql id="selectDomain">
