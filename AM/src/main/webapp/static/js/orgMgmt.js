@@ -131,22 +131,21 @@ $('#org_add').on('click', function() {
 		type: 1,
 		content: $('#org_add_div'),
 		title: '机构信息',
-		area: ['500px', '500px'],
+		area: ['400px', '400px'],
 		maxmin: true,
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
-			if (!validate()) {
-				return false;
+			if (validate()) {
+				$("#form").attr("action", "orgMgmt/save");
+				$('#form').ajaxSubmit(function(resultJson){
+					if(JSON.stringify(resultJson) == "false"){
+						layer.msg('机构编码不能重复!');
+						return;
+					}
+					initTable();
+					layer.closeAll();
+				});
 			}
-			$("#form").attr("action", "orgMgmt/save");
-			$('#form').ajaxSubmit(function(resultJson){
-				if(JSON.stringify(resultJson) == "false"){
-					layer.msg('机构编码不能重复!');
-					return;
-				}
-				initTable();
-				layer.closeAll();
-			});
 		},
 		btn2: function(index, layero){	
 		}
@@ -166,6 +165,7 @@ function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 	$("#org_add_div #form #up_org_name").val(upOrgDesc);
 	$("#org_add_div #form #ipt_memo").val(memo);
 	$("#org_add_div #form #domain_uuid").val(dId);
+	$('.error').empty();
 	
 	//获取机构
 	$.getJSON("orgMgmt/getOrg",function(data){
@@ -187,7 +187,7 @@ function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 		type: 1,
 		content: $('#org_add_div'),
 		title: '机构信息',
-		area: ['500px', '500px'],
+		area: ['400px', '400px'],
 		maxmin: true,
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
@@ -263,14 +263,14 @@ $('#sub').click(function(){
 
 //删除
 function del(id) {
-	layer.confirm('是否删除该系统信息？', 
+	layer.confirm('是否删除该机构信息？', 
 			{
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
 				$.post('orgMgmt/delete?UUID='+id, function(d){
 					if(d){
-						layer.msg('资源删除成功');
+						layer.msg('删除成功');
 					}else {
 						layer.msg('删除失败');
 					}

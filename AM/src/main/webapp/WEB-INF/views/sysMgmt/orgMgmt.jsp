@@ -45,7 +45,7 @@
 					<th>域</th>
 					<th>机构描述</th>
 					<th>上级机构</th>
-					<th>操作</th>
+					<th style="width:130px">操作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -128,11 +128,12 @@
 			            </span>
 		            </div>
 				</div>
+				<!--  
 				<div class="form-group">
 					<lable>备注</lable>
 					<textarea id="ipt_memo" class="form-control" name="memo" rows="" cols=""></textarea>
 				</div>
-				
+				-->
  			</form>
  		</div>
 	<!-- 全局js -->
