@@ -111,7 +111,7 @@ public class OrgMgmtController extends Controller {
 		orgMgmt.set("UUID", getPara("UUID"));
 		orgMgmt.set("ORG_UNIT_ID", getPara("orgCode"));
 		orgMgmt.set("ORG_UNIT_DESC", getPara("orgName"));
-		orgMgmt.set("ORG_UP_UUID", getPara("upOrg"));
+		orgMgmt.set("ORG_UP_UUID", getPara("org_up_uuid"));
 		orgMgmt.set("MEMO", getPara("memo"));
 		orgMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
 		orgMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
