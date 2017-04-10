@@ -16,8 +16,13 @@ public class SysMgmtController extends Controller {
 	
 	public void index() {
 		log.info("jump to sysMgmt");
-		render("sysMgmt.jsp");
-
+		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
+		String userRole = sysMgmtService.userRole(userId).get(0).getStr("domain_id");
+		if("root".equals(userRole)){
+			render("sysMgmt.jsp");
+			return;
+		}
+		render("sysMgmt2.jsp");
 	}
 	
 	/*
