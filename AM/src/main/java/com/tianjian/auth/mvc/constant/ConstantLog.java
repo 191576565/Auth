@@ -39,7 +39,7 @@ public interface ConstantLog {
 	/**
 	 * 资源操作信息
 	 */	
-	public static final String res     = userauth+"资源管理"; 
+	public static final String res     = userauth+"-资源管理"; 
 	public static final String res_add = res+"-新增";
 	public static final String res_chg = res+"-编辑";
 	public static final String res_del = res+"-删除";	
