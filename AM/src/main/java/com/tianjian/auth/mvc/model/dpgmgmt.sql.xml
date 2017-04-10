@@ -4,19 +4,30 @@
 
 	<sql id="pageAllSelect">
 		<![CDATA[ 
-         select t.uuid,t1.domain_id, t1.domain_name, t.group_id, t.group_desc, t.users
+       select t.uuid,
+                       t1.domain_id,
+                       t1.domain_name,
+                       t.group_id,
+                       t.group_desc,
+                       LISTAGG(T4.UUID  , ',') WITHIN GROUP(ORDER BY T4.USER_ID)  AS users
     	]]>
 	</sql>
 	
 	<sql id="pageAllFrom">
 		<![CDATA[ 
-		  from sys_group_info t, sys_domain_info t1
-         where t.domain_uuid = t1.uuid and 1=1
+		   from sys_group_info t 
+                  join sys_domain_info t1  on  t.domain_uuid = t1.uuid
+             left join sys_user_info   T4  ON INSTR(T.USERS  ,T4.UUID)>0
 		<% if(domain_id == "root"){ %>
        	 
         <% } else if(!isEmpty(domain_id)){%>
         and t1.domain_id=#'$domain_id$'#
         <% } %>
+        GROUP BY  t.uuid,
+                 t1.domain_id,
+                 t1.domain_name,
+                 t.group_id,
+                 t.group_desc  
         order by t1.domain_id, t.group_id
     	]]>
 	</sql>

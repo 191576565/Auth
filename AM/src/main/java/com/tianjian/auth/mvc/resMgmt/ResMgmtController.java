@@ -74,7 +74,7 @@ public class ResMgmtController extends Controller {
 			// 写日志
 			setAttr(ConstantLog.log_optype, ConstantLog.res_add);
 			String msg = "新增资源" + "资源id:" + res.getStr(ResMgmt.column_res_id) + "  资源名称:"
-					+ res.getStr(ResMgmt.column_res_name);
+					+ res.getStr(ResMgmt.column_res_name)+ "  唯一识别码:"+ res.getStr(ResMgmt.column_uuid  );
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {
@@ -99,7 +99,7 @@ public class ResMgmtController extends Controller {
 			// 写日志
 			setAttr(ConstantLog.log_optype, ConstantLog.res_chg);
 			String msg = "编辑资源" + "资源id:" + res.getStr(ResMgmt.column_res_id) + "  资源名称:"
-					+ res.getStr(ResMgmt.column_res_name);
+					+ res.getStr(ResMgmt.column_res_name)+ "  唯一识别码:"+ res.getStr(ResMgmt.column_uuid  );
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {
@@ -114,13 +114,13 @@ public class ResMgmtController extends Controller {
 	public void delete() {
 
 		String uuid = getPara("uuid");
-		System.out.println("uuid=====" + uuid);
-
+	//System.out.println("uuid=====" + uuid);
+	
 		int i = reservice.delmore(ResMgmt.sqlId_res_delete, uuid);
 		if (i >= 1) {
 			// 写日志
 			setAttr(ConstantLog.log_optype, ConstantLog.res_del);
-			String msg = "删除资源,资源头结点UUID为：" + uuid;
+			String msg = "删除资源"+"资源头结点UUID为：" + uuid;
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {
