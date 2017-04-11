@@ -59,6 +59,14 @@
  				method="post" 
  				novalidate>
  				<div class="form-group">
+					<label>所属域</label>
+					<select class="form-control" name="domain" id="domain"></select>
+				</div>
+				<div class="form-group">
+					<label>所属机构</label>
+					<select class="form-control" name="organization" id="organization"></select>
+				</div>
+ 				<div class="form-group">
  					<input id="uuid" 
  						name="uuid" 
  						type="hidden" 
@@ -105,14 +113,6 @@
 				</div>
 				<div class="form-group">
 					<input name="usrName" style="display:none"/>
-				</div>
-				<div class="form-group">
-					<label>所属域</label>
-					<select class="form-control" name="domain" id="domain"></select>
-				</div>
-				<div class="form-group">
-					<label>所属机构</label>
-					<select class="form-control" name="organization" id="organization"></select>
 				</div>
 				<div class="form-group">
 					<label>角色</label><br>
