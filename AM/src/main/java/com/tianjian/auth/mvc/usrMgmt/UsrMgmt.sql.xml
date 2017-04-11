@@ -137,4 +137,13 @@ group by  t.uuid,
 
     	]]>
 	</sql>
+	<sql id="loginrolecheck">
+		<![CDATA[ 
+       select T0.user_id USER_UUID, t1.role_name as user_role
+  FROM SYS_USER_INFO T0
+ inner JOIN SYS_ROLE_INFO T1
+    ON INSTR(T0.ROLES, T1.UUID) > 0
+ where t0.user_id = ?
+    	]]>
+	</sql>
 </sql-statement>

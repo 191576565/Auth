@@ -1,9 +1,14 @@
 package com.tianjian.auth.mvc.login;
 
+import java.util.List;
+
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseSecurityMD5;
 import com.tianjian.auth.mvc.constant.ConstantLogin;
 import com.tianjian.auth.mvc.model.User;
 import com.tianjian.auth.mvc.model.UserService;
+import com.tianjian.platform.tools.ToolGetSql;
 
 public class LoginService {
 
@@ -43,5 +48,21 @@ public class LoginService {
 			//User.cacheAdd(user.getPKValue());
 			return ConstantLogin.login_info_4;
 		}
+	}
+	
+	/**
+	 * @param sqlId
+	 * @param para
+	 * @return
+	 */
+	public boolean uhasrole(String sqlId,String para){
+		String sql = ToolGetSql.getSql(sqlId);
+		List<Record> ur=Db.find(sql,para);
+		if (ur.size()>0){
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 }

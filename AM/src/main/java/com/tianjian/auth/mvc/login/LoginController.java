@@ -38,7 +38,18 @@ public class LoginController extends Controller {
 		render("login_v2.html");
 
 	}
-	
+	/**
+	 * hujian 
+	 * 登录后处理
+	 */
+	public void loginafter(){
+		String sessionId = (String) getRequest().getSession().getAttribute("usersessionid");
+		Object userinfo = getSessionAttr("userinfo");
+		String userName=((Record) userinfo).getStr("user_id");
+		setAttr("userid", userName);
+		setAttr("sid", sessionId);
+		render("login_after.jsp");
+	}
 	 /** 
 		 *@Function 用户登录            
 		 *@Declare   实现用户登录功能：用户密码认证，用户Session绑定，用户权限交互-登录
@@ -53,6 +64,11 @@ public class LoginController extends Controller {
 		//用户登录认证
 		int b=loginservice.validUser(username,password);
 		if(b==3){
+			//用户是否非配角色校验
+			if (!loginservice.uhasrole(Login.sqlId_uhasrole,username)){
+				renderJson("{\"code\":\"0\",\"message\":\"请向管理员分配角色后再登录\"}");
+				return;
+			}
 			//用户Session绑定
 			try {
 				SessionController.bindUSessionId(getRequest(), getResponse(), username);
@@ -60,13 +76,10 @@ public class LoginController extends Controller {
 			} catch (ServletException | IOException e) {
 				e.printStackTrace();
 			}
-			String sessionId = (String) getRequest().getSession().getAttribute("usersessionid");
-			setAttr("userid", username);
-			setAttr("sid", sessionId);
-			//用户交互数据命令生成
-				render("login_after.jsp");
+			//hujian modify
+			renderJson("{\"code\":\"1\",\"message\":\"登陆成功\"}");
 		}else{
-				render("login_v2.html");
+			renderJson("{\"code\":\"0\",\"message\":\"用户名或密码错误\"}");
 		}
 	}
 	
