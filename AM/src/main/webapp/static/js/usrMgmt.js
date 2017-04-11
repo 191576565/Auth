@@ -175,7 +175,7 @@ $('#btn_add').on('click', function() {
 		type: 1,
 		content: $('#sys_add_div'),
 		title: '用户信息',
-		area: ['960px', '540px'],
+		area: ['900px', '600px'],
 	});
 });
 //修改的onclick事件
@@ -275,16 +275,6 @@ $('#btn_reset').click(function(){
 	//获得userName，confirm的时候用
 	var arrUser = $.map(selectContent,function(row){return row.user_name});
 	//确认删除
-//	var msg = "请再次确认您要删除的用户：\n"+arrUser+"\n";
-//	if(confirm(msg)){
-//		$.get("usrMgmt/batchDel",{"uuid[]":arrUUID},function(data){
-//			if(data){
-//				window.location.href='usrMgmt';	
-//			}
-//		});
-//	}else{
-//		return false;
-//	}
 	layer.confirm('是否重置选中用户的密码？', {
 		  btn: ['确定','取消'] //按钮
 		}, function(){
@@ -299,3 +289,22 @@ $('#btn_reset').click(function(){
 			layer.close(layer.index);
 		});
 });
+
+function validate(){
+	//非空验证
+	var flag = true;
+	$(".notNull").each(function(){
+        if(""==$(this).val()){
+        	layer.msg($(this).attr('nullName')+"不能为空");
+        	flag = false;
+        	return false;
+        }
+    });
+	//合法验证
+	$("p.error").each(function(){
+		if(""!=$(this).text()){
+			flag = false;
+		}
+	});
+	return flag;
+}

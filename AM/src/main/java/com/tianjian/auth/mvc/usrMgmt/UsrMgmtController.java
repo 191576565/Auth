@@ -30,7 +30,7 @@ public class UsrMgmtController extends Controller {
 		String param = getPara("sendParam");
 		//条件查询
 		if(!"".equals(param)){
-			renderJson(ums.paramSelect(param));
+			renderJson(ums.paramSelect(orgUUID,param));
 			return;
 		}
 		//查询该用户所属机构下所能展示的用户

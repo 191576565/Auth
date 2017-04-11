@@ -69,7 +69,6 @@ public class UsrMgmtService {
 			obj[i][0] = pwd;
 			obj[i][1] = uuids[i];
 		}
-		System.out.println(obj);
 		int[] size = Db.batch(sql, obj, 10);
 		if(!size.equals(null)&&size.length>0){
 			feedback = true;
@@ -78,10 +77,10 @@ public class UsrMgmtService {
 	}
 	
 	//条件搜索
-	public List<Record> paramSelect(String param){
+	public List<Record> paramSelect(String orgUuid, String param){
 		String sql = ToolGetSql.getSql("tianjian.usrMgmt.paramSelect");
 		String findParam = "%"+param+"%";
-		List<Record> list = Db.find(sql,findParam,findParam);
+		List<Record> list = Db.find(sql,orgUuid,findParam,findParam);
 		return list;
 	}
 }

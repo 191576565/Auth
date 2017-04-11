@@ -132,7 +132,6 @@ $('#sys_add').on('click', function() {
 		content: $('#sys_add_div'),
 		title: '系统信息',
 		area: ['400px', '400px'],
-		maxmin: true,
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
 			if (!validate()) {
