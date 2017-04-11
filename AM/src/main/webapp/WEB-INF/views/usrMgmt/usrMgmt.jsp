@@ -18,13 +18,6 @@
     	<link href="${ctxPath }/static/css/animate.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/style.css?v=4.1.0" rel="stylesheet">
 		<link rel="stylesheet" href="${ctxPath }/static/css/bootstrap-multiselect.css" type="text/css"/>
-    	<style type="text/css">
-			.input_result {
-				position: relative;
-				top: -27px;
-				left: 870px;
-			}
-		</style>
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
  		<div class="row">
@@ -39,83 +32,76 @@
 				</ol>
 			</div>
 		</div>
-		<br /><br /><br /><br />
+		<hr />
  		<div class="row">
  			<div class="col-xs-4">
- 				<!-- <button type="button" class="btn btn-primary create">重置密码</button> -->
  				<button id="btn_add" type="button" class="btn btn-primary create">新增</button>
  				<button id="btn_del" type="button" class="btn btn-danger delete">删除</button>
  				<button id="btn_reset" type="button" class="btn btn-warning delete">重置密码</button>
  			</div>
- <!-- 			<div class="col-xs-8 text-right">
+			<div class="col-xs-8 text-right">
 				<div class="form-inline">
 					<div class="form-group">
-						<input type="text" placeholder="请输入用户编码" style="width: 200px;" id="search" class="form-control">
+						<input id="iptSearch" type="text" placeholder="输入用户编码/用户名称" style="width: 200px;" class="form-control">
 					</div>
-					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
+					<button id="search" class="btn btn-default search"><i class="fa fa-search"></i></button>
 				</div>
-			</div> -->
+			</div>
  		</div>
+ 		<br/>
  		<table id="table"></table>
- 		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
- 			<form id="form" name="signUpForm" ng-submit="submitForm()">
- 				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeCode.$valid }">
+ 		<div class="wrapper" id="sys_add_div" style="display:none;">
+ 			<form ng-app="myApp"
+ 				ng-controller="validateCtrl"
+ 				id="form" 
+ 				name="myForm"
+ 				action="" 
+ 				method="post" 
+ 				novalidate>
+ 				<div class="form-group">
  					<input id="uuid" 
  						name="uuid" 
  						type="hidden" 
- 						ng-model="userdata.uuid"
  					/>
 					<label>用户编码</label> 
 					<input name="scopeCode" 
+						   type="text"
+						   class="form-control notNull"
+						   nullName="用户编码"	
 						   id="scopeCode"
-						   type="text" 
-						   class="form-control" 
 						   placeholder="1~30位数字/字母"
-						   ng-model="userdata.scopeCode"
+						   ng-model="scopeCode"
 						   ng-minlength="1"
 						   ng-maxlength="30"
 						   ng-pattern="/^[A-Za-z0-9]+$/"
 						   required
 					/>
-					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.scopeCode.$valid"></p>
-					<p class="error" ng-if="signUpForm.scopeCode.$error.required &&
-						signUpForm.scopeCode.$touched">
-					用户编码不可为空</p>
-					<p class="error" ng-if="(signUpForm.scopeCode.$error.minlength ||
-						signUpForm.scopeCode.$error.maxlength) && 
-						signUpForm.scopeCode.$touched">
+					<p class="error" ng-if="(myForm.scopeCode.$error.minlength ||
+						myForm.scopeCode.$error.maxlength) && 
+						myForm.scopeCode.$touched">
 					用户编码长度应在1~30位之间</p>
-					<p class="error" ng-if="signUpForm.scopeCode.$error.pattern &&
-						signUpForm.scopeCode.$touched">
+					<p class="error" ng-if="myForm.scopeCode.$error.pattern &&
+						myForm.scopeCode.$touched">
 					只能是字母/数字组合</p>
 					<p id="chkUserError" class="error"></p>
 				</div>
-				<div class="form-group" ng-class="{ 'has-success': signUpForm.scopeName.$valid }">
+				<div class="form-group">
 					<label>用户名称</label> 
 					<input name="usrName" 
 						   type="text" 
 						   id="usrName"
 						   class="form-control" 
 						   placeholder="请输入用户名称"
-						   ng-model="userdata.usrName"
+						   ng-model="usrName"
 						   ng-minlength="1"
 						   ng-maxlength="30"
 						   ng-pattern="/^[A-Za-z0-9]+$/"
 						   required
 					/>
-					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.usrName.$valid"></p>
-					<p class="error" ng-if="signUpForm.usrName.$error.required &&
-						signUpForm.usrName.$touched">
-					不可为空</p>
-					<p class="error" ng-if="(signUpForm.usrName.$error.minlength ||
-						signUpForm.usrName.$error.maxlength) && 
-						signUpForm.usrName.$touched">
+					<p class="error" ng-if="(myForm.usrName.$error.minlength ||
+						myForm.usrName.$error.maxlength) && 
+						myForm.usrName.$touched">
 				 	长度应在1~30位之间</p>
-				 	<p class="error" ng-if="signUpForm.usrName.$error.pattern &&
-						signUpForm.usrName.$touched">
-					只能是字母/数字组合</p>
 				</div>
 				<div class="form-group">
 					<input name="usrName" style="display:none"/>
@@ -128,29 +114,6 @@
 					<label>所属机构</label>
 					<select class="form-control" name="organization" id="organization"></select>
 				</div>
-				<!-- 
-				<div class="form-group" ng-class="{ 'has-success': signUpForm.pwd.$valid }">
-					<label>密码</label> 
-					<input name="pwd" 
-						   type="password" 
-						   class="form-control" 
-						   placeholder="请输入密码"
-						   ng-model="userdata.pwd"
-						   ng-minlength="6"
-						   ng-maxlength="30"
-						   required
-					/>
-					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.pwd.$valid"></p>
-					<p class="error" ng-if="signUpForm.pwd.$error.required &&
-						signUpForm.pwd.$touched">
-					不可为空</p>
-					<p class="error" ng-if="(signUpForm.pwd.$error.minlength ||
-						signUpForm.pwd.$error.maxlength) && 
-						signUpForm.pwd.$touched">
-				 	长度应在6~30位之间</p>
-				</div>
-				 -->
 				<div class="form-group">
 					<label>角色</label><br>
 					<select class="form-control" name="role" id="role" multiple></select>
@@ -161,17 +124,12 @@
 						   type="text" 
 						   id="phone"
 						   class="form-control" 
-						   ng-model="userdata.phone"
+						   ng-model="phone"
 						   ng-pattern="/^1[34578]\d{9}$/"
 						   required
 					/>
-					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.phone.$valid"></p>
-					<p class="error" ng-if="signUpForm.phone.$error.required &&
-						signUpForm.phone.$touched">
-					不可为空</p>
-					<p class="error" ng-if="signUpForm.phone.$error.pattern &&
-						signUpForm.phone.$touched">
+					<p class="error" ng-if="myForm.phone.$error.pattern &&
+						myForm.phone.$touched">
 					手机号填写错误</p>
 				</div>
 				<div class="form-group" ng-class="{ 'has-success': signUpForm.email.$valid }">
@@ -180,17 +138,12 @@
 						   type="text" 
 						   id="email"
 						   class="form-control" 
-						   ng-model="userdata.email"
+						   ng-model="email"
 						   ng-pattern="/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/"
 						   required
 					/>
-					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.email.$valid"></p>
-					<p class="error" ng-if="signUpForm.email.$error.required &&
-						signUpForm.email.$touched">
-					不可为空</p>
-					<p class="error" ng-if="signUpForm.email.$error.pattern &&
-						signUpForm.email.$touched">
+					<p class="error" ng-if="myForm.email.$error.pattern &&
+						myForm.email.$touched">
 					邮箱填写错误</p>
 				</div>
 				<div class="form-group">
@@ -222,5 +175,16 @@
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/usrMgmt.js"></script>
+    <script>
+    $(document).ready(function () { 
+		 inittable();
+		 //条件搜索
+		 $("#search").bind("click", inittable);
+	})
+	//表单验证
+	var app = angular.module('myApp', []);
+	app.controller('validateCtrl',function($scope){
+	});
+    </script>
 	</body>
 </html>

@@ -129,23 +129,27 @@ function initdpgMgmtlist() {
 								{
 									field : 'domain_name',
 									title : '域名称',
+									align: 'center',
 								},
 								{
 									field : 'group_id',
 									title : '组编码',
+									align: 'center',
 								},
 								{
 									field : 'group_desc',
 									title : '组名称',
+									align: 'center',
 								},
 								{
 									field : 'opt',
 									title : '操 作',
-									width:250,
+									width:　"220px",
+									align: 'center',
 									formatter : function(value, row, index) {
 										var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\''+ index +'\')">编辑</a> ';
 								    	var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
-								    	var f = '<a href="#" onclick="onFun(\''+ row.uuid +'\',\''+ row.domain_id +'\')" class="btn btn-success">数据权限</a> ';
+								    	var f = '<a href="#" class="btn btn-success" onclick="onFun(\''+ row.uuid +'\',\''+ row.domain_id +'\')">数据权限</a> ';
 								    	return e+d+f;
 									}
 								}, ]

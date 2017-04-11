@@ -27,6 +27,12 @@ public class UsrMgmtController extends Controller {
 		System.out.println("sessionUserId == "+sessionUserId);
 		//查询到的org_uuid
 		String orgUUID = ums.selectInitOrganization(sessionUserId);
+		String param = getPara("sendParam");
+		//条件查询
+		if(!"".equals(param)){
+			renderJson(ums.paramSelect(param));
+			return;
+		}
 		//查询该用户所属机构下所能展示的用户
 		renderJson(ums.initSelect(orgUUID));
 	}

@@ -36,7 +36,7 @@ $(function(){
 			$.fn.zTree.init($("#org"), s, data); //树
 			var treeObj = $.fn.zTree.getZTreeObj("org");
 			treeObj.expandAll(true);
-			
+//			console.log(orgs);
 			var u=orgs.split(',');
 			if(orgs!="" && orgs!=null){
 				u.forEach(function(e){
@@ -81,7 +81,7 @@ function initTable(){
  	sortOrder: "asc", //排序方式
  	pageNumber:1, //初始化加载第一页，默认第一页
  	pageSize: 10, //每页的记录行数（*）
- 	pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+ 	pageList: [10], //可供选择的每页的行数（*）
  	search:  false,
  	showColumns: false, //是否显示所有的列
  	showRefresh: false, //是否显示刷新按钮
@@ -110,35 +110,41 @@ function initTable(){
         checkbox: true
     },{
         field: 'domain_id',
+        align: 'center',
         title: '域 ID'
     }, {
         field: 'domain_name',
         title: '域名称',
+        align: 'center',
         width:'100'
     },{
         field: 'group_id',
         title: '组编码',
+        align: 'center',
         width:'40'
     }, {
         field: 'group_desc',
         title: '组名称',
-        width:'100'
+        align: 'center',
+        width:'150px'
     }, {
         field: 'req_url',
-        title: 'URL',
-        width:'200'
+        align: 'center',
+        title: 'URL'
     }, {
     	field: 'req_url_desc',
     	title: 'URL描述',
-        width:'400'
+    	align: 'center',
+        width:'200px'
     }, {
         field: 'condition_type',
         title: '条件类型',
-        width:'60',
+        align: 'center',
+        width:'200px'
     }, {
     	field: 'opt',
     	title: '操 作',
-        width:'170',
+        width:'140px',
     	formatter:function(value,row,index){
     		var e = '<button type="button" class="btn btn-info update edit" onclick="onEdit(\''+ row.uuid +'\',\''+ row.condition_content_uuid +'\')">编辑</button> ';
     		var d = '<button type="button" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</button> ';
@@ -221,6 +227,7 @@ $('#btn_del').on('click', function(){
 //layer弹出自定义div__修改
 function onEdit(uuid,content) {
 	orgs = content=="null"?"":content;
+//	alert(orgs);
 	$("#sys_add_div #form")[0].reset();
 	$("#sys_add_div #form #urlid").html("");
 	$("#sys_add_div #form #dictcode").html("");

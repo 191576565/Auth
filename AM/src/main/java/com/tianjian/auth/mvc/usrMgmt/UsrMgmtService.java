@@ -76,4 +76,12 @@ public class UsrMgmtService {
 		}
 		return feedback;
 	}
+	
+	//条件搜索
+	public List<Record> paramSelect(String param){
+		String sql = ToolGetSql.getSql("tianjian.usrMgmt.paramSelect");
+		String findParam = "%"+param+"%";
+		List<Record> list = Db.find(sql,findParam,findParam);
+		return list;
+	}
 }

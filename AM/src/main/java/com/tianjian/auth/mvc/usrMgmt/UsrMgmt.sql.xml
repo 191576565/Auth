@@ -146,4 +146,13 @@ group by  t.uuid,
  where t0.user_id = ?
     	]]>
 	</sql>
+	
+	<sql id="paramSelect">
+		<![CDATA[ 
+        	SELECT T.* from SYS_USER_INFO T 
+  				WHERE (T.USER_ID LIKE ? OR T.USER_NAME LIKE ?) 
+        				order by t.modified_date desc
+    	]]>
+	</sql>
+	
 </sql-statement>
