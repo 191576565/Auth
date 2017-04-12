@@ -41,12 +41,12 @@
        t0.user_id,
        t0.user_name,
        t0.user_pwd,
-       listagg(t1.uuid, ',') within group(order by t1.role_id) as role_uuids,
-       listagg(t1.role_id, ',') within group(order by t1.role_id) as role_ids,
-       listagg(t1.role_name, ',') within group(order by t1.role_id) as role_names
+       dao_concat(t1.uuid)      as role_uuids,
+       dao_concat(t1.role_id)   as role_ids,
+       dao_concat(t1.role_name) as role_names
   from sys_user_info t0
   left join sys_role_info t1
-    on instr(t0.roles, t1.uuid) > 0
+    on DBMS_LOB.INSTR(t0.roles, t1.uuid) > 0
   left join sys_domain_info t2
     on t0.domain_uuid = t2.uuid
   left join sys_org_info t3
@@ -80,10 +80,10 @@
 		<![CDATA[ 
 with tmp_roles as (
               select t0.user_id                                                           
-              ,listagg(t1.role_id  , ',') within group(order by t1.role_id)  as role_id  
-              ,listagg(t1.role_name, ',') within group(order by t1.role_id)  as role_name
+              ,dao_concat(t1.role_id )  as role_id  
+              ,dao_concat(t1.role_name)  as role_name
                 from sys_user_info     t0
-              left join sys_role_info     t1  on instr(t0.roles  ,t1.uuid)>0             
+              left join sys_role_info     t1  on DBMS_LOB.INSTR(t0.roles  ,t1.uuid)>0             
               group by t0.user_id    )
     ,tmp_users  as (
               select  t2.domain_id                                                       
@@ -103,10 +103,10 @@ with tmp_roles as (
                      ,t4.res_type         as res_type   
                      ,t4.sort_id          as res_sort_id
                    from sys_user_info     t0                                             
-              left join sys_role_info     t1  on instr(t0.roles  ,t1.uuid)>0             
+              left join sys_role_info     t1  on DBMS_LOB.INSTR(t0.roles  ,t1.uuid)>0             
               left join sys_domain_info   t2  on t0.domain_uuid=t2.uuid                  
               left join sys_org_info      t3  on t0.org_uuid=t3.uuid and t0.domain_uuid=t3.domain_uuid  
-              left join sys_resource_info t4  on instr(t1.resources  ,t4.uuid)>0
+              left join sys_resource_info t4  on DBMS_LOB.INSTR(t1.resources  ,t4.uuid)>0
               left join sys_resource_info t5  on t4.res_up_uuid=t5.uuid
              where   ${column} = ? and ${session} = ? and loggin_status = '0'
               group  by
@@ -137,7 +137,7 @@ with tmp_roles as (
 	<!-- 不规则查询：查询Sessionid和用户信息权限  2 用户数据权限  （全部）-->
 	<sql id="rpmselect2">
 		<![CDATA[ 
-     SELECT   T2.DOMAIN_ID
+      SELECT   T2.DOMAIN_ID
              ,T2.DOMAIN_NAME
              ,T3.ORG_UNIT_ID
              ,T3.ORG_UNIT_DESC
@@ -146,19 +146,19 @@ with tmp_roles as (
              ,T7.GROUP_ID
              ,T81.REQ_URL
              ,T81.CONDITION_TYPE
-             ,LISTAGG(t9.org_unit_id  , ',') WITHIN GROUP(ORDER BY t9.org_unit_id)    AS CONDITION_CONTENT
-             ,LISTAGG(t9.org_unit_desc  , ',') WITHIN GROUP(ORDER BY t9.org_unit_id)  AS CONTENT_DESC
+             ,dao_concat(t9.org_unit_id  )    AS CONDITION_CONTENT
+             ,dao_concat(t9.org_unit_desc)    AS CONTENT_DESC
            FROM SYS_USER_INFO     T0
       LEFT JOIN SYS_DOMAIN_INFO   T2  ON T0.DOMAIN_UUID=T2.UUID
       LEFT JOIN SYS_ORG_INFO      T3  ON T0.ORG_UUID=T3.UUID and t0.domain_uuid=t3.domain_uuid
-           JOIN SYS_GROUP_INFO      T7  ON T0.DOMAIN_UUID=T7.DOMAIN_UUID  AND  INSTR(T7.USERS  ,T0.UUID)>0
+           JOIN SYS_GROUP_INFO      T7  ON T0.DOMAIN_UUID=T7.DOMAIN_UUID  AND  DBMS_LOB.INSTR(T7.USERS  ,T0.UUID)>0
       LEFT JOIN sys_group_url_rela  T8  ON T7.UUID  =T8.GROUP_UUID
       LEFT JOIN SYS_GROUP_URL_MAPPING T81  ON T8.REQ_URL=T81.UUID
-      LEFT JOIN SYS_ORG_INFO        T9  ON INSTR(T8.CONDITION_CONTENT  ,T9.uuid)>0 AND T9.DOMAIN_UUID=T0.DOMAIN_UUID
+      LEFT JOIN SYS_ORG_INFO        T9  ON DBMS_LOB.INSTR(T8.CONDITION_CONTENT  ,T9.uuid)>0 AND T9.DOMAIN_UUID=T0.DOMAIN_UUID
       WHERE  T0.DOMAIN_UUID  IN (  select d.uuid from  SYS_DOMAIN_INFO   D   where  d.domain_id='rpm')
-        AND  ${column} = ? and ${session} = ? and loggin_status = '0'
+         AND  ${column} = ? and ${session} = ? and loggin_status = '0'
       GROUP BY T2.DOMAIN_ID,T2.DOMAIN_NAME ,T3.ORG_UNIT_ID,T3.ORG_UNIT_DESC ,T0.USER_ID ,T0.USER_NAME,T7.GROUP_ID,T81.REQ_URL,T81.CONDITION_TYPE,T8.CONDITION_CONTENT,T0.LOGGIN_STATUS  ,T0.USER_SID 
-    	]]>
+        	]]>
 	</sql>
 	
 	<!-- 不规则查询：查询用户信息  3 用户数据权限  （登录用户）-->
@@ -170,12 +170,12 @@ with tmp_roles as (
        ,T3.ORG_UNIT_DESC
        ,T0.USER_ID
        ,T0.USER_NAME
-      ,LISTAGG(T1.ROLE_ID  , ',') WITHIN GROUP(ORDER BY T1.ROLE_ID)  AS ROLE_IDS
-      ,LISTAGG(T1.ROLE_NAME, ',') WITHIN GROUP(ORDER BY T1.ROLE_ID)  AS ROLE_NAMES
+      ,dao_concat(T1.ROLE_ID )  AS ROLE_IDS
+      ,dao_concat(T1.ROLE_NAME)  AS ROLE_NAMES
       ,T0.LOGGIN_STATUS
       ,T0.USER_SID
      FROM SYS_USER_INFO     T0
-LEFT JOIN SYS_ROLE_INFO     T1  ON INSTR(T0.ROLES  ,T1.UUID)>0
+LEFT JOIN SYS_ROLE_INFO     T1  ON DBMS_LOB.INSTR(T0.ROLES  ,T1.UUID)>0
 LEFT JOIN SYS_DOMAIN_INFO   T2  ON T0.DOMAIN_UUID=T2.UUID
 LEFT JOIN SYS_ORG_INFO      T3  ON T0.ORG_UUID=T3.UUID and t0.domain_uuid=t3.domain_uuid
 WHERE   ( 1=1  or 1 = ?   ) and ${session} = ? and loggin_status = '0'

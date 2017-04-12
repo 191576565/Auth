@@ -20,8 +20,8 @@
 			       A.USER_EMAIL,
 			       B.ORG_UNIT_ID,
 			       B.ORG_UNIT_DESC,
-			       LISTAGG(C.UUID, ',') WITHIN GROUP(ORDER BY C.UUID) AS ROLE_UUIDS,
-			       LISTAGG(C.ROLE_NAME, ',') WITHIN GROUP(ORDER BY C.UUID) AS ROLE_NAMES
+			       dao_concat(C.UUID      ) AS ROLE_UUIDS,
+			       dao_concat(C.ROLE_NAME ) AS ROLE_NAMES
 			  FROM SYS_USER_INFO A
 			 INNER JOIN (SELECT T.UUID, T.DOMAIN_UUID, T.ORG_UNIT_ID, T.ORG_UNIT_DESC
 			               FROM SYS_ORG_INFO T
@@ -29,7 +29,7 @@
 			             CONNECT BY PRIOR T.UUID = T.ORG_UP_UUID) B
 			    ON A.ORG_UUID = B.UUID
 			  LEFT JOIN SYS_ROLE_INFO C
-			    ON INSTR(A.ROLES, C.UUID) > 0
+			    ON DBMS_LOB.INSTR(A.ROLES, C.UUID) > 0
 			  LEFT JOIN SYS_DOMAIN_INFO D
 			    ON A.DOMAIN_UUID = D.UUID
 			 WHERE  D.DOMAIN_ID  != 'root'
@@ -114,7 +114,7 @@
           select t.uuid,
           t.user_id,
        t.user_name,
-       LISTAGG(C.ROLE_NAME, ',') WITHIN GROUP(ORDER BY C.ROLE_ID)   as   roles,
+       dao_concat(C.ROLE_NAME )   as   roles,
        t.user_phone,
         t.user_email,
        a.org_unit_desc,
@@ -124,7 +124,7 @@
     on t.org_uuid = a.uuid
  inner join sys_domain_info b
     on t.domain_uuid = b.uuid
-LEFT JOIN SYS_ROLE_INFO     c  ON INSTR(t.ROLES  ,c.UUID)>0     
+LEFT JOIN SYS_ROLE_INFO     c  ON DBMS_LOB.INSTR(t.ROLES  ,c.UUID)>0     
  where t.uuid = ? 
 group by  t.uuid,
           t.user_id,
@@ -142,7 +142,7 @@ group by  t.uuid,
        select T0.user_id USER_UUID, t1.role_name as user_role
   FROM SYS_USER_INFO T0
  inner JOIN SYS_ROLE_INFO T1
-    ON INSTR(T0.ROLES, T1.UUID) > 0
+    ON DBMS_LOB.INSTR(T0.ROLES, T1.UUID) > 0
  where t0.user_id = ?
     	]]>
 	</sql>
@@ -159,8 +159,8 @@ group by  t.uuid,
              A.USER_EMAIL,
              B.ORG_UNIT_ID,
              B.ORG_UNIT_DESC,
-             LISTAGG(C.UUID, ',') WITHIN GROUP(ORDER BY C.UUID) AS ROLE_UUIDS,
-             LISTAGG(C.ROLE_NAME, ',') WITHIN GROUP(ORDER BY C.UUID) AS ROLE_NAMES
+             dao_concat(C.UUID      ) AS ROLE_UUIDS,
+             dao_concat(C.ROLE_NAME ) AS ROLE_NAMES
         FROM SYS_USER_INFO A
        INNER JOIN (SELECT T.UUID, T.DOMAIN_UUID, T.ORG_UNIT_ID, T.ORG_UNIT_DESC
                      FROM SYS_ORG_INFO T
@@ -168,7 +168,7 @@ group by  t.uuid,
                    CONNECT BY PRIOR T.UUID = T.ORG_UP_UUID) B
           ON A.ORG_UUID = B.UUID
         LEFT JOIN SYS_ROLE_INFO C
-          ON INSTR(A.ROLES, C.UUID) > 0
+          ON DBMS_LOB.INSTR(A.ROLES, C.UUID) > 0
         LEFT JOIN SYS_DOMAIN_INFO D
           ON A.DOMAIN_UUID = D.UUID
        WHERE  D.DOMAIN_ID  != 'root'
