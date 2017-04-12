@@ -9,7 +9,7 @@
                        t1.domain_name,
                        t.group_id,
                        t.group_desc,
-                       LISTAGG(T4.UUID  , ',') WITHIN GROUP(ORDER BY T4.USER_ID)  AS users
+                       dao_concat(T4.UUID  )  AS users
     	]]>
 	</sql>
 	
@@ -17,7 +17,7 @@
 		<![CDATA[ 
 		   from sys_group_info t 
                   join sys_domain_info t1  on  t.domain_uuid = t1.uuid
-             left join sys_user_info   T4  ON INSTR(T.USERS  ,T4.UUID)>0
+             left join sys_user_info   T4  ON DBMS_LOB.INSTR(T.USERS  ,T4.UUID)>0
 		<% if(domain_id == "root"){ %>
        	 
         <% } else if(!isEmpty(domain_id)){%>
@@ -51,7 +51,7 @@ select  t8.uuid
 		<![CDATA[ 
 		from  sys_group_url_rela  T8
       LEFT JOIN SYS_GROUP_URL_MAPPING T81  ON T8.REQ_URL=T81.UUID
-      LEFT JOIN SYS_ORG_INFO        T9  ON INSTR( T8.CONDITION_CONTENT ,T9.uuid   )>0 AND T9.DOMAIN_UUID=T81.DOMAIN_UUID
+      LEFT JOIN SYS_ORG_INFO        T9  ON DBMS_LOB.INSTR( T8.CONDITION_CONTENT ,T9.uuid   )>0 AND T9.DOMAIN_UUID=T81.DOMAIN_UUID
       left join sys_domain_info   t10  ON T10.UUID=T81.DOMAIN_UUID
       LEFT JOIN SYS_GROUP_INFO    T11  ON T11.UUID=T8.GROUP_UUID
       LEFT JOIN SYS_DICT_INFO    T12   ON T12.DICT_ID =T81.CONDITION_TYPE  AND  T12.DICT_TYPE='effective_flag'
