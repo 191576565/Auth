@@ -87,6 +87,7 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("creator", sessionUserId);
 		if(""==roles || null==roles){
 			renderJson("{\"message\":\"roleIsNull\"}");
+			return;
 		}
 		
 		usrMgmt.save();

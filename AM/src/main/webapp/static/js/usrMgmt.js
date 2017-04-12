@@ -171,6 +171,7 @@ $('#btn_add').on('click', function() {
 	changeDomain($("#domain").val());
 	$("#phone").val('');
 	$("#email").val('');
+	$("#chkUserError").html('');
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
@@ -183,12 +184,16 @@ $('#btn_add').on('click', function() {
 			}
 			$("#form").attr("action", "usrMgmt/insUsr"); 
 			$('#form').ajaxSubmit(function(resultJson){
-				if(JSON.stringify(resultJson) == "false"){
-					layer.msg('域编码/域名不能重复');
-				}else{
+				if(JSON.stringify(resultJson) === "true"){
 					layer.closeAll();
 					$('#table').bootstrapTable('refresh', {silent: true});
+					return;
 				}
+				$.each(resultJson, function(i, item){
+					if(item === "roleIsNull"){
+						layer.msg('请为该用户分配角色');
+					}
+				})
 			});
 		},
 		btn2: function(index, layero){	
@@ -209,6 +214,7 @@ function edit(uuid,user_id,user_name,domain_uuid,org_uuid,role_uuids,user_phone,
 	$('#role').multiselect('select', role_uuids.split(","));
 	$("#phone").val(user_phone);
 	$("#email").val(user_email);
+	$("#chkUserError").html('');
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
