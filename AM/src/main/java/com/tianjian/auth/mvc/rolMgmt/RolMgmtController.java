@@ -44,6 +44,12 @@ public class RolMgmtController extends Controller {
 		List<Record> list = mgmtService.paramSelect(userId);
 		String domainUuid = list.get(0).getStr("uuid");
 		String domainId = list.get(0).getStr("domain_id");
+		String param = getPara("sendParam");
+		//条件查询
+		if(!"".equals(param)){
+			renderJson(mgmtService.likeSelect(domainId,domainUuid,param));
+			return;
+		}
 		renderJson(mgmtService.defaultSelect(domainUuid,domainId));
 	}
 	
@@ -93,4 +99,5 @@ public class RolMgmtController extends Controller {
 		renderJson(true);
 		
 	}
+	
 }

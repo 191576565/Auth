@@ -17,6 +17,23 @@ where (    decode(?,'root', 1,null )=1
     	]]>
 	</sql>
 	
+	<sql id="likeSelect">
+		<![CDATA[ 
+          Select  ro.uuid,ro.Domain_uuid,Domain.Domain_Name,Ro.Role_Id,Ro.Role_Name,Ro.MEMO
+     From Sys_Role_Info Ro
+Left Join Sys_Domain_Info Domain        
+       On Ro.Domain_Uuid=Domain.Uuid  
+where (    decode(?,'root', 1,null )=1               
+        or ro.domain_uuid= ?                                                         
+      )   
+  and domain_id !='root'
+   and (      role_id like ?                               
+         or role_name like ?   )          
+  
+order by domain_id ,role_id
+    	]]>
+	</sql>
+	
 	<sql id="paramSelect">
 		<![CDATA[ 
           select t.uuid,t.domain_id from sys_domain_info t 
