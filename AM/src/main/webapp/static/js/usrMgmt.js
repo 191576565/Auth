@@ -313,6 +313,7 @@ $('#btn_reset').click(function(){
 					layer.msg('重置密码失败');
 				}
 			});
+			$('#table').bootstrapTable('refresh', {silent: true});
 		}, function(){
 			layer.close(layer.index);
 		});
