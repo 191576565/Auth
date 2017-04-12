@@ -26,13 +26,6 @@
 		<!-- Sweet Alert -->
 		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 		<link href="${ctxPath }/static/css/plugins/ztree/zTreeStyle.css" rel="stylesheet">
-		<style type="text/css">
-			.input_result {
-				position: relative;
-				top: -27px;
-				left: 700px;
-			}
-		</style>
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
  		<div class="row">
@@ -53,11 +46,24 @@
  				<button id="sys_add" type="button" class="btn btn-primary create" style="margin:0px 3px 0px 0px">新增</button>
  				<button id="btn_del" type="button" class="btn btn-danger delete">删除</button>
  			</div>
- 		</div>
+ 			<div class="col-xs-8 text-right">
+				<div class="form-inline">
+					<div class="form-group">
+						<input id="iptSearch" type="text" placeholder="输入角色ID/角色名称" style="width: 200px;" class="form-control">
+					</div>
+					<button id="search" class="btn btn-default search"><i class="fa fa-search"></i></button>
+				</div>
+			</div>
+ 		</div><br />
  		<table id="table"></table>
- 		<div class="wrapper" id="sys_add_div" style="display:none;" ng-app="myApp" ng-controller="SignUpController">
- 			<form id="form" name="signUpForm" ng-submit="submitForm()" action="" method="post">
- 				<br />
+ 		<div class="wrapper" id="sys_add_div" style="display:none;">
+ 			<form ng-app="myApp"
+ 				ng-controller="validateCtrl"
+ 				id="form" 
+ 				name="myForm" 
+ 				action="" 
+ 				method="post"
+ 				novalidate>
  				<div class="form-group">
 					<label>所属域</label> 
 					<select class="form-control" name="domain_uuid" id="domain_uuid">
@@ -67,7 +73,7 @@
 						
 					</select>
 				</div>
- 				<div class="form-group" ng-class="{ 'has-success': signUpForm.CustCode.$valid }">
+ 				<div class="form-group">
  				<input id="uuid" 
  						name="UUID" 
  						type="hidden" 
@@ -76,44 +82,46 @@
  					<input name="role_id" 
  						   id="role_id"
  						   type="text" 
- 						   class="form-control"
+ 						   class="form-control notNull"
+ 						   nullName="角色编码"
  						   placeholder="1~30位字母/数字"
- 						   ng-model="userdata.role_id"
+ 						   ng-model="role_id"
 						   ng-minlength="1"
 						   ng-maxlength="30"
 						   ng-pattern="/^[A-Za-z0-9]+$/"
 						   required
  					/>
- 					<p id="" class="fa fa-check input_result success"
-						ng-if="signUpForm.role_id.$valid && userdata.role_id!=''"></p>
-					<p class="error" ng-if="(signUpForm.role_id.$error.minlength ||
-						signUpForm.role_id.$error.maxlength) && 
-						signUpForm.role_id.$touched">
+					<p class="error" ng-if="(myForm.role_id.$error.minlength ||
+						myForm.role_id.$error.maxlength) && 
+						myForm.role_id.$touched">
 					长度应在1~30位之间</p>
-					<p class="error" ng-if="signUpForm.role_id.$error.pattern &&
-						signUpForm.role_id.$touched">
+					<p class="error" ng-if="myForm.role_id.$error.pattern &&
+						myForm.role_id.$touched">
 					只能是字母/数字组合</p>
  				</div>
-				<div class="form-group" ng-class="{ 'has-success': signUpForm.role_name.$valid }">
+				<div class="form-group">
 					<label>角色名称</label> 
 					<input name="role_name" 
 					       id="role_name"
 						   type="text" 
-						   class="form-control"
+						   class="form-control notNull"
+						   nullName="角色名称"
 						   placeholder="请输入角色名"
-						   ng-model="userdata.role_name"
+						   ng-model="role_name"
+						   ng-minlength="1"
+						   ng-maxlength="30"
 						   required		   
 					/>
-					<p class="fa fa-check input_result success"
-						ng-if="signUpForm.role_name.$valid"></p>
+					<p class="error" ng-if="(myForm.role_name.$error.minlength ||
+						myForm.role_name.$error.maxlength) && 
+						myForm.role_name.$touched">
+					长度应在1~30位之间</p>
 				</div>
-				<div class="form-group">
-					<lable>备注</lable>
-					<textarea id="ipt_memo" class="form-control" name="memo"></textarea>
-				</div>
+				<!--  
 				<div class="form-group">
 					<button class="btn btn-info ladda-button save" id="sub">保存</button>
 				</div>
+				-->
  			</form>
  		</div>
  		<div id="sys_del_div" class="form-group" style="display:none;">
@@ -154,5 +162,16 @@
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/rolMgmt.js"></script>
+    <script>
+    $(document).ready(function () { 
+    	inittable();
+		 //条件搜索
+		 $("#search").bind("click", inittable);
+	})
+	//表单验证
+	var app = angular.module('myApp', []);
+	app.controller('validateCtrl',function($scope){
+	});
+    </script>
 	</body>
 </html>
