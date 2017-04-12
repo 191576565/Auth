@@ -13,7 +13,9 @@
 <script src="static/js/jquery.min.js?v=2.1.4"></script>
 <script src="static/js/plugins/layer/layer.min.js"></script>
 <script>
-	
+if (window.top !== window.self) {
+    window.top.location = window.location;
+}
 </script>
 
 </head>

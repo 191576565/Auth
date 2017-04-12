@@ -137,7 +137,7 @@ public class MainConfig extends JFinalConfig {
 
 	@Override
 	public void configInterceptor(Interceptors me) {
-		me.add(new GlobalInterceptor());
+		//me.add(new GlobalInterceptor());
 		me.add(new GlobalLogInterceptor());
 		
 	}
