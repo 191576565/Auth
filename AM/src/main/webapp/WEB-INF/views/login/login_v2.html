@@ -62,7 +62,18 @@ if (window.top !== window.self) {
 					}
 				}
 			});
-		}
+		};
+		jQuery(document).ready(function() {
+		var tds = $("html");
+		tds.keydown(function(event) {
+			var myEvent = event || window.event; //解决不同浏览器获取事件对象的差异
+			switch (myEvent.keyCode) {
+			case 13://回车事件
+				submitFunc();
+				break;
+			}
+		});
+		});
 	</script>
 </body>
 
