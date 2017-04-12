@@ -61,10 +61,10 @@
         	  <%if(db_type== "oracle"){%>
 with TMP_ROLES as (
           select T0.USER_ID                                                            
-          ,LISTAGG(T1.ROLE_ID  , ',') WITHIN GROUP(ORDER BY T1.ROLE_ID)  AS ROLE_ID    
-          ,LISTAGG(T1.ROLE_NAME, ',') WITHIN GROUP(ORDER BY T1.ROLE_ID)  AS ROLE_NAME  
+          ,dao_concat(T1.ROLE_ID   )  AS ROLE_ID    
+          ,dao_concat(T1.ROLE_NAME )  AS ROLE_NAME  
             FROM SYS_USER_INFO     T0
-          LEFT JOIN SYS_ROLE_INFO     T1  ON INSTR(T0.ROLES  ,T1.UUID)>0               
+          LEFT JOIN SYS_ROLE_INFO     T1  ON DBMS_LOB.INSTR(T0.ROLES  ,T1.UUID)>0               
           group by T0.USER_ID    )
 ,TMP_USERS  AS (
           SELECT  T2.DOMAIN_ID                                                                        
@@ -84,10 +84,10 @@ with TMP_ROLES as (
                  ,T4.RES_ICON         AS RES_ICON      
                  ,T4.RES_TYPE         AS RES_TYPE      
                FROM SYS_USER_INFO     T0                                                             
-          LEFT JOIN SYS_ROLE_INFO     T1  ON INSTR(T0.ROLES  ,T1.UUID)>0                              
+          LEFT JOIN SYS_ROLE_INFO     T1  ON DBMS_LOB.INSTR(T0.ROLES  ,T1.UUID)>0                              
           LEFT JOIN SYS_DOMAIN_INFO   T2  ON T0.DOMAIN_UUID=T2.UUID                                  
           LEFT JOIN SYS_ORG_INFO      T3  ON T0.ORG_UUID=T3.UUID and t0.domain_uuid=t3.domain_uuid    
-          LEFT JOIN SYS_RESOURCE_INFO T4  ON INSTR(T1.RESOURCES  ,T4.UUID)>0
+          LEFT JOIN SYS_RESOURCE_INFO T4  ON DBMS_LOB.INSTR(T1.RESOURCES  ,T4.UUID)>0
           LEFT JOIN SYS_RESOURCE_INFO T5  ON T4.RES_UP_UUID=T5.UUID
           where  user_id =?
           group  by
