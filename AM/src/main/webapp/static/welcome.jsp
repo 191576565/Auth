@@ -25,6 +25,8 @@
 	</head>
 
 	<body>
+<div  style="padding-left:18px;padding-right:18px;padding-top:18px;">
+
 
 		<!--
 Recreating Apple Watch's Utility face <http://www.apple.com/watch/design/> in HTML+CSS+JS
@@ -46,7 +48,7 @@ Recreating Apple Watch's Utility face <http://www.apple.com/watch/design/> in HT
 				<!-- END CALENDAR PORTLET-->
 			</div>
 
-			<div class="span4" style="margin-right:4px ;">
+			<div class="span4" style="margin-right:4px ;min-width:350px;">
 				<!--BEGIN GENERAL STATISTICS-->
 				<div class="widget purple">
 					<div class="widget-title">
@@ -65,6 +67,7 @@ Recreating Apple Watch's Utility face <http://www.apple.com/watch/design/> in HT
 				<!--END GENERAL STATISTICS-->
 			</div>
 
+		</div>
 		</div>
 		<script src="clock/js/jquery-2.1.1.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="clock/js/clock-1.1.0.min.js"></script>
