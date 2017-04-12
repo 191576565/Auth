@@ -48,5 +48,13 @@ public class RoleMgmtService {
 	public boolean delete(RoleMgmt roleMgmt) {
 		return roleMgmt.delete();
 	}
+	
+	//条件搜索
+	public List<Record> likeSelect(String domainId, String domainUuid, String param){
+		String sql = ToolGetSql.getSql("tianjian.roleMgmt.likeSelect");
+		String findParam = "%"+param+"%";
+		List<Record> list = Db.find(sql,domainId,domainUuid,findParam,findParam);
+		return list;
+	}
 
 }

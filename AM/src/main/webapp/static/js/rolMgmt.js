@@ -33,12 +33,20 @@ function zTreeOnClickSimple(event, treeId, treeNode) {
 };
 
 function inittable(){
+	$('#table').bootstrapTable('destroy'); 
 	$('#table').bootstrapTable({
 	    url: 'rolMgmt/showRol',
 		method: 'get',    
 	 	striped: false,
 	 	pagination: true,
 	 	sortable: false,
+	 	queryParams: function queryParams() {     //设置查询参数  
+	        var param = {    
+		        sendParam : $("#iptSearch").val(),
+		        send : ''
+	        };    
+       　　	return param;                   
+         },	
 	 	pageNumber:1,
 	 	pageSize: 10,
 	 	search: false,

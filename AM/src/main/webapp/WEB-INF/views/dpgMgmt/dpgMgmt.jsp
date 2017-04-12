@@ -48,7 +48,7 @@
  			  <div class="col-xs-8 text-right">
 				<div class="form-inline">
 					<div class="form-group">
-						<input type="text" placeholder="请输入系统名称" style="width: 200px;" id="search" class="form-control">
+						<input type="text" placeholder="请输入组编码/组名称" style="width: 200px;" id="search" class="form-control">
 					</div>
 					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
 				</div><br/>
