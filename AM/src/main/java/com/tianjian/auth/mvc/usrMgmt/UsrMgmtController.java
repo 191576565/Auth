@@ -68,8 +68,6 @@ public class UsrMgmtController extends Controller {
 		String userId = getPara("scopeCode");
 		String userName = getPara("usrName");
 		String roles = StringUtils.join(getParaValues("role"),",");
-		//获取密码并用MD5加密
-//		String userPwd = BaseSecurityMD5.encodeMD5Hex(getPara("pwd"));
 		String userPwd = BaseSecurityMD5.encodeMD5Hex("123456");
 		String userPhone = getPara("phone");
 		String userEmail = getPara("email");
@@ -87,6 +85,9 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("user_email", userEmail);
 		usrMgmt.set("user_phone", userPhone);
 		usrMgmt.set("creator", sessionUserId);
+		if(""==roles || null==roles){
+			renderJson("{\"message\":\"roleIsNull\"}");
+		}
 		
 		usrMgmt.save();
 
