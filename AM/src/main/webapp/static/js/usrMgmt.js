@@ -175,7 +175,24 @@ $('#btn_add').on('click', function() {
 		type: 1,
 		content: $('#sys_add_div'),
 		title: '用户信息',
-		area: ['900px', '600px'],
+		area: ['960px', '600px'],
+		btn: ['确定', '取消'],
+		yes: function(index, layero){
+			if (!validate()) {
+				return false;
+			}
+			$("#form").attr("action", "usrMgmt/insUsr"); 
+			$('#form').ajaxSubmit(function(resultJson){
+				if(JSON.stringify(resultJson) == "false"){
+					layer.msg('域编码/域名不能重复');
+				}else{
+					layer.closeAll();
+					$('#table').bootstrapTable('refresh', {silent: true});
+				}
+			});
+		},
+		btn2: function(index, layero){	
+		}
 	});
 });
 //修改的onclick事件
@@ -197,18 +214,45 @@ function edit(uuid,user_id,user_name,domain_uuid,org_uuid,role_uuids,user_phone,
 		content: $('#sys_add_div'),
 		title: '用户信息',
 		area: ['960px', '540px'],
+		btn: ['确定', '取消'],
+		yes: function(index, layero){
+			if (!validate()) {
+				return false;
+			}
+			$("#form").attr("action", "usrMgmt/updtUsr"); 
+			$('#form').ajaxSubmit(function(resultJson){
+				if(JSON.stringify(resultJson) == "false"){
+					layer.msg('域编码/域名不能重复');
+				}else{
+					layer.closeAll();
+					$('#table').bootstrapTable('refresh', {silent: true});
+				}
+			});
+		},
+		btn2: function(index, layero){	
+		}
 	});
 };
 //删除的onclick事件
 function del(uuid) {
-	//确认删除
-	var msg = "您真的确定要删除吗？\n\n请确认！";
-	if(confirm(msg)){
-		$.post("usrMgmt/delUsr",{"uuid":uuid});
-		window.location.href='usrMgmt';	
-	}else{
-		return false;
-	}
+	layer.confirm('是否删除该用户信息？', 
+			{
+			  btn: ['删除','取消'] //按钮
+			}, 
+			function(){
+				$.post('usrMgmt/delUsr?uuid='+uuid, function(d){
+					if(d){
+						layer.msg('删除成功');
+					}else {
+						layer.msg('删除失败，检查是否已关联机构');
+					}
+					$('#table').bootstrapTable('refresh', {silent: true});
+				});
+			}, 
+			function(){
+				layer.closeAll();
+			}
+		);
 };
 
 //用户唯一校验
@@ -223,28 +267,7 @@ $("#scopeCode").blur(function(){
         }
 	})
 });
-$('#sub').click(function(){
-	//新增操作
-	if($("#uuid").val() == ''){
-		$("#form").attr("action", "usrMgmt/insUsr"); 
-		$('#form').submit(function(){
-			if(chkUserStr==''){
-				$(this).ajaxSubmit(function(){});	
-				window.location.href='usrMgmt';	
-			}else{
-				return false;
-			}
-		});
-	}
-	//修改操作
-	if($("#uuid").val() != ''){
-		$("#form").attr("action", "usrMgmt/updtUsr");
-		$('#form').submit(function(){
-			$(this).ajaxSubmit(function(){});	
-			window.location.href='usrMgmt';	
-		});
-	}
-});
+
 //批量删除
 $('#btn_del').click(function(){
 	//获得bootstraptable，如果 要解析，用json.stringify(data)方法解析。
@@ -253,17 +276,22 @@ $('#btn_del').click(function(){
 	var arrUUID = $.map(selectContent,function(row){return row.uuid});
 	//获得userName，confirm的时候用
 	var arrUser = $.map(selectContent,function(row){return row.user_name});
-	//确认删除
-	var msg = "请再次确认您要删除的用户：\n"+arrUser+"\n";
-	if(confirm(msg)){
-		$.get("usrMgmt/batchDel",{"uuid[]":arrUUID},function(data){
-			if(data){
-				window.location.href='usrMgmt';	
+	layer.confirm('是否删除所选用户信息？', 
+			{
+			  btn: ['删除','取消'] //按钮
+			}, 
+			function(){
+				$.get("usrMgmt/batchDel",{"uuid[]":arrUUID},function(data){
+					if(data){
+						layer.msg('删除成功')
+					}
+					$('#table').bootstrapTable('refresh', {silent: true});
+				});
+			}, 
+			function(){
+				layer.closeAll();
 			}
-		});
-	}else{
-		return false;
-	}
+		);
 });
 
 //批量重置密码

@@ -77,7 +77,6 @@ public class UsrMgmtController extends Controller {
 		String orgUUID = getPara("organization");
 		//将session中的userid作为创建者
 		String sessionUserId = getSessionAttr("user_id");
-		
 		//将获得的字段与表字段对应
 		usrMgmt.set("domain_uuid", domainUUID);
 		usrMgmt.set("user_id", userId);
@@ -94,7 +93,7 @@ public class UsrMgmtController extends Controller {
 		setAttr(ConstantLog.log_optype, ConstantLog.user_add);
 		String msg = "新增用户（用户名）："+userId;
 		setAttr(ConstantLog.log_opcontent, msg);
-		
+		renderJson(true);
 	}
 	//编辑用户
 	public void updtUsr(){
@@ -129,6 +128,7 @@ public class UsrMgmtController extends Controller {
 		setAttr(ConstantLog.log_optype, ConstantLog.user_chg);
 		String msg = "编辑用户（uuid）："+uuid;
 		setAttr(ConstantLog.log_opcontent, msg);
+		renderJson(true);
 	}
 	//删除用户
 	public void delUsr(){
@@ -142,6 +142,7 @@ public class UsrMgmtController extends Controller {
 		setAttr(ConstantLog.log_optype, ConstantLog.user_del);
 		String msg = "删除用户（uuid）："+uuid;
 		setAttr(ConstantLog.log_opcontent, msg);
+		renderJson(true);
 	}
 	//批量删除用户
 	public void batchDel(){
@@ -151,6 +152,7 @@ public class UsrMgmtController extends Controller {
 		setAttr(ConstantLog.log_optype, ConstantLog.user_del);
 		String msg = "删除用户（uuid）："+uuids;
 		setAttr(ConstantLog.log_opcontent, msg);
+		renderJson(true);
 	}
 	
 	//重置密码

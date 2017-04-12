@@ -210,7 +210,7 @@ function onDel(id) {
 		function(){
 			$.post('sysMgmt/delete?UUID='+id, function(d){
 				if(d){
-					layer.msg('资源删除成功');
+					layer.msg('删除成功');
 				}else {
 					layer.msg('删除失败，检查是否已关联机构');
 				}

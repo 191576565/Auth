@@ -98,7 +98,8 @@
 					<input name="usrName" 
 						   type="text" 
 						   id="usrName"
-						   class="form-control" 
+						   class="form-control notNull" 
+						   nullName="用户名称"
 						   placeholder="请输入用户名称"
 						   ng-model="usrName"
 						   ng-minlength="1"
@@ -115,10 +116,10 @@
 					<input name="usrName" style="display:none"/>
 				</div>
 				<div class="form-group">
-					<label>角色</label><br>
-					<select class="form-control" name="role" id="role" multiple></select>
+					<label>角色</label>
+					<select class="form-control" nullName="角色" name="role" id="role" multiple></select>
 				</div>
-				<div class="form-group" ng-class="{ 'has-success': signUpForm.phone.$valid }">
+				<div class="form-group">
 					<label>手机号</label> 
 					<input name="phone" 
 						   type="text" 
@@ -132,7 +133,7 @@
 						myForm.phone.$touched">
 					手机号填写错误</p>
 				</div>
-				<div class="form-group" ng-class="{ 'has-success': signUpForm.email.$valid }">
+				<div class="form-group">
 					<label>邮箱</label> 
 					<input name="email" 
 						   type="text" 
@@ -146,9 +147,11 @@
 						myForm.email.$touched">
 					邮箱填写错误</p>
 				</div>
+				<!--  
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit" id="sub" >保存</button>
 				</div>
+				-->
  			</form>
  		</div>
 	<!-- 全局js -->
