@@ -52,7 +52,7 @@
  			<div class="col-xs-8 text-right">
 				<div class="form-inline">
 					<div class="form-group">
-						<input id="iptSearch" type="text" placeholder="输入组编码/组名称" style="width: 200px;" class="form-control">
+						<input id="iptSearch" type="text" placeholder="输入URL描述" style="width: 200px;" class="form-control">
 					</div>
 					<button id="search" class="btn btn-default search"><i class="fa fa-search"></i></button>
 				</div>
