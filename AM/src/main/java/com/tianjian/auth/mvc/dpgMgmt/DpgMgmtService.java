@@ -171,4 +171,11 @@ public class DpgMgmtService extends BaseService {
 		List<Record> list = Db.find(sql,domainId,domainUuid,findParam,findParam);
 		return list;
 	}
+	
+	//第一层分页
+	public List<Record> pageSelect(String domainId, String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.pageSelect");
+		List<Record> list = Db.find(sql,domainId,domainUuid);
+		return list;
+	}
 }

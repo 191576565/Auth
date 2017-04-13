@@ -103,7 +103,7 @@ function initdpgMgmtlist() {
 						sortOrder : "asc", // 排序方式
 						pageNumber : 1, // 初始化加载第一页，默认第一页
 						pageSize : 10, // 每页的记录行数（*）
-						pageList : [ 10, 25, 50, 100 ], // 可供选择的每页的行数（*）
+						pageList : [10], // 可供选择的每页的行数（*）
 						search : false,
 						showColumns : false, // 是否显示所有的列
 						showRefresh : false, // 是否显示刷新按钮
@@ -112,12 +112,9 @@ function initdpgMgmtlist() {
 						showToggle : false, // 是否显示详细视图和列表视图的切换按钮
 						cardView : false, // 是否显示详细视图
 						queryParamsType : '',
-						sidePagination : "server",
+						sidePagination : "client",
 						queryParams : function queryParams(params) { // 设置查询参数
 							var param = {
-								pageNumber : params.pageNumber,
-								pageSize : params.pageSize,
-								user_id : $("#userid").val(),
 								sendParam : $("#iptSearch").val(),
 						        send : ''
 							};

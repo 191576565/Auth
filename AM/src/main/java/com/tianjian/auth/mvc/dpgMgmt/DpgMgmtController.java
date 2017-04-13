@@ -36,21 +36,21 @@ public class DpgMgmtController extends Controller {
 	 *@Return    String  void
 	 */
 	public void list() {
-		Map<String, Object> mpara = new HashMap<String, Object>();
+//		Map<String, Object> mpara = new HashMap<String, Object>();
 		// 获取表单参数
-		Integer pageSize = getParaToInt("pageSize");
-		Integer pageNumber = getParaToInt("pageNumber");
+//		Integer pageSize = getParaToInt("pageSize");
+//		Integer pageNumber = getParaToInt("pageNumber");
 
 		//获取session中domain_id
-		Object userinfo = getSessionAttr("userinfo");	
-		String domain_id=((Record) userinfo).getStr("domain_id");
+//		Object userinfo = getSessionAttr("userinfo");	
+//		String domain_id=((Record) userinfo).getStr("domain_id");
 		
 	    // 组装sql参数
 		//mpara.put("user_id", user_id);
-		mpara.put("domain_id", domain_id);
-		String selectsql = dpgmgmtservice.getSelectSql(DpgMgmt.sqlId_DM_select);
+//		mpara.put("domain_id", domain_id);
+//		String selectsql = dpgmgmtservice.getSelectSql(DpgMgmt.sqlId_DM_select);
 		// 获取from语句
-		String wheresql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_DM_selectfrom, mpara);
+//		String wheresql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_DM_selectfrom, mpara);
 		//条件查询
 		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
 		List<Record> list = mgmtService.paramSelect(userId);
@@ -61,9 +61,10 @@ public class DpgMgmtController extends Controller {
 			renderJson(dpgmgmtservice.paramSelect(domainId,domainUuid,param));
 			return;
 		}
+		renderJson(dpgmgmtservice.pageSelect(domainId, domainUuid));
 		// 获取数据
-		PageJson<DpgMgmt> myjson = dpgmgmtservice.getPageData(pageSize, pageNumber, selectsql, wheresql);
-		renderJson(myjson);
+//		PageJson<DpgMgmt> myjson = dpgmgmtservice.getPageData(pageSize, pageNumber, selectsql, wheresql);
+//		renderJson(myjson);
 	}
 	
 	 
