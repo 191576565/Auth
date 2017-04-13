@@ -163,4 +163,12 @@ public class DpgMgmtService extends BaseService {
 		List<Record> list = Db.find(sql,uuid);
 		return list;
 	}
+	
+	//条件搜索
+	public List<Record> paramSelect(String domainId, String domainUuid, String param){
+		String sql = ToolGetSql.getSql("tianjian.dpg.paramSelect");
+		String findParam = "%"+param+"%";
+		List<Record> list = Db.find(sql,domainId,domainUuid,findParam,findParam);
+		return list;
+	}
 }

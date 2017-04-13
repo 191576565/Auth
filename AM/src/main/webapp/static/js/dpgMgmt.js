@@ -92,11 +92,11 @@ $(function() {
 
 var table;
 function initdpgMgmtlist() {
+	$('#table').bootstrapTable('destroy');
 	table=$('#table')
 			.bootstrapTable(
 					{
 						url : 'dpgMgmt/list',
-						// toolbar: '#toolbar', //工具按钮用哪个容器
 						striped : true, // 是否显示行间隔色
 						pagination : true, // 是否显示分页（*）
 						sortable : true, // 是否启用排序
@@ -117,7 +117,9 @@ function initdpgMgmtlist() {
 							var param = {
 								pageNumber : params.pageNumber,
 								pageSize : params.pageSize,
-								user_id : $("#userid").val()
+								user_id : $("#userid").val(),
+								sendParam : $("#iptSearch").val(),
+						        send : ''
 							};
 							return param;
 						},
@@ -334,9 +336,9 @@ function refresh(){
 	 table.bootstrapTable('refresh');
 }
 
-$("input").blur(function(){
-	valid.element( this );
-});
+//$("input").blur(function(){
+//	valid.element( this );
+//});
 
 
 jQuery.validator.addMethod("chkGroudId", function(value, element) {  

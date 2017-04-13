@@ -15,12 +15,14 @@ import com.tianjian.auth.mvc.callback.PrivateTreeData;
 import com.tianjian.auth.mvc.callback.PublicTreeData;
 import com.tianjian.auth.mvc.dpgMgmt.DpgMgmtController;
 import com.tianjian.auth.mvc.model.DpgMgmt;
+import com.tianjian.auth.mvc.rolMgmt.RoleMgmtService;
 import com.tianjian.platform.pjson.PageJson;
 
 public class DpgMgmtController extends Controller {
 	protected DataSource dataSource;
 	private static final Log log = Log.getLog(DpgMgmtController.class);
 	private DpgMgmtService dpgmgmtservice = new DpgMgmtService();
+	private RoleMgmtService mgmtService = new RoleMgmtService();
 	
 	public void index() {
 		log.info("jump to dpgMgmt");
@@ -38,10 +40,7 @@ public class DpgMgmtController extends Controller {
 		// 获取表单参数
 		Integer pageSize = getParaToInt("pageSize");
 		Integer pageNumber = getParaToInt("pageNumber");
-// 		String user_id = getPara("user_id");
-//		String op_type = getPara("op_type");
-//		String startdate_start = getPara("startdate_start");
-//		String startdate_end = getPara("startdate_end");
+
 		//获取session中domain_id
 		Object userinfo = getSessionAttr("userinfo");	
 		String domain_id=((Record) userinfo).getStr("domain_id");
@@ -52,6 +51,16 @@ public class DpgMgmtController extends Controller {
 		String selectsql = dpgmgmtservice.getSelectSql(DpgMgmt.sqlId_DM_select);
 		// 获取from语句
 		String wheresql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_DM_selectfrom, mpara);
+		//条件查询
+		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
+		List<Record> list = mgmtService.paramSelect(userId);
+		String domainUuid = list.get(0).getStr("uuid");
+		String domainId = list.get(0).getStr("domain_id");
+		String param = getPara("sendParam");
+		if(!"".equals(param)){
+			renderJson(dpgmgmtservice.paramSelect(domainId,domainUuid,param));
+			return;
+		}
 		// 获取数据
 		PageJson<DpgMgmt> myjson = dpgmgmtservice.getPageData(pageSize, pageNumber, selectsql, wheresql);
 		renderJson(myjson);

@@ -128,4 +128,32 @@ GROUP BY  T7.UUID
     	]]>
 	</sql>
 	
+	<sql id="paramSelect">
+		<![CDATA[ 
+        	select t.uuid,
+                       t1.domain_id,
+                       t1.domain_name,
+                       t.group_id,
+                       t.group_desc,
+                       dao_concat(T4.UUID  )  AS users
+ 
+       from sys_group_info t 
+                  join sys_domain_info t1  on  t.domain_uuid = t1.uuid
+             left join sys_user_info   T4  ON DBMS_LOB.INSTR(T.USERS  ,T4.UUID)>0
+    where (    decode(?,'root', 1,null )=1                    
+        or t.domain_uuid= ?                         
+      )  
+   and domain_id !='root'
+   and (      t.group_id like ?                                   
+         or   t.group_desc like ?   )                                         
+        GROUP BY  t.uuid,
+                 t1.domain_id,
+                 t1.domain_name,
+                 t.group_id,
+                 t.group_desc  
+        order by t1.domain_id, t.group_id
+        	
+    	]]>
+	</sql>
+	
 </sql-statement>

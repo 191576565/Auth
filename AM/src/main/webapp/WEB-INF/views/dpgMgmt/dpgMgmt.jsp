@@ -45,27 +45,23 @@
  				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
  				<button id="delete" type="button" class="btn btn-danger delete">删除</button>
  			</div>
- 			  <div class="col-xs-8 text-right">
+ 			 <div class="col-xs-8 text-right">
 				<div class="form-inline">
 					<div class="form-group">
-						<input type="text" placeholder="请输入组编码/组名称" style="width: 200px;" id="search" class="form-control">
+						<input id="iptSearch" type="text" placeholder="输入域编码/域名" style="width: 200px;" class="form-control">
 					</div>
-					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
-				</div><br/>
+					<button id="search" class="btn btn-default search"><i class="fa fa-search"></i></button>
+				</div>
 			</div>
- 		</div>
- 		<div id="sys_add_div" style="display:none;">
- 			<form id="form">
+		</div>
+ 		<br />
+ 		<div class="wrapper" id="sys_add_div" style="display:none;">
+ 			<form ng-app="myApp"
+ 				ng-controller="validateCtrl"
+ 				id="form"
+ 				name="myForm"
+ 				novalidate>
  				<input type="hidden" name="uuid" id="uuid"/>
- 		     	<!-- <label style="margin-left: 5%;">所属域</label> 
-				<select id="domaininfo" name="domaininfo" nValidate="{required:true}" style="width: 120px; margin-left: 6%;">
-					<option value="default">请选择域</option>
-	 			</select></br></br>
-				<label style="margin-left: 5%;">组编码</label> <input id="groupid"  name="groupid" style="margin-left: 6%;" type="text" placeholder="1~30位字母数字"  ></br></br>字母和数字(1~30位)
-				<label style="margin-left: 5%;">组名称</label> <input id="groupname"  name="groupname"  style="margin-left: 6%;" type="text" placeholder="请输入组名称" name="CustName">
-				</br></br>
-				<label style="margin-left: 5%;">所属用户</label> <input id="guserid" name="guserid" style="margin-left: 2%;" type="text" />
-				</br></br></br> -->
 				<div class="form-group col-sm-12">
                      <label>所属域:</label>
                      <div >
@@ -97,14 +93,12 @@
  		</div>
  		<table id="table"></table>
  		<div class="t" style="display:none;">
- 			<!-- <form id="userform"></br>
- 		     	<div id="user_in_div" style="margin-left: 2%;"></div>
- 			</form> -->
  			<ul id="tree" class="ztree"></ul>
  		</div>
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="${ctxPath }/static/js/angular.min.js"></script>
     
     <!-- Bootstrap-Treeview plugin javascript-->
     <script src="${ctxPath }/static/js/bootstrap-treeview.js" type="text/javascript"></script>
@@ -133,5 +127,16 @@
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/dpgMgmt.js"></script>
+    <script>
+    $(document).ready(function () { 
+    	initdpgMgmtlist();
+		 //条件搜索
+		 $("#search").bind("click", initdpgMgmtlist);
+	})
+	//表单验证
+	var app = angular.module('myApp', []);
+	app.controller('validateCtrl',function($scope){
+	});
+    </script>
 	</body>
 </html>
