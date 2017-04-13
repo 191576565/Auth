@@ -114,7 +114,7 @@ function onFun(id){
 		layer.open({
 			type : 1,
 			content : $('.t'),
-			title : '选择上级资源',
+			title : '选择功能',
 			area : [ '400px', '600px' ],
 			btn: ['保存', '取消'],
 			yes: function(index, layero){
