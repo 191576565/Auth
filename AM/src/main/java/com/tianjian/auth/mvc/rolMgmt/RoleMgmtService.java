@@ -56,5 +56,14 @@ public class RoleMgmtService {
 		List<Record> list = Db.find(sql,domainId,domainUuid,findParam,findParam);
 		return list;
 	}
+	
+	//批量删除角色信息
+	public boolean deleteMore(String idValues){
+		String[] idValue = idValues.split(",");
+		for(int i=0; i<idValue.length; i++){
+			RoleMgmt.dao.deleteById(idValue[i]);
+		}
+		return true;
+	}
 
 }

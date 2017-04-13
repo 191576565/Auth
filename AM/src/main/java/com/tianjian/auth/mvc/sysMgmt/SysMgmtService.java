@@ -13,10 +13,6 @@ public class SysMgmtService {
 	public List<Record> getData(){
 		String sql = ToolGetSql.getSql(SysMgmt.sqlId_sys_select);
 		List<Record> list = Db.find(sql);
-//		for(int i=0; i<list.size(); i++){
-//			String memo = list.get(i).getStr("memo");
-//			list.get(i).set("memo", ToolYeqc.HtmlToText(memo));
-//		}
 		return list;
 	}
 	

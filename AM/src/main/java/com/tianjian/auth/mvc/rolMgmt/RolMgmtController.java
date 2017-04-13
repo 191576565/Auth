@@ -6,6 +6,7 @@ import java.util.List;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Record;
+import com.tianjian.auth.mvc.constant.ConstantLog;
 import com.tianjian.auth.mvc.rolMgmt.RolMgmtController;
 import com.tianjian.auth.mvc.sysMgmt.SysMgmt;
 import com.tianjian.auth.mvc.sysMgmt.SysMgmtService;
@@ -98,6 +99,16 @@ public class RolMgmtController extends Controller {
 		}
 		renderJson(true);
 		
+	}
+	
+	//批量删除
+	public void deleteMore(){
+		String uuids = getPara("uuid");
+		if(mgmtService.deleteMore(uuids)){
+			renderJson(true);
+			return;
+		}
+		renderJson(false);
 	}
 	
 }
