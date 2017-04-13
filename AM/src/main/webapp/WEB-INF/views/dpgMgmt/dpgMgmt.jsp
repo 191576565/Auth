@@ -39,7 +39,7 @@
 				</ol>
 			</div>
 		</div>
-		<br/>
+		<hr />
  		<div class="row">
  			<div class="col-xs-4" >
  				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>

@@ -132,7 +132,6 @@ $('#org_add').on('click', function() {
 		content: $('#org_add_div'),
 		title: '机构信息',
 		area: ['400px', '400px'],
-		maxmin: true,
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
 			if (validate()) {
@@ -188,7 +187,6 @@ function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 		content: $('#org_add_div'),
 		title: '机构信息',
 		area: ['400px', '400px'],
-		maxmin: true,
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
 			if (!validate()) {
