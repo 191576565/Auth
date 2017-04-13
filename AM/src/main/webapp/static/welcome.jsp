@@ -52,7 +52,7 @@ Recreating Apple Watch's Utility face <http://www.apple.com/watch/design/> in HT
 				<!--BEGIN GENERAL STATISTICS-->
 				<div class="widget purple">
 					<div class="widget-title">
-						<h4><i class="icon-tasks"></i> 时钟 </h4>
+						<h4><i class="icon-time" ></i> 时钟 </h4>
 
 					</div>
 					<div class="widget-body">
