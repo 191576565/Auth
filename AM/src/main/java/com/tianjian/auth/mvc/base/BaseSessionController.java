@@ -39,7 +39,7 @@ public class BaseSessionController extends Controller{
 		       // if((session.getAttribute("username")) == null){
 			        session.setAttribute("user_id", username);
 			        session.setAttribute("usersessionid", sessionId);
-			        UserService.login(username, sessionId, "0");
+			        
 			        log.info("用户会话级别session绑定：user："+username+"["+sessionId+"]");
 			   //     }
 		        return sessionId;

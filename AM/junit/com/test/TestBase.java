@@ -1,4 +1,4 @@
-package com.tianjian.junit.testbase;
+package com.test;
 
 import org.junit.BeforeClass;
 

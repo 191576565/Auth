@@ -1,7 +1,10 @@
 package com.tianjian.auth.mvc.login;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.jfinal.kit.HttpKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseSecurityMD5;
@@ -64,5 +67,30 @@ public class LoginService {
 			return false;
 		}
 		
+	}
+	
+	public String sendPost(String username,String doid){
+		System.out.println("domainid:"+doid);
+		String sql=ToolGetSql.getSql("tianjian.login.postsid");
+		Record s=Db.findFirst(sql,username);
+		String sid=s.get("user_sid");
+		Map<String, String> headers=new HashMap<String, String>();
+		headers.put("Sid", sid);
+		//url
+		String sql1=ToolGetSql.getSql("tianjian.login.posturl");
+		Record s1=Db.findFirst(sql1,doid);
+		String url=s1.getStr("iport");
+		url+="/api/rpm/login/out";
+		//
+		System.out.println("url:"+url);
+		String reponse="";
+		try{
+			reponse=HttpKit.post(url, "tianjian", headers);
+		} catch (Exception e) {
+            System.out.println("发送 POST 请求出现异常！"+e);
+            e.printStackTrace();
+        }
+		
+		return reponse;
 	}
 }

@@ -2,15 +2,13 @@ package com.tianjian.auth.mvc.login;
 
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseSessionController;
-import com.tianjian.auth.mvc.model.UserService;
 
 /** 
  *@Company  重庆天健金管科技股份有限公司
@@ -34,6 +32,11 @@ public class UloginController extends Controller {
 		 */
 	public  void userexit() {
 		//int i=1;
+		LoginService loginservice=new LoginService();
+		Object userinfo = getSessionAttr("userinfo");
+		String username=((Record) userinfo).getStr("user_name");
+		String doid=((Record) userinfo).getStr("domain_id");
+		loginservice.sendPost(username,doid);
 		BaseSessionController SessionController=new BaseSessionController();
 		// TODO Auto-generated method stub
 		try {
@@ -42,6 +45,7 @@ public class UloginController extends Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		redirect("/");
 	}
 }
