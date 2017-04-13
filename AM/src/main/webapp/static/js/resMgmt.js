@@ -17,18 +17,12 @@ var s = {
 	}
 };
 function zTreeOnDblClickSimple(event, treeId, treeNode) {
-//	if(treeNode.id===$('#res_id').val()){
-//		toastr.warning('资源编码与上级资源编码冲突');
-//		return;
-//	}
-	//console.log(treeNode);
 	$('#res_up_uuid').val(treeNode.id);
 	$('#up_res_name').val(treeNode.name);
 	
 	var index = layer.index; //获取当前弹层的索引号
 	layer.close(index); //关闭当前弹层
 	
-	//$('#form').valid();
 	valid.element( '#up_res_name' );
 };
 
@@ -71,7 +65,6 @@ $(function(){
 					var index = layer.index; //获取当前弹层的索引号
 					layer.close(index); //关闭当前弹层
 					
-					//$('#form').valid();
 					valid.element( '#up_res_name' );
 				},
 				btn2: function(index, layero){
@@ -113,10 +106,6 @@ function initTable() {
 		//收起第二级及以下的机构
     		$('#table tbody tr[lvl=2]').treegrid('collapseRecursive');
     		
-    		//tr点击单选钮选中
-//        $('#table tbody tr').click(function(){
-//        		$(this).find('input:radio')[0].checked=true;
-//        });
 	});
 }
 
@@ -138,8 +127,7 @@ $('#res_add').on('click', function() {
 		content : $('#sys_add_div'),
 		// skin: 'layui-layer-molv',
 		title : '资源信息-新增',
-		area :  '640px', 
-		maxmin: true
+		area :  '640px'
 	});
 });
 
@@ -156,10 +144,8 @@ function update(obj){
 	layer.open({
 		type : 1,
 		content : $('#sys_add_div'),
-		// skin: 'layui-layer-molv',
 		title : '资源信息-编辑',
-		area :  '640px', 
-		maxmin: true
+		area :  '640px'
 	});
 }
 
@@ -201,10 +187,6 @@ function del(obj){
 				layer.msg('资源删除失败');
 			}
 			initTable();
-//			var p=$(obj).parent().parent().treegrid('getParentNode');
-//			console.log(p);
-//			$(obj).parent().parent().remove();
-//			p.treegrid('render');
 		});
 	}, function(){
 		layer.close(layer.index);
@@ -238,7 +220,6 @@ $('#res_del').click(function(){
 });
 
 $("input").blur(function(){
-//	$(this).valid();
 	valid.element( this );
 });
 
@@ -261,15 +242,3 @@ jQuery.validator.addMethod("chkResId", function(value, element) {
     return this.optional(element) || flag;
 }, "<i class='fa fa-times-circle'></i>输入的资源编码已存在，不能重复");
 
-//jQuery.validator.addMethod("chkResName", function(value, element) {   
-//    var flag=true;
-//    $.ajax({
-//    	async:false,
-//    	type:"GET",
-//    	url:'resMgmt/resNamecheck?resName='+value,
-//    	success:function(data){
-//    		flag=data;
-//    	}
-//    });
-//    return this.optional(element) || flag;
-//}, "<i class='fa fa-times-circle'></i>输入的资源名称已存在，不能重复");

@@ -117,20 +117,8 @@
 						myForm.role_name.$touched">
 					长度应在1~30位之间</p>
 				</div>
-				<!--  
-				<div class="form-group">
-					<button class="btn btn-info ladda-button save" id="sub">保存</button>
-				</div>
-				-->
  			</form>
  		</div>
- 		<div id="sys_del_div" class="form-group" style="display:none;">
- 			<form id="del_form" action="" method="post">
- 				<input type="hidden" name="UUID" id="role_uuid"/>
-				确定要删除该系统信息吗？
-				<button id="btn_beSure" class="btn btn-danger delete">删除</button>
-			</form>
-		</div>
 		<div class="t" style="display: none;">
  			<ul id="res" class="ztree"></ul>
  		</div>

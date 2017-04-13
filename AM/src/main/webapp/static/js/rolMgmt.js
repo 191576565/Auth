@@ -116,7 +116,6 @@ function onFun(id){
 			content : $('.t'),
 			title : '选择上级资源',
 			area : [ '400px', '600px' ],
-			maxmin: true,
 			btn: ['保存', '取消'],
 			yes: function(index, layero){
 				//var treeObj = $.fn.zTree.getZTreeObj("res");
@@ -173,7 +172,6 @@ $('#sys_add').on('click', function() {
 
 //layer弹出自定义div__修改
 function onEdit(id,roleid,rolename,domainuuid,memo) {
-	//alert(id + ' ' + roleid + ' ' + rolename + ' ' + domainuuid);
 	$("#sys_add_div #form #uuid").val(id);
 	$("#sys_add_div #form #role_id").val(roleid);
 	$("#sys_add_div #form #role_name").val(rolename);
@@ -207,66 +205,25 @@ function onEdit(id,roleid,rolename,domainuuid,memo) {
 
 //删除
 function onDel(id) {
-	var $role_uuid = $("#sys_del_div #del_form #role_uuid").val(id);
-	layer.open({
-		type: 1,
-		content: $('#sys_del_div'),
-		title: '系统提示',
-		area: ['300px', '100px'],
-	});
-};
-$('#btn_beSure').click(function() {
-	$('#del_form').attr("action", "rolMgmt/delete");
-	$('#del_form').submit(function(){
-		$(this).ajaxSubmit(function(resultJson){
-			if(JSON.stringify(resultJson) == "false"){
-				alert('更新失败');
-				return;
-			}else{
-				window.location.href='rolMgmt';
-			}
-		});
-		return false;
-	});
-	
-});
-
-$('#sub').click(function(){
-	//新增操作
-	if($("#sys_add_div #form #uuid").val() == ''){
-		$("#form").attr("action", "rolMgmt/save");
-		$('#form').ajaxSubmit(function(resultJson){
-			if(JSON.stringify(resultJson) == "false"){
-				layer.open({
-					type: 1,
-					content: '角色编码/角色名重复，新增失败!',
-					title: '新增失败',
-					area: ['200px', '200px'],
+	layer.confirm('是否删除该系统信息？', 
+			{
+			  btn: ['删除','取消'] //按钮
+			}, 
+			function(){
+				$.post('rolMgmt/delete?UUID='+id, function(d){
+					if(d){
+						layer.msg('删除成功');
+					}else {
+						layer.msg('删除失败，检查是否已关联机构');
+					}
+					$('#table').bootstrapTable('refresh', {silent: true});
 				});
-				return;
-			}else{
+			}, 
+			function(){
 				layer.closeAll();
-				$('#table').bootstrapTable('refresh', {silent: true});
 			}
-		});
-		return false;//阻止表单默认提交
-	}
-	
-	//修改操作
-	if($("#sys_add_div #form #uuid").val() != ''){
-		$("#form").attr("action", "rolMgmt/update");
-		$('#form').submit(function(){
-			$(this).ajaxSubmit(function(resultJson){
-				if(JSON.stringify(resultJson) == "true"){
-					window.location.href='rolMgmt';
-				}else{
-					alert('修改失败!');
-				}
-			});
-			return false;//阻止表单默认提交
-		});
-	}
-});
+		);
+};
 
 function validate(){
 	//非空验证
