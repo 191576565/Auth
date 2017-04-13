@@ -15,14 +15,13 @@
 	
 	<sql id="pageAllFrom">
 		<![CDATA[ 
-		   from sys_group_info t 
+		      from sys_group_info t 
                   join sys_domain_info t1  on  t.domain_uuid = t1.uuid
              left join sys_user_info   T4  ON DBMS_LOB.INSTR(T.USERS  ,T4.UUID)>0
-		<% if(domain_id == "root"){ %>
-       	 
-        <% } else if(!isEmpty(domain_id)){%>
-        and t1.domain_id=#'$domain_id$'#
-        <% } %>
+    where (    decode(?,'root', 1,null )=1                   
+        or t.domain_uuid= ?                            
+      )  
+   and domain_id !='root'                       
         GROUP BY  t.uuid,
                  t1.domain_id,
                  t1.domain_name,
