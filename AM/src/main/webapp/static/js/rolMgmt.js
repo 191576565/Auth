@@ -205,7 +205,7 @@ function onEdit(id,roleid,rolename,domainuuid,memo) {
 
 //删除
 function onDel(id) {
-	layer.confirm('是否删除该系统信息？', 
+	layer.confirm('是否删除该角色信息？', 
 			{
 			  btn: ['删除','取消'] //按钮
 			}, 
