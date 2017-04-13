@@ -36,29 +36,14 @@ public class GouMgmtController extends Controller{
 		renderJson(dpgmgmtservice.getConditionType(domain_id));
 	}
 	
-	/** 
-	 *@Function 获取数据权限组管理-权限管理子页面list清单           
-	 *@Declare   init 获取数据权限组管理-权限管理子页面list清单  
-	 *@Author    谢涛
-	 *@Return    String  void
-	 */
 	public void goulist() {
-		Map<String, Object> mpara = new HashMap<String, Object>();
-		// 获取表单参数
-		Integer pageSize = getParaToInt("pageSize");
-		Integer pageNumber = getParaToInt("pageNumber");
 		String groupuuid = g_id;
-		Object userinfo = getSessionAttr("userinfo");	
-		String domain_id=((Record) userinfo).getStr("domain_id");
-		
-	    // 组装sql参数
-		mpara.put("groupuuid", groupuuid);
-		String selectsql = dpgmgmtservice.getSelectSql(DpgMgmt.sqlId_DG_select);
-		// 获取from语句
-		String wheresql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_DG_selectfrom, mpara);
-		// 获取数据
-		PageJson<DpgMgmt> myjson = dpgmgmtservice.getPageData(pageSize, pageNumber, selectsql, wheresql);
-		renderJson(myjson);
+		String param = getPara("sendParam");
+		if(!"".equals(param)){
+			renderJson(dpgmgmtservice.gouParamSelect(groupuuid,param));
+			return;
+		}
+		renderJson(dpgmgmtservice.gouPageSelect(groupuuid));
 	}
 	
 	/** 

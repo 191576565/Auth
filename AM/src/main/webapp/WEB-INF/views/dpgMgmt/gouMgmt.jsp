@@ -35,7 +35,7 @@
 						<a href="${ctxPath }/static/welcome.jsp">首页</a>
 					</li>
 					<li>
-						<a href="${ctxPath }/dpgMgmt"/>数据权限组管理</a>
+						<a href="${ctxPath }/dpgMgmt">数据权限组管理</a>
 					</li>
 					<li>
 						<a href="gouMgmt?groupuuid=${groupuuid}">权限组管理</a>
@@ -49,15 +49,16 @@
  				<button id="sys_add" type="button" class="btn btn-primary create">新增</button>
  				<button id="btn_del" type="button" class="btn btn-danger delete">删除</button>
  			</div>
- 			  <div class="col-xs-8 text-right">
+ 			<div class="col-xs-8 text-right">
 				<div class="form-inline">
 					<div class="form-group">
-						<input type="text" placeholder="请输入系统名称" style="width: 200px;" id="search" class="form-control">
+						<input id="iptSearch" type="text" placeholder="输入组编码/组名称" style="width: 200px;" class="form-control">
 					</div>
-					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
-				</div><br/>
+					<button id="search" class="btn btn-default search"><i class="fa fa-search"></i></button>
+				</div>
 			</div>
  		</div>
+ 		<br />
  		<div class="wrapper" id="sys_add_div" style="display:none;">
  			<form id="form">
  				<div class="form-group col-sm-12">
@@ -132,5 +133,12 @@
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/gouMgmt.js"></script>
+    <script>
+    $(document).ready(function () { 
+    	initTable();
+		 //条件搜索
+		 $("#search").bind("click", initTable);
+	})
+    </script>
 	</body>
 </html>

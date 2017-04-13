@@ -72,6 +72,7 @@ $(function(){
 })
 
 function initTable(){
+　　　$('#table').bootstrapTable('destroy');
    $('#table').bootstrapTable({
 	url: 'gouMgmt/goulist',
 // 	toolbar: '#toolbar', //工具按钮用哪个容器
@@ -90,12 +91,11 @@ function initTable(){
  	showToggle:false, //是否显示详细视图和列表视图的切换按钮
  	cardView: false, //是否显示详细视图
  	queryParamsType: '',
- 	sidePagination: "server",
+ 	sidePagination: "client",
  	queryParams: function queryParams(params) {   //设置查询参数  
         var param = {
-            pageNumber: params.pageNumber,    
-            pageSize: params.pageSize,  
-            user_id : $("#userid").val()
+        	sendParam : $("#iptSearch").val(),
+		    send : ''
         };    
         return param;                   
       },  

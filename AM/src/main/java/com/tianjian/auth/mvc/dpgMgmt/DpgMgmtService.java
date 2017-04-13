@@ -164,7 +164,7 @@ public class DpgMgmtService extends BaseService {
 		return list;
 	}
 	
-	//条件搜索
+	//条件搜索(第一层)
 	public List<Record> paramSelect(String domainId, String domainUuid, String param){
 		String sql = ToolGetSql.getSql("tianjian.dpg.paramSelect");
 		String findParam = "%"+param+"%";
@@ -172,10 +172,25 @@ public class DpgMgmtService extends BaseService {
 		return list;
 	}
 	
+	//条件搜索(第二层)
+	public List<Record> gouParamSelect(String groupUuid, String param){
+		String sql = ToolGetSql.getSql("tianjian.dpg.gouParamSelect");
+		String findParam = "%"+param+"%";
+		List<Record> list = Db.find(sql,groupUuid,findParam);
+		return list;
+	}
+	
 	//第一层分页
 	public List<Record> pageSelect(String domainId, String domainUuid){
 		String sql = ToolGetSql.getSql("tianjian.dpg.pageSelect");
 		List<Record> list = Db.find(sql,domainId,domainUuid);
+		return list;
+	}
+	
+	//第二层分页
+	public List<Record> gouPageSelect(String groupUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.gouPageSelect");
+		List<Record> list = Db.find(sql,groupUuid);
 		return list;
 	}
 }

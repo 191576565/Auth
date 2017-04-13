@@ -29,29 +29,7 @@ public class DpgMgmtController extends Controller {
 		render("dpgMgmt.jsp");
 	}
 	
-	 /** 
-	 *@Function 获取数据权限组管理list清单           
-	 *@Declare   init 数据权限组管理清单
-	 *@Author    谢涛
-	 *@Return    String  void
-	 */
 	public void list() {
-//		Map<String, Object> mpara = new HashMap<String, Object>();
-		// 获取表单参数
-//		Integer pageSize = getParaToInt("pageSize");
-//		Integer pageNumber = getParaToInt("pageNumber");
-
-		//获取session中domain_id
-//		Object userinfo = getSessionAttr("userinfo");	
-//		String domain_id=((Record) userinfo).getStr("domain_id");
-		
-	    // 组装sql参数
-		//mpara.put("user_id", user_id);
-//		mpara.put("domain_id", domain_id);
-//		String selectsql = dpgmgmtservice.getSelectSql(DpgMgmt.sqlId_DM_select);
-		// 获取from语句
-//		String wheresql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_DM_selectfrom, mpara);
-		//条件查询
 		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
 		List<Record> list = mgmtService.paramSelect(userId);
 		String domainUuid = list.get(0).getStr("uuid");
@@ -62,9 +40,6 @@ public class DpgMgmtController extends Controller {
 			return;
 		}
 		renderJson(dpgmgmtservice.pageSelect(domainId, domainUuid));
-		// 获取数据
-//		PageJson<DpgMgmt> myjson = dpgmgmtservice.getPageData(pageSize, pageNumber, selectsql, wheresql);
-//		renderJson(myjson);
 	}
 	
 	 
