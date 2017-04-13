@@ -1,18 +1,12 @@
 html{height: 100%;}
 body.signin {
-    background: #18c8f6;
     height: auto;
-    background:url("../img/login-background.jpg") no-repeat center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: rgba(255,255,255,.95);
+    background:url("../img/Auth_02.png");
 }
 
 .signinpanel {
-    width: 320px;
-    margin: 10% auto 0 auto;
+    width: 350px;
+    margin: 15% auto 0 auto;
 }
 
 .signinpanel .logopanel {
@@ -46,7 +40,7 @@ body.signin {
 }
 
 .signinpanel form {
-    background: rgba(255, 255, 255, 0.2);
+    background: url("../img/Auth_02.png");
     border: 1px solid rgba(255,255,255,.3);
     -moz-box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
     -webkit-box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
