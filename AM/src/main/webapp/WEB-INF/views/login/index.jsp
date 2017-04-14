@@ -118,7 +118,6 @@
                                         <a class="J_menuItem" href="ulogin/userexit">
                                             <i class="fa fa-sign-out"></i> <strong> 退出登录</strong>
                                         </a>
-                                        </form>
                                     </div>
                                 </li>
                             </ul>
@@ -158,6 +157,12 @@
     	var url='uptPwd';
     	 $("#J_iframe").attr('src',url);
     }
+    $('#idropdown').mouseout(function(){
+    	$(this).removeClass('open');
+    });
+    $('#idropdown').mouseover(function(){
+    	$(this).addClass('open');
+    });
     </script>
 
 </body>
