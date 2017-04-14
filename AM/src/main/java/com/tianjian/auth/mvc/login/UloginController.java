@@ -34,8 +34,10 @@ public class UloginController extends Controller {
 		//int i=1;
 		LoginService loginservice=new LoginService();
 		Object userinfo = getSessionAttr("userinfo");
-		String username=((Record) userinfo).getStr("user_name");
+		String username=((Record) userinfo).getStr("user_id");
 		String doid=((Record) userinfo).getStr("domain_id");
+		System.out.println("user_id:"+username);
+		System.out.println("doid:"+doid);
 		loginservice.sendPost(username,doid);
 		BaseSessionController SessionController=new BaseSessionController();
 		// TODO Auto-generated method stub

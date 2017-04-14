@@ -70,20 +70,28 @@ public class LoginService {
 	}
 	
 	public String sendPost(String username,String doid){
+		
+		Map<String, String> headers=new HashMap<String, String>();
 		System.out.println("domainid:"+doid);
 		String sql=ToolGetSql.getSql("tianjian.login.postsid");
 		Record s=Db.findFirst(sql,username);
-		String sid=s.get("user_sid");
-		Map<String, String> headers=new HashMap<String, String>();
-		headers.put("Sid", sid);
+		if (s!=null){
+			String sid=s.get("user_sid");	
+			headers.put("Sid", sid);
+		}
+		
 		//url
 		String sql1=ToolGetSql.getSql("tianjian.login.posturl");
 		Record s1=Db.findFirst(sql1,doid);
-		String url=s1.getStr("iport");
-		url+="/api/rpm/login/out";
+		String url="";
+		if (s1 != null){
+			 url=s1.getStr("iport");
+			url+="/api/rpm/loginout/am";
+		}
 		//
 		System.out.println("url:"+url);
 		String reponse="";
+		
 		try{
 			reponse=HttpKit.post(url, "tianjian", headers);
 		} catch (Exception e) {
