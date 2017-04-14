@@ -11,8 +11,8 @@ function initsyslogtable(){
 	 	sortable: false, //是否启用排序
 	 	sortOrder: "asc", //排序方式
 	 	pageNumber:1, //初始化加载第一页，默认第一页
-	 	pageSize: 15, //每页的记录行数（*）
-	 	pageList: [10, 15, 25, 50], //可供选择的每页的行数（*）
+	 	pageSize: 10, //每页的记录行数（*）
+	 	pageList: [10], //可供选择的每页的行数（*）
 	 	queryParamsType: '',
 	 	sidePagination: "server",
 	 	queryParams: function queryParams(params) {   //设置查询参数  
