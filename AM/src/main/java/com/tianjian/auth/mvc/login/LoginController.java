@@ -42,11 +42,6 @@ public class LoginController extends Controller {
 	public void init_login() {
 		log.info("welcome to init_login");
 		render("login_v2.html");
-		
-		Map<String, String> headers=new HashMap<String, String>();
-		headers.put("Sid", "123456");
-		HttpKit.post("www.baidu.com", null, headers);
-
 	}
 	/**
 	 * hujian 
