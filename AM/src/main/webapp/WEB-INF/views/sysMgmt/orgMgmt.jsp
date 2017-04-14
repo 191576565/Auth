@@ -41,9 +41,9 @@
  		<table id="table"  class="table table-striped table-bordered table-hover">
  			<thead>
 				<tr>
-					<th>机构ID</th>
-					<th>域</th>
-					<th>机构描述</th>
+					<th>机构编码</th>
+					<th>域名称</th>
+					<th>机构名称</th>
 					<th>上级机构</th>
 					<th style="width:130px">操作</th>
 				</tr>

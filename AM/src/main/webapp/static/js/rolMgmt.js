@@ -61,7 +61,7 @@ function inittable(){
 	        align: 'center'	
 	    }, {
 	        field: 'role_id',
-	        title: '角色ID',
+	        title: '角色编码',
 	        align: 'center'	
 	    }, {
 	        field: 'role_name',

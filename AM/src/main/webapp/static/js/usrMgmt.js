@@ -38,11 +38,11 @@ function inittable(){
 		},{                                                                                                                      
 	        field: 'domain_name',       
 	        align: 'center',
-	        title: '域'                                                                                                        
+	        title: '域名称'                                                                                                        
 	    },{                                                                                                                      
 	        field: 'org_unit_desc',     
 	        align: 'center',
-	        title: '机 构'                                                                                                        
+	        title: '机构名称'                                                                                                        
 	    },{        	
 	        field: 'user_id',        
 	        align: 'center',
@@ -212,6 +212,12 @@ function edit(uuid,user_id,user_name,domain_uuid,org_uuid,role_uuids,user_phone,
 	changeDomain(domain_uuid);
 	$("#organization").val(org_uuid);
 	$('#role').multiselect('select', role_uuids.split(","));
+	if(user_phone == "null"){
+		user_phone = "";
+	}
+	if(user_email == "null"){
+		user_email = "";
+	}
 	$("#phone").val(user_phone);
 	$("#email").val(user_email);
 	$("#chkUserError").html('');

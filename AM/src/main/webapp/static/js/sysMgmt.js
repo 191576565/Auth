@@ -39,7 +39,7 @@ function initsystable(){
 			width: '30%'
 		}, {
 			field: 'domain_name',
-			title: '域 名',
+			title: '域名称',
 			align: 'center'
 		}, {
 			field: 'uuid',
