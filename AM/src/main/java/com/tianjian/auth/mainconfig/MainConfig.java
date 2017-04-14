@@ -144,7 +144,7 @@ public class MainConfig extends JFinalConfig {
 
 	@Override
 	public void configInterceptor(Interceptors me) {
-		// me.add(new GlobalInterceptor());
+		me.add(new GlobalInterceptor());
 		me.add(new GlobalLogInterceptor());
 
 	}
@@ -157,9 +157,9 @@ public class MainConfig extends JFinalConfig {
 		me.add(new GlobalHandler());
 	}
 	//
-	 public static void main(String[] args) {
-	 JFinal.start("WebRoot", 8080, "/", 5);
-	 }
+	// public static void main(String[] args) {
+	// JFinal.start("WebRoot", 8080, "/", 5);
+	// }
 
 	@Override
 	public void configEngine(Engine me) {
@@ -167,11 +167,12 @@ public class MainConfig extends JFinalConfig {
 
 	}
 
-//	public static void main(String[] args) {
-//		Map<String, String> headers=new HashMap<String, String>();
-//		headers.put("Sid", "iiii");
-//		
-//		//http://172.168.171.241:9090/login/out 
-//		HttpKit.post("http://172.168.173.3:9090/api/rpm/login/out", "tianjian", headers);
-//	}
+	public static void main(String[] args) {
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Sid", "6BD2FDB22D312903FF03D9C4007FE5CE");
+
+		// http://172.168.171.241:9090/login/out
+		String s = HttpKit.post("http://172.168.173.3:9090/api/rpm/login/out", "tianjian", headers);
+		System.out.println(s);
+	}
 }
