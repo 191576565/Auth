@@ -29,4 +29,17 @@
         	<% } %>
 	]]>
 	</sql>
+	<sql id="postsid">
+		<![CDATA[ 
+	select user_sid from SYS_USER_INFO where user_id = ?
+	]]>
+	</sql>
+	<sql id="posturl">
+		<![CDATA[ 
+	select 
+REGEXP_SUBSTR(RES_URL,'[[:alpha:]]+://([1-9]|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])(\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])){3}:[0-9]{2,5}',1,1,'i') iport 
+ from sys_resource_info  t where uuid = ?
+	
+	]]>
+	</sql>
 </sql-statement>
