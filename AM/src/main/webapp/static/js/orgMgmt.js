@@ -42,7 +42,7 @@ $(function(){
 					content : $('.t'),
 					title : '选择上级机构',
 					area : [ '400px', '400px' ],
-					maxmin: true,
+					maxmin: false,
 					btn: ['确定', '取消'],
 					yes: function(index, layero){
 						var treeObj = $.fn.zTree.getZTreeObj("org");
