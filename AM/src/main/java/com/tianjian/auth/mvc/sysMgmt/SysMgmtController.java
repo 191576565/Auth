@@ -67,7 +67,7 @@ public class SysMgmtController extends Controller {
 			return;
 		}
 		sysMgmtService.save(sysMgmt);
-		setAttr(ConstantLog.log_optype, ConstantLog.res_add);
+		setAttr(ConstantLog.log_optype, ConstantLog.dmn_add);
 		String msg = "新增域" + "域id:" + getPara("scopeCode") + "  域名称:"
 				+ getPara("scopeName");
 		setAttr(ConstantLog.log_opcontent, msg);
@@ -95,7 +95,7 @@ public class SysMgmtController extends Controller {
 			renderJson(false);
 			return;
 		}
-		setAttr(ConstantLog.log_optype, ConstantLog.res_chg);
+		setAttr(ConstantLog.log_optype, ConstantLog.dmn_chg);
 		String msg = "编辑域" + "域id:" + getPara("scopeCode") + "  域名称:"
 				+ getPara("scopeName");
 		setAttr(ConstantLog.log_opcontent, msg);
@@ -120,7 +120,7 @@ public class SysMgmtController extends Controller {
 			return;
 		}
 		//日志
-		setAttr(ConstantLog.log_optype, ConstantLog.res_del);
+		setAttr(ConstantLog.log_optype, ConstantLog.dmn_del);
 		String msg = "删除域,头结点UUID为："+getPara("UUID") ;
 		setAttr(ConstantLog.log_opcontent, msg);
 		//删除成功
@@ -134,7 +134,7 @@ public class SysMgmtController extends Controller {
 	public void deleteMore(){	
 		String uuids = getPara("uuid");
 		if(sysMgmtService.deleteMore(uuids)){
-			setAttr(ConstantLog.log_optype, ConstantLog.res_del);
+			setAttr(ConstantLog.log_optype, ConstantLog.dmn_del);
 			String msg = "批量删除域,头结点UUID为："+getPara("uuid") ;
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);

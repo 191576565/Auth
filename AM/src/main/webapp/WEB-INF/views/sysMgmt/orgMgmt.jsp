@@ -128,12 +128,6 @@
 			            </span>
 		            </div>
 				</div>
-				<!--  
-				<div class="form-group">
-					<lable>备注</lable>
-					<textarea id="ipt_memo" class="form-control" name="memo" rows="" cols=""></textarea>
-				</div>
-				-->
  			</form>
  		</div>
 	<!-- 全局js -->

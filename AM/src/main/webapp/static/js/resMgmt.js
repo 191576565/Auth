@@ -163,6 +163,11 @@ function update(obj){
 		area :  '640px',
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
+			//上级资源不能选自己
+			if($('#res_up_uuid').val() == $('#uuid').val()){
+				layer.msg('上级资源不能选自己');
+				return false;
+			}
 			var data=$('#form').serialize();
 			$.post('resMgmt/put?'+data, function(d){
 				if(d){

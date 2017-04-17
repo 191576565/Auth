@@ -189,6 +189,11 @@ function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 		area: ['400px', '400px'],
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
+			//防止编辑上级机构选择自身
+			if($('#org_up_uuid').val() == uuid){
+				layer.msg('上级机构不能选择自己');
+				return false;
+			}
 			if (!validate()) {
 				return false;
 			}
@@ -211,53 +216,6 @@ function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 	});
 	return false;
 }
-//新增||编辑机构_保存
-$('#sub').click(function(){
-	//非空验证
-	var flag = true;
-	$(".notNull").each(function(){
-        if($(this).val()==""){
-        	alert($(this).attr('nullName')+"不能为空");
-        	flag = false;
-        	return false;
-        }
-    });
-	 if(!flag){
- 		return;
- 	}
-	if($("#org_add_div #form #uuid").val() == ''){
-		//新增操作
-		$("#form").attr("action", "orgMgmt/save");
-		$('#form').ajaxSubmit(function(resultJson){
-			if(JSON.stringify(resultJson) == "false"){
-				layer.msg('机构编码不能重复!');
-				return;
-			}
-			initTable();
-			layer.closeAll();
-		});
-		return false;//阻止表单默认提交
-	}
-	if($("#org_add_div #form #uuid").val() != ''){
-		//编辑操作
-		$("#form").attr("action", "orgMgmt/update");
-		$('#form').ajaxSubmit(function(resultJson){
-			if(JSON.stringify(resultJson) == "true"){
-				initTable();
-				layer.closeAll();
-				return;
-			}
-			$.each(resultJson, function(i, item){
-				if(item === "repeat"){
-					layer.msg('机构编码重复，修改失败!');
-				}
-			})
-		});
-		return false;//阻止表单默认提交
-	}
-	
-});
-
 
 //删除
 function del(id) {
