@@ -10,7 +10,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Masonry Responsive Template</title>
+<title>TianJian</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -216,50 +216,29 @@
 		})
 		//]]>
 
-		$
-				.getJSON(
-						"getMenu",
-						function(content) {
-							var resIcon = '';
-							var resUrl = '';
-							$
-									.each(
-											content,
-											function(index, data) {//遍历对象数组
-												$.each(data, function(key,
-														value) {
-													if (key === "res_icon") {
-														resIcon = value;
-													}
-													if (key === "res_url") {
-														resUrl = value;
-													}
-												})
-												$('#1 #2 #3 #4')
-														.append(
-																'<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb effect"><a href="'
-																		+ resUrl
-																		+ '?userid=${userid }&sid=${sid }"><img src="'+resIcon+'"></a></div></div>');
-											});
-							$(".effect")
-									.mouseover(
-											function() {
-												$(this)
-														.css(
-																{
-																	"border" : "2px solid rgba(141,39,142,.75)",
-																	"overflow" : "hidden",
-																	"position" : "relative"
-																})
-											});
-							$(".effect").mouseleave(function() {
-								$(this).css({
-									"border" : "1px solid #fff",
-									"overflow" : "hidden",
-									"position" : "relative"
-								})
-							});
-						})
+		$.getJSON("getMenu",function(content) {
+			var resIcon = '';
+			var resUrl = '';
+			$.each(content,function(index, data) {//遍历对象数组
+				$.each(data, function(key,value) {
+					if (key === "res_icon") {resIcon = value;}
+					if (key === "res_url") {resUrl = value;}	
+				})
+				$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb effect"><a href="'+ resUrl+ '?userid=${userid }&sid=${sid }"><img src="'+resIcon+'"></a></div></div>');
+			});
+			$(".effect").mouseover(function() {
+				$(this).css({"border" : "2px solid rgba(141,39,142,.75)",
+							　	"overflow" : "hidden",
+								"position" : "relative"
+							})
+			});
+			$(".effect").mouseleave(function() {
+				$(this).css({"border" : "1px solid #fff",
+							"overflow" : "hidden",
+							"position" : "relative"
+							})
+			});
+		});
 		function modifyuserpass() {
 			$('#form_modfiypass')[0].reset();   
 			$("#oldpmessage").html("");

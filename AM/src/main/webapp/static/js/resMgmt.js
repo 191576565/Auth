@@ -53,7 +53,7 @@ $(function(){
 				content : $('.t'),
 				title : '选择上级资源',
 				area : [ '400px', '400px' ],
-				maxmin: true,
+				maxmin: false,
 				btn: ['确定', '取消'],
 				yes: function(index, layero){
 					var treeObj = $.fn.zTree.getZTreeObj("res");
@@ -127,7 +127,22 @@ $('#res_add').on('click', function() {
 		content : $('#sys_add_div'),
 		// skin: 'layui-layer-molv',
 		title : '资源信息-新增',
-		area :  '640px'
+		area :  '640px',
+		btn: ['确定', '取消'],
+		yes: function(index, layero){
+			var data=$('#form').serialize();
+			$.post('resMgmt/save?'+data, function(d){
+				if(d){
+					layer.closeAll();
+					initTable();
+				}else {
+					layer.msg('资源新增失败');
+				}
+			});
+		},
+		btn2: function(index, layero){
+			
+	    }
 	});
 });
 

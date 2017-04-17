@@ -50,14 +50,6 @@
  				<button id="res_add" type="button" class="btn btn-primary create">新增</button>
  				<!-- <button id="res_del" type="button" class="btn btn-danger delete">删除</button> -->
  			</div>
- 			<!-- <div class="col-xs-8 text-right">
-				<div class="form-inline">
-					<div class="form-group">
-						<input type="text" placeholder="请输入资源名称" style="width: 200px;" id="search" class="form-control">
-					</div>
-					<button class="btn btn-default search" type="button"><i class="fa fa-search"></i></button>
-				</div>
-			</div> -->
  		</div>
  		<br>
  		<table id="table"  class="table table-striped table-bordered table-hover">
@@ -83,8 +75,7 @@
  		<div class="t" style="display: none;">
  			<ul id="res" class="ztree"></ul>
  		</div>
- 		<div id="sys_add_div"  class="row" style="display:none;width:100%;margin:0px;">
- 			</br>
+ 		<div id="sys_add_div"  class="row" style="display:none;width:100%;margin:0px;"><br />
                         <div class="col-sm-12">
                         		<form id="form" >
                         		<input type="hidden" name="res.uuid" id="uuid">
@@ -149,18 +140,13 @@
                                 	<hr>
                                 </div>
                                 </form>
+                                <!--  
                                 <button class="btn btn-primary pull-right m-t-n-xs save"  style="margin-right:30px;margin-bottom: 10px;">保存</button>
+                        		-->
                         </div>
  			
  		</div>
- 		<!-- <div id="sys_del_div" class="form-group" style="display:none;">
- 			<form id="del_form" action="" method="post">
- 				<input type="hidden" id="deluuid" name="uuid"/>
-					确定要删除该系统信息吗？
-				</br>
-				<button id="resdelete" type="submit" class="btn btn-danger delete">确定删除</button>
-			</form>
-		</div> -->
+
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/jquery-form.js"></script>
