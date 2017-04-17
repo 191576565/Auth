@@ -125,19 +125,18 @@ $('#res_add').on('click', function() {
 	layer.open({
 		type : 1,
 		content : $('#sys_add_div'),
-		// skin: 'layui-layer-molv',
-		title : '资源信息-新增',
+		title : '资源信息',
 		area :  '640px',
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
 			var data=$('#form').serialize();
 			$.post('resMgmt/save?'+data, function(d){
 				if(d){
-					layer.closeAll();
 					initTable();
 				}else {
 					layer.msg('资源新增失败');
 				}
+				layer.closeAll();
 			});
 		},
 		btn2: function(index, layero){
@@ -159,8 +158,25 @@ function update(obj){
 	layer.open({
 		type : 1,
 		content : $('#sys_add_div'),
-		title : '资源信息-编辑',
-		area :  '640px'
+		title : '资源信息',
+		area :  '640px',
+		area :  '640px',
+		btn: ['确定', '取消'],
+		yes: function(index, layero){
+			var data=$('#form').serialize();
+			$.post('resMgmt/put?'+data, function(d){
+				if(d){
+					layer.msg('资源更新成功');
+					initTable();
+				}else {
+					layer.msg('资源更新失败');
+				}
+				layer.closeAll();
+			});
+		},
+		btn2: function(index, layero){
+			
+	    }
 	});
 }
 
