@@ -230,6 +230,7 @@ $('#btn_del').on('click', function(){
 	}else{
 		layer.confirm('是否删除选定的角色？', 
 				{
+			　　　　　　title:'提示信息',
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){
@@ -253,6 +254,7 @@ $('#btn_del').on('click', function(){
 function onDel(id) {
 	layer.confirm('是否删除该角色信息？', 
 			{
+		　　　　　　title:'提示信息',
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){

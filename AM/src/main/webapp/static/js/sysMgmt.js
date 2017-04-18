@@ -103,6 +103,7 @@ $('#btn_del').on('click', function(){
 	}else{
 		layer.confirm('是否删除选定的系统信息？', 
 				{
+				  title:'提示信息',
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){
@@ -202,8 +203,10 @@ function onEdit(id,code,name,sort,memo) {
 //删除
 function onDel(id) {
 	var $ipt_uuid = $("#sys_del_div #del_form #del_uuid").val(id);
-	layer.confirm('是否删除该系统信息？', 
+	layer.confirm(
+		'是否删除该系统信息？', 
 		{
+		　　title:'提示信息',
 		  btn: ['删除','取消'] //按钮
 		}, 
 		function(){

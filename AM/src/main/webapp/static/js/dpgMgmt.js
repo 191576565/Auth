@@ -203,7 +203,6 @@ $('#sys_add').click(function(){
 });
 
 function onEdit(index){
-	chk=0;
 	$('#group_id').attr('readonly', 'readonly');
 	var info=table.bootstrapTable('getData')[index];
 	for(var key in info){
@@ -250,6 +249,7 @@ function onEdit(index){
 
 function onDel(uuid){
 	layer.confirm('是否删除该权限组？', {
+		　　title:'提示信息',
 		  btn: ['删除','取消'] //按钮
 		}, function(){
 			$.ajax({
@@ -287,6 +287,7 @@ $('#delete').click(function(){
 	 }
 	 
 	 layer.confirm('是否删除选中的权限组？', {
+		 title:'提示信息',
 		  btn: ['删除','取消'] //按钮
 		}, function(){
 			$.ajax({

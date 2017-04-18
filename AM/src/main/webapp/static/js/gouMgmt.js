@@ -160,6 +160,7 @@ function initTable(){
 function onDel(uuid){
 	layer.confirm('是否删除？', 
 			{
+			　　title:'提示信息',
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
@@ -205,6 +206,7 @@ $('#btn_del').on('click', function(){
 	}else{
 		layer.confirm('是否删除选定的内容？', 
 				{
+			　　　　　　title:'提示信息',
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){

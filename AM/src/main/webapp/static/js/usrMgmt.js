@@ -256,6 +256,7 @@ function edit(uuid,user_id,user_name,domain_uuid,org_uuid,role_uuids,user_phone,
 function del(uuid) {
 	layer.confirm('是否删除该用户信息？', 
 			{
+		　　　　　　title:'提示信息',
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
@@ -300,6 +301,7 @@ $('#btn_del').click(function(){
 	}else{
 		layer.confirm('是否删除所选用户信息？', 
 				{
+			　　　　　　title:'提示信息',
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){
