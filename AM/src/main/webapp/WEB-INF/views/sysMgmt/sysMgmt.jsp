@@ -56,7 +56,7 @@
 			</div>
  		</div>
  		<table id="table"></table>
- 		<div class="wrapper" id="sys_add_div" style="display:none;">
+ 		<div class="wrapper" id="sys_add_div" style="display:none;width:100%;margin:0px;"><br />
  			<form ng-app="myApp" 
  				ng-controller="validateCtrl" 
  				id="form" 

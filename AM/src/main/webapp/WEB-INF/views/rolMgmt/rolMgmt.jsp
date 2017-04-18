@@ -49,7 +49,7 @@
  			<div class="col-xs-8 text-right">
 				<div class="form-inline">
 					<div class="form-group">
-						<input id="iptSearch" type="text" placeholder="输入角色ID/角色名称" style="width: 200px;" class="form-control">
+						<input id="iptSearch" type="text" placeholder="输入角色编码/角色名称" style="width: 200px;" class="form-control">
 					</div>
 					<button id="search" class="btn btn-default search"><i class="fa fa-search"></i></button>
 				</div>

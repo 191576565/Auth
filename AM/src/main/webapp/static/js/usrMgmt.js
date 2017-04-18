@@ -235,10 +235,17 @@ function edit(uuid,user_id,user_name,domain_uuid,org_uuid,role_uuids,user_phone,
 			$('#form').ajaxSubmit(function(resultJson){
 				if(JSON.stringify(resultJson) == "false"){
 					layer.msg('域编码/域名不能重复');
-				}else{
+				}
+				if(JSON.stringify(resultJson) == "true"){
 					layer.closeAll();
 					$('#table').bootstrapTable('refresh', {silent: true});
+					return;
 				}
+				$.each(resultJson, function(i, item){
+					if(item === "roleIsNull"){
+						layer.msg('请为该用户分配角色');
+					}
+				})
 			});
 		},
 		btn2: function(index, layero){	
@@ -288,22 +295,26 @@ $('#btn_del').click(function(){
 	var arrUUID = $.map(selectContent,function(row){return row.uuid});
 	//获得userName，confirm的时候用
 	var arrUser = $.map(selectContent,function(row){return row.user_name});
-	layer.confirm('是否删除所选用户信息？', 
-			{
-			  btn: ['删除','取消'] //按钮
-			}, 
-			function(){
-				$.get("usrMgmt/batchDel",{"uuid[]":arrUUID},function(data){
-					if(data){
-						layer.msg('删除成功')
-					}
-					$('#table').bootstrapTable('refresh', {silent: true});
-				});
-			}, 
-			function(){
-				layer.closeAll();
-			}
-		);
+	if(arrUUID.length == 0){
+		layer.msg('请选择要删除的用户信息');
+	}else{
+		layer.confirm('是否删除所选用户信息？', 
+				{
+				  btn: ['删除','取消'] //按钮
+				}, 
+				function(){
+					$.get("usrMgmt/batchDel",{"uuid[]":arrUUID},function(data){
+						if(data){
+							layer.msg('删除成功')
+						}
+						$('#table').bootstrapTable('refresh', {silent: true});
+					});
+				}, 
+				function(){
+					layer.closeAll();
+				}
+			);
+	}
 });
 
 //批量重置密码

@@ -37,8 +37,6 @@ function zTreeOnClickSimple(event, treeId, treeNode) {
 var valid;
 var rs;
 $(function(){
-	valid=$('#form').validate();
-	
 	initTable();
 	
 	$('.tree').click(function(){
@@ -109,16 +107,10 @@ function initTable() {
 	});
 }
 
-var chk=0;
 $('#res_add').on('click', function() {
 	$('#form')[0].reset();
 	$('#uuid').val('');
 	$('#res_id').removeAttr('readonly');
-	
-	chk=1;
-	
-	//去除上次表单验证的样式
-	valid.resetForm();
 	$('input').removeClass('error');
 	$('select').removeClass('error');
 	
@@ -146,7 +138,6 @@ $('#res_add').on('click', function() {
 });
 
 function update(obj){
-	chk=0;
 	
 	$('#res_id').attr('readonly', 'readonly');
 	var info=rs[$(obj).attr('index')];
@@ -255,26 +246,22 @@ $('#res_del').click(function(){
 	});
 });
 
-$("input").blur(function(){
-	valid.element( this );
-});
-
-jQuery.validator.addMethod("chkResId", function(value, element) {   
-    var flag=true, url='';
-    if(chk==0){ //编辑后台不校验是否重复
-    	url='resMgmt/resIdcheck?resId='+value;
-    }else { //新增需要校验编码是否重复
-    	url='resMgmt/resIdcheck?resId='+value+'&checkflag=1';
-    }
-    
-    $.ajax({
-    	async:false,
-    	type:"GET",
-    	url:url,
-    	success:function(data){
-    		flag=data;
-    	}
-    });
-    return this.optional(element) || flag;
-}, "<i class='fa fa-times-circle'></i>输入的资源编码已存在，不能重复");
+//jQuery.validator.addMethod("chkResId", function(value, element) {   
+//    var flag=true, url='';
+//    if(chk==0){ //编辑后台不校验是否重复
+//    	url='resMgmt/resIdcheck?resId='+value;
+//    }else { //新增需要校验编码是否重复
+//    	url='resMgmt/resIdcheck?resId='+value+'&checkflag=1';
+//    }
+//    
+//    $.ajax({
+//    	async:false,
+//    	type:"GET",
+//    	url:url,
+//    	success:function(data){
+//    		flag=data;
+//    	}
+//    });
+//    return this.optional(element) || flag;
+//}, "<i class='fa fa-times-circle'></i>输入的资源编码已存在，不能重复");
 
