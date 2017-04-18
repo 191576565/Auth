@@ -102,7 +102,7 @@
 		 style="display: none; width: 100%; margin: 0px;">
 		<div class="col-sm-12">
 			<form id="form_modfiypass" method="post" action="uptPwd/modifpwd" role="form"
-				onsubmit="return checkForm()">
+				>
 				<div class="form-group">
 					<label>旧密码</label> <input id="oldpassword" name="oldpassword"
 						type="password" placeholder="请输入旧密码" class="form-control"
@@ -122,8 +122,8 @@
 					<p id="newpmessage" class="error"></p>
 				</div>
 				<div>
-					<button class="btn btn-sm btn-primary pull-right m-t-n-xs"
-						style="margin-right: 2px; margin-bottom: 10px;" type="submit">
+					<button class="btn btn-sm btn-primary pull-right m-t-n-xs" onclick="psubmitFunc();"
+						style="margin-right: 2px; margin-bottom: 10px;" type="button">
 						<strong>保 存</strong>
 					</button>
 				</div>
@@ -374,7 +374,34 @@
 				return false;
 			}
 		}
-		
+		function psubmitFunc(){
+			var m1 = oldpcheck();
+			var m2 = newplencheck();
+			var m3 = newpcheck();
+			//if (m1=="" && m2 == ""){
+			
+			if (m1 && m2 && m3) {
+				$.ajax({
+					type : "post",
+					dataType : "html",
+					data:$('#form_modfiypass').serialize(),
+					url : "uptPwd/modifpwd",
+					async : false,
+					cache : false,
+					success : function(data) {
+						layer.closeAll();
+						layer.msg('用户密码更新成功,将跳转到登录页面', {
+							  icon: 1,
+							  time: 1500 //2秒关闭（如果不配置，默认是3秒）
+							}, function(){
+							 // alert("回调函数");
+								window.location.href = 'init_login';
+							});  
+					}
+				});
+			}	
+			//layer.closeAll();
+		}
 		function submitFunc(){
 			var m1=phonecheck();
 			var m2=emailcheck();
@@ -390,7 +417,7 @@
 					cache : false,
 					success : function(data) {
 						layer.closeAll();
-						layer.msg('用户信息更新成功');	
+						layer.msg('用户信息更新成功');		
 					}
 				});
 			}	

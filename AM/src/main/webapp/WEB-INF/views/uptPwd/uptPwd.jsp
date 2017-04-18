@@ -65,8 +65,8 @@
 			<div class="ibox-content">
 				<div class="row">
 					<div class="col-sm-12">
-						<form method="post" action="uptPwd/modifpwd" role="form"
-							onsubmit="return checkForm()">
+						<form id="form_modfiypass" method="post" action="uptPwd/modifpwd" role="form"
+							>
 							<div class="form-group">
 								<label>旧密码</label> <input id="oldpassword" name="oldpassword"
 									type="password" placeholder="请输入旧密码" class="form-control"
@@ -87,7 +87,7 @@
 							</div>
 							<div>
 								<button class="btn btn-sm btn-primary pull-right m-t-n-xs"
-									type="submit">
+									onclick="psubmitFunc();" type="button">
 									<strong>保 存</strong>
 								</button>
 							</div>
@@ -97,6 +97,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
 </body>
 <script>
 	function oldpcheck() {
@@ -161,6 +162,34 @@
 		} else {
 			return false;
 		}
+	}
+	function psubmitFunc(){
+		var m1 = oldpcheck();
+		var m2 = newplencheck();
+		var m3 = newpcheck();
+		//if (m1=="" && m2 == ""){
+		
+		if (m1 && m2 && m3) {
+			$.ajax({
+				type : "post",
+				dataType : "html",
+				data:$('#form_modfiypass').serialize(),
+				url : "uptPwd/modifpwd",
+				async : false,
+				cache : false,
+				success : function(data) {
+					layer.closeAll();
+					layer.msg('用户密码更新成功,将跳转到登录页面', {
+						  icon: 1,
+						  time: 1500 //2秒关闭（如果不配置，默认是3秒）
+						}, function(){
+						 // alert("回调函数");
+							window.location.href = 'init_login';
+						});  
+				}
+			});
+		}	
+		//layer.closeAll();
 	}
 	function newpcheckwww() {
 		var result = false;
