@@ -75,18 +75,43 @@
  		<div class="t" style="display: none;">
  			<ul id="res" class="ztree"></ul>
  		</div>
- 		<div id="sys_add_div"  class="row" style="display:none;width:100%;margin:0px;"><br />
+ 		<div id="sys_add_div"  class="wrapper" style="display:none;width:100%;margin:0px;"><br />
                         <div class="col-sm-12">
-                        		<form id="form" >
+                        		<form ng-app="myApp"
+                        			ng-controller="validateCtrl"
+                        			id="form"
+                        			name="myForm"
+ 									novalidate>
                         		<input type="hidden" name="res.uuid" id="uuid">
                                 <div class="col-sm-12">
                                 	<div class="form-group col-sm-6">
 	                                    <label>资源编码</label>
-	                                    <input type="text" placeholder="" class="form-control chkResId" name="res.res_id" id="res_id" required>
+	                                    <input name="res.res_id" 
+	                                    	   type="text" 
+	                                    	   class="form-control chkResId notNull"
+	                                    	   id="res_id"
+	                                    	   placeholder="" 
+	                                    	   ng-model="res.res_id"
+	                                    	   ng-minlength="1"
+						   					   ng-maxlength="32" 
+						   					   ng-pattern="/^[A-Za-z0-9]+$/"
+						   					   required
+						   				/>
+						   				<p class="error" ng-if="($scope.res.res_id.$error.minlength ||
+											$scope.res.res_id.$error.maxlength) && 
+											$scope.res.res_id.$touched">
+										长度应在1~32位之间</p>
+										<p class="error" ng-if="$scope.res.res_id.$error.pattern &&
+											$scope.res.res_id.$touched">
+										只能是字母/数字组合</p>
 	                                </div>
 	                                <div class="form-group col-sm-6">
 	                                    <label>资源名称</label>
-	                                    <input type="text" placeholder="" class="form-control" name="res.res_name" id="res_name" required>
+	                                    <input type="text" 
+	                                    	   placeholder="" 
+	                                    	   class="form-control notNull" 
+	                                    	   name="res.res_name" 
+	                                    	   id="res_name" required>
 	                                </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -140,27 +165,19 @@
                                 	<hr>
                                 </div>
                                 </form>
-                                <!--  
-                                <button class="btn btn-primary pull-right m-t-n-xs save"  style="margin-right:30px;margin-bottom: 10px;">保存</button>
-                        		-->
                         </div>
  			
  		</div>
 
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
-    <script src="${ctxPath }/static/js/jquery-form.js"></script>
-   
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="${ctxPath }/static/js/angular.min.js"></script>
+    <script src="${ctxPath }/static/js/angular.min.js"></script>
+    <script src="${ctxPath }/static/js/jquery-form.js"></script>
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>
 
 
-    <!-- Bootstrap table -->
-    <%-- <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-    <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-    <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script> --%>
      <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
     
@@ -171,14 +188,17 @@
     <!-- ztree -->
     <script src="${ctxPath }/static/js/plugins/zTree/jquery.ztree.all.min.js"></script>
     
-    <!-- validate -->
-    <script src="${ctxPath }/static/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="${ctxPath }/static/js/plugins/validate/messages_zh.min.js"></script>
     <!--
     	作者：ys
     	时间：2017-03-06
     	描述：页面js
     -->
     <script src="${ctxPath }/static/js/resMgmt.js"></script>
+    <script>
+	//表单验证
+	var app = angular.module('myApp', []);
+	app.controller('validateCtrl',function($scope){
+	});
+    </script>
 	</body>
 </html>

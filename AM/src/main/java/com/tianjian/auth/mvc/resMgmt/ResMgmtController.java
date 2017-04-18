@@ -62,7 +62,7 @@ public class ResMgmtController extends Controller {
 	 */
 	public void save() {
 		ResMgmt res = getModel(ResMgmt.class, "res");
-		System.out.println(res);
+//		System.out.println(res);
 		// 获取session中数据
 		Object userinfo = getSessionAttr("userinfo");
 		// 完善res数据

@@ -125,6 +125,10 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.set("user_phone", userPhone);
 		usrMgmt.set("modifier", sessionUserId);
 		usrMgmt.set("modified_date", new Timestamp(System.currentTimeMillis()));
+		if(""==roles || null==roles){
+			renderJson("{\"message\":\"roleIsNull\"}");
+			return;
+		}
 		usrMgmt.update();
 
 		setAttr(ConstantLog.log_optype, ConstantLog.user_chg);
