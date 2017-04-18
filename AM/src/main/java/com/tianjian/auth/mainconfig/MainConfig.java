@@ -62,12 +62,16 @@ public class MainConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		// TODO Auto-generated method stub
 		PropKit.use("authconfig.properties");
-		me.setViewType(ViewType.JSP);
+		
 		// 设置开发模式
 		me.setDevMode(PropKit.getBoolean("config.devMode"));
 		if (PropKit.getBoolean("config.devMode")) {
 			// SqlReporter.setLog(true);
 		}
+		//me.setRenderFactory(renderFactory);
+		me.setError404View("/WEB-INF/views/login/404.html");
+		me.setError500View("/WEB-INF/views/login/500.html");
+		me.setViewType(ViewType.JSP);
 	}
 
 	@Override

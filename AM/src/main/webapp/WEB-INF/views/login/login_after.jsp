@@ -250,7 +250,7 @@
 				// skin: 'layui-layer-molv',
 				title : '密码修改',
 				area : '600px',
-				maxmin : true
+				maxmin : false
 			});
 		}
 		function modifyuserinfo(){
@@ -281,7 +281,7 @@
 				// skin: 'layui-layer-molv',
 				title : '用户信息修改',
 				area : '600px',
-				maxmin : true
+				maxmin : false
 			});
 		}
 		function mytest1() {
