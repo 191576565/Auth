@@ -228,7 +228,7 @@ function del(id) {
 					if(d){
 						layer.msg('删除成功');
 					}else {
-						layer.msg('删除失败');
+						layer.msg('删除失败，检查是否已关联用户');
 					}
 					initTable();
 				});

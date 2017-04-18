@@ -74,6 +74,26 @@ public class SysMgmtService {
 		return false;
 	}
 	
+	//判断是否关联用户
+	public boolean usrSelect(String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.sys.usrSelect");
+		List<Record> list = Db.find(sql, domainUuid);
+		if(list.size()>0){
+			return true;
+		}
+		return false;
+	}
+	
+	//判断是否关联角色
+	public boolean rolSelect(String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.sys.rolSelect");
+		List<Record> list = Db.find(sql,domainUuid);
+		if(list.size()>0){
+			return true;
+		}
+		return false;
+	}
+	
 	//批量删除系统信息
 	public boolean deleteMore(String idValues){
 		String[] idValue = idValues.split(",");
@@ -81,6 +101,18 @@ public class SysMgmtService {
 		//若没有关联机构则允许删除
 		for (int i=0; i<idValue.length; i++){
 			if(orgSelect(idValue[i])){
+				return false;
+			}
+		}
+		//若没有关联用户则允许删除
+		for(int i=0; i<idValue.length; i++){
+			if(usrSelect(idValue[i])){
+				return false;
+			}
+		}
+		//若没有关联角色则允许删除
+		for(int i=0; i<idValue.length; i++){
+			if(rolSelect(idValue[i])){
 				return false;
 			}
 		}

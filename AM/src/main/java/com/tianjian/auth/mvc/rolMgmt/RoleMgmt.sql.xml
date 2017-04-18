@@ -117,5 +117,30 @@ select sri.uuid as id,sri.res_up_uuid as pid,trim(sri.res_name) name, nvl2(tur.R
     	]]>
 	</sql>
 	
+	<sql id="rUsrSelect">
+		<![CDATA[ 
+        	SELECT A.UUID,
+             A.DOMAIN_UUID,
+ 
+             A.USER_ID,
+             A.ORG_UUID,
+             A.USER_NAME,
+             A.USER_PHONE,
+             A.USER_EMAIL
+        FROM  SYS_USER_INFO A
+       	  LEFT JOIN SYS_DOMAIN_INFO D
+			    ON A.DOMAIN_UUID = D.UUID   
+          where DBMS_LOB.INSTR(A.ROLES, ?) > 0  
+          group by A.UUID,
+             A.DOMAIN_UUID,
+ 
+             A.USER_ID,
+             A.ORG_UUID,
+             A.USER_NAME,
+             A.USER_PHONE,
+             A.USER_EMAIL 
+    	]]>
+	</sql>
+	
 	
 </sql-statement>

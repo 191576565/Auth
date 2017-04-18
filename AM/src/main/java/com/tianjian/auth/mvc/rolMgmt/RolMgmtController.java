@@ -92,13 +92,18 @@ public class RolMgmtController extends Controller {
 	//删除角色
 	public void delete() {
 		RoleMgmt mgmt = new RoleMgmt();
-		mgmt.set("UUID", getPara("UUID"));
+		String uuid = getPara("UUID");
+		mgmt.set("UUID", uuid);
+		//判断是否关联用户
+		if(mgmtService.usrSelect(uuid)){
+			renderJson(false);
+			return;
+		}
 		if(!mgmtService.delete(mgmt)) {
 			renderJson(false);
 			return;
 		}
 		renderJson(true);
-		
 	}
 	
 	//批量删除

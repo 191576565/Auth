@@ -44,7 +44,7 @@
 				</ol>
 			</div>
 		</div>
-		<br /><!-- <br /><br /><br /> -->
+		<hr />
  		<div class="row">
  			<div class="col-xs-12">
  				<button id="res_add" type="button" class="btn btn-primary create">新增</button>

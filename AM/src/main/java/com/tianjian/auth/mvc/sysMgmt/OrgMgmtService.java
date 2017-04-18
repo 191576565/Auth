@@ -77,6 +77,16 @@ public class OrgMgmtService {
 		return OrgMgmt.dao.deleteById(uuid);
 	}
 	
+	//判断是否关联用户
+	public boolean usrSelect(String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.org.oUsrSelect");
+		List<Record> list = Db.find(sql, domainUuid);
+		if(list.size()>0){
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * 功能:查询该机构下的所有机构
 	 * 输入:String uuid

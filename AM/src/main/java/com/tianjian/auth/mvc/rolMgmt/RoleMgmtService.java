@@ -60,10 +60,26 @@ public class RoleMgmtService {
 	//批量删除角色信息
 	public boolean deleteMore(String idValues){
 		String[] idValue = idValues.split(",");
+		//若没有关联用户则允许删除
+		for(int i=0; i<idValue.length; i++){
+			if(usrSelect(idValue[i])){
+				return false;
+			}
+		}
 		for(int i=0; i<idValue.length; i++){
 			RoleMgmt.dao.deleteById(idValue[i]);
 		}
 		return true;
+	}
+	
+	//判断是否关联用户
+	public boolean usrSelect(String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.roleMgmt.rUsrSelect");
+		List<Record> list = Db.find(sql, domainUuid);
+		if(list.size()>0){
+			return true;
+		}
+		return false;
 	}
 
 }

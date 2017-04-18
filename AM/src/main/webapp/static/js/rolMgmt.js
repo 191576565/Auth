@@ -238,7 +238,7 @@ $('#btn_del').on('click', function(){
 						if(d){
 							layer.msg('删除成功');
 						}else {
-							layer.msg('删除失败，检查是否已关联机构');
+							layer.msg('删除失败，检查是否已关联用户');
 						}
 						$('#table').bootstrapTable('refresh', {silent: true});
 					});
@@ -262,7 +262,7 @@ function onDel(id) {
 					if(d){
 						layer.msg('删除成功');
 					}else {
-						layer.msg('删除失败，检查是否已关联机构');
+						layer.msg('删除失败，检查是否已关联用户');
 					}
 					$('#table').bootstrapTable('refresh', {silent: true});
 				});

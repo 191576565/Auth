@@ -133,13 +133,19 @@ public class OrgMgmtController extends Controller {
 	 * 删除机构信息
 	 */
 	public void delete(){
-		if(orgMgmtService.delete(getPara("UUID"))){
-			renderJson(true);
+		String uuid = getPara("UUID");
+		//判断是否关联用户
+		if(orgMgmtService.usrSelect(uuid)){
+			renderJson(false);
+			return;
+		}
+		if(!orgMgmtService.delete(uuid)){
+			renderJson(false);
 			return;
 		}
 		setAttr(ConstantLog.log_optype, ConstantLog.org_del);
-		String msg = "删除机构,头结点UUID为："+getPara("UUID") ;
+		String msg = "删除机构,头结点UUID为："+uuid;
 		setAttr(ConstantLog.log_opcontent, msg);
-		renderJson(false);
+		renderJson(true);
 	}
 }

@@ -59,6 +59,20 @@
     	]]>
 	</sql>
 	
+	<sql id="usrSelect">
+		<![CDATA[ 
+        	SELECT T.* FROM SYS_USER_INFO T 
+        		WHERE T.DOMAIN_UUID = ?
+    	]]>
+	</sql>
+	
+	<sql id="rolSelect">
+		<![CDATA[ 
+        	SELECT T.* FROM SYS_ROLE_INFO T 
+        		WHERE T.DOMAIN_UUID = ?
+    	]]>
+	</sql>
+	
 	<sql id="paramSelect">
 		<![CDATA[ 
         	SELECT T.* from SYS_DOMAIN_INFO T 

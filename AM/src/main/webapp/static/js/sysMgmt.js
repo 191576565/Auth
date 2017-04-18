@@ -111,7 +111,7 @@ $('#btn_del').on('click', function(){
 						if(d){
 							layer.msg('删除成功');
 						}else {
-							layer.msg('删除失败，检查是否已关联机构');
+							layer.msg('删除失败，检查是否已关联机构/用户/角色');
 						}
 						$('#table').bootstrapTable('refresh', {silent: true});
 					});
@@ -202,7 +202,6 @@ function onEdit(id,code,name,sort,memo) {
 
 //删除
 function onDel(id) {
-	var $ipt_uuid = $("#sys_del_div #del_form #del_uuid").val(id);
 	layer.confirm(
 		'是否删除该系统信息？', 
 		{
@@ -214,7 +213,7 @@ function onDel(id) {
 				if(d){
 					layer.msg('删除成功');
 				}else {
-					layer.msg('删除失败，检查是否已关联机构');
+					layer.msg('删除失败，检查是否已关联机构/用户/角色');
 				}
 				$('#table').bootstrapTable('refresh', {silent: true});
 			});

@@ -108,9 +108,20 @@ public class SysMgmtController extends Controller {
 	 */
 	public void delete(){
 		SysMgmt sysMgmt = new SysMgmt();
-		sysMgmt.set("UUID", getPara("UUID"));
+		String uuid = getPara("UUID");
+		sysMgmt.set("UUID", uuid);
 		//判断是否关联机构
-		if(sysMgmtService.orgSelect(getPara("UUID"))){
+		if(sysMgmtService.orgSelect(uuid)){
+			renderJson(false);
+			return;
+		}
+		//判断是否关联用户
+		if(sysMgmtService.usrSelect(uuid)){
+			renderJson(false);
+			return;
+		}
+		//判断是否关联角色
+		if(sysMgmtService.rolSelect(uuid)){
 			renderJson(false);
 			return;
 		}
@@ -121,7 +132,7 @@ public class SysMgmtController extends Controller {
 		}
 		//日志
 		setAttr(ConstantLog.log_optype, ConstantLog.dmn_del);
-		String msg = "删除域,头结点UUID为："+getPara("UUID") ;
+		String msg = "删除域,头结点UUID为："+uuid ;
 		setAttr(ConstantLog.log_opcontent, msg);
 		//删除成功
 		renderJson(true);

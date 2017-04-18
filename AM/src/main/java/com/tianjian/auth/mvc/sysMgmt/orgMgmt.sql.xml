@@ -133,5 +133,12 @@
     	]]>
 	</sql>
 	
+	<sql id="oUsrSelect">
+		<![CDATA[ 
+        	SELECT T.* FROM SYS_USER_INFO T 
+        		WHERE T.ORG_UUID = ?
+    	]]>
+	</sql>
+	
 	
 </sql-statement>
