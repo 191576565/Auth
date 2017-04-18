@@ -64,7 +64,7 @@
 				</div>
 				<div class="form-group">
 					<label>所属机构</label>
-					<select class="form-control" name="organization" id="organization"></select>
+					<select class="form-control" nullName="所属机构" name="organization" id="organization"></select>
 				</div>
  				<div class="form-group">
  					<input id="uuid" 

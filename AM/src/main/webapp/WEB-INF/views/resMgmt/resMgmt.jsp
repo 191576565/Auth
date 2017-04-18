@@ -88,21 +88,23 @@
 	                                    <label>资源编码</label>
 	                                    <input name="res.res_id" 
 	                                    	   type="text" 
-	                                    	   class="form-control chkResId notNull"
+	                                    	   class="form-control notNull"
 	                                    	   id="res_id"
 	                                    	   placeholder="" 
-	                                    	   ng-model="res.res_id"
+	                                    	   ng-model="res_id"
 	                                    	   ng-minlength="1"
 						   					   ng-maxlength="32" 
 						   					   ng-pattern="/^[A-Za-z0-9]+$/"
 						   					   required
 						   				/>
-						   				<p class="error" ng-if="($scope.res.res_id.$error.minlength ||
-											$scope.res.res_id.$error.maxlength) && 
-											$scope.res.res_id.$touched">
+						   				<!--  
+						   				<p class="error" ng-if="(myForm.res.res_id.$error.minlength ||
+											myForm.res.res_id.$error.maxlength) && 
+											myForm.res.res_id.$touched">
 										长度应在1~32位之间</p>
-										<p class="error" ng-if="$scope.res.res_id.$error.pattern &&
-											$scope.res.res_id.$touched">
+										-->
+										<p class="error" ng-if="$scope.res_id.$error.pattern &&
+											$scope.res_id.$touched">
 										只能是字母/数字组合</p>
 	                                </div>
 	                                <div class="form-group col-sm-6">

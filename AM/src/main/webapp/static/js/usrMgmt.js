@@ -176,7 +176,7 @@ $('#btn_add').on('click', function() {
 		type: 1,
 		content: $('#sys_add_div'),
 		title: '用户信息',
-		area: ['960px', '600px'],
+		area: ['960px', '540px'],
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
 			if (!validate()) {
@@ -347,6 +347,11 @@ $('#btn_reset').click(function(){
 function validate(){
 	//非空验证
 	var flag = true;
+	if($('#organization')[0].options.length == 0){
+		layer.msg($('#organization').attr('nullName')+"不能为空");
+		flag = false;
+		return false;
+	}
 	$(".notNull").each(function(){
         if(""==$(this).val()){
         	layer.msg($(this).attr('nullName')+"不能为空");

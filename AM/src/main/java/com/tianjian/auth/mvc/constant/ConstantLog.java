@@ -4,7 +4,7 @@ public interface ConstantLog {
 	/**
 	 * AUTH 三层标题
 	 */
-	public static final String basemgr  =" 基础配置";  // 基础配置
+	public static final String basemgr  =" 基础管理";  // 基础配置
 	public static final String userauth = "用户权限" ; //用户权限
 	public static final String syslog   = "系统日志" ;   //系统日志
 	
