@@ -116,9 +116,6 @@ public class GouMgmtController extends Controller{
 		gouMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
 		gouMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 		dpgmgmtservice.save(gouMgmt);
-		setAttr(ConstantLog.log_optype, ConstantLog.grp2_add);
-		String msg = "新增数据权限URL-" + " URL:" + getPara("dictcode");
-		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}
 	
@@ -134,10 +131,6 @@ public class GouMgmtController extends Controller{
 		gouMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
 		gouMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 		dpgmgmtservice.update(gouMgmt);
-		setAttr(ConstantLog.log_optype, ConstantLog.grp2_add);
-		String msg = "编辑数据权限URL-" + "URL:" + getPara("dictcode") + "  条件值:"
-				+ getPara("orgs") + " UUID" + getPara("uuid");
-		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}
 	
