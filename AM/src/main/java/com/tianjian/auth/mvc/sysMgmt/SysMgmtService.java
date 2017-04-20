@@ -94,6 +94,16 @@ public class SysMgmtService {
 		return false;
 	}
 	
+	//判断是否关联权限组
+	public boolean dpgSelect(String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.sys.dpgSelect");
+		List<Record> list = Db.find(sql,domainUuid);
+		if(list.size()>0){
+			return true;
+		}
+		return false;
+	}
+	
 	//批量删除系统信息
 	public boolean deleteMore(String idValues){
 		String[] idValue = idValues.split(",");
@@ -111,6 +121,12 @@ public class SysMgmtService {
 			}
 		}
 		//若没有关联角色则允许删除
+		for(int i=0; i<idValue.length; i++){
+			if(rolSelect(idValue[i])){
+				return false;
+			}
+		}
+		//若没有关联权限组则允许删除
 		for(int i=0; i<idValue.length; i++){
 			if(rolSelect(idValue[i])){
 				return false;

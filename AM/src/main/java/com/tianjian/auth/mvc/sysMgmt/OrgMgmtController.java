@@ -96,7 +96,7 @@ public class OrgMgmtController extends Controller {
 		}
 		orgMgmtService.save(orgMgmt);
 		setAttr(ConstantLog.log_optype, ConstantLog.org_add);
-		String msg = "新增机构" + "机构id:" + getPara("orgCode") + "  机构名称:"
+		String msg = "新增机构-" + "机构编码:" + getPara("orgCode") + "  机构名称:"
 				+ getPara("orgName");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
@@ -121,8 +121,8 @@ public class OrgMgmtController extends Controller {
 		}
 		if(orgMgmtService.update(orgMgmt)){
 			setAttr(ConstantLog.log_optype, ConstantLog.org_chg);
-			String msg = "编辑机构" + "域id:" + getPara("orgCode") + "  机构名称:"
-					+ getPara("orgName");
+			String msg = "编辑机构-" + "机构编码:" + getPara("orgCode") + "  机构名称:"
+					+ getPara("orgName") + " UUID:" + getPara("UUID");
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		}
@@ -139,12 +139,10 @@ public class OrgMgmtController extends Controller {
 			renderJson(false);
 			return;
 		}
-		if(!orgMgmtService.delete(uuid)){
-			renderJson(false);
-			return;
-		}
+		orgMgmtService.delete(uuid);
 		setAttr(ConstantLog.log_optype, ConstantLog.org_del);
-		String msg = "删除机构,头结点UUID为："+uuid;
+		String msg = "删除机构-" + "机构编码:" + getPara("orgCode") + "  机构名称:"
+				+ getPara("orgName") + " UUID:" + getPara("UUID");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}

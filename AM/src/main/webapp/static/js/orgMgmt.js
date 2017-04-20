@@ -78,6 +78,8 @@ function initTable() {
 									+'\',\''+ e.org_up_uuid 
 									+'\',\''+ e.memo 
 									+'\')">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger delete" onclick="del(\''+ e.uuid
+									+'\',\''+ e.org_unit_id 
+									+'\',\''+ e.org_unit_desc
 									+'\')">删除</button></td></tr>';
 							$('#table tbody').append(temp);
 						}else {
@@ -92,6 +94,8 @@ function initTable() {
 									+'\',\''+ e.org_up_uuid 
 									+'\',\''+ e.memo
 									+'\')">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger delete" onclick="del(\''+ e.uuid
+									+'\',\''+ e.org_unit_id 
+									+'\',\''+ e.org_unit_desc
 									+'\')">删除</button></td></tr>';
 							$('#table tbody tr.treegrid-'+e.org_up_uuid).after(temp);
 						}
@@ -218,13 +222,13 @@ function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 }
 
 //删除
-function del(id) {
+function del(id,orgCode,orgDesc) {
 	layer.confirm('是否删除该机构信息？', 
 			{
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
-				$.post('orgMgmt/delete?UUID='+id, function(d){
+				$.post('orgMgmt/delete?UUID='+id+'&orgCode='+orgCode+'&orgName='+orgDesc, function(d){
 					if(d){
 						layer.msg('删除成功');
 					}else {

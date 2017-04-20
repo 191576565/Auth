@@ -13,6 +13,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.callback.PrivateTreeData;
 import com.tianjian.auth.mvc.callback.PublicTreeData;
+import com.tianjian.auth.mvc.constant.ConstantLog;
 import com.tianjian.auth.mvc.dpgMgmt.DpgMgmtController;
 import com.tianjian.auth.mvc.model.DpgMgmt;
 import com.tianjian.auth.mvc.rolMgmt.RoleMgmtService;
@@ -56,11 +57,6 @@ public class DpgMgmtController extends Controller {
 		String domain_id=((Record) userinfo).getStr("domain_id");
 		String domain_uuid=((Record) userinfo).getStr("domain_uuid");
 		List<Record> list = dpgmgmtservice.domainInfo(domain_id, domain_uuid);
-//		mpara.put("domain_id", domain_id);
-//		mpara.put("domain_uuid", domain_uuid);
-//		String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_domaininfo, mpara);
-		// 获取数据
-//		List<Record> dpgmgmt = (List<Record>) Db.find(sql);
 		renderJson(list);
 	}
 	
@@ -153,7 +149,12 @@ public class DpgMgmtController extends Controller {
 				if(dpgmgmt==1){
 					insertflag.put("status", "success");
 				}else{
-					insertflag.put("status", "error");}
+					insertflag.put("status", "error");
+				}
+				setAttr(ConstantLog.log_optype, ConstantLog.grp_add);
+				String msg = "新增权限组-" + "组编码:" + getPara("groupid") + "  组名称:"
+						+ getPara("groupname");
+				setAttr(ConstantLog.log_opcontent, msg);
 				renderJson(insertflag);
 			}
 			
@@ -191,7 +192,7 @@ public class DpgMgmtController extends Controller {
 			public void delform() {
 				Map<String,Object> insertflag = new HashMap<String,Object>();
 				Map<String, Object> mpara = new HashMap<String, Object>();
-				StringBuffer  InString = new StringBuffer(); 
+				StringBuffer InString = new StringBuffer(); 
 				String[] duid = getPara("uuid").split(","); 
 				for (int i = 0; i < duid.length; i++) { 
 					InString.append("'").append(duid[i]).append("'").append(","); 
@@ -203,8 +204,12 @@ public class DpgMgmtController extends Controller {
               	if(dpgmgmt>0){
 					insertflag.put("status", "success");
 					insertflag.put("delcount", dpgmgmt);
-				 }else{
-					insertflag.put("status", "error");}
+				}else{
+					insertflag.put("status", "error");
+				}
+              	setAttr(ConstantLog.log_optype, ConstantLog.grp_del);
+    			String msg = "删除权限组,头结点UUID为："+getPara("uuid") ;
+    			setAttr(ConstantLog.log_opcontent, msg);
 				renderJson(insertflag);
 			}
 			
@@ -255,7 +260,12 @@ public class DpgMgmtController extends Controller {
 				if(dpgmgmt==1){
 					insertflag.put("status", "success");
 				}else{
-					insertflag.put("status", "error");}
+					insertflag.put("status", "error");
+				}
+				setAttr(ConstantLog.log_optype, ConstantLog.grp_chg);
+				String msg = "编辑权限组-" + "组编码:" + getPara("groupid") + "  组名称:"
+						+ getPara("groupname") + " UUID" + getPara("uuid");
+				setAttr(ConstantLog.log_opcontent, msg);
 				renderJson(insertflag);
 			}
 			

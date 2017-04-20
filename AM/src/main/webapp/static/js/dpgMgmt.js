@@ -171,7 +171,7 @@ $('#sys_add').click(function(){
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: '新增权限组信息',
+		title: '权限组信息',
 		area: '400px',
 		btn: ['保存', '取消'],
 		yes: function(index, layero){
@@ -333,11 +333,6 @@ function refresh(){
 	 layer.closeAll();
 	 table.bootstrapTable('refresh');
 }
-
-//$("input").blur(function(){
-//	valid.element( this );
-//});
-
 
 jQuery.validator.addMethod("chkGroudId", function(value, element) {  
 	var dd=$('#domain_id').val();

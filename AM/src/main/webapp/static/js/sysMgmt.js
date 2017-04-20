@@ -3,11 +3,8 @@ function initsystable(){
 	$('#table').bootstrapTable('destroy'); 
 	$('#table').bootstrapTable({
 		url: 					'sysMgmt/sysData', 		//请求后台的URL（*）
-		toolbar: 				'', 					//工具按钮用哪个容器
-		striped: 				false, 					//是否显示行间隔色
 		cache: 					false, 					//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 		pagination: 			true, 					//是否显示分页（*）
-		sortable: 				false, 					//是否启用排序
 		queryParams: function queryParams() {     //设置查询参数  
 	        var param = {    
 		        sendParam : $("#iptSearch").val(),
@@ -15,20 +12,11 @@ function initsystable(){
 	        };    
        　　	return param;                   
          },	
-        queryParamsType: '',
+        queryParamsType: 		'',
 		sidePagination: 		"client",   			//分页方式：client客户端分页，server服务端分页（*）
 		pageNumber: 			1, 						//初始化加载第一页，默认第一页
 		pageSize: 				10, 					//每页的记录行数（*）
-		pageList: 				[10], 		//可供选择的每页的行数（*）
-		search: 				false, 					//是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
-		showColumns: 			false, 					//是否显示所有的列
-		showRefresh: 			false, 					//是否显示刷新按钮
-		minimumCountColumns: 	2, 						//最少允许的列数
-		clickToSelect: 			false, 					//是否启用点击选中行
-	//	height: 				400,      				//行高，如果没有设置height属性，表格自动根据记录条数调整表格高度
-		showToggle: 			false, 					//是否显示详细视图和列表视图的切换按钮
-		cardView: 				false, 					//是否显示详细视图
-		detailView: 			false,     				//是否显示父子表
+		pageList: 				[10], 					//可供选择的每页的行数（*）
 	
 		columns: [{
 			checkbox: true
@@ -48,7 +36,7 @@ function initsystable(){
 			align: 'center',
 			formatter: function(value, row, index) {
 				var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.domain_id +'\',\''+ row.domain_name +'\',\''+ row.sort_id +'\',\''+ row.memo +'\')">编辑</a> ';
-				var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
+				var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\',\''+ row.domain_id +'\',\''+ row.domain_name +'\')">删除</a> ';
 				var f = '<a href="#" class="btn btn-success" onclick="onOrg(\''+ row.uuid +'\')">机构</a> ';
 				return e + d + f;
 			}
@@ -79,39 +67,33 @@ function onOrg(id){
 //批量删除
 $('#btn_del').on('click', function(){
 	var selectContent = $('#table').bootstrapTable('getSelections');
-	var len = selectContent.length;//获取对象数组的长度
-	var arr = new Array();//初始化数组
-	var i = 0;//初始化数组下标
-	var sendData = '';//初始化发送数据
-	var sep = ",";
-	$.each(selectContent, function(index, data){//遍历对象数组
-		//遍历对象,拼接数据
-		$.each(data, function(key, value){
-			if(key === "uuid"){
-				sendData += value;
-			}
-		})
-		if(index < len-1){
-			sendData += sep;
+	var uuids='',domainCodes='',domainNames='';
+	selectContent.forEach(function(e,i){
+		//逗号分隔拼接字符串,末尾不加逗号
+		if(i == (selectContent.length-1)){
+			uuids += (e.uuid);
+			domainCodes += (e.domain_id);
+			domainNames += (e.domain_name);
 		}else{
-			sendData = sendData;
+			uuids += (e.uuid+',');
+			domainCodes += (e.domain_id+',');
+			domainNames += (e.domain_name+',');
 		}
-		i++;
-	})
-	if(sendData == ''){
+	});
+	if('' == uuids){
 		layer.msg('请选择要删除的系统信息');
 	}else{
 		layer.confirm('是否删除选定的系统信息？', 
 				{
 				  title:'提示信息',
-				  btn: ['删除','取消'] //按钮
+				  btn: ['删除','取消']
 				}, 
 				function(){
-					$.post('sysMgmt/deleteMore?uuid='+sendData, function(d){
+					$.post('sysMgmt/deleteMore?uuids='+uuids+'&domainCodes='+domainCodes+'&domainNames='+domainNames, function(d){
 						if(d){
 							layer.msg('删除成功');
 						}else {
-							layer.msg('删除失败，检查是否已关联机构/用户/角色');
+							layer.msg('删除失败，检查是否已关联机构/用户/角色/权限组');
 						}
 						$('#table').bootstrapTable('refresh', {silent: true});
 					});
@@ -201,7 +183,7 @@ function onEdit(id,code,name,sort,memo) {
 };
 
 //删除
-function onDel(id) {
+function onDel(id,code,name) {
 	layer.confirm(
 		'是否删除该系统信息？', 
 		{
@@ -209,11 +191,11 @@ function onDel(id) {
 		  btn: ['删除','取消'] //按钮
 		}, 
 		function(){
-			$.post('sysMgmt/delete?UUID='+id, function(d){
+			$.post('sysMgmt/delete?UUID='+id+'&scopeCode='+code+'&scopeName='+name, function(d){
 				if(d){
 					layer.msg('删除成功');
 				}else {
-					layer.msg('删除失败，检查是否已关联机构/用户/角色');
+					layer.msg('删除失败，检查是否已关联机构/用户/角色/权限组');
 				}
 				$('#table').bootstrapTable('refresh', {silent: true});
 			});

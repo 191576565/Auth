@@ -73,6 +73,13 @@
     	]]>
 	</sql>
 	
+	<sql id="dpgSelect">
+		<![CDATA[ 
+        	SELECT T.* FROM SYS_GROUP_INFO T 
+        		WHERE T.DOMAIN_UUID = ?
+    	]]>
+	</sql>
+	
 	<sql id="paramSelect">
 		<![CDATA[ 
         	SELECT T.* from SYS_DOMAIN_INFO T 

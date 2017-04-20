@@ -36,7 +36,6 @@ $(function(){
 			$.fn.zTree.init($("#org"), s, data); //树
 			var treeObj = $.fn.zTree.getZTreeObj("org");
 			treeObj.expandAll(true);
-//			console.log(orgs);
 			var u=orgs.split(',');
 			if(orgs!="" && orgs!=null){
 				u.forEach(function(e){

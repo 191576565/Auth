@@ -14,6 +14,10 @@ public class SysMgmtController extends Controller {
 	private static final Log log = Log.getLog(SysMgmtController.class);
 	private SysMgmtService sysMgmtService = new SysMgmtService();
 	
+	/*
+	 * sysMgmt
+	 * 渲染"系统管理"页面
+	 */
 	public void index() {
 		log.info("jump to sysMgmt");
 		String userId = ((Record)getSessionAttr("userinfo")).getStr("user_id");
@@ -68,7 +72,7 @@ public class SysMgmtController extends Controller {
 		}
 		sysMgmtService.save(sysMgmt);
 		setAttr(ConstantLog.log_optype, ConstantLog.dmn_add);
-		String msg = "新增域" + "域id:" + getPara("scopeCode") + "  域名称:"
+		String msg = "新增域-" + "域编码:" + getPara("scopeCode") + "  域名称:"
 				+ getPara("scopeName");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
@@ -96,8 +100,8 @@ public class SysMgmtController extends Controller {
 			return;
 		}
 		setAttr(ConstantLog.log_optype, ConstantLog.dmn_chg);
-		String msg = "编辑域" + "域id:" + getPara("scopeCode") + "  域名称:"
-				+ getPara("scopeName");
+		String msg = "编辑域-" + "域id:" + getPara("scopeCode") + "  域名称:"
+				+ getPara("scopeName") + " UUID" + getPara("UUID");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}
@@ -107,35 +111,24 @@ public class SysMgmtController extends Controller {
 	 * 删除系统信息
 	 */
 	public void delete(){
-		SysMgmt sysMgmt = new SysMgmt();
 		String uuid = getPara("UUID");
+		SysMgmt sysMgmt = new SysMgmt();
 		sysMgmt.set("UUID", uuid);
-		//判断是否关联机构
-		if(sysMgmtService.orgSelect(uuid)){
+		if(sysMgmtService.orgSelect(uuid)//是否关联机构
+				||sysMgmtService.usrSelect(uuid)//是否关联用户
+				||sysMgmtService.rolSelect(uuid)//是否关联角色
+				||sysMgmtService.dpgSelect(uuid)){//是否关联权限组
 			renderJson(false);
 			return;
 		}
-		//判断是否关联用户
-		if(sysMgmtService.usrSelect(uuid)){
-			renderJson(false);
-			return;
-		}
-		//判断是否关联角色
-		if(sysMgmtService.rolSelect(uuid)){
-			renderJson(false);
-			return;
-		}
-		//是否删除成功
-		if(!sysMgmtService.delete(sysMgmt)){
-			renderJson(false);
-			return;
-		}
+		//删除
+		sysMgmtService.delete(sysMgmt);
+		renderJson(true);
 		//日志
 		setAttr(ConstantLog.log_optype, ConstantLog.dmn_del);
-		String msg = "删除域,头结点UUID为："+uuid ;
+		String msg = "删除域-" +  " UUID:" + uuid + " 域编码:" + getPara("scopeCode") + "  域名称:"
+				+ getPara("scopeName");
 		setAttr(ConstantLog.log_opcontent, msg);
-		//删除成功
-		renderJson(true);
 	}
 	
 	/*
@@ -143,10 +136,12 @@ public class SysMgmtController extends Controller {
 	 * 删除多个
 	 */
 	public void deleteMore(){	
-		String uuids = getPara("uuid");
+		String uuids = getPara("uuids");
+		String domainCodes = getPara("domainCodes");
+		String domainNames = getPara("domainNames");
 		if(sysMgmtService.deleteMore(uuids)){
 			setAttr(ConstantLog.log_optype, ConstantLog.dmn_del);
-			String msg = "批量删除域,头结点UUID为："+getPara("uuid") ;
+			String msg = "批量删除域- UUID：" + uuids + " 域编码:" + domainCodes + " 域名称:" + domainNames;
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 			return;
