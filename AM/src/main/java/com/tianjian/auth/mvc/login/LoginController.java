@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpSession;
 
 import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
@@ -85,8 +86,11 @@ public class LoginController extends Controller {
 			//hujian modify
 			Object userinfo = getSessionAttr("userinfo");
 			String doid=((Record) userinfo).getStr("domain_id");
-			
-			loginservice.sendPost(username,doid);
+			//session 为新的才发请求
+			HttpSession sess=getRequest().getSession();
+			if (sess.isNew()){
+				loginservice.sendPost(username,doid);
+			}	
 			String sessionId=getSession().getId();
 			UserService.login(username, sessionId, "0");
 			renderJson("{\"code\":\"1\",\"message\":\"登陆成功\"}");
