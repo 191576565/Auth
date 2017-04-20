@@ -8,6 +8,7 @@ import org.junit.Test;
 import com.jfinal.kit.HttpKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.tianjian.auth.mvc.login.LoginService;
 import com.tianjian.platform.tools.ToolGetSql;
 
 public class MyTest extends TestBase {
@@ -30,5 +31,13 @@ public class MyTest extends TestBase {
 		//
 		HttpKit.post(url, "tianjian", headers);
 		
+	}
+	@Test
+	public void httppostest(){
+		LoginService l=new LoginService();
+		//http://172.168.171.241:8080/login/out
+		//http://localhost:8080/platform/ComCurrency
+		String s=l.sendHttpPost("http://172.168.171.241:8080/login/out", null);
+		System.out.println("s:"+s);
 	}
 }
