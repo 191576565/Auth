@@ -183,4 +183,19 @@ public class LoginService {
 		}
 		return result;
 	}
+	
+	
+	/**
+	 * @return sid 是否是新的，和数据库的对比
+	 */
+	public boolean sidIsNew(String sqlId,String sid,String username){
+		String sql = ToolGetSql.getSql(sqlId);
+		Record rec = Db.findFirst(sql, username,sid);
+		if (rec != null){
+			return false;
+		}else{
+			return true;
+		}
+		
+	}
 }

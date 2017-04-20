@@ -64,12 +64,15 @@ public class LoginController extends Controller {
 		 */
 	@Clear(GlobalInterceptor.class)
 	public void validLogin() {
+		
+		//
 		BaseSessionController SessionController=new BaseSessionController();
 		String username=getPara("username");
 		String password=getPara("password");
 		//用户登录认证
 		int b=loginservice.validUser(username,password);
 		if(b==3){
+			String sessionId=getSession().getId();
 			//用户是否非配角色校验
 			if (!loginservice.uhasrole(Login.sqlId_uhasrole,username)){
 				renderJson("{\"code\":\"0\",\"message\":\"请向管理员分配角色后再登录\"}");
@@ -87,11 +90,11 @@ public class LoginController extends Controller {
 			Object userinfo = getSessionAttr("userinfo");
 			String doid=((Record) userinfo).getStr("domain_id");
 			//session 为新的才发请求
-			HttpSession sess=getRequest().getSession();
-			if (sess.isNew()){
+			
+			if (loginservice.sidIsNew(Login.sqlId_checksid, sessionId, username)){
 				loginservice.sendPost(username,doid);
 			}	
-			String sessionId=getSession().getId();
+			
 			UserService.login(username, sessionId, "0");
 			renderJson("{\"code\":\"1\",\"message\":\"登陆成功\"}");
 		}else{

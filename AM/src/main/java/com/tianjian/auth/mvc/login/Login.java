@@ -6,4 +6,5 @@ public class Login extends Model<Login>{
 	public static final Login dao=new Login();	
 	
 	public static final String sqlId_uhasrole="tianjian.usrMgmt.loginrolecheck";
+	public static final String sqlId_checksid="tianjian.login.checksid";
 }

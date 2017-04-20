@@ -44,7 +44,7 @@ public class GlobalInterceptor implements Interceptor {
 	            	 inv.getController().redirect("/init_login");
 	            }else{inv.invoke();}
 	        } else {
-	            inv.invoke();
+	        	inv.invoke();
 	        }
 	    }
 	

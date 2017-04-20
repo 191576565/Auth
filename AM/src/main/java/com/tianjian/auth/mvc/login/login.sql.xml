@@ -42,4 +42,9 @@ REGEXP_SUBSTR(RES_URL,'[[:alpha:]]+://([1-9]|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])(\.
 	
 	]]>
 	</sql>
+	<sql id="checksid">
+		<![CDATA[ 
+	select uuid from  SYS_USER_INFO where user_id=? and user_sid=?
+	]]>
+	</sql>
 </sql-statement>
