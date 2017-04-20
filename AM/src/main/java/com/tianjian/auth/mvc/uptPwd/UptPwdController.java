@@ -9,6 +9,8 @@ import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseSecurityMD5;
+import com.tianjian.auth.mvc.constant.ConstantLog;
+import com.tianjian.auth.mvc.resMgmt.ResMgmt;
 import com.tianjian.auth.mvc.usrMgmt.UsrMgmt;
 import com.tianjian.platform.tools.ToolGetSql;
 
@@ -31,6 +33,9 @@ public class UptPwdController extends Controller {
 		u.set(UsrMgmt.column_user_pwd, pass);
 
 		if (newp.equals(renewp)) {
+			setAttr(ConstantLog.log_optype, ConstantLog.user_passmodify);
+			String msg = "用户密码修改";
+			setAttr(ConstantLog.log_opcontent, msg);
 			u.update();
 			redirect("/");
 		}else{
@@ -68,6 +73,9 @@ public class UptPwdController extends Controller {
 		usrMgmt.set("user_email", userEmail);
 		usrMgmt.set("user_phone", userPhone);
 		usrMgmt.update();
+		setAttr(ConstantLog.log_optype, ConstantLog.user_chg);
+		String msg = "编辑用户（uuid）："+uuid;
+		setAttr(ConstantLog.log_opcontent, msg);
 		//forwardAction("/validLogin");
 		//render("/login/login_after.jsp");
 		renderJson(true);	

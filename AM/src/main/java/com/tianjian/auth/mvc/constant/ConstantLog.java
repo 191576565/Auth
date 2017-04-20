@@ -28,7 +28,8 @@ public interface ConstantLog {
 	public static final String user     = userauth+"-用户管理" ;
 	public static final String user_add = user+"-新增";
 	public static final String user_chg = user+"-编辑";
-	public static final String user_del = user+"-删除";	
+	public static final String user_del = user+"-删除";
+	public static final String user_passmodify = user+"-密码更改";	
 	/**
 	 * 角色操作信息
 	 */	

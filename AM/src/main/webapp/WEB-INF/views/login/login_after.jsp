@@ -152,7 +152,7 @@
 					<label>用户名称</label> <input id="username" name="username"
 						  class="form-control" 
 					>
-					
+					<p id="usernamecheck" class="error"></p>
 				</div>
 				<div class="form-group">
 					<label>所属域</label> <input id="userdomain" name="userdomain"
@@ -256,7 +256,8 @@
 		function modifyuserinfo(){
 		
 			$("#phonecheck").html("");
-			$("#emailcheck").html("");	
+			$("#emailcheck").html("");
+			$("#useridcheck").html("");
 			$.ajax({
 				type : "post",
 				dataType : "json",
@@ -328,25 +329,35 @@
 		}
 		function phonecheck() {
 			var s = $("#userphone").val();
-			var patrn = /^1[0-9]{10}$/;
-			if (!patrn.exec(s)) {
-				$("#phonecheck").html("手机号码不符合规则");
-				return false;
-			} else {
-				$("#phonecheck").html("");
+			if (s!=""){
+				var patrn = /^1[0-9]{10}$/;
+				if (!patrn.exec(s)) {
+					$("#phonecheck").html("手机号码不符合规则");
+					return false;
+				} else {
+					$("#phonecheck").html("");
+					return true;
+				}
+			}else{
 				return true;
 			}
+			
 		}
 		function emailcheck() {
 			var s = $("#useremail").val();
-			var patrn = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-			if (!patrn.exec(s)) {
-				$("#emailcheck").html("邮箱地址不符合规则");
-				return false;
-			} else {
-				$("#emailcheck").html("");
+			if (s!=""){
+				var patrn = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+				if (!patrn.exec(s)) {
+					$("#emailcheck").html("邮箱地址不符合规则");
+					return false;
+				} else {
+					$("#emailcheck").html("");
+					return true;
+				}
+			}else{
 				return true;
 			}
+			
 		}
 		function newpcheck() {
 
@@ -402,12 +413,22 @@
 			}	
 			//layer.closeAll();
 		}
+		function usernamecheck(){
+			var s = $("#username").val();
+			
+			if (s =="") {
+				$("#usernamecheck").html("用户编码不符合规则");
+				return false;
+			} else {
+				$("#usernamecheck").html("");
+				return true;
+			}
+		}
 		function submitFunc(){
 			var m1=phonecheck();
 			var m2=emailcheck();
-			console.log(m1);
-			console.log(m2);
-			if (m1 && m2){
+			var m3=usernamecheck();
+			if (m1&&m2&&m3){
 				$.ajax({
 					type : "post",
 					dataType : "html",

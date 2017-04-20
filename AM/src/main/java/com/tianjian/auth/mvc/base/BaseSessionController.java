@@ -74,6 +74,7 @@ public class BaseSessionController extends Controller{
 		        response.setCharacterEncoding("UTF=8");
 		        response.setContentType("text/html;charset=UTF-8");
 		        HttpSession session = request.getSession();
+		      
 		        String sessionId = (String) session.getAttribute("usersessionid");
 		        String username = (String) session.getAttribute("user_id");
 
