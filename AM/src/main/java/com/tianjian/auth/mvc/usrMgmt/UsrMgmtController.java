@@ -2,13 +2,12 @@ package com.tianjian.auth.mvc.usrMgmt;
 
 import java.sql.Timestamp;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.tianjian.auth.mvc.base.BaseSecurityMD5;
 import com.tianjian.auth.mvc.constant.ConstantLog;
-import com.tianjian.auth.mvc.usrMgmt.UsrMgmtController;
 
 public class UsrMgmtController extends Controller {
 	

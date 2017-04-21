@@ -1,6 +1,5 @@
 package com.tianjian.auth.mvc.rolMgmt;
 
-import org.apache.commons.lang.StringUtils;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
