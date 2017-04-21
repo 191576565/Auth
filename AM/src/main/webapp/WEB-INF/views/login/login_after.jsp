@@ -215,30 +215,40 @@
 			});
 		})
 		//]]>
-
-		$.getJSON("getMenu",function(content) {
-			var resIcon = '';
-			var resUrl = '';
-			$.each(content,function(index, data) {//遍历对象数组
-				$.each(data, function(key,value) {
-					if (key === "res_icon") {resIcon = value;}
-					if (key === "res_url") {resUrl = value;}	
-				})
-				$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb effect"><a href="'+ resUrl+ '?userid=${userid }&sid=${sid }"><img src="'+resIcon+'"></a></div></div>');
+		$.getJSON("getMenu",function(content){
+			var array = new Array();
+			content.forEach(function(e,i){
+				var arr = (e.res_icon).split(",");
+				array.push(arr);
+				$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb"><a id="'+arr[0]+'" href="'
+						+e.res_url+'?userid=${userid }&sid=${sid }"><img id="st'+i+'" class="effect" src="'
+								+arr[0]+'"></a></div></div>');
+				s = 's';
 			});
 			$(".effect").mouseover(function() {
-				$(this).css({"border" : "2px solid rgba(141,39,142,.75)",
-							　	"overflow" : "hidden",
-								"position" : "relative"
-							})
+				var a = $(this).parent().attr("id");
+			//	console.log($(this).attr("id"));
+				$.each(array, function (i, item) {
+	                $.each(item, function (j, itemobj) {
+	                    if(a == itemobj){
+	                    	$('#st'+i).attr("src",item[1]);
+	                    }
+	                });
+	            });
 			});
 			$(".effect").mouseleave(function() {
-				$(this).css({"border" : "1px solid #fff",
-							"overflow" : "hidden",
-							"position" : "relative"
-							})
+				var a = $(this).parent().attr("id");
+				//console.log($(this).attr("id"));
+				$.each(array, function (i, item) {
+	                $.each(item, function (j, itemobj) {
+	                    if(a == itemobj){
+	                    	$('#st'+i).attr("src",item[0]);
+	                    }
+	                });
+	            });
 			});
-		});
+		})
+		
 		function modifyuserpass() {
 			$('#form_modfiypass')[0].reset();   
 			$("#oldpmessage").html("");
@@ -445,11 +455,5 @@
 			//layer.closeAll();
 		}
 	</script>
-	<!-- templatemo 434 masonry -->
-	<!--
-    	作者：yeqc
-    	时间：2017-02-09
-    	描述：页面js
-    -->
 </body>
 </html>
