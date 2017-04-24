@@ -94,8 +94,7 @@ public class LoginService {
 		Record s1 = Db.findFirst(sql1, doid);
 		String url = "";
 		if (s1 != null) {
-			url = s1.getStr("iport");
-			url += "/api/rpm/loginout/am";
+			url = s1.getStr("res_bg_url");
 		}
 		//
 		System.out.println("url:" + url);

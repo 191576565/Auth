@@ -36,10 +36,7 @@
 	</sql>
 	<sql id="posturl">
 		<![CDATA[ 
-	select 
-REGEXP_SUBSTR(RES_URL,'[[:alpha:]]+://([1-9]|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])(\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])){3}:[0-9]{2,5}',1,1,'i') iport 
- from sys_resource_info  t where uuid = ?
-	
+	select res_bg_url from sys_resource_info  t where uuid = ?
 	]]>
 	</sql>
 	<sql id="checksid">
