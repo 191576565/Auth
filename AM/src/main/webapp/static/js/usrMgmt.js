@@ -296,6 +296,8 @@ $('#btn_del').click(function(){
 	var arrUUID = $.map(selectContent,function(row){return row.uuid});
 	//获得userName，confirm的时候用
 	var arrUser = $.map(selectContent,function(row){return row.user_name});
+	//获得userId
+	var arrUserId = $.map(selectContent,function(row){return row.user_id});
 	if(arrUUID.length == 0){
 		layer.msg('请选择要删除的用户信息');
 	}else{
@@ -305,7 +307,7 @@ $('#btn_del').click(function(){
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){
-					$.get("usrMgmt/batchDel",{"uuid[]":arrUUID,"arrUser[]":arrUser},function(data){
+					$.get("usrMgmt/batchDel",{"uuid[]":arrUUID,"arrUser[]":arrUser,"arrUserId[]":arrUserId},function(data){
 						if(data){
 							layer.msg('删除成功')
 						}

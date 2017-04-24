@@ -154,10 +154,11 @@ public class UsrMgmtController extends Controller {
 	public void batchDel(){
 		String[] uuids = getParaValues("uuid[]");
 		String[] users = getParaValues("arrUser[]");
+		String[] userIds = getParaValues("arrUserId[]");
 		renderJson(ums.batchDeleteUUID(uuids));
 		
 		setAttr(ConstantLog.log_optype, ConstantLog.user_del);
-		String msg = "删除用户-UUID："+Arrays.toString(uuids)+"　用户名:"+Arrays.toString(users);
+		String msg = "删除用户-UUID："+Arrays.toString(uuids)+"　用户名:"+Arrays.toString(users) + " 用户编码:"+Arrays.toString(userIds);
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}
