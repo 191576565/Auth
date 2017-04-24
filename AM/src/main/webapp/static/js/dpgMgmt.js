@@ -147,7 +147,7 @@ function initdpgMgmtlist() {
 									align: 'center',
 									formatter : function(value, row, index) {
 										var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\''+ index +'\')">编辑</a> ';
-								    	var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
+								    	var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\',\''+ row.group_id + '\',\'' + row.group_desc + '\')">删除</a> ';
 								    	var f = '<a href="#" class="btn btn-success" onclick="onFun(\''+ row.uuid +'\',\''+ row.domain_id +'\')">数据权限</a> ';
 								    	return e+d+f;
 									}
@@ -230,8 +230,9 @@ function onEdit(index){
 					 type:'post',
 					 contentType:'application/x-www-form-urlencoded; charset=UTF-8',
 					 success: function (data) {
-						 if(data.status=='success'){
-							 layer.msg("数据保存成功");
+						 if('success' == data.status){
+							 layer.closeAll();
+							 $('#table').bootstrapTable('refresh', {silent: true});
 						 }else{
 							 layer.msg("数据保存失败");
 						 }
@@ -252,21 +253,13 @@ function onDel(uuid){
 		　　title:'提示信息',
 		  btn: ['删除','取消'] //按钮
 		}, function(){
-			$.ajax({
-				 url: "dpgMgmt/delform",
-				 dataType: "json",
-				 data:{'uuid':uuid},
-				 success: function (data) {
-					 if(data.status=='success'){
-						 layer.msg("删除成功");
-					 }else{
-						 layer.msg("删除失败！");
-					 }
-					 refresh();
-				 },
-				 error: function (XMLHttpRequest, textStatus, errorThrown) {
-					 layer.msg("对象被城管抓走了！");
-				 }
+			$.post('dpgMgmt/delform?uuid='+uuid+'&group_id='+group_id+'&group_desc='+group_desc, function(d){
+				if("success" == d.status){
+					layer.msg('删除成功');
+				}else {
+					layer.msg('删除失败');
+				}
+				$('#table').bootstrapTable('refresh', {silent: true});
 			});
 		}, function(){
 			layer.close(layer.index);
@@ -276,36 +269,31 @@ function onDel(uuid){
 //批量删除
 $('#delete').click(function(){
 	var selRow = $("#table").bootstrapTable('getSelections');
-	 var uuid = new Array();
-	 if(selRow.length>0){
-		 $.each(selRow, function() {
-		 uuid.push(this.uuid);
-		 });
-	 }else {
-		 layer.msg("请选择要删除的权限组！");
-		 return ;
-	 }
-	 
+	var uuid='',group_id='',group_desc='';
+	selRow.forEach(function(e,i){
+		//逗号分隔拼接字符串,末尾不加逗号
+		if(i == (selRow.length-1)){
+			uuid += (e.uuid);
+			group_id += (e.group_id);
+			group_desc += (e.group_desc);
+		}else{
+			uuid += (e.uuid+',');
+			group_id += (e.group_id+',');
+			group_desc += (e.group_desc+',');
+		}
+	});
 	 layer.confirm('是否删除选中的权限组？', {
 		 title:'提示信息',
 		  btn: ['删除','取消'] //按钮
 		}, function(){
-			$.ajax({
-				 url: "dpgMgmt/delform",
-				 dataType: "json",
-				 data:{'uuid':uuid.toString()},
-				 success: function (data) {
-					 if(data.status=='success'){
-						 layer.msg("删除成功！");
-					 }else{
-						 layer.msg("删除失败咯！");
-					 }
-					 refresh();
-				 },
-				 error: function (XMLHttpRequest, textStatus, errorThrown) {
-					 layer.msg("对象被城管抓走了！");
-				 }
-			 });
+			$.post('dpgMgmt/delform?uuid='+uuid+'&group_id='+group_id+'&group_desc='+group_desc, function(d){
+				if("success" == d.status){
+					layer.msg('删除成功');
+				}else {
+					layer.msg('删除失败');
+				}
+				$('#table').bootstrapTable('refresh', {silent: true});
+			});
 		}, function(){
 			layer.close(layer.index);
 		});
@@ -334,34 +322,34 @@ function refresh(){
 	 table.bootstrapTable('refresh');
 }
 
-jQuery.validator.addMethod("chkGroudId", function(value, element) {  
-	var dd=$('#domain_id').val();
-	if(dd==""){
-		layer.tips("请先选择所属域！", '#domain_id');
-		return true;
-	}
-	
-	var flag=false, d={};
-    if(chk!=0){ 
-    	 //新增需要校验编码是否重复
-    	d={domaininfo:dd,groupid:value, chk:1}
-    	$.ajax({
-	   		 async:false,
-	   		 url: "dpgMgmt/verifygroupid",
-	   		 data:d,
-	   		 dataType: "json",
-	   		 success: function (data) {
-	   			 if(data.status=='success'){
-	   				 flag=true;
-	   			 }
-	   		 }
-	   	});
-    }else {
-    	return true;
-    }
-    
-    return this.optional(element) || flag;
-}, "<i class='fa fa-times-circle'></i>所属域下已存在该组编码，不能重复");
+//jQuery.validator.addMethod("chkGroudId", function(value, element) {  
+//	var dd=$('#domain_id').val();
+//	if(dd==""){
+//		layer.tips("请先选择所属域！", '#domain_id');
+//		return true;
+//	}
+//	
+//	var flag=false, d={};
+//    if(chk!=0){ 
+//    	 //新增需要校验编码是否重复
+//    	d={domaininfo:dd,groupid:value, chk:1}
+//    	$.ajax({
+//	   		 async:false,
+//	   		 url: "dpgMgmt/verifygroupid",
+//	   		 data:d,
+//	   		 dataType: "json",
+//	   		 success: function (data) {
+//	   			 if(data.status=='success'){
+//	   				 flag=true;
+//	   			 }
+//	   		 }
+//	   	});
+//    }else {
+//    	return true;
+//    }
+//    
+//    return this.optional(element) || flag;
+//}, "<i class='fa fa-times-circle'></i>所属域下已存在该组编码，不能重复");
 
 
 $('#domain_id').change(function(){

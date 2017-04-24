@@ -49,7 +49,7 @@ $(function(){
 					content : $('.t'),
 					title : '选择机构',
 					area : [ '400px', '400px' ],
-					maxmin: true,
+					maxmin: false,
 					btn: ['确定', '取消'],
 					yes: function(index, layero){
 						var nodes = treeObj.getCheckedNodes(true);
@@ -146,7 +146,7 @@ function initTable(){
         width:'140px',
     	formatter:function(value,row,index){
     		var e = '<button type="button" class="btn btn-info update edit" onclick="onEdit(\''+ row.uuid +'\',\''+ row.condition_content_uuid +'\')">编辑</button> ';
-    		var d = '<button type="button" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</button> ';
+    		var d = '<button type="button" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\',\''+row.req_url+'\',\''+row.req_url_desc+'\')">删除</button> ';
     		return e+d;
     	}
     },]
@@ -156,14 +156,14 @@ function initTable(){
 };
 
 //删除
-function onDel(uuid){
+function onDel(uuid,req_url,req_url_desc){
 	layer.confirm('是否删除？', 
 			{
 			　　title:'提示信息',
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
-				$.post('gouMgmt/delete?uuid='+uuid, function(d){
+				$.post('gouMgmt/delete?uuid='+uuid+'&req_url='+req_url+'&req_url_desc='+req_url_desc, function(d){
 					if(d){
 						layer.msg('删除成功');
 					}else {
@@ -181,26 +181,20 @@ function onDel(uuid){
 //批量删除
 $('#btn_del').on('click', function(){
 	var selectContent = $('#table').bootstrapTable('getSelections');
-	var len = selectContent.length;//获取对象数组的长度
-	var arr = new Array();//初始化数组
-	var i = 0;//初始化数组下标
-	var sendData = '';//初始化发送数据
-	var sep = ",";
-	$.each(selectContent, function(index, data){//遍历对象数组
-		//遍历对象,拼接数据
-		$.each(data, function(key, value){
-			if(key === "uuid"){
-				sendData += value;
-			}
-		})
-		if(index < len-1){
-			sendData += sep;
+	var uuids='',req_url='',req_url_desc='';
+	selectContent.forEach(function(e,i){
+		//逗号分隔拼接字符串,末尾不加逗号
+		if(i == (selectContent.length-1)){
+			uuids += (e.uuid);
+			req_url += (e.req_url);
+			req_url_desc += (e.req_url_desc);
 		}else{
-			sendData = sendData;
+			uuids += (e.uuid+',');
+			req_url += (e.req_url+',');
+			req_url_desc += (e.req_url_desc+',');
 		}
-		i++;
-	})
-	if(sendData == ''){
+	});
+	if('' == uuids){
 		layer.msg('请选择要删除的内容');
 	}else{
 		layer.confirm('是否删除选定的内容？', 
@@ -209,7 +203,7 @@ $('#btn_del').on('click', function(){
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){
-					$.post('gouMgmt/deleteMore?uuid='+sendData, function(d){
+					$.post('gouMgmt/deleteMore?uuid='+uuids+'&req_url='+req_url+'&req_url_desc='+req_url_desc, function(d){
 						if(d){
 							layer.msg('删除成功');
 						}else {

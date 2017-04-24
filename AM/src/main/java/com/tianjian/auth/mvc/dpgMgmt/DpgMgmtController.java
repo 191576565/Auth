@@ -196,7 +196,7 @@ public class DpgMgmtController extends Controller {
 				String[] duid = getPara("uuid").split(","); 
 				for (int i = 0; i < duid.length; i++) { 
 					InString.append("'").append(duid[i]).append("'").append(","); 
-					} 
+				} 
 			    String para=InString.toString().substring(1, InString.length() - 2);
 				mpara.put("para", para.replaceAll("\\s*", ""));
 		        String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlid_deletegid, mpara);
@@ -208,7 +208,7 @@ public class DpgMgmtController extends Controller {
 					insertflag.put("status", "error");
 				}
               	setAttr(ConstantLog.log_optype, ConstantLog.grp_del);
-    			String msg = "删除权限组,头结点UUID为："+getPara("uuid") ;
+    			String msg = "删除权限组- UUID：" + getPara("uuid") + " 组编码:" + getPara("group_id") + " 组名称:" + getPara("group_desc");
     			setAttr(ConstantLog.log_opcontent, msg);
 				renderJson(insertflag);
 			}
@@ -264,7 +264,7 @@ public class DpgMgmtController extends Controller {
 				}
 				setAttr(ConstantLog.log_optype, ConstantLog.grp_chg);
 				String msg = "编辑权限组-" + "组编码:" + getPara("groupid") + "  组名称:"
-						+ getPara("groupname") + " UUID" + getPara("uuid");
+						+ getPara("groupname") + " UUID:" + getPara("uuid");
 				setAttr(ConstantLog.log_opcontent, msg);
 				renderJson(insertflag);
 			}
