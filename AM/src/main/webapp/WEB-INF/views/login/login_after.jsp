@@ -427,7 +427,7 @@
 			var s = $("#username").val();
 			
 			if (s =="") {
-				$("#usernamecheck").html("用户编码不符合规则");
+				$("#usernamecheck").html("用户名称不符合规则");
 				return false;
 			} else {
 				$("#usernamecheck").html("");
