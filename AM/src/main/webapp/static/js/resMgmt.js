@@ -207,7 +207,7 @@ function del(obj){
 	layer.confirm('是否删除该资源及其子资源？', {
 	  btn: ['删除','取消'] //按钮
 	}, function(){
-		$.post('resMgmt/delete?uuid='+rs[index].uuid, function(d){
+		$.post('resMgmt/delete?uuid='+rs[index].uuid+'&res_id='+res_id+'&res_name='+res_name, function(d){
 			if(d){
 				layer.msg('资源删除成功');
 			}else {

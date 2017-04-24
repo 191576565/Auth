@@ -74,7 +74,7 @@ function inittable(){
 	    	width: '188px',
 	    	formatter:function(value,row,index){
 		    	var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.role_id +'\',\''+ row.role_name +'\',\''+ row.domain_uuid +'\',\''+ row.memo +'\')">编辑</a> ';
-		    	var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
+		    	var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\',\''+ row.role_id +'\',\''+ row.role_name +'\')">删除</a> ';
 		    	var f = '<a href="#" onclick="onFun(\''+ row.uuid +'\')" class="btn btn-success">功能</a> ';
 		    	return e+d+f;
 	    	}
@@ -206,26 +206,20 @@ function onEdit(id,roleid,rolename,domainuuid,memo) {
 //批量删除
 $('#btn_del').on('click', function(){
 	var selectContent = $('#table').bootstrapTable('getSelections');
-	var len = selectContent.length;//获取对象数组的长度
-	var arr = new Array();//初始化数组
-	var i = 0;//初始化数组下标
-	var sendData = '';//初始化发送数据
-	var sep = ",";
-	$.each(selectContent, function(index, data){//遍历对象数组
-		//遍历对象,拼接数据
-		$.each(data, function(key, value){
-			if(key === "uuid"){
-				sendData += value;
-			}
-		})
-		if(index < len-1){
-			sendData += sep;
+	var uuids='',role_id='',role_name='';
+	selectContent.forEach(function(e,i){
+		//逗号分隔拼接字符串,末尾不加逗号
+		if(i == (selectContent.length-1)){
+			uuids += (e.uuid);
+			role_id += (e.role_id);
+			role_name += (e.role_name);
 		}else{
-			sendData = sendData;
+			uuids += (e.uuid+',');
+			role_id += (e.role_id+',');
+			role_name += (e.role_name+',');
 		}
-		i++;
-	})
-	if(sendData == ''){
+	});
+	if('' == uuids){
 		layer.msg('请选择要删除的角色');
 	}else{
 		layer.confirm('是否删除选定的角色？', 
@@ -234,7 +228,7 @@ $('#btn_del').on('click', function(){
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){
-					$.post('rolMgmt/deleteMore?uuid='+sendData, function(d){
+					$.post('rolMgmt/deleteMore?UUID='+uuids+'&role_id='+role_id+'&role_name='+role_name, function(d){
 						if(d){
 							layer.msg('删除成功');
 						}else {
@@ -251,14 +245,14 @@ $('#btn_del').on('click', function(){
 })
 
 //删除
-function onDel(id) {
+function onDel(id,role_id,role_name) {
 	layer.confirm('是否删除该角色信息？', 
 			{
 		　　　　　　title:'提示信息',
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
-				$.post('rolMgmt/delete?UUID='+id, function(d){
+				$.post('rolMgmt/delete?UUID='+id+'&role_id='+role_id+'&role_name='+role_name, function(d){
 					if(d){
 						layer.msg('删除成功');
 					}else {

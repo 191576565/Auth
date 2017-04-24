@@ -1,6 +1,7 @@
 package com.tianjian.auth.mvc.usrMgmt;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -92,7 +93,7 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.save();
 
 		setAttr(ConstantLog.log_optype, ConstantLog.user_add);
-		String msg = "新增用户（用户名）："+userId;
+		String msg = "新增用户（用户编码）："+userId+" 用户名:"+userName;
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}
@@ -131,7 +132,7 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.update();
 
 		setAttr(ConstantLog.log_optype, ConstantLog.user_chg);
-		String msg = "编辑用户（uuid）："+uuid;
+		String msg = "编辑用户-UUID:" + uuid +" 用户名:"+userName;
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}
@@ -145,17 +146,18 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.delete();
 		
 		setAttr(ConstantLog.log_optype, ConstantLog.user_del);
-		String msg = "删除用户（uuid）："+uuid;
+		String msg = "删除用户-UUID："+uuid+" 用户编码:"+getPara("user_id")+" 用户名:"+getPara("user_name");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}
 	//批量删除用户
 	public void batchDel(){
 		String[] uuids = getParaValues("uuid[]");
+		String[] users = getParaValues("arrUser[]");
 		renderJson(ums.batchDeleteUUID(uuids));
 		
 		setAttr(ConstantLog.log_optype, ConstantLog.user_del);
-		String msg = "删除用户（uuid）："+uuids;
+		String msg = "删除用户-UUID："+Arrays.toString(uuids)+"　用户名:"+Arrays.toString(users);
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}

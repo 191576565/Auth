@@ -76,7 +76,7 @@ function inittable(){
 																	    		   + row.role_uuids +'\',\''
 																	    		   + row.user_phone +'\',\''
 																	    		   + row.user_email + '\')">编辑</a> ';                                                      
-	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\')">删除</a> ';                                                    
+	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\',\''+row.user_id +'\',\''+ row.user_name +'\')">删除</a> ';                                                    
 	    	return e+d;                                                                                                           
 	    	}                                                                                                                     
 	    },]                                                                                                                       
@@ -253,14 +253,14 @@ function edit(uuid,user_id,user_name,domain_uuid,org_uuid,role_uuids,user_phone,
 	});
 };
 //删除的onclick事件
-function del(uuid) {
+function del(uuid,user_id,user_name) {
 	layer.confirm('是否删除该用户信息？', 
 			{
 		　　　　　　title:'提示信息',
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
-				$.post('usrMgmt/delUsr?uuid='+uuid, function(d){
+				$.post('usrMgmt/delUsr?uuid='+uuid+'&user_id='+user_id+'&user_name='+user_name, function(d){
 					if(d){
 						layer.msg('删除成功');
 					}else {
@@ -305,7 +305,7 @@ $('#btn_del').click(function(){
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){
-					$.get("usrMgmt/batchDel",{"uuid[]":arrUUID},function(data){
+					$.get("usrMgmt/batchDel",{"uuid[]":arrUUID,"arrUser[]":arrUser},function(data){
 						if(data){
 							layer.msg('删除成功')
 						}
@@ -328,20 +328,25 @@ $('#btn_reset').click(function(){
 	//获得userName，confirm的时候用
 	var arrUser = $.map(selectContent,function(row){return row.user_name});
 	//确认删除
-	layer.confirm('是否重置选中用户的密码？', {
-		  btn: ['确定','取消'] //按钮
-		}, function(){
-			$.post('usrMgmt/batchReset', {"uuid[]":arrUUID},function(d){
-				if(d){
-					layer.msg('重置密码成功');
-				}else {
-					layer.msg('重置密码失败');
-				}
+	if(0 == arrUUID.length){
+		layer.msg('请选择要重置的用户');
+	}else{
+		layer.confirm('是否重置选中用户的密码？', {
+			  btn: ['确定','取消'] //按钮
+			}, function(){
+				$.post('usrMgmt/batchReset', {"uuid[]":arrUUID},function(d){
+					if(d){
+						layer.msg('重置密码成功');
+					}else {
+						layer.msg('重置密码失败');
+					}
+				});
+				$('#table').bootstrapTable('refresh', {silent: true});
+			}, function(){
+				layer.close(layer.index);
 			});
-			$('#table').bootstrapTable('refresh', {silent: true});
-		}, function(){
-			layer.close(layer.index);
-		});
+	}
+	
 });
 
 function validate(){

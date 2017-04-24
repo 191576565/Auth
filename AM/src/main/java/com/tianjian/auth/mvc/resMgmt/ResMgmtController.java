@@ -120,7 +120,7 @@ public class ResMgmtController extends Controller {
 		if (i >= 1) {
 			// 写日志
 			setAttr(ConstantLog.log_optype, ConstantLog.res_del);
-			String msg = "删除资源"+"资源头结点UUID为：" + uuid;
+			String msg = "删除资源-"+" UUID：" + uuid + " 资源编码:" + getPara("res_id") + " 资源名称:" + getPara("res_name");
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {
