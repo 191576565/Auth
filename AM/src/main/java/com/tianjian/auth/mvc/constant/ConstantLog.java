@@ -50,7 +50,14 @@ public interface ConstantLog {
 	public static final String grp      =userauth+"-数据权限组管理";	 
 	public static final String grp_add = grp+"-新增";
 	public static final String grp_chg = grp+"-编辑";
-	public static final String grp_del = grp+"-删除";	
+	public static final String grp_del = grp+"-删除";
+	/**
+	 * 权限组操作信息
+	 */
+	public static final String grp2      =userauth+"-数据权限组管理-权限组管理";	 
+	public static final String grp2_add = grp2+"-新增";
+	public static final String grp2_chg = grp2+"-编辑";
+	public static final String grp2_del = grp2+"-删除";
 	/**
 	 * 日志  操作信息
 	 */
