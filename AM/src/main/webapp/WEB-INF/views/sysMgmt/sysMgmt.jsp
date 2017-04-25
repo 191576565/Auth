@@ -54,7 +54,7 @@
 					<button id="search" class="btn btn-default search"><i class="fa fa-search"></i></button>
 				</div>
 			</div>
- 		</div>
+ 		</div><br />
  		<table id="table"></table>
  		<div class="wrapper" id="sys_add_div" style="display:none;width:100%;margin:0px;"><br />
  			<form ng-app="myApp" 
