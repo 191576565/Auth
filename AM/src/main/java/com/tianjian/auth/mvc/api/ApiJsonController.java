@@ -101,7 +101,9 @@ public class ApiJsonController extends Controller {
 			if (user == null || user.size() == 0) {
 				log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
 				code = "400";
-				msg = username + "数据api请求异常，请检查接入格式或用户Session状态！";
+				//msg = username + "数据api请求异常，请检查接入格式或用户Session状态！";
+				//modify 2017.4.26 hujian
+				msg = "会话已过期或当前用户在其它地方登录！";
 			} else {
 				data = user;
 			}
