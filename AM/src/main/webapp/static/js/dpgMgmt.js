@@ -161,12 +161,7 @@ $('#sys_add').click(function(){
 	$('#group_id').removeAttr('readonly');
 	users='', chk=1;;
 	$('.users').text('请选择所属用户');
-	$('#form p.success').remove();
-	
-	//去除上次表单验证的样式
-//	valid.resetForm();
-	$('input').removeClass('error');
-	$('select').removeClass('error');
+	$('.error').empty();
 	
 	layer.open({
 		type: 1,
@@ -175,6 +170,9 @@ $('#sys_add').click(function(){
 		area: '400px',
 		btn: ['保存', '取消'],
 		yes: function(index, layero){
+			if (!validate()) {
+				return false;
+			}
 //			if($('#form').valid()){
 				$.ajax({
 					url : "dpgMgmt/saveform?"+$('#form').serialize()+"&guserid="+users,
@@ -215,7 +213,7 @@ function onEdit(index){
 	}else {
 		$('.users').text('编辑所属用户');
 	}
-	
+	$('.error').empty();
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
@@ -223,7 +221,10 @@ function onEdit(index){
 		area: '400px',
 		btn: ['保存', '取消'],
 		yes: function(index, layero){
-			if($('#form').valid()){
+//			if($('#form').valid()){
+			if (!validate()) {
+				return false;
+			}
 				$.ajax({
 					 url: "dpgMgmt/updateform?"+$('#form').serialize()+"&guserid="+users,
 					 dataType: "json",
@@ -242,13 +243,13 @@ function onEdit(index){
 						 layer.msg("数据被城管抓走了！");
 					 }
 				});
-			}
+//			}
 		},
 		btn2: function(index, layero){}
 	});
 }
 
-function onDel(uuid){
+function onDel(uuid,group_id,group_desc){
 	layer.confirm('是否删除该权限组？', {
 		　　title:'提示信息',
 		  btn: ['删除','取消'] //按钮
@@ -322,6 +323,29 @@ function refresh(){
 	 table.bootstrapTable('refresh');
 }
 
+$('#domain_id').change(function(){
+	users = "";
+});
+
+function validate(){
+	//非空验证
+	var flag = true;
+	$(".notNull").each(function(){
+        if(""==$(this).val()){
+        	layer.msg($(this).attr('nullName')+"不能为空");
+        	flag = false;
+        	return false;
+        }
+    });
+	//合法验证
+	$("p.error").each(function(){
+		if(""!=$(this).text()){
+			flag = false;
+		}
+	});
+	return flag;
+}
+
 //jQuery.validator.addMethod("chkGroudId", function(value, element) {  
 //	var dd=$('#domain_id').val();
 //	if(dd==""){
@@ -351,8 +375,4 @@ function refresh(){
 //    return this.optional(element) || flag;
 //}, "<i class='fa fa-times-circle'></i>所属域下已存在该组编码，不能重复");
 
-
-$('#domain_id').change(function(){
-	users = "";
-});
 

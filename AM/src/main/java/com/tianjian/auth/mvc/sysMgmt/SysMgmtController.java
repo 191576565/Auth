@@ -100,8 +100,8 @@ public class SysMgmtController extends Controller {
 			return;
 		}
 		setAttr(ConstantLog.log_optype, ConstantLog.dmn_chg);
-		String msg = "编辑域-" + " 域编码:" + getPara("scopeCode") + " 域名称:"
-				+ getPara("scopeName") + " UUID" + getPara("UUID");
+		String msg = "编辑域-" + " UUID:" + getPara("UUID") + " 域编码:" + getPara("scopeCode") + " 域名称:"
+				+ getPara("scopeName");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}

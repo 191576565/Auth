@@ -74,17 +74,42 @@
                      <label>组编码:</label>
                      <div>
                          <input 
+                         	name="groupid"
                          	type="text" 
-                         	class="form-control chkGroudId"  
-                         	id="group_id"  
-                         	name="groupid" 
-                         	required> 
+                         	class="form-control notNull"
+                         	nullName="组编码"
+                         	id="group_id"
+                         	ng-model="groupid"
+                         	ng-minlength="1"
+                         	ng-maxlength="32"
+                         	ng-pattern="/^[A-Za-z0-9]+$/"
+                         	required /> 
+                         	<p class="error" ng-if="(myForm.groupid.$error.minlength ||
+						myForm.groupid.$error.maxlength) && 
+						myForm.groupid.$touched">
+					长度应在1~32位之间</p>
+					<p class="error" ng-if="myForm.groupid.$error.pattern &&
+						myForm.groupid.$touched">
+					只能是字母/数字组合</p>
                      </div>
                  </div>
                  <div class="form-group col-sm-12">
                      <label>组名称:</label>
                      <div>
-                         <input type="text" class="form-control" id="group_desc"  name="groupname" required> 
+                         <input 
+                         	type="text" 
+                         	class="form-control notNull" 
+                         	nullName="组名称"
+                         	id="group_desc"  
+                         	name="groupname" 
+                         	ng-model="groupname"
+                         	ng-minlength="1"
+                         	ng-maxlength="32"
+                         	required /> 
+                         <p class="error" ng-if="(myForm.groupname.$error.minlength ||
+						myForm.groupname.$error.maxlength) && 
+						myForm.groupname.$touched">
+					长度应在1~32位之间</p>	
                      </div>
                  </div>
  			</form>

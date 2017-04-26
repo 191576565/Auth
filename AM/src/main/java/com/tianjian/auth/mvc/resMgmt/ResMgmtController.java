@@ -139,7 +139,7 @@ public class ResMgmtController extends Controller {
 		//唯一验证还没有写
 		reservice.resUpdate(resMgmt);
 		setAttr(ConstantLog.log_optype, ConstantLog.res_chg);
-		String msg = "编辑资源-" + " 资源编码:" + getPara("res_id") + " 资源名称:"
+		String msg = "编辑资源-"+" UUID:"+getPara("uuid") + " 资源编码:" + getPara("res_id") + " 资源名称:"
 				+ getPara("res_name");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
