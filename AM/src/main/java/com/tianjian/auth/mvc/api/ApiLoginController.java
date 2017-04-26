@@ -126,7 +126,7 @@ public class ApiLoginController extends Controller {
 				code = "400";
 				//msg = username + "数据api请求异常，请检查接入格式或用户Session状态！";
 				//modify 2017.4.26 hujian
-				msg = "会话已过期或当前用户在其它地方登录！";
+				msg = "用户在其他终端登录,该终端已下线,请确保您的密码是否已泄露。";
 			} else {
 				data = user;
 			}
