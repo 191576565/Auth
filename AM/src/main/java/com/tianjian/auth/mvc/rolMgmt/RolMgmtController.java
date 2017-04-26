@@ -72,7 +72,7 @@ public class RolMgmtController extends Controller {
 		mgmtService.save(mgmt);
 		renderJson(true);
 		setAttr(ConstantLog.log_optype, ConstantLog.role_add);
-		String msg = "新增角色-" + "角色编码:" + getPara("role_id") + "  角色名称:"
+		String msg = "新增角色-" + " 角色编码:" + getPara("role_id") + " 角色名称:"
 				+ getPara("role_name");
 		setAttr(ConstantLog.log_opcontent, msg);
 	}
@@ -92,7 +92,7 @@ public class RolMgmtController extends Controller {
 		}
 		renderJson(true);
 		setAttr(ConstantLog.log_optype, ConstantLog.role_chg);
-		String msg = "修改角色-" +"UUID:" + getPara("UUID") + "角色编码:" + getPara("role_id") + "  角色名称:"
+		String msg = "修改角色-" +" UUID:" + getPara("UUID") + " 角色编码:" + getPara("role_id") + " 角色名称:"
 				+ getPara("role_name");
 		setAttr(ConstantLog.log_opcontent, msg);
 	}
@@ -110,7 +110,7 @@ public class RolMgmtController extends Controller {
 		mgmtService.delete(mgmt);
 		renderJson(true);
 		setAttr(ConstantLog.log_optype, ConstantLog.role_del);
-		String msg = "删除角色-" +"UUID:" + getPara("UUID") + "角色编码:" + getPara("role_id") + "  角色名称:"
+		String msg = "删除角色-" +" UUID:" + getPara("UUID") + " 角色编码:" + getPara("role_id") + " 角色名称:"
 				+ getPara("role_name");
 		setAttr(ConstantLog.log_opcontent, msg);
 	}
@@ -121,7 +121,7 @@ public class RolMgmtController extends Controller {
 		if(mgmtService.deleteMore(uuids)){
 			renderJson(true);
 			setAttr(ConstantLog.log_optype, ConstantLog.role_del);
-			String msg = "删除角色-" +"UUID:" + uuids + "角色编码:" + getPara("role_id") + "  角色名称:"
+			String msg = "删除角色-" +" UUID:" + uuids + " 角色编码:" + getPara("role_id") + " 角色名称:"
 					+ getPara("role_name");
 			setAttr(ConstantLog.log_opcontent, msg);
 			return;

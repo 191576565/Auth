@@ -73,7 +73,12 @@
                  <div class="form-group col-sm-12">
                      <label>组编码:</label>
                      <div>
-                         <input type="text" class="form-control chkGroudId"  id="group_id"  name="groupid" required> 
+                         <input 
+                         	type="text" 
+                         	class="form-control chkGroudId"  
+                         	id="group_id"  
+                         	name="groupid" 
+                         	required> 
                      </div>
                  </div>
                  <div class="form-group col-sm-12">
@@ -118,9 +123,6 @@
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
     
-     <!-- validate -->
-    <script src="${ctxPath }/static/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="${ctxPath }/static/js/plugins/validate/messages_zh.min.js"></script>
     <!--
     	作者：yeqc
     	时间：2017-02-09

@@ -85,7 +85,7 @@ public class ResMgmtController extends Controller {
 		}
 		reservice.resSave(resMgmt);
 		setAttr(ConstantLog.log_optype, ConstantLog.res_add);
-		String msg = "新增资源-" + "资源编码:" + getPara("res_id") + "  资源名称:"
+		String msg = "新增资源-" + " 资源编码:" + getPara("res_id") + " 资源名称:"
 				+ getPara("res_name");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
@@ -106,8 +106,8 @@ public class ResMgmtController extends Controller {
 		if (savesucess) {
 			// 写日志
 			setAttr(ConstantLog.log_optype, ConstantLog.res_add);
-			String msg = "新增资源" + "资源id:" + res.getStr(ResMgmt.column_res_id) + "  资源名称:"
-					+ res.getStr(ResMgmt.column_res_name)+ "  唯一识别码:"+ res.getStr(ResMgmt.column_uuid  );
+			String msg = "新增资源-" + " 资源编码:" + res.getStr(ResMgmt.column_res_id) + " 资源名称:"
+					+ res.getStr(ResMgmt.column_res_name)+ " 唯一识别码:"+ res.getStr(ResMgmt.column_uuid  );
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {
@@ -139,7 +139,7 @@ public class ResMgmtController extends Controller {
 		//唯一验证还没有写
 		reservice.resUpdate(resMgmt);
 		setAttr(ConstantLog.log_optype, ConstantLog.res_chg);
-		String msg = "编辑资源-" + "资源编码:" + getPara("res_id") + "  资源名称:"
+		String msg = "编辑资源-" + " 资源编码:" + getPara("res_id") + " 资源名称:"
 				+ getPara("res_name");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
@@ -159,8 +159,8 @@ public class ResMgmtController extends Controller {
 		if (savesucess) {
 			// 写日志
 			setAttr(ConstantLog.log_optype, ConstantLog.res_chg);
-			String msg = "编辑资源" + "资源id:" + res.getStr(ResMgmt.column_res_id) + "  资源名称:"
-					+ res.getStr(ResMgmt.column_res_name)+ "  唯一识别码:"+ res.getStr(ResMgmt.column_uuid  );
+			String msg = "编辑资源-" + " 资源编码:" + res.getStr(ResMgmt.column_res_id) + " 资源名称:"
+					+ res.getStr(ResMgmt.column_res_name)+ " 唯一识别码:"+ res.getStr(ResMgmt.column_uuid  );
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {
@@ -181,7 +181,7 @@ public class ResMgmtController extends Controller {
 		if (i >= 1) {
 			// 写日志
 			setAttr(ConstantLog.log_optype, ConstantLog.res_del);
-			String msg = "删除资源-"+" UUID：" + uuid + " 资源编码:" + getPara("res_id") + " 资源名称:" + getPara("res_name");
+			String msg = "删除资源-"+" UUID:" + uuid + " 资源编码:" + getPara("res_id") + " 资源名称:" + getPara("res_name");
 			setAttr(ConstantLog.log_opcontent, msg);
 			renderJson(true);
 		} else {

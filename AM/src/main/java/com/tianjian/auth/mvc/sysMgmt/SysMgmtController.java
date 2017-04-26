@@ -72,7 +72,7 @@ public class SysMgmtController extends Controller {
 		}
 		sysMgmtService.save(sysMgmt);
 		setAttr(ConstantLog.log_optype, ConstantLog.dmn_add);
-		String msg = "新增域-" + "域编码:" + getPara("scopeCode") + "  域名称:"
+		String msg = "新增域-" + "　域编码:" + getPara("scopeCode") + " 域名称:"
 				+ getPara("scopeName");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
@@ -100,7 +100,7 @@ public class SysMgmtController extends Controller {
 			return;
 		}
 		setAttr(ConstantLog.log_optype, ConstantLog.dmn_chg);
-		String msg = "编辑域-" + "域id:" + getPara("scopeCode") + "  域名称:"
+		String msg = "编辑域-" + " 域编码:" + getPara("scopeCode") + " 域名称:"
 				+ getPara("scopeName") + " UUID" + getPara("UUID");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
@@ -126,7 +126,7 @@ public class SysMgmtController extends Controller {
 		renderJson(true);
 		//日志
 		setAttr(ConstantLog.log_optype, ConstantLog.dmn_del);
-		String msg = "删除域-" +  " UUID:" + uuid + " 域编码:" + getPara("scopeCode") + "  域名称:"
+		String msg = "删除域-" +  " UUID:" + uuid + " 域编码:" + getPara("scopeCode") + " 域名称:"
 				+ getPara("scopeName");
 		setAttr(ConstantLog.log_opcontent, msg);
 	}

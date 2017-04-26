@@ -117,7 +117,7 @@ public class GouMgmtController extends Controller{
 		gouMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 		dpgmgmtservice.save(gouMgmt);
 		setAttr(ConstantLog.log_optype, ConstantLog.grp2_add);
-		String msg = "新增URL-" + "URL值:" + getPara("dictcode") + "  条件值:"
+		String msg = "新增URL-" + "　URL值:" + getPara("dictcode") + " 条件值:"
 				+ getPara("orgs");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
@@ -136,7 +136,7 @@ public class GouMgmtController extends Controller{
 		gouMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 		dpgmgmtservice.update(gouMgmt);
 		setAttr(ConstantLog.log_optype, ConstantLog.grp2_chg);
-		String msg = "编辑URL-" + "URL值:" + getPara("dictcode") + "  条件值:"
+		String msg = "编辑URL-" + "　URL值:" + getPara("dictcode") + " 条件值:"
 				+ getPara("orgs");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
@@ -175,7 +175,7 @@ public class GouMgmtController extends Controller{
 		renderJson(true);
 		//日志
 		setAttr(ConstantLog.log_optype, ConstantLog.grp2_del);
-		String msg = "删除URL配置-" +  " UUID:" + uuid + " URL:" + getPara("req_url") + "  URL描述:"
+		String msg = "删除URL配置-" +  " UUID:" + uuid + " URL:" + getPara("req_url") + " URL描述:"
 					+ getPara("req_url_desc");
 		setAttr(ConstantLog.log_opcontent, msg);
 	}
@@ -190,7 +190,7 @@ public class GouMgmtController extends Controller{
 			renderJson(true);
 			//日志
 			setAttr(ConstantLog.log_optype, ConstantLog.grp2_del);
-			String msg = "删除URL配置-" +  " UUID:" + uuids + " URL:" + getPara("req_url") + "  URL描述:"
+			String msg = "删除URL配置-" +  " UUID:" + uuids + " URL:" + getPara("req_url") + " URL描述:"
 						+ getPara("req_url_desc");
 			setAttr(ConstantLog.log_opcontent, msg);
 			return;

@@ -152,7 +152,7 @@ public class DpgMgmtController extends Controller {
 					insertflag.put("status", "error");
 				}
 				setAttr(ConstantLog.log_optype, ConstantLog.grp_add);
-				String msg = "新增权限组-" + "组编码:" + getPara("groupid") + "  组名称:"
+				String msg = "新增权限组-" + "　组编码:" + getPara("groupid") + " 组名称:"
 						+ getPara("groupname");
 				setAttr(ConstantLog.log_opcontent, msg);
 				renderJson(insertflag);
@@ -208,7 +208,7 @@ public class DpgMgmtController extends Controller {
 					insertflag.put("status", "error");
 				}
               	setAttr(ConstantLog.log_optype, ConstantLog.grp_del);
-    			String msg = "删除权限组- UUID：" + getPara("uuid") + " 组编码:" + getPara("group_id") + " 组名称:" + getPara("group_desc");
+    			String msg = "删除权限组- UUID:" + getPara("uuid") + " 组编码:" + getPara("group_id") + " 组名称:" + getPara("group_desc");
     			setAttr(ConstantLog.log_opcontent, msg);
 				renderJson(insertflag);
 			}
@@ -263,8 +263,8 @@ public class DpgMgmtController extends Controller {
 					insertflag.put("status", "error");
 				}
 				setAttr(ConstantLog.log_optype, ConstantLog.grp_chg);
-				String msg = "编辑权限组-" + "组编码:" + getPara("groupid") + "  组名称:"
-						+ getPara("groupname") + " UUID:" + getPara("uuid");
+				String msg = "编辑权限组-" + " UUID:" + getPara("uuid") + " 组编码:" + getPara("groupid") + " 组名称:"
+						+ getPara("groupname");
 				setAttr(ConstantLog.log_opcontent, msg);
 				renderJson(insertflag);
 			}

@@ -29,9 +29,9 @@ function zTreeOnClickSimple(event, treeId, treeNode) {
 	return true;
 };
 
-var valid;
+//var valid;
 $(function() {
-	valid=$('#form').validate();
+//	valid=$('#form').validate();
 	//初始化表格
 	initdpgMgmtlist();
 	
@@ -164,7 +164,7 @@ $('#sys_add').click(function(){
 	$('#form p.success').remove();
 	
 	//去除上次表单验证的样式
-	valid.resetForm();
+//	valid.resetForm();
 	$('input').removeClass('error');
 	$('select').removeClass('error');
 	
@@ -175,7 +175,7 @@ $('#sys_add').click(function(){
 		area: '400px',
 		btn: ['保存', '取消'],
 		yes: function(index, layero){
-			if($('#form').valid()){
+//			if($('#form').valid()){
 				$.ajax({
 					url : "dpgMgmt/saveform?"+$('#form').serialize()+"&guserid="+users,
 					dataType : "json",
@@ -195,7 +195,7 @@ $('#sys_add').click(function(){
 						layer.msg("数据被城管抓走了！");
 					}
 				});
-			}
+//			}
 		},
 		btn2: function(index, layero){}
 	});
