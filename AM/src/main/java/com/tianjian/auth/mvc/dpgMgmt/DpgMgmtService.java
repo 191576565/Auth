@@ -10,12 +10,20 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseService;
 import com.tianjian.auth.mvc.model.DpgMgmt;
+import com.tianjian.auth.mvc.sysMgmt.SysMgmt;
 import com.tianjian.platform.constant.ConstantRender;
 import com.tianjian.platform.pjson.PageJson;
 import com.tianjian.platform.tools.ToolGetSql;
 import com.tianjian.platform.tools.ToolSqlXml;
 
 public class DpgMgmtService extends BaseService {
+	
+	//重复性验证(新增)
+	public boolean notRepeated(String groupId, String groupName, String domainUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.repeatSelect");
+		List<Record> list = Db.find(sql,groupId,groupName,domainUuid);
+		return list.isEmpty();
+	}
 	
 	//获取权限组信息
 	public List<Record> domainInfo(String domainId, String domainUuid){

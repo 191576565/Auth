@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sql-statement namespace="tianjian.dpg">
 
+	<sql id="repeatSelect">
+		<![CDATA[ 
+        	select * from SYS_GROUP_INFO t where 1=1 and (t.GROUP_ID = ? or t.GROUP_DESC = ?) and t.DOMAIN_UUID = 
+(select t.UUID from SYS_DOMAIN_INFO t where t.DOMAIN_ID=?)
+    	]]>
+	</sql>
+
 	<sql id="userTree">
 		<![CDATA[ 
         	with org_user as (

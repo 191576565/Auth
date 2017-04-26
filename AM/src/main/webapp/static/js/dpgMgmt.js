@@ -180,12 +180,13 @@ $('#sys_add').click(function(){
 					type : 'post',
 					contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
 					success : function(data) {
-						if (data.status == 'success') {
-							layer.msg("数据保存成功");
+						if (data.status == 'repeat') {
+							layer.msg("组编码/组名不能重复");
 						} else {
-							layer.msg("数据保存失败");
+							layer.closeAll();
+							$('#table').bootstrapTable('refresh', {silent: true});
 						}
-						 refresh();
+//						 refresh();
 					},
 					error : function(
 							XMLHttpRequest,
@@ -330,6 +331,11 @@ $('#domain_id').change(function(){
 function validate(){
 	//非空验证
 	var flag = true;
+	if('' == $("#domain_id").val()){
+		layer.msg("所属域不能为空");
+		flag = false;
+		return false;
+	}
 	$(".notNull").each(function(){
         if(""==$(this).val()){
         	layer.msg($(this).attr('nullName')+"不能为空");

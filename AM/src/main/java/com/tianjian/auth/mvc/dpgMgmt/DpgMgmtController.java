@@ -144,6 +144,11 @@ public class DpgMgmtController extends Controller {
 				mpara.put("groupname", getPara("groupname"));
 				mpara.put("guserid", getPara("guserid"));
 				mpara.put("opuser", ((Record) userinfo).getStr("user_id"));
+				if(!dpgmgmtservice.notRepeated(getPara("groupid"), getPara("groupname"),getPara("domaininfo"))){
+					insertflag.put("status", "repeat");
+					renderJson(insertflag);
+					return;
+				}
 				String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_ingroupinfo, mpara);
 				int dpgmgmt =Db.update(sql);
 				if(dpgmgmt==1){
