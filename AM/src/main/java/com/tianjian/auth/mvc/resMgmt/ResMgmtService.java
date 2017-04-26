@@ -9,6 +9,24 @@ import com.tianjian.auth.mvc.sysMgmt.OrgMgmt;
 import com.tianjian.platform.tools.ToolGetSql;
 
 public class ResMgmtService {
+	
+	//重复性验证
+	public boolean notRepeated(String resId, String resName){
+		String sql = ToolGetSql.getSql("tianjian.res.repeatSelect");
+		boolean bool = Db.find(sql,resId,resName).isEmpty();
+		return bool;
+	}
+	
+	//编辑资源,yeqc
+	public void resUpdate(ResMgmt resMgmt){
+		resMgmt.update();
+	}
+	
+	//新增资源,yeqc
+	public void resSave(ResMgmt resMgmt){
+		resMgmt.save();
+	}
+	
 	/*
 	 * 资源的--查询
 	 */

@@ -56,13 +56,46 @@ public class ResMgmtController extends Controller {
 			renderJson(false);
 		}
 	}
+	
+	/**
+	 * yeqc
+	 * save()采用getModel的方式获取表单数据，与前端ng表单验证产生冲突
+	 * 故暂时采用此方法,以后再做深入研究
+	 */
+	public void resSave(){
+		ResMgmt resMgmt = new ResMgmt();
+		resMgmt.set("RES_BG_URL", getPara("res_bg_url"));
+		resMgmt.set("RES_ID", getPara("res_id"));
+		resMgmt.set("RES_NAME", getPara("res_name"));
+		resMgmt.set("RES_URL", getPara("res_url"));
+		resMgmt.set("RES_UP_UUID", getPara("res_up_uuid"));
+		resMgmt.set("RES_TYPE", getPara("res_type"));
+		resMgmt.set("RES_CLASS", getPara("res_class"));
+		resMgmt.set("RES_COLOR", getPara("res_color"));
+		resMgmt.set("RES_ICON", getPara("res_icon"));
+		resMgmt.set("SORT_ID", getPara("sort_id"));
+		resMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
+		resMgmt.set("CREATOR", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
+		resMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
+		resMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
+		//唯一验证
+		if(!reservice.notRepeated(getPara("res_id"), getPara("res_name"))){
+			renderJson(false);
+			return;
+		}
+		reservice.resSave(resMgmt);
+		setAttr(ConstantLog.log_optype, ConstantLog.res_add);
+		String msg = "新增资源-" + "资源编码:" + getPara("res_id") + "  资源名称:"
+				+ getPara("res_name");
+		setAttr(ConstantLog.log_opcontent, msg);
+		renderJson(true);
+	}
 
 	/*
 	 * 资源的--新增
 	 */
 	public void save() {
 		ResMgmt res = getModel(ResMgmt.class, "res");
-//		System.out.println(res);
 		// 获取session中数据
 		Object userinfo = getSessionAttr("userinfo");
 		// 完善res数据
@@ -82,7 +115,35 @@ public class ResMgmtController extends Controller {
 		}
 
 	}
-
+	
+	/**
+	 * yeqc
+	 * put()采用getModel的方式获取表单数据，与前端ng表单验证产生冲突
+	 * 故暂时采用此方法,以后再做深入研究
+	 */
+	public void resPut(){
+		ResMgmt resMgmt = new ResMgmt();
+		resMgmt.set("UUID", getPara("uuid"));
+		resMgmt.set("RES_BG_URL", getPara("res_bg_url"));
+		resMgmt.set("RES_ID", getPara("res_id"));
+		resMgmt.set("RES_NAME", getPara("res_name"));
+		resMgmt.set("RES_URL", getPara("res_url"));
+		resMgmt.set("RES_UP_UUID", getPara("res_up_uuid"));
+		resMgmt.set("RES_TYPE", getPara("res_type"));
+		resMgmt.set("RES_CLASS", getPara("res_class"));
+		resMgmt.set("RES_COLOR", getPara("res_color"));
+		resMgmt.set("RES_ICON", getPara("res_icon"));
+		resMgmt.set("SORT_ID", getPara("sort_id"));
+		resMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
+		resMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
+		//唯一验证还没有写
+		reservice.resUpdate(resMgmt);
+		setAttr(ConstantLog.log_optype, ConstantLog.res_chg);
+		String msg = "编辑资源-" + "资源编码:" + getPara("res_id") + "  资源名称:"
+				+ getPara("res_name");
+		setAttr(ConstantLog.log_opcontent, msg);
+		renderJson(true);
+	}
 	/*
 	 * 资源的--更改
 	 */

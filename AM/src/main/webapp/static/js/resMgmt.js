@@ -23,7 +23,7 @@ function zTreeOnDblClickSimple(event, treeId, treeNode) {
 	var index = layer.index; //获取当前弹层的索引号
 	layer.close(index); //关闭当前弹层
 	
-	valid.element( '#up_res_name' );
+//	valid.element( '#up_res_name' );
 };
 
 function zTreeOnClickSimple(event, treeId, treeNode) {
@@ -121,14 +121,17 @@ $('#res_add').on('click', function() {
 		area :  '640px',
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
+			if (!validate()) {
+				return false;
+			}
 			var data=$('#form').serialize();
-			$.post('resMgmt/save?'+data, function(d){
-				if(d){
-					initTable();
+			$.post('resMgmt/resSave?'+data, function(d){
+				if(JSON.stringify(d) == "false"){
+					layer.msg('资源编码/资源名称不能重复');
 				}else {
-					layer.msg('资源新增失败');
+					layer.closeAll();
+					initTable();
 				}
-				layer.closeAll();
 			});
 		},
 		btn2: function(index, layero){
@@ -154,20 +157,20 @@ function update(obj){
 		area :  '640px',
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
+			if (!validate()) {
+				return false;
+			}
 			//上级资源不能选自己
 			if($('#res_up_uuid').val() == $('#uuid').val()){
 				layer.msg('上级资源不能选自己');
 				return false;
 			}
 			var data=$('#form').serialize();
-			$.post('resMgmt/put?'+data, function(d){
+			$.post('resMgmt/resPut?'+data, function(d){
 				if(d){
-					layer.msg('资源更新成功');
+					layer.closeAll();
 					initTable();
-				}else {
-					layer.msg('资源更新失败');
 				}
-				layer.closeAll();
 			});
 		},
 		btn2: function(index, layero){
@@ -176,31 +179,31 @@ function update(obj){
 	});
 }
 
-$('.save').click(function(){
-	if($('#form').valid()){
-		var data=$('#form').serialize();
-		if($('#uuid').val()==''){ //add
-			$.post('resMgmt/save?'+data, function(d){
-				if(d){
-					layer.msg('资源新增成功');
-					initTable();
-				}else {
-					layer.msg('资源新增失败');
-				}
-			});
-		}else { //update
-			$.post('resMgmt/put?'+data, function(d){
-				if(d){
-					layer.msg('资源更新成功');
-					initTable();
-				}else {
-					layer.msg('资源更新失败');
-				}
-			});
-		}
-		layer.closeAll();
-	}
-});
+//$('.save').click(function(){
+//	if($('#form').valid()){
+//		var data=$('#form').serialize();
+//		if($('#uuid').val()==''){ //add
+//			$.post('resMgmt/save?'+data, function(d){
+//				if(JSON.stringify(resultJson) == "false"){
+//					layer.msg('资源编码/资源名称不能重复');
+//				}else {
+//					layer.closeAll();
+//					initTable();
+//				}
+//			});
+//		}else { //update
+//			$.post('resMgmt/put?'+data, function(d){
+//				if(d){
+//					layer.msg('资源更新成功');
+//					initTable();
+//				}else {
+//					layer.msg('资源更新失败');
+//				}
+//			});
+//		}
+//		layer.closeAll();
+//	}
+//});
 
 function del(obj){
 	var index=$(obj).attr('index');
@@ -245,6 +248,35 @@ $('#res_del').click(function(){
 		layer.close(layer.index);
 	});
 });
+
+function validate(){
+	//非空验证
+	var flag = true;
+	if("" == $('#res_type').val()){
+		layer.msg($('#res_type').attr('nullName')+"不能为空");
+		flag = false;
+		return false;
+	}
+	if("" == $('#res_up_uuid').val()){
+		layer.msg($('#res_up_uuid').attr('nullName')+"不能为空");
+		flag = false;
+		return false;
+	}
+	$(".notNull").each(function(){
+        if(""==$(this).val()){
+        	layer.msg($(this).attr('nullName')+"不能为空");
+        	flag = false;
+        	return false;
+        }
+    });
+	//合法验证
+	$("p.error").each(function(){
+		if(""!=$(this).text()){
+			flag = false;
+		}
+	});
+	return flag;
+}
 
 //jQuery.validator.addMethod("chkResId", function(value, element) {   
 //    var flag=true, url='';

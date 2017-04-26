@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 用户sql -->
 <sql-statement namespace="tianjian.res">
+	
+	<sql id="repeatSelect">
+		<![CDATA[ 
+        	select * from sys_resource_info t 
+        		where 1=1 
+        			and (t.RES_ID = ? or t.RES_NAME = ?)
+    	]]>
+	</sql>
+
 	<sql id="restree">
 		<![CDATA[ 
         	select uuid as id,res_up_uuid as pid,trim(res_name) name from SYS_RESOURCE_INFO 

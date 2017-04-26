@@ -85,38 +85,55 @@ select {
 	<div id="sys_add_div" class="wrapper"
 		style="display: none; width: 100%; margin: 0px;">
 		<br />
-		<div class="col-sm-12">
+		<div class="col-sm-12">  
 			<form ng-app="myApp" ng-controller="validateCtrl" id="form"
 				name="myForm" novalidate>
-				<input type="hidden" name="res.uuid" id="uuid">
+				<input type="hidden" name="uuid" id="uuid">
 				<div class="col-sm-12">
 					<div class="form-group col-sm-6">
-						<label>资源编码</label> <input name="res.res_id" type="text"
-							class="form-control notNull" id="res_id" placeholder=""
-							ng-model="res_id" ng-minlength="1" ng-maxlength="32"
-							ng-pattern="/^[A-Za-z0-9]+$/" required />
-						<!--  
-						   				<p class="error" ng-if="(myForm.res.res_id.$error.minlength ||
-											myForm.res.res_id.$error.maxlength) && 
-											myForm.res.res_id.$touched">
+						<label>资源编码</label> 
+						<input name="res_id" 
+							type="text"
+							class="form-control notNull" 
+							id="res_id" 
+							placeholder="1~32位字母/数字"
+							ng-model="res_id" 
+							ng-minlength="1" 
+							ng-maxlength="32"
+							ng-pattern="/^[A-Za-z0-9]+$/"
+							nullName="资源编码"
+							required />
+						<p class="error" ng-if="(myForm.res_id.$error.minlength ||
+											myForm.res_id.$error.maxlength) && 
+											myForm.res_id.$touched">
 										长度应在1~32位之间</p>
-										-->
-						<p class="error"
-							ng-if="$scope.res_id.$error.pattern &&
-											$scope.res_id.$touched">
-							只能是字母/数字组合</p>
+						<p class="error" ng-if="myForm.res_id.$error.pattern &&
+						myForm.res_id.$touched">
+					只能是字母/数字组合</p>
 					</div>
 					<div class="form-group col-sm-6">
-						<label>资源名称</label> <input type="text" placeholder=""
-							class="form-control notNull" name="res.res_name" id="res_name"
-							required>
+						<label>资源名称</label> 
+						<input type="text" 
+							placeholder=""
+							class="form-control notNull" 
+							name="res_name" 
+							id="res_name"
+							ng-model="res_name"
+							ng-minlength="1" 
+							ng-maxlength="32"
+							nullName="资源名称"
+							required />
+						<p class="error" ng-if="(myForm.res_name.$error.minlength ||
+											myForm.res_name.$error.maxlength) && 
+											myForm.res_name.$touched">
+										长度应在1~32位之间</p>
 					</div>
 				</div>
 				<div class="col-sm-12">
 					<div class="form-group col-sm-6">
 						<label>上级资源</label>
 						<div class="input-group">
-							<input type="hidden" name="res.res_up_uuid" id="res_up_uuid">
+							<input type="hidden" name="res_up_uuid" id="res_up_uuid" nullName="上级资源">
 							<input type="text" class="form-control" name="res_up_name"
 								id="up_res_name" required readonly="readonly"> <span
 								class="input-group-btn">
@@ -128,7 +145,7 @@ select {
 					</div>
 					<div class="form-group col-sm-6">
 						<label>资源类型</label> <select class="form-control"
-							name="res.res_type" style="border-radius: 2px;" id="res_type"
+							name="res_type" style="border-radius: 2px;" id="res_type" nullName="资源类型"
 							required>
 							<option value="">请选择资源类型</option>
 							<option value="0">主菜单</option>
@@ -140,32 +157,32 @@ select {
 				<div class="col-sm-12">
 					<div class="form-group col-sm-6">
 						<label>前端URL</label> <input type="text" placeholder=""
-							class="form-control" name="res.res_url" id="res_url">
+							class="form-control" name="res_url" id="res_url">
 					</div>
 					<div class="form-group col-sm-6">
 						<label>后端URL</label> <input type="text" placeholder=""
-							class="form-control" name="res.res_bg_url" id="res_bg_url">
+							class="form-control" name="res_bg_url" id="res_bg_url">
 					</div>
 
 				</div>
 				<div class="col-sm-12">
 					<div class="form-group col-sm-6">
 						<label>资源背景色</label> <input type="text" placeholder=""
-							class="form-control" name="res.res_color" id="res_color">
+							class="form-control" name="res_color" id="res_color">
 					</div>
 					<div class="form-group col-sm-6">
 						<label>资源图标</label> <input type="text" placeholder=""
-							class="form-control" name="res.res_icon" id="res_icon">
+							class="form-control" name="res_icon" id="res_icon">
 					</div>
 				</div>
 				<div class="col-sm-12">
 					<div class="form-group col-sm-6">
 						<label>资源样式</label> <input type="text" placeholder=""
-							class="form-control" name="res.res_class" id="res_class">
+							class="form-control" name="res_class" id="res_class">
 					</div>
 					<div class="form-group col-sm-6">
 						<label>资源排序</label> <input type="text" placeholder=""
-							class="form-control digits" name="res.sort_id" id="sort_id"
+							class="form-control digits" name="sort_id" id="sort_id"
 							required maxlength="4">
 					</div>
 				</div>
