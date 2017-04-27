@@ -279,6 +279,9 @@ function sys_add(){
 		area: ['600px', '450px'],
 		btn: ['保存','取消'],
         yes: function(index){
+        	if (!validate()) {
+				return false;
+			}
         	$.ajax({
 				url : "gouMgmt/save?"+$('#form').serialize()+"&orgs="+orgs,
 				dataType : "json",
@@ -318,24 +321,25 @@ function sys_edit(uuid){
 	return false;
 }
 
-function fromcheck(){
-	var urlid=$('#urlid').val();
-    var dictcode=$('#dictcode').val();
-    var dictinfo=$('#dictinfo').val();
-    if(isnull(urlid)){
-		layer.tips("请输入URL！", '#urlid');
-		return false;
-	}
-	if(dictcode==null || dictcode=='Value'){
-		layer.tips("请选择条件类型!", '#dictcode');
-		 return false;
-	 }
-	if(isnull(dictinfo)){
-		layer.tips("请输入条件参数！", '#dictinfo');
-		 return false;
-	}else{return true;};
-}
+//function fromcheck(){
+//	var urlid=$('#urlid').val();
+//    var dictcode=$('#dictcode').val();
+//    var dictinfo=$('#dictinfo').val();
+//    if(isnull(urlid)){
+//		layer.tips("请输入URL！", '#urlid');
+//		return false;
+//	}
+//	if(dictcode==null || dictcode=='Value'){
+//		layer.tips("请选择条件类型!", '#dictcode');
+//		 return false;
+//	 }
+//	if(isnull(dictinfo)){
+//		layer.tips("请输入条件参数！", '#dictinfo');
+//		 return false;
+//	}else{return true;};
+//}
 
+//新增
 $('#sys_add').on('click', function() {
      $('#urlid').val('');
      $('#urlname').val('');
@@ -578,6 +582,27 @@ function isnull(str){
     return rg.test(str);
 }
 
+function validate(){
+	//非空验证
+	var flag = true;
+	if('' == $("#urlid").val()){
+		layer.msg("条件类型不能为空");
+		flag = false;
+		return false;
+	}
+	if('' == $("#dictcode").val()){
+		layer.msg("URL描述不能为空");
+		flag = false;
+		return false;
+	}
+	//合法验证
+	$("p.error").each(function(){
+		if(""!=$(this).text()){
+			flag = false;
+		}
+	});
+	return flag;
+}
 
 
 

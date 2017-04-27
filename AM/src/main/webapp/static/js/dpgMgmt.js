@@ -31,7 +31,6 @@ function zTreeOnClickSimple(event, treeId, treeNode) {
 
 //var valid;
 $(function() {
-//	valid=$('#form').validate();
 	//初始化表格
 	initdpgMgmtlist();
 	
@@ -66,7 +65,7 @@ $(function() {
 				content : $('.t'),
 				title : '选择所属用户',
 				area : [ '400px', '600px' ],
-				maxmin: true,
+				maxmin: false,
 				btn: ['确定', '取消'],
 				yes: function(index, layero){
 					var nodes = treeObj.getCheckedNodes(true);

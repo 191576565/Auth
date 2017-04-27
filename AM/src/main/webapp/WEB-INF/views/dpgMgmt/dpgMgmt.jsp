@@ -22,8 +22,7 @@
 		<!-- Ladda style -->
 		<link href="${ctxPath }/static/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
 		<link href="${ctxPath }/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-		<!-- Sweet Alert -->
-		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+		<!-- Ztree style -->
 		<link href="${ctxPath }/static/css/plugins/ztree/zTreeStyle.css" rel="stylesheet">
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
