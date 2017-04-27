@@ -34,7 +34,8 @@ public class UptPwdController extends Controller {
 
 		if (newp.equals(renewp)) {
 			setAttr(ConstantLog.log_optype, ConstantLog.user_passmodify);
-			String msg = "用户密码修改";
+			String msg = "修改密码-" + " UUID:" + ((Record) userinfo).getStr("user_uuid") 
+					+ " 用户编码:" + ((Record) userinfo).getStr("user_id") + " 用户名:" + ((Record) userinfo).getStr("user_name");
 			setAttr(ConstantLog.log_opcontent, msg);
 			u.update();
 			redirect("/");
@@ -74,7 +75,7 @@ public class UptPwdController extends Controller {
 		usrMgmt.set("user_phone", userPhone);
 		usrMgmt.update();
 		setAttr(ConstantLog.log_optype, ConstantLog.user_chg);
-		String msg = "编辑用户（uuid）："+uuid;
+		String msg = "编辑用户- UUID:"+uuid+" 用户编码:"+getPara("userid")+" 用户名:"+getPara("username");
 		setAttr(ConstantLog.log_opcontent, msg);
 		//forwardAction("/validLogin");
 		//render("/login/login_after.jsp");

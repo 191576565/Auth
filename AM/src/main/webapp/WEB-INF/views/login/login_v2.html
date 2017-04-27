@@ -54,8 +54,6 @@ if (window.top !== window.self) {
 				async : false,
 				cache : false,
 				success : function(data) {
-					console.log(data.code);
-					console.log(data.message);
 					if (data.code == '0') {
 						layer.tips(data.message, '#submitbutton');
 					} else {
