@@ -150,7 +150,7 @@
 				</div>
 				<div class="form-group">
 					<label>用户名称</label> <input id="username" name="username"
-						  class="form-control" 
+						  class="form-control" onblur="usernamecheck()"
 					>
 					<p id="usernamecheck" class="error"></p>
 				</div>
@@ -174,13 +174,13 @@
 				</div>
 				<div class="form-group">
 					<label>手机号</label> <input id="userphone" name="userphone"
-						  class="form-control"
+						  class="form-control" onblur="phonecheck()"
 					>
 					<p id="phonecheck" class="error"></p>
 				</div>
 				<div class="form-group">
 					<label>邮箱</label> <input id="useremail" name="useremail"
-						  class="form-control"
+						  class="form-control" onblur="emailcheck()"
 					>
 					<p id="emailcheck" class="error"></p>
 				</div>
