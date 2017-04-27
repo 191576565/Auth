@@ -136,7 +136,7 @@ public class GouMgmtController extends Controller{
 		gouMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 		dpgmgmtservice.update(gouMgmt);
 		setAttr(ConstantLog.log_optype, ConstantLog.grp2_chg);
-		String msg = "编辑URL-" + "　URL值:" + getPara("dictcode") + " 条件值:"
+		String msg = "编辑URL-" + " UUID:" + getPara("uuid") + "　URL值:" + getPara("dictcode") + " 条件值:"
 				+ getPara("orgs");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);

@@ -206,7 +206,7 @@ function edit(uuid,user_id,user_name,domain_uuid,org_uuid,role_uuids,user_phone,
 	//初始化form
 	$("#uuid").val(uuid);
 	$("#scopeCode").val(user_id);
-	$("#scopeCode").attr("disabled",true);
+	$("#scopeCode").attr("readonly","readonly");
 	$("#usrName").val(user_name);
 	$("#domain").val(domain_uuid);
 	changeDomain(domain_uuid);

@@ -141,7 +141,7 @@ public class OrgMgmtController extends Controller {
 		}
 		orgMgmtService.delete(uuid);
 		setAttr(ConstantLog.log_optype, ConstantLog.org_del);
-		String msg = "删除机构-" + " UUID:" + getPara("UUID") + "机构编码:" + getPara("orgCode") + " 机构名称:"
+		String msg = "删除机构-" + " UUID:" + getPara("UUID") + " 机构编码:" + getPara("orgCode") + " 机构名称:"
 				+ getPara("orgName");
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);

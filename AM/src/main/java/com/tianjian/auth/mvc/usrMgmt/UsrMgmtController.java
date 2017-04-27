@@ -100,6 +100,7 @@ public class UsrMgmtController extends Controller {
 	//编辑用户
 	public void updtUsr(){
 		//获取form中的信息
+		String userId = getPara("scopeCode");
 		String uuid = getPara("uuid");
 		String userName = getPara("usrName");
 		String roles = StringUtils.join(getParaValues("role"),",");
@@ -132,7 +133,7 @@ public class UsrMgmtController extends Controller {
 		usrMgmt.update();
 
 		setAttr(ConstantLog.log_optype, ConstantLog.user_chg);
-		String msg = "编辑用户- UUID:" + uuid +" 用户名:"+userName;
+		String msg = "编辑用户- UUID:" + uuid + " 用户编码:" + userId +" 用户名:"+userName;
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}
