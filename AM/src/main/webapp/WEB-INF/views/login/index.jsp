@@ -104,7 +104,15 @@
                                	欢迎您，<%=((Record)session.getAttribute("userinfo")).getStr("user_name") %>
                                 <i class="fa fa-chevron-down"></i>
                             </a>
-                            <ul class="dropdown-menu yeqc-size">                               
+                            <ul class="dropdown-menu yeqc-size"> 
+                            	<li>
+                                    <div id="div1" class="text-center link-block" >
+                                       <a id="div2" class="" href="loginafter">
+                                            <i class=" fa fa-home" ></i> <strong > 回主界面</strong>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>                              
                                 <li>
                                     <div id="div1" class="text-center link-block" >
                                        <a id="div2" class="J_menuItem" onclick="modclick()">
