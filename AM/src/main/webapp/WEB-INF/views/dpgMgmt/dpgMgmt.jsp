@@ -115,7 +115,6 @@
  				<div class="form-group col-sm-12">
                      <label>所属用户:</label>
                      <div>
-                         <!-- <input type="text" class="form-control" id="guserid" name="guserid">  -->
                          <button class="btn btn-block btn-default users">选择用户</button>
                      </div>
                  </div>

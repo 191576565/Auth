@@ -17,7 +17,6 @@ import com.tianjian.auth.mvc.constant.ConstantLog;
 import com.tianjian.auth.mvc.dpgMgmt.DpgMgmtController;
 import com.tianjian.auth.mvc.model.DpgMgmt;
 import com.tianjian.auth.mvc.rolMgmt.RoleMgmtService;
-import com.tianjian.platform.pjson.PageJson;
 
 public class DpgMgmtController extends Controller {
 	protected DataSource dataSource;

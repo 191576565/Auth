@@ -1,6 +1,8 @@
 package com.tianjian.auth.mvc.dpgMgmt;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -95,7 +97,21 @@ public class DpgMgmtService extends BaseService {
 	public List<Record> userTree(String domainUuid){
 		String sql = ToolGetSql.getSql("tianjian.dpg.userTree");
 		List<Record> list = Db.find(sql,domainUuid,domainUuid);
+		for(int i=list.size()-1; i>=0; i--){
+			String flag = list.get(i).getStr("flag");
+			String orgUuid = list.get(i).getStr("id");
+			if("0".equals(flag) && getLeaf(domainUuid,orgUuid)==0){
+				list.remove(i);
+			}
+		}
 		return list;
+	}
+	
+	//传入域和机构的uuid，查询其下叶子节点的个数
+	public int getLeaf(String domainUuid,String orgUuid){
+		String sql = ToolGetSql.getSql("tianjian.dpg.getLeaf");
+		List<Record> list = Db.find(sql,domainUuid,orgUuid);
+		return list.size();
 	}
 	
 	//获取机构树

@@ -7,6 +7,15 @@
 (select t.UUID from SYS_DOMAIN_INFO t where t.DOMAIN_ID=?)
     	]]>
 	</sql>
+	
+	<sql id="getLeaf">
+		<![CDATA[ 
+        	SELECT T.* FROM SYS_USER_INFO T 
+    WHERE T.DOMAIN_UUID = (SELECT T.UUID FROM SYS_DOMAIN_INFO T WHERE T.DOMAIN_ID = ?) 
+        AND T.ORG_UUID=?
+        	
+    	]]>
+	</sql>
 
 	<sql id="userTree">
 		<![CDATA[ 
