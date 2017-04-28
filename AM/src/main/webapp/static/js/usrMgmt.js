@@ -329,6 +329,8 @@ $('#btn_reset').click(function(){
 	var arrUUID = $.map(selectContent,function(row){return row.uuid});
 	//获得userName，confirm的时候用
 	var arrUser = $.map(selectContent,function(row){return row.user_name});
+	//获得userId
+	var arrUserId = $.map(selectContent,function(row){return row.user_id});
 	//确认删除
 	if(0 == arrUUID.length){
 		layer.msg('请选择要重置的用户');
@@ -336,7 +338,7 @@ $('#btn_reset').click(function(){
 		layer.confirm('是否重置选中用户的密码？', {
 			  btn: ['确定','取消'] //按钮
 			}, function(){
-				$.post('usrMgmt/batchReset', {"uuid[]":arrUUID},function(d){
+				$.post('usrMgmt/batchReset', {"uuid[]":arrUUID,"arrUser[]":arrUser,"arrUserId[]":arrUserId},function(d){
 					if(d){
 						layer.msg('重置密码成功');
 					}else {

@@ -159,7 +159,7 @@ public class UsrMgmtController extends Controller {
 		renderJson(ums.batchDeleteUUID(uuids));
 		
 		setAttr(ConstantLog.log_optype, ConstantLog.user_del);
-		String msg = "删除用户- UUID："+Arrays.toString(uuids)+"　用户名:"+Arrays.toString(users) + " 用户编码:"+Arrays.toString(userIds);
+		String msg = "删除用户- UUID："+Arrays.toString(uuids)+"　用户编码:"+Arrays.toString(userIds) + " 用户名:" +Arrays.toString(users);
 		setAttr(ConstantLog.log_opcontent, msg);
 		renderJson(true);
 	}
@@ -167,10 +167,12 @@ public class UsrMgmtController extends Controller {
 	//重置密码
 	public void batchReset(){
 		String[] uuids = getParaValues("uuid[]");
+		String[] users = getParaValues("arrUser[]");
+		String[] userIds = getParaValues("arrUserId[]");
 		renderJson(ums.batchResetUUID(uuids));
 		
 		setAttr(ConstantLog.log_optype, ConstantLog.user_chg);
-		String msg = "重置用户- UUID:"+uuids+" 的密码";
+		String msg = "重置密码- UUID:"+Arrays.toString(uuids)+"　用户编码:"+Arrays.toString(userIds) + " 用户名:" +Arrays.toString(users);;
 		setAttr(ConstantLog.log_opcontent, msg);
 	}
 }
