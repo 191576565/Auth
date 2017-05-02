@@ -136,9 +136,9 @@ public class DpgMgmtService extends BaseService {
 	}
 	
 	//条件类型下的url
-	public List<Record> typeUrl(String type){
+	public List<Record> typeUrl(String type, String domainId){
 		String sql = ToolGetSql.getSql("tianjian.dpg.typeUrlSelect");
-		List<Record> list = Db.find(sql,type);
+		List<Record> list = Db.find(sql,type,domainId);
 		return list;
 	}
 	

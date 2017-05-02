@@ -37,6 +37,15 @@ public class GouMgmtController extends Controller{
 		renderJson(dpgmgmtservice.getConditionType(domain_id));
 	}
 	
+	/*
+	 * gouMgmt/getUrlDesc
+	 * 获取URL描述
+	 */
+	public void getUrlDesc(){
+		String type = getPara("type");
+		renderJson(dpgmgmtservice.typeUrl(type,domain_id));
+	}
+	
 	public void goulist() {
 		String groupuuid = g_id;
 		String param = getPara("sendParam");

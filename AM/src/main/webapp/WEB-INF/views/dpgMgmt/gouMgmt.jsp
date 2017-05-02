@@ -69,7 +69,6 @@
 	 			<div class="form-group col-sm-12">
  		     		<label>条件类型</label> 
  		     		<select id="urlid" name="urlid" class="form-control">
- 		     			<option value="">请选择条件类型</option>
  		     			<c:forEach items="${condition }" var="dlist">
 						<option value="${dlist.dict_id }">${dlist.dict_name }</option>
 						</c:forEach>

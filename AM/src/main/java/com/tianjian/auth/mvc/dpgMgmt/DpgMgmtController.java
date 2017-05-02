@@ -309,16 +309,6 @@ public class DpgMgmtController extends Controller {
 			}
 			
 			/*
-			 * dpgMgmt/typeUrl
-			 * 条件值URL
-			 */
-			public void typeUrl(){
-				String type = getPara("type");
-				List<Record> list = dpgmgmtservice.typeUrl(type);
-				renderJson(list);
-			}
-			
-			/*
 			 * dpgMgmt/getUsers
 			 * 获取users
 			 */
