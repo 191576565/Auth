@@ -100,10 +100,11 @@ public class ApiJsonController extends Controller {
 			List<Record> user = ApiJsonService.getSelectlist(username, usersession, type);
 			if (user == null || user.size() == 0) {
 				log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
-				code = "400";
-				//msg = username + "数据api请求异常，请检查接入格式或用户Session状态！";
+				
+				code = "200";
+				msg =username+ "-数据权限组无该用户或该用户登录状态已改变";
 				//modify 2017.4.26 hujian
-				msg = "用户在其他终端登录,该终端已下线,请确保您的密码是否已泄露。";
+				//msg = "用户在其他终端登录,该终端已下线,请确保您的密码是否已泄露。";
 			} else {
 				data = user;
 			}
