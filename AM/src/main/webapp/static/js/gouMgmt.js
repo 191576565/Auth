@@ -276,6 +276,9 @@ function onEdit(uuid, content) {
 		area: ['768px', '432px'],
 		btn: ['保存', '取消'],
 		yes: function(index) {
+			if (!validate()) {
+				return false;
+			}
 			$.ajax({
 				url: "gouMgmt/update?" + $('#form').serialize() + "&orgs=" + orgs + "&uuid=" + uuid,
 				dataType: "json",
