@@ -69,19 +69,13 @@
 	 			<div class="form-group col-sm-12">
  		     		<label>条件类型</label> 
  		     		<select id="urlid" name="urlid" class="form-control">
- 		     			<c:forEach items="${condition }" var="dlist">
-						<option value="${dlist.dict_id }">${dlist.dict_name }</option>
-						</c:forEach>
  		     		</select>
 				</div>
 				<div class="form-group col-sm-12">
 	 		     	<label>URL描述</label> 
-					<select id="dictcode" name="dictcode" nValidate="{required:true}" class="form-control">
+					<select id="dictcode" name="dictcode" class="form-control">
 		 			</select>
 	 			</div>
-				<div class="form-group col-sm-12">
-					<input id="urlname"  name="urlname"  class="form-control" readonly="true" type="hidden">
-				</div>
  			</form>
  				<div class="form-group col-sm-12">
 					<label>条件值</label> 

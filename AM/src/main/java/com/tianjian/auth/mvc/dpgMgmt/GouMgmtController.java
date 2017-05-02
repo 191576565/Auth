@@ -1,17 +1,12 @@
 package com.tianjian.auth.mvc.dpgMgmt;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
-import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.constant.ConstantLog;
-import com.tianjian.auth.mvc.model.DpgMgmt;
-import com.tianjian.platform.pjson.PageJson;
 
 public class GouMgmtController extends Controller{
 	private static final Log log = Log.getLog(DpgMgmtController.class);
@@ -22,10 +17,6 @@ public class GouMgmtController extends Controller{
 	
 	public void index() {
 		log.info("jump to gouMgmt");
-		setAttr("domainlist",dpgmgmtservice.getUrl(getPara("domainid")));
-		setAttr("condition",dpgmgmtservice.getConditionType(domain_id));
-		/*权限管理组模块子页面*/
-		setAttr("groupuuid", getPara("groupuuid"));
 		render("gouMgmt.jsp");
 	}
 	
@@ -39,13 +30,17 @@ public class GouMgmtController extends Controller{
 	
 	/*
 	 * gouMgmt/getUrlDesc
-	 * 获取URL描述
+	 * 根据条件类型获取URL数据
 	 */
 	public void getUrlDesc(){
 		String type = getPara("type");
 		renderJson(dpgmgmtservice.typeUrl(type,domain_id));
 	}
 	
+	/*
+	 * gouMgmt/goulist
+	 * bootstrapTable分页数据
+	 */
 	public void goulist() {
 		String groupuuid = g_id;
 		String param = getPara("sendParam");
@@ -56,41 +51,6 @@ public class GouMgmtController extends Controller{
 		renderJson(dpgmgmtservice.gouPageSelect(groupuuid));
 	}
 	
-	/** 
-	 *@Function 获取dictcode           
-	 *@Declare   根据组信息获取dictcode
-	 *@Author    谢涛
-	 *@Return    String  void
-	 */
-	public void getdictcode() {
-		Map<String, Object> mpara = new HashMap<String, Object>();
-		mpara.put("groupuuid", g_id);
-		String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_dictcode, mpara);
-		// 获取数据
-		List<Record> dpgmgmt = (List<Record>) Db.find(sql);
-		renderJson(dpgmgmt);
-	}
-	
-	/** 
-	 *@Function 校验URL是否存在       
-	 *@Declare   根据用户的权限获取域信息
-	 *@Author    谢涛
-	 *@Return    String  void
-	 */
-	public void verifyurlid() {
-		Map<String, Object> mpara = new HashMap<String, Object>();
-		Map<String,Object> insertflag = new HashMap<String,Object>();
-		mpara.put("groupuuid", g_id);
-		mpara.put("urlid", getPara("urlid"));
-		String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlid_verifyurl, mpara);
-	    List<Record> dpgmgmt =Db.find(sql);
-		if(dpgmgmt.size()>0){
-			insertflag.put("status", "error");
-		}else{
-			insertflag.put("status", "success");
-		}
-		renderJson(insertflag);
-	}
 	
 	/*
 	 * gouMgmt/orgTree
@@ -117,9 +77,13 @@ public class GouMgmtController extends Controller{
 	 */
 	public void save(){
 		GouMgmt gouMgmt = new GouMgmt();
+		//权限组唯一标识
 		gouMgmt.set("GROUP_UUID", getPara("groupUuid"));
+		//请求-URL值
 		gouMgmt.set("REQ_URL", getPara("dictcode"));
+		//条件值(机构UUID逗号分隔)
 		gouMgmt.set("CONDITION_CONTENT", getPara("orgs"));
+		//----------
 		gouMgmt.set("CREATOR", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
 		gouMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
 		gouMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));

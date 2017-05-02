@@ -1,8 +1,6 @@
 package com.tianjian.auth.mvc.dpgMgmt;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +10,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.base.BaseService;
 import com.tianjian.auth.mvc.model.DpgMgmt;
-import com.tianjian.auth.mvc.sysMgmt.SysMgmt;
 import com.tianjian.platform.constant.ConstantRender;
 import com.tianjian.platform.pjson.PageJson;
 import com.tianjian.platform.tools.ToolGetSql;

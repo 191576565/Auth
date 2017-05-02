@@ -21,6 +21,7 @@ var s = {
 		}
 	}
 };
+var orgs = '';
 
 
 function zTreeOnClickSimple(event, treeId, treeNode) {
@@ -31,7 +32,9 @@ function zTreeOnClickSimple(event, treeId, treeNode) {
 };
 
 $(function() {
+	//初始化bootstrapTable
 	initTable();
+	//加载机构树
 	$('.tree').click(function() {
 		$.get('gouMgmt/orgTree', function(data) {
 			$.fn.zTree.init($("#org"), s, data); //树
@@ -67,7 +70,19 @@ $(function() {
 				btn2: function(index, layero) {}
 			});
 		})
-	})
+	});
+	//切换条件类型->加载URL值
+	$('#urlid').change(function() {
+		orgs = "";
+		$("#dictcode").html("");
+		$("#dictcode").append("<option value=''>请选择URL描述</option>");
+		var conType = $(this).children('option:selected').val();
+		$.getJSON("gouMgmt/getUrlDesc?type=" + conType, function(data) {
+			$.each(data, function(index, e) {
+				$("#dictcode").append("<option value='" + e.req_uuid + "'>" + e.req_url_desc + "</option>");
+			});
+		});
+	});
 })
 
 function initTable() {　　　
@@ -283,25 +298,33 @@ function onEdit(uuid, content) {
 	});
 };
 
-$('#urlid').change(function() {
-	orgs = "";
-	$("#dictcode").html("");
-	$("#dictcode").append("<option value=''>请选择URL描述</option>");
-	var conType = $(this).children('option:selected').val();
-	$.getJSON("gouMgmt/getUrlDesc?type=" + conType, function(data) {
-		$.each(data, function(index, e) {
-			$("#dictcode").append("<option value='" + e.url_uuid + "'>" + e.req_url_desc + "</option>");
-		});
+//新增
+$('#sys_add').on('click', function() {
+	orgs = '';
+	$('#urlid').html('');
+	$('#urlname').val('');
+	$('#dictinfo').val('');
+	$("#dictcode").html('');
+	$("#urlid").prepend("<option value=''>请选择条件类型</option>");
+	$('.tree').text('选择条件值');
+	$.ajax({
+		url: "gouMgmt/getGroupCode",
+		dataType: "json",
+		success: function(data) {
+			$.each(data, function(index, groupuuid) {
+				$("#groupid").val(groupuuid.group_desc);
+				$("#groupUuid").val(groupuuid.group_uuid);
+			});
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown, data) {
+			layer.tips("请先配置组所属域的条件类型字典！", '#dictcode');
+		}
 	});
-});
-$('#dictcode').change(function() {
-	var url = $(this).children('option:selected').val();
-	$('#urlname').val(url);
-});
-
-var orgs = '';
-
-function sys_add() {
+	$.getJSON("gouMgmt/getCondition", function(content) {
+		content.forEach(function(e) {
+			$("#urlid").append("<option value='" + e.dict_id + "'>" + e.dict_name + "</option>");
+		})
+	});
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
@@ -332,59 +355,7 @@ function sys_add() {
 		},
 		btn2: function(index, layero) {}
 	});
-};
-
-function sys_edit(uuid) {
-	layer.open({
-		type: 1,
-		content: $('#sys_add_div'),
-		skin: 'layui-layer-molv',
-		title: '权限组信息',
-		area: ['400px', '310px'],
-		btn: ['保存'],
-		yes: function(index) {
-			if (fromcheck()) {
-				updateurlform(uuid);
-				location.reload();
-				layer.closeAll(index);
-			};
-		}
-	});
-	return false;
-}
-
-//新增
-$('#sys_add').on('click', function() {
-	$('#urlid').val('');
-	$('#urlname').val('');
-	$('#dictinfo').val('');
-	$("#dictcode").html("");
-	$("#urlid").prepend("<option value=''>请选择条件类型</option>");
-	orgs = '';
-	$('.tree').text('选择条件值');
-	removeAll();
-	$.ajax({
-		url: "gouMgmt/getGroupCode",
-		dataType: "json",
-		success: function(data) {
-			$.each(data, function(index, groupuuid) {
-				$("#groupid").val(groupuuid.group_desc);
-				$("#groupUuid").val(groupuuid.group_uuid);
-			});
-		},
-		error: function(XMLHttpRequest, textStatus, errorThrown, data) {
-			layer.tips("请先配置组所属域的条件类型字典！", '#dictcode');
-		}
-	});
-	var urlUuid = "";
-	sys_add();
 });
-
-function removeAll() {
-	var obj = document.getElementById('dictcode');
-	obj.options.length = 0;
-}
-
 
 $('#dictinfo').on('click', function() {
 	var dictcode = $('#dictcode').val();
