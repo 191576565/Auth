@@ -46,8 +46,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-10">
-						<a href="#" class="site-brand pull-left"><strong>TianJian</strong>
-							重庆天健金管科技服务有限公司</a>
+						<a href="#" class="site-brand pull-left"><img alt="" src="${ctxPath }/static/img/tianjian.png"></a>
 					</div>
 					<div class="col-sm-4 pull-right">
 						<i class="fa fa-user" style="color: white;">&nbsp; <%=((Record) session.getAttribute("userinfo")).getStr("user_name")%></i>&nbsp;
