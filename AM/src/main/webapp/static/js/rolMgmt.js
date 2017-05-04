@@ -228,7 +228,7 @@ $('#btn_del').on('click', function(){
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){
-					$.post('rolMgmt/deleteMore?UUID='+uuids+'&role_id='+role_id+'&role_name='+role_name, function(d){
+					$.post('rolMgmt/deleteMore',{UUID:uuids,role_id:role_id,role_name:role_name}, function(d){
 						if(d){
 							layer.msg('删除成功');
 						}else {
@@ -252,7 +252,7 @@ function onDel(id,role_id,role_name) {
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
-				$.post('rolMgmt/delete?UUID='+id+'&role_id='+role_id+'&role_name='+role_name, function(d){
+				$.post('rolMgmt/delete',{UUID:id,role_id:role_id,role_name:role_name}, function(d){
 					if(d){
 						layer.msg('删除成功');
 					}else {

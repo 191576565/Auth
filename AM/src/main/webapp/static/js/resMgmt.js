@@ -179,38 +179,12 @@ function update(obj){
 	});
 }
 
-//$('.save').click(function(){
-//	if($('#form').valid()){
-//		var data=$('#form').serialize();
-//		if($('#uuid').val()==''){ //add
-//			$.post('resMgmt/save?'+data, function(d){
-//				if(JSON.stringify(resultJson) == "false"){
-//					layer.msg('资源编码/资源名称不能重复');
-//				}else {
-//					layer.closeAll();
-//					initTable();
-//				}
-//			});
-//		}else { //update
-//			$.post('resMgmt/put?'+data, function(d){
-//				if(d){
-//					layer.msg('资源更新成功');
-//					initTable();
-//				}else {
-//					layer.msg('资源更新失败');
-//				}
-//			});
-//		}
-//		layer.closeAll();
-//	}
-//});
-
 function del(obj){
 	var index=$(obj).attr('index');
 	layer.confirm('是否删除该资源及其子资源？', {
 	  btn: ['删除','取消'] //按钮
 	}, function(){
-		$.post('resMgmt/delete?uuid='+rs[index].uuid+'&res_id='+rs[index].res_id+'&res_name='+rs[index].res_name, function(d){
+		$.post('resMgmt/delete',{uuid:rs[index].uuid,res_id:rs[index].res_id,res_name:rs[index].res_name}, function(d){
 			if(d){
 				layer.msg('资源删除成功');
 			}else {

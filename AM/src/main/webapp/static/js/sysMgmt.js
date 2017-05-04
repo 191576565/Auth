@@ -89,7 +89,7 @@ $('#btn_del').on('click', function(){
 				  btn: ['删除','取消']
 				}, 
 				function(){
-					$.post('sysMgmt/deleteMore?uuids='+uuids+'&domainCodes='+domainCodes+'&domainNames='+domainNames, function(d){
+					$.post('sysMgmt/deleteMore',{uuids:uuids,domainCodes:domainCodes,domainNames:domainNames}, function(d){
 						if(d){
 							layer.msg('删除成功');
 						}else {
@@ -191,7 +191,7 @@ function onDel(id,code,name) {
 		  btn: ['删除','取消'] //按钮
 		}, 
 		function(){
-			$.post('sysMgmt/delete?UUID='+id+'&scopeCode='+code+'&scopeName='+name, function(d){
+			$.post('sysMgmt/delete',{UUID:id,scopeCode:code,scopeName:name},function(d){
 				if(d){
 					layer.msg('删除成功');
 				}else {

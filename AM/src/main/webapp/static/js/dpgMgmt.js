@@ -249,7 +249,7 @@ function onDel(uuid, group_id, group_desc) {
 		title: '提示信息',
 		btn: ['删除', '取消'] //按钮
 	}, function() {
-		$.post('dpgMgmt/delform?uuid=' + uuid + '&group_id=' + group_id + '&group_desc=' + group_desc, function(d) {
+		$.post('dpgMgmt/delform',{uuid:uuid,group_id:group_id,group_desc:group_desc}, function(d) {
 			if ("success" == d.status) {
 				layer.msg('删除成功');
 			} else {
@@ -289,7 +289,7 @@ $('#delete').click(function() {
 			title: '提示信息',
 			btn: ['删除', '取消'] //按钮
 		}, function() {
-			$.post('dpgMgmt/delform?uuid=' + uuid + '&group_id=' + group_id + '&group_desc=' + group_desc, function(d) {
+			$.post('dpgMgmt/delform',{uuid:uuid,group_id:group_id,group_desc:group_desc}, function(d) {
 				if ("success" == d.status) {
 					layer.msg('删除成功');
 				} else {

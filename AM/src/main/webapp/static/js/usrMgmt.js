@@ -260,7 +260,7 @@ function del(uuid,user_id,user_name) {
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
-				$.post('usrMgmt/delUsr?uuid='+uuid+'&user_id='+user_id+'&user_name='+user_name, function(d){
+				$.post('usrMgmt/delUsr',{uuid:uuid,user_id:user_id,user_name:user_name}, function(d){
 					if(d){
 						layer.msg('删除成功');
 					}else {
@@ -307,7 +307,7 @@ $('#btn_del').click(function(){
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){
-					$.get("usrMgmt/batchDel",{"uuid[]":arrUUID,"arrUser[]":arrUser,"arrUserId[]":arrUserId},function(data){
+					$.post("usrMgmt/batchDel",{"uuid[]":arrUUID,"arrUser[]":arrUser,"arrUserId[]":arrUserId},function(data){
 						if(data){
 							layer.msg('删除成功')
 						}

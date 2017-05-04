@@ -176,7 +176,7 @@ function onDel(uuid, req_url, req_url_desc) {
 			btn: ['删除', '取消'] //按钮
 		},
 		function() {
-			$.post('gouMgmt/delete?uuid=' + uuid + '&req_url=' + req_url + '&req_url_desc=' + req_url_desc, function(d) {
+			$.post('gouMgmt/delete',{uuid:uuid,req_url:req_url,req_url_desc:req_url_desc}, function(d) {
 				if (d) {
 					layer.msg('删除成功');
 				} else {
@@ -219,7 +219,7 @@ $('#btn_del').on('click', function() {
 				btn: ['删除', '取消'] //按钮
 			},
 			function() {
-				$.post('gouMgmt/deleteMore?uuid=' + uuids + '&req_url=' + req_url + '&req_url_desc=' + req_url_desc, function(d) {
+				$.post('gouMgmt/deleteMore',{uuid:uuids,req_url:req_url,req_url_desc:req_url_desc}, function(d) {
 					if (d) {
 						layer.msg('删除成功');
 					} else {
