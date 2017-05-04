@@ -35,8 +35,7 @@
                             <a data-toggle="dropdown" class="dropdown-toggle J_menuItem" href="${ctxPath }/static/welcome.jsp">
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
-                                        <i class="fa fa-home"></i>
-                                        <strong class="font-bold">Auth</strong>
+                                        <img width="100px" src="${ctxPath }/static/img/leftLogo.png">
                                     </span>
                                 </span>
                             </a>
@@ -97,6 +96,7 @@
                     <div class="navbar-header">
                     	<a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#">
                     		<i class="fa fa-bars"></i> </a>
+                    	<img alt="" src="${ctxPath }/static/img/tianjian.png" style="margin-top: 15px">
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li id="idropdown" class="dropdown">

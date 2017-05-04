@@ -212,7 +212,7 @@ body.body-small .navbar-top-links li:last-child {
 
 .nav-header {
     padding: 8px 25px;
-    background: #1c2b36;
+    background: #303549;
 }
 
 .pace-done .nav-header {
@@ -406,7 +406,7 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
 
 .navbar-fixed-top,
 .navbar-static-top {
-    background: #fff;
+    background: #3f4361;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
@@ -7597,7 +7597,7 @@ body.skin-3 {
 }
 
 .navbar-static-side {
-    background: #1c2b36;
+    background: #303549;
 }
 
 .nav-close {
