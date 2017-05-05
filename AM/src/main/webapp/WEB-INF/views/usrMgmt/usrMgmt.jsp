@@ -7,17 +7,25 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    	<title> - Bootstrap Table</title>
+    	<title> - 用户管理</title>
     	<meta name="keywords" content="">
     	<meta name="description" content="">
 
-    	<link rel="shortcut icon" href="favicon.ico"> 
-    	<link href="${ctxPath }/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    	<link rel="shortcut icon" href="favicon.ico"> <link href="${ctxPath }/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
    		<link href="${ctxPath }/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     	<link href="${ctxPath }/static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/animate.css" rel="stylesheet">
     	<link href="${ctxPath }/static/css/style.css?v=4.1.0" rel="stylesheet">
-		<link rel="stylesheet" href="${ctxPath }/static/css/bootstrap-multiselect.css" type="text/css"/>
+    	<!-- Toastr style -->
+		<link href="${ctxPath }/static/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+		<link href="${ctxPath }/static/css/plugins/select2/select2.min.css" rel="stylesheet">
+		<!-- Ladda style -->
+		<link href="${ctxPath }/static/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
+		<link href="${ctxPath }/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+		<!-- Ztree style -->
+		<link href="${ctxPath }/static/css/plugins/ztree/zTreeStyle.css" rel="stylesheet">
+
+		<link rel="stylesheet" href="${ctxPath }/static/css/bootstrap-multiselect.css"/>
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
  		<div class="row">
@@ -33,9 +41,10 @@
 			</div>
 		</div>
 		<hr />
+		
  		<div class="row">
  			<div class="col-xs-4">
- 				<button id="btn_add" type="button" class="btn btn-primary create">新增</button>
+ 				<button id="btn_add" type="button" class="btn btn-primary create" style="margin: 0px">新增</button>
  				<button id="btn_del" type="button" class="btn btn-danger delete">删除</button>
  				<button id="btn_reset" type="button" class="btn btn-warning delete">重置密码</button>
  			</div>
@@ -49,8 +58,10 @@
 			</div>
  		</div>
  		<br/>
+		
  		<table id="table"></table>
- 		<div class="wrapper" id="sys_add_div" style="display:none;">
+ 		
+ 		<div class="wrapper" id="sys_add_div" style="display:none;width:100%;margin:0px;"><br />
  			<form ng-app="myApp"
  				ng-controller="validateCtrl"
  				id="form" 
@@ -147,13 +158,9 @@
 						myForm.email.$touched">
 					邮箱填写错误</p>
 				</div>
-				<!--  
-				<div class="form-group">
-					<button class="btn btn-primary" type="submit" id="sub" >保存</button>
-				</div>
-				-->
  			</form>
  		</div>
+
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>

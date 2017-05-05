@@ -12,8 +12,7 @@ var s = {
 		}
 	},
 	callback: {
-		onDblClick: zTreeOnDblClickSimple,
-		onClick: zTreeOnClickSimple
+		onDblClick: zTreeOnDblClickSimple
 	}
 };
 function zTreeOnDblClickSimple(event, treeId, treeNode) {
@@ -26,12 +25,12 @@ function zTreeOnDblClickSimple(event, treeId, treeNode) {
 //	valid.element( '#up_res_name' );
 };
 
-function zTreeOnClickSimple(event, treeId, treeNode) {
-	var treeObj = $.fn.zTree.getZTreeObj(treeId);
-	treeObj.expandNode(treeNode, null, null, null);
+// function zTreeOnClickSimple(event, treeId, treeNode) {
+// 	var treeObj = $.fn.zTree.getZTreeObj(treeId);
+// 	treeObj.expandNode(treeNode, null, null, null);
 
-	return true;
-};
+// 	return true;
+// };
 
 
 var valid;

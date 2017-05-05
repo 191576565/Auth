@@ -5,7 +5,6 @@ function inittable(){
 	$('#table').bootstrapTable('destroy');
 	$('#table').bootstrapTable({                                                                                                  
 	    url: 'usrMgmt/initSel',
-		method: 'get', 					//请求方式（*）                                                                                                
 		striped: true, 					//是否显示行间隔色
 		cache: false, 					//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）                                                               
 	 	pagination: true, //是否显示分页（*）                                                                                             
@@ -18,8 +17,6 @@ function inittable(){
 	   　　	return param;                   
 	     },	
 	    queryParamsType: '',
-	 	sortOrder: "asc", //排序方式                                            
-	//	queryParams: 			oTableInit.queryParams, //传递参数（*）	
 		sidePagination:  "client",   			//分页方式：client客户端分页，server服务端分页（*）                                                      
 	 	pageNumber:1, //初始化加载第一页，默认第一页                                                                                            
 	 	pageSize: 10, //每页的记录行数（*）  
@@ -29,7 +26,6 @@ function inittable(){
 	 	showColumns: false, //是否显示所有的列                                                                                             
 	 	showRefresh: false, //是否显示刷新按钮                                                                                             
 	 	clickToSelect: false, //是否启用点击选中行                                                                                          
-	 	uniqueId: "uuid", //每一行的唯一标识，一般为主键列                                                                                         
 	 	showToggle:false, //是否显示详细视图和列表视图的切换按钮                                                                                     
 	 	cardView: false, //是否显示详细视图                                                                                               
 	                                                                                                                              
@@ -39,7 +35,8 @@ function inittable(){
 	        field: 'domain_name',       
 	        align: 'center',
 	        title: '域名称'                                                                                                        
-	    },{                                                                                                                      
+	    },
+	    {                                                                                                                      
 	        field: 'org_unit_desc',     
 	        align: 'center',
 	        title: '机构名称'                                                                                                        
@@ -59,27 +56,22 @@ function inittable(){
 	        field: 'user_phone',      
 	        align: 'center',
 	        title: '电话号码'                                                                                                         
-	    }, {                                                                                                                      
+	    }, 
+	    {                                                                                                                      
 	        field: 'user_email',      
 	        align: 'center',
 	        title: '电子信箱'                                                                                                        
 	    }, {                                                                                                                         
-	    	field: 'uuid',                                                                                                         
+			field: 'uuid',
 	    	title: '操 作',
 	    	width: "130px",
-	    	formatter:function(value,row,index){                                                                                  
-	    	var e = '<a href="#" class="btn btn-info update edit" onclick="edit(\''+ row.uuid +'\',\''
-																	    		   + row.user_id +'\',\''
-																	    		   + row.user_name +'\',\''
-																	    		   + row.domain_uuid +'\',\''
-																	    		   + row.org_uuid +'\',\''
-																	    		   + row.role_uuids +'\',\''
-																	    		   + row.user_phone +'\',\''
-																	    		   + row.user_email + '\')">编辑</a> ';                                                      
-	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\',\''+row.user_id +'\',\''+ row.user_name +'\')">删除</a> ';                                                    
-	    	return e+d;                                                                                                           
+	    	align: 'center',
+	    	formatter: function(value, row, index) {
+	    	var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ row.uuid +'\',\''+ row.user_id +'\',\''+ row.user_name +'\',\''+ row.domain_uuid +'\',\''+ row.org_uuid +'\',\''+ row.role_uuids +'\',\''+ row.user_phone +'\',\''+ row.user_email +'\')">编辑</a> ';                                                                               
+	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\',\''+ row.user_id +'\',\''+ row.user_name +'\')">删除</a> ';
+	    	return e + d;                                                                                                           
 	    	}                                                                                                                     
-	    },]                                                                                                                       
+	    }, ]                                                                                                                       
 	});
 };
 //域load

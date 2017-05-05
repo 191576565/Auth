@@ -46,7 +46,7 @@ function initsyslogtable(){
 	        title: '角色名称'
 	    }, {
 	        field: 'user_name',
-	        title: '用户名'
+	        title: '角色编码'
 	    }, {
 	        field: 'op_type',
 	        title: '操作类型'

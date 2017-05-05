@@ -12,8 +12,7 @@ var s = {
 		}
 	},
 	callback: {
-		onDblClick: zTreeOnDblClickSimple,
-		onClick: zTreeOnClickSimple
+		onDblClick: zTreeOnDblClickSimple
 	}
 };
 function zTreeOnDblClickSimple(event, treeId, treeNode) {
@@ -24,12 +23,7 @@ function zTreeOnDblClickSimple(event, treeId, treeNode) {
 	layer.close(index); //关闭当前弹层
 };
 
-function zTreeOnClickSimple(event, treeId, treeNode) {
-	var treeObj = $.fn.zTree.getZTreeObj(treeId);
-	treeObj.expandNode(treeNode, null, null, null);
 
-	return true;
-};
 $(function(){
 	initTable();
 	$('.tree').click(function(){
