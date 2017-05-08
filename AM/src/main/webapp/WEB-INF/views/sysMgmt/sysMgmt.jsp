@@ -41,7 +41,6 @@
 			</div>
 		</div>
 		<hr/>
-
  		<div class="row">
  			<div class="col-xs-4">
  				<button id="sys_add" class="btn btn-primary create" style="margin:0px 3px 0px 0px">新增</button>
@@ -56,7 +55,6 @@
 				</div>
 			</div>
  		</div><br />
- 		
  		<table id="table"></table>
  		<div class="wrapper" id="sys_add_div" style="display:none;width:100%;margin:0px;"><br />
  			<form ng-app="myApp" 

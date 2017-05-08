@@ -98,7 +98,13 @@
                     		<i class="fa fa-bars"></i> </a>
                     	<img alt="" src="${ctxPath }/static/img/tianjian.png" style="margin-top: 15px">
                     </div>
-                    <ul class="nav navbar-top-links navbar-right">
+                    <div class="col-sm-4 pull-right" style="margin-top:15px">
+                        <i class="fa fa-user" style="color: white;">&nbsp; <%=((Record) session.getAttribute("userinfo")).getStr("user_name")%></i>&nbsp;
+                        <a href="loginafter"><i class="fa fa-home" style="color: white; cursor: pointer">&nbsp;回主界面</i></a>&nbsp; 
+                        <i class="fa fa-cog" style="color: white; cursor: pointer" onclick="modclick()">&nbsp;修改密码</i>&nbsp; 
+                        <a class="" href="ulogin/userexit" style="color: white;"> <i class="fa fa-sign-out">&nbsp; 退出登录</i></a>
+                    </div>
+                    <!-- <ul class="nav navbar-top-links navbar-right">
                         <li id="idropdown" class="dropdown">
                             <a herf="#" class="dropdown-toggle count-info" data-toggle="dropdown" >
                                	欢迎您，<%=((Record)session.getAttribute("userinfo")).getStr("user_name") %>
@@ -130,7 +136,7 @@
                                 </li>
                             </ul>
                         </li>                        
-                    </ul>
+                    </ul> -->
                 </nav>
             </div>
             <div class="row J_mainContent" id="content-main">

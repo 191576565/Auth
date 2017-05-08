@@ -35,8 +35,7 @@ function inittable(){
 	        field: 'domain_name',       
 	        align: 'center',
 	        title: '域名称'                                                                                                        
-	    },
-	    {                                                                                                                      
+	    },{                                                                                                                      
 	        field: 'org_unit_desc',     
 	        align: 'center',
 	        title: '机构名称'                                                                                                        
@@ -56,20 +55,17 @@ function inittable(){
 	        field: 'user_phone',      
 	        align: 'center',
 	        title: '电话号码'                                                                                                         
-	    }, 
-	    {                                                                                                                      
+	    },{                                                                                                                      
 	        field: 'user_email',      
 	        align: 'center',
 	        title: '电子信箱'                                                                                                        
 	    }, {                                                                                                                         
-			field: 'uuid',
 	    	title: '操 作',
-	    	width: "130px",
 	    	align: 'center',
 	    	formatter: function(value, row, index) {
-	    	var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ row.uuid +'\',\''+ row.user_id +'\',\''+ row.user_name +'\',\''+ row.domain_uuid +'\',\''+ row.org_uuid +'\',\''+ row.role_uuids +'\',\''+ row.user_phone +'\',\''+ row.user_email +'\')">编辑</a> ';                                                                               
-	    	var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\',\''+ row.user_id +'\',\''+ row.user_name +'\')">删除</a> ';
-	    	return e + d;                                                                                                           
+		    	 var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ row.uuid +'\',\''+ row.user_id +'\',\''+ row.user_name +'\',\''+ row.domain_uuid +'\',\''+ row.org_uuid +'\',\''+ row.role_uuids +'\',\''+ row.user_phone +'\',\''+ row.user_email +'\')">编辑</a> ';
+		    	 var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\',\''+ row.user_id +'\',\''+ row.user_name +'\')">删除</a> ';
+		    	 return e+d;
 	    	}                                                                                                                     
 	    }, ]                                                                                                                       
 	});
