@@ -185,7 +185,7 @@ $('#sys_add').click(function() {
 				error: function(
 					XMLHttpRequest,
 					textStatus, errorThrown) {
-					layer.msg("数据被城管抓走了！");
+					layer.msg("系统异常,保存失败！");
 				}
 			});
 			//			}
@@ -249,7 +249,11 @@ function onDel(uuid, group_id, group_desc) {
 		title: '提示信息',
 		btn: ['删除', '取消'] //按钮
 	}, function() {
-		$.post('dpgMgmt/delform',{uuid:uuid,group_id:group_id,group_desc:group_desc}, function(d) {
+		$.post('dpgMgmt/delform', {
+			uuid: uuid,
+			group_id: group_id,
+			group_desc: group_desc
+		}, function(d) {
 			if ("success" == d.status) {
 				layer.msg('删除成功');
 			} else {
@@ -282,14 +286,18 @@ $('#delete').click(function() {
 			group_desc += (e.group_desc + ',');
 		}
 	});
-	if('' == uuid){
+	if ('' == uuid) {
 		layer.msg('请选择要删除的权限组信息');
-	}else{
+	} else {
 		layer.confirm('是否删除选中的权限组？', {
 			title: '提示信息',
 			btn: ['删除', '取消'] //按钮
 		}, function() {
-			$.post('dpgMgmt/delform',{uuid:uuid,group_id:group_id,group_desc:group_desc}, function(d) {
+			$.post('dpgMgmt/delform', {
+				uuid: uuid,
+				group_id: group_id,
+				group_desc: group_desc
+			}, function(d) {
 				if ("success" == d.status) {
 					layer.msg('删除成功');
 				} else {
