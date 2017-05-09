@@ -142,7 +142,7 @@ function initdpgMgmtlist() {
 				align: 'center',
 				formatter: function(value, row, index) {
 					var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\'' + index + '\')">编辑</a> ';
-					var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\'' + row.uuid + '\',\'' + row.group_id + '\',\'' + row.group_desc + '\')">删除</a> ';
+					var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\'' + index + '\')">删除</a> ';
 					var f = '<a href="#" class="btn btn-success" onclick="onFun(\'' + row.uuid + '\',\'' + row.domain_id + '\')">数据权限</a> ';
 					return e + d + f;
 				}
@@ -244,15 +244,16 @@ function onEdit(index) {
 	});
 }
 
-function onDel(uuid, group_id, group_desc) {
+function onDel(index) {
+	var info = table.bootstrapTable('getData')[index];
 	layer.confirm('是否删除该权限组？', {　　
 		title: '提示信息',
 		btn: ['删除', '取消'] //按钮
 	}, function() {
 		$.post('dpgMgmt/delform', {
-			uuid: uuid,
-			group_id: group_id,
-			group_desc: group_desc
+			uuid: info.uuid,
+			group_id: info.group_id,
+			group_desc: info.group_desc
 		}, function(d) {
 			if ("success" == d.status) {
 				layer.msg('删除成功');

@@ -17,6 +17,18 @@ import com.tianjian.platform.tools.ToolSqlXml;
 
 public class DpgMgmtService extends BaseService {
 	
+	//补丁:根据域ID获取对应UUID
+	public String idToUuid(String domainId){
+		String sql = "SELECT T.UUID FROM SYS_DOMAIN_INFO T WHERE T.DOMAIN_ID=?";
+		List<Record> list = Db.find(sql,domainId);
+		return list.get(0).getStr("uuid");
+	}
+	
+	//新增
+	public void save(DpgMgmt dpgMgmt){
+		dpgMgmt.save();
+	}
+	
 	//重复性验证(新增)
 	public boolean notRepeated(String groupId, String groupName, String domainUuid){
 		String sql = ToolGetSql.getSql("tianjian.dpg.repeatSelect");
