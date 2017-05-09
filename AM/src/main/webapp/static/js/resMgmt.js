@@ -25,13 +25,6 @@ function zTreeOnDblClickSimple(event, treeId, treeNode) {
 //	valid.element( '#up_res_name' );
 };
 
-// function zTreeOnClickSimple(event, treeId, treeNode) {
-// 	var treeObj = $.fn.zTree.getZTreeObj(treeId);
-// 	treeObj.expandNode(treeNode, null, null, null);
-
-// 	return true;
-// };
-
 
 var valid;
 var rs;
@@ -251,22 +244,4 @@ function validate(){
 	return flag;
 }
 
-//jQuery.validator.addMethod("chkResId", function(value, element) {   
-//    var flag=true, url='';
-//    if(chk==0){ //编辑后台不校验是否重复
-//    	url='resMgmt/resIdcheck?resId='+value;
-//    }else { //新增需要校验编码是否重复
-//    	url='resMgmt/resIdcheck?resId='+value+'&checkflag=1';
-//    }
-//    
-//    $.ajax({
-//    	async:false,
-//    	type:"GET",
-//    	url:url,
-//    	success:function(data){
-//    		flag=data;
-//    	}
-//    });
-//    return this.optional(element) || flag;
-//}, "<i class='fa fa-times-circle'></i>输入的资源编码已存在，不能重复");
 
