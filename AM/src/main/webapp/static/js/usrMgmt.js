@@ -63,8 +63,8 @@ function inittable(){
 	    	title: '操 作',
 	    	align: 'center',
 	    	formatter: function(value, row, index) {
-		    	 var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ row.uuid +'\',\''+ row.user_id +'\',\''+ row.user_name +'\',\''+ row.domain_uuid +'\',\''+ row.org_uuid +'\',\''+ row.role_uuids +'\',\''+ row.user_phone +'\',\''+ row.user_email +'\')">编辑</a> ';
-		    	 var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ row.uuid +'\',\''+ row.user_id +'\',\''+ row.user_name +'\')">删除</a> ';
+		    	 var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ index +'\')">编辑</a> ';
+		    	 var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ index +'\')">删除</a> ';
 		    	 return e+d;
 	    	}                                                                                                                     
 	    }, ]                                                                                                                       
@@ -189,25 +189,26 @@ $('#btn_add').on('click', function() {
 	});
 });
 //修改的onclick事件
-function edit(uuid,user_id,user_name,domain_uuid,org_uuid,role_uuids,user_phone,user_email) {
+function edit(index) {
+	var info = $('#table').bootstrapTable('getData')[index];
 	chkUserStr='';
 	//初始化form
-	$("#uuid").val(uuid);
-	$("#scopeCode").val(user_id);
+	$("#uuid").val(info.uuid);
+	$("#scopeCode").val(info.user_id);
 	$("#scopeCode").attr("readonly","readonly");
-	$("#usrName").val(user_name);
-	$("#domain").val(domain_uuid);
-	changeDomain(domain_uuid);
-	$("#organization").val(org_uuid);
-	$('#role').multiselect('select', role_uuids.split(","));
-	if(user_phone == "null"){
-		user_phone = "";
+	$("#usrName").val(info.user_name);
+	$("#domain").val(info.domain_uuid);
+	changeDomain(info.domain_uuid);
+	$("#organization").val(info.org_uuid);
+	$('#role').multiselect('select', (info.role_uuids).split(","));
+	if(info.user_phone == null){
+		info.user_phone = "";
 	}
-	if(user_email == "null"){
-		user_email = "";
+	if(info.user_email == null){
+		info.user_email = "";
 	}
-	$("#phone").val(user_phone);
-	$("#email").val(user_email);
+	$("#phone").val(info.user_phone);
+	$("#email").val(info.user_email);
 	$("#chkUserError").html('');
 	layer.open({
 		type: 1,
@@ -241,14 +242,15 @@ function edit(uuid,user_id,user_name,domain_uuid,org_uuid,role_uuids,user_phone,
 	});
 };
 //删除的onclick事件
-function del(uuid,user_id,user_name) {
+function del(index) {
+	var info = $('#table').bootstrapTable('getData')[index];
 	layer.confirm('是否删除该用户信息？', 
 			{
 		　　　　　　title:'提示信息',
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
-				$.post('usrMgmt/delUsr',{uuid:uuid,user_id:user_id,user_name:user_name}, function(d){
+				$.post('usrMgmt/delUsr',{uuid:info.uuid,user_id:info.user_id,user_name:info.user_name}, function(d){
 					if(d){
 						layer.msg('删除成功');
 					}else {
