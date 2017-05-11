@@ -45,7 +45,7 @@
 						<a href="${ctxPath }/static/welcome.jsp">首页</a>
 					</li>
 					<li>
-						<a href="syslog">系统日志</a>
+						<a href="syslog">操作日志</a>
 					</li>
 				</ol>
 			</div>
