@@ -61,7 +61,7 @@ function initsyslogtable(){
 	    	title: '操 作',
 	    	formatter:function(value,row,index){
 	    		
-	    		var e = '<a href="#" class="btn btn-info update edit" onclick="onMore(\''+ row.op_content +'\')">操作明细</a> ';
+	    		var e = '<a href="#" class="btn btn-op update edit" onclick="onMore(\''+ row.op_content +'\')">操作明细</a> ';
 	    		return e;
 	    	}
 	    },],
