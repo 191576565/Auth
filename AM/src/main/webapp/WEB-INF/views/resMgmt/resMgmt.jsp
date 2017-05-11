@@ -136,8 +136,8 @@ select {
 							<input type="hidden" name="res_up_uuid" id="res_up_uuid" nullName="上级资源">
 							<input type="text" class="form-control" name="res_up_name"
 								id="up_res_name" required readonly="readonly"> <span
-								class="input-group-btn">
-								<button type="button" class="btn tree">
+								class="input-group-btn" style="height: 34px">
+								<button type="button" class="btn tree" style="height: 34px">
 									<i class="fa fa-tree"></i>
 								</button>
 							</span>

@@ -124,7 +124,7 @@
 						<input type="hidden" name="org_up_uuid" id="org_up_uuid">
 			            <input type="text" class="form-control notNull" nullName="上级机构" name="org_up_name" id="up_org_name" required readonly="readonly"> 
 			            <span class="input-group-btn"> 
-			            	<button type="button" class="btn tree"><i class="fa fa-tree"></i></button> 
+			            	<button type="button" class="btn tree" style="height: 34px"><i class="fa fa-tree"></i></button> 
 			            </span>
 		            </div>
 				</div>

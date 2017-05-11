@@ -162,7 +162,7 @@ $('#sys_add').click(function() {
 		content: $('#sys_add_div'),
 		title: '权限组信息',
 		area: '400px',
-		btn: ['保存', '取消'],
+		btn: ['确定', '取消'],
 		yes: function(index, layero) {
 			if (!validate()) {
 				return false;
