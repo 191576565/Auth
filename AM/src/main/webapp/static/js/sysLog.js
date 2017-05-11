@@ -58,6 +58,7 @@ function initsyslogtable(){
 	        title: '操作IP'
 	    }, {
 	    	field: 'op_content',
+	    	width: '100px',
 	    	title: '操 作',
 	    	formatter:function(value,row,index){
 	    		
