@@ -37,7 +37,7 @@ function initsystable() {
 			formatter: function(value, row, index) {
 				var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\'' + index + '\')">编辑</a> ';
 				var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\'' + index + '\')">删除</a> ';
-				var f = '<a href="#" class="btn btn-success" onclick="onOrg(\'' + row.uuid + '\')">机构</a> ';
+				var f = '<a href="#" class="btn btn-org" onclick="onOrg(\'' + row.uuid + '\')">机构</a> ';
 				return e + d + f;
 			}
 		}, ]

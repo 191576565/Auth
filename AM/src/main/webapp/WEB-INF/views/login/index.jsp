@@ -118,7 +118,7 @@
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;background-color:#2e374a;border-bottom: 1px solid #3a4d5e;
 	box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.1);">
                     <div class="navbar-header">
-                    		<a class="navbar-minimalize minimalize-styl-2 btn btn-info btn-info1" href="#">
+                    		<a class="navbar-minimalize minimalize-styl-2 btn btn-info-init btn-info1" href="#">
                     			<i class="fa fa-bars"></i> 
                    	 	</a>
                     		<!--<img alt="" src="${ctxPath }/static/img/tianjian.png" style="margin-top: 15px">-->

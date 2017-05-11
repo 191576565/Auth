@@ -75,7 +75,7 @@ function inittable() {
 			formatter: function(value, row, index) {
 				var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\'' + index + '\')">编辑</a> ';
 				var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\'' + index + '\')">删除</a> ';
-				var f = '<a href="#" onclick="onFun(\'' + row.uuid + '\')" class="btn btn-success">功能</a> ';
+				var f = '<a href="#" onclick="onFun(\'' + row.uuid + '\')" class="btn btn-fun">功能</a> ';
 				return e + d + f;
 			}
 		}, ]
