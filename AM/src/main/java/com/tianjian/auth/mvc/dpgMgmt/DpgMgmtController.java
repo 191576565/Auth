@@ -1,6 +1,7 @@
 package com.tianjian.auth.mvc.dpgMgmt;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,26 +136,23 @@ public class DpgMgmtController extends Controller {
 			 *@Return    String  void
 			 */
 			public void saveform() {
-				Map<String, Object> mpara = new HashMap<String, Object>();
+				DpgMgmt dpgMgmt = new DpgMgmt();
+				dpgMgmt.set("DOMAIN_UUID", dpgmgmtservice.idToUuid(getPara("domaininfo")));
+				dpgMgmt.set("GROUP_ID", getPara("groupid"));
+				dpgMgmt.set("GROUP_DESC", getPara("groupname"));
+				dpgMgmt.set("USERS", getPara("guserid"));
+				dpgMgmt.set("CREATOR", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
+				dpgMgmt.set("MODIFIER", ((Record)getSessionAttr("userinfo")).getStr("user_id"));
+				dpgMgmt.set("CREATED_DATE", new Timestamp(System.currentTimeMillis()));
+				dpgMgmt.set("MODIFIED_DATE", new Timestamp(System.currentTimeMillis()));
 				Map<String,Object> insertflag = new HashMap<String,Object>();
-				Object userinfo = getSessionAttr("userinfo");	
-				mpara.put("domainid", getPara("domaininfo"));
-				mpara.put("groupid", getPara("groupid"));
-				mpara.put("groupname", getPara("groupname"));
-				mpara.put("guserid", getPara("guserid"));
-				mpara.put("opuser", ((Record) userinfo).getStr("user_id"));
 				if(!dpgmgmtservice.notRepeated(getPara("groupid"), getPara("groupname"),getPara("domaininfo"))){
 					insertflag.put("status", "repeat");
 					renderJson(insertflag);
 					return;
 				}
-				String sql = dpgmgmtservice.getFromSql(DpgMgmt.sqlId_ingroupinfo, mpara);
-				int dpgmgmt =Db.update(sql);
-				if(dpgmgmt==1){
-					insertflag.put("status", "success");
-				}else{
-					insertflag.put("status", "error");
-				}
+				dpgmgmtservice.save(dpgMgmt);
+				insertflag.put("status", "success");
 				setAttr(ConstantLog.log_optype, ConstantLog.grp_add);
 				String msg = "新增权限组-" + "　组编码:" + getPara("groupid") + " 组名称:"
 						+ getPara("groupname");

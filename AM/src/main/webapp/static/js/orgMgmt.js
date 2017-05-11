@@ -15,6 +15,7 @@ var s = {
 		onDblClick: zTreeOnDblClickSimple
 	}
 };
+var rs;
 function zTreeOnDblClickSimple(event, treeId, treeNode) {
 	$('#org_up_uuid').val(treeNode.id);
 	$('#up_org_name').val(treeNode.name);
@@ -55,42 +56,20 @@ $(function(){
 
 function initTable() {
 			$.get('orgMgmt/orgData', {r:Math.random()*10000000000000}, function(data){
-				var rs=data;
+				rs=data;
 				$('#table tbody').html('');
 				var temp='';
 				if(rs!=null){
-					rs.forEach(function(e){
+					rs.forEach(function(e, index){
 						if(e.level===1){
 							temp='<tr class="treegrid-'+e.uuid+'" lvl="'+e.level+'"><td>'+e.org_unit_id+'</td><td>'+e.domain_name+'</td><td>'
 									+e.org_unit_desc+'</td><td>'+e.up_org_unit_desc
-									+'</td><td><button id="" type="button" class="btn btn-info update" onclick="upt(\''+ e.uuid
-									+'\',\''+ e.org_unit_id 
-									+'\',\''+ e.domain_name
-									+'\',\''+ e.domain_uuid
-									+'\',\''+ e.org_unit_desc 
-									+'\',\''+ e.up_org_unit_desc 
-									+'\',\''+ e.org_up_uuid 
-									+'\',\''+ e.memo 
-									+'\')">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger delete" onclick="del(\''+ e.uuid
-									+'\',\''+ e.org_unit_id 
-									+'\',\''+ e.org_unit_desc
-									+'\')">删除</button></td></tr>';
+									+'</td><td><button id="" type="button" class="btn btn-info update" onclick="upt(this)" index="'+index+'">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger delete" onclick="del(this)" index="'+index+'">删除</button></td></tr>';
 							$('#table tbody').append(temp);
 						}else {
 							temp='<tr class="treegrid-'+e.uuid+' treegrid-parent-'+e.org_up_uuid+'" lvl="'+e.level+'"><td>'+e.org_unit_id+'</td><td>'+e.domain_name+'</td><td>'
 									+e.org_unit_desc+'</td><td>'+e.up_org_unit_desc
-									+'</td><td><button id="" type="button" class="btn btn-info update" onclick="upt(\''+ e.uuid
-									+'\',\''+ e.org_unit_id 
-									+'\',\''+ e.domain_name
-									+'\',\''+ e.domain_uuid
-									+'\',\''+ e.org_unit_desc 
-									+'\',\''+ e.up_org_unit_desc 
-									+'\',\''+ e.org_up_uuid 
-									+'\',\''+ e.memo
-									+'\')">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger delete" onclick="del(\''+ e.uuid
-									+'\',\''+ e.org_unit_id 
-									+'\',\''+ e.org_unit_desc
-									+'\')">删除</button></td></tr>';
+									+'</td><td><button id="" type="button" class="btn btn-info update" onclick="upt(this)" index="'+index+'">编辑</button>&nbsp;<button id="" type="button" class="btn btn-danger delete" onclick="del(this)" index="'+index+'">删除</button></td></tr>';
 							$('#table tbody tr.treegrid-'+e.org_up_uuid).after(temp);
 						}
 					});
@@ -151,17 +130,18 @@ $('#org_add').on('click', function() {
 });
 
 //编辑机构_弹出层
-function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
+function upt(obj){
+	var info=rs[$(obj).attr('index')];
 	//初始化表单
 	$("#org_add_div #form #up_org").html("");
-	$("#org_add_div #form #uuid").val(uuid);
-	$("#org_add_div #form #scop_n").val(dName);
-	$("#org_add_div #form #org_code").val(orgCode);
-	$("#org_add_div #form #org_name").val(orgDesc);
-	$("#org_add_div #form #org_up_uuid").val(upOrgID);
-	$("#org_add_div #form #up_org_name").val(upOrgDesc);
-	$("#org_add_div #form #ipt_memo").val(memo);
-	$("#org_add_div #form #domain_uuid").val(dId);
+	$("#org_add_div #form #uuid").val(info.uuid);
+	$("#org_add_div #form #scop_n").val(info.domain_name);
+	$("#org_add_div #form #org_code").val(info.org_unit_id);
+	$("#org_add_div #form #org_name").val(info.org_unit_desc);
+	$("#org_add_div #form #org_up_uuid").val(info.org_up_uuid);
+	$("#org_add_div #form #up_org_name").val(info.up_org_unit_desc);
+	$("#org_add_div #form #ipt_memo").val(info.memo);
+	$("#org_add_div #form #domain_uuid").val(info.domain_uuid);
 	$('.error').empty();
 	
 	//获取机构
@@ -216,13 +196,14 @@ function upt(uuid,orgCode,dName,dId,orgDesc,upOrgDesc,upOrgID,memo){
 }
 
 //删除
-function del(id,orgCode,orgDesc) {
+function del(obj) {
+	var index=$(obj).attr('index');
 	layer.confirm('是否删除该机构信息？', 
 			{
 			  btn: ['删除','取消'] //按钮
 			}, 
 			function(){
-				$.post('orgMgmt/delete?UUID='+id+'&orgCode='+orgCode+'&orgName='+orgDesc, function(d){
+				$.post('orgMgmt/delete',{UUID:rs[index].uuid,orgCode:rs[index].org_unit_id,orgName:rs[index].org_unit_desc}, function(d){
 					if(d){
 						layer.msg('删除成功');
 					}else {
