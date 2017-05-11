@@ -70,7 +70,7 @@
 					</div>
 					
 					<button class="btn btn-default search" id="logsearch" type="button"><i class="fa fa-search"></i></button>
-					<button class="btn btn-default" id="resetBtn" type="reset" value="Reset">重置</button>
+					<button class="btn btn-default" id="resetBtn" type="reset" value="Reset" style="margin-left: 1px">重置</button>
 			
 				</div><br/>
 				</form>
