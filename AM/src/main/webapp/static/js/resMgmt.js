@@ -81,7 +81,7 @@ function initTable() {
 				}else {
 					temp='<tr class="treegrid-'+e.uuid+' treegrid-parent-'+e.res_up_uuid+'" lvl="'+e.lvl+'" index="'+index+'"><td style="white-space: nowrap;" id="'+e.res_id+'">'+e.res_id+'</td><td>'+e.res_name+'</td><td>'
 							+e.up_res_name+'</td><td>'+e.res_url+'</td><td>'+e.res_type_name+'</td><td>'+e.res_class+'</td><td>'+e.res_color+'</td><td>'+e.res_icon
-							+'</td><td>'+e.sort_id+'</td><td style="white-space: nowrap;"><button type="button" class="btn btn-info btn-sm" onclick="update(this)"  index="'+index+'">编辑</button>&nbsp;<button type="button" class="btn btn-danger btn-sm" onclick="del(this)"  index="'+index+'">删除</button></td></tr>';
+							+'</td><td>'+e.sort_id+'</td><td style="white-space: nowrap;"><button type="button" class="btn btn-info" onclick="update(this)"  index="'+index+'">编辑</button>&nbsp;<button type="button" class="btn btn-danger" onclick="del(this)"  index="'+index+'">删除</button></td></tr>';
 					temp=	temp.replace(/null/g, '-');
 					$('#table tbody tr.treegrid-'+e.res_up_uuid).after(temp);
 				}
