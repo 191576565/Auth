@@ -1,7 +1,6 @@
 /*
  *
- *   H+ - 后台主题UI框架
- *   version 4.0
+ *   Auth - 后台主题UI框架
  *
 */
 
@@ -841,6 +840,23 @@ fieldset[disabled] .btn-success.active {
   box-shadow:2px 2px 4px 1px rgba(195,203,228,1);
 }
 
+.btn-reset{
+    color: #ffffff !important;
+    background-color: #ffc77f; 
+    border-color: #ffc77f;
+    transition:all 0.3s linear;
+}
+
+.btn-reset:hover,
+.btn-reset:focus,
+.btn-reset:active,
+.btn-reset.active,
+.open .dropdown-toggle.btn-reset {
+  color: #ffc77f !important;
+  background-color: #ffffff;
+  border-color: rgba(180,184,203,1);
+  box-shadow:2px 2px 4px 1px rgba(195,203,228,1);
+}
 
 .btn-fun{
     color: #ffffff !important;
