@@ -32,7 +32,7 @@
 Recreating Apple Watch's Utility face <http://www.apple.com/watch/design/> in HTML+CSS+JS
 -->
 		<div class="row-fluid">
-			<div class="span7 responsive" data-tablet="span7 fix-margin" data-desktop="span7" style="width: 100%">
+			<div class="span7 responsive" data-tablet="span7 fix-margin" data-desktop="span7" style="width: 70%; margin-left: 100px">
 				<!-- BEGIN CALENDAR PORTLET-->
 				<div class="widget yellow">
 					<div class="widget-title">
