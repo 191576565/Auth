@@ -143,7 +143,7 @@ function initdpgMgmtlist() {
 				formatter: function(value, row, index) {
 					var e = '<a href="#" id="btn_upt" class="btn btn-info update" onclick="onEdit(\'' + index + '\')">编辑</a> ';
 					var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\'' + index + '\')">删除</a> ';
-					var f = '<a href="#" class="btn btn-success" onclick="onFun(\'' + row.uuid + '\',\'' + row.domain_id + '\')">数据权限</a> ';
+					var f = '<a href="#" class="btn btn-dp" onclick="onFun(\'' + row.uuid + '\',\'' + row.domain_id + '\')">数据权限</a> ';
 					return e + d + f;
 				}
 			}, ]
