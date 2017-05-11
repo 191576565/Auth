@@ -424,11 +424,20 @@ h5 {
 }
 
 .post-masonry .post-thumb {
-    border: 1px solid #fff;
+    border: 1px solid rgba(126,164,198,0.1);
+    border-radius: 8px;
+    box-shadow: 0px 0px 14px 4px rgba(0,0,0,0.1);
     overflow: hidden;
     position: relative;
+    transition: all 0.2s linear;
 }
-
+.post-masonry .post-thumb:hover {
+    border: 1px solid rgba(233,233,233,0.8);
+    border-radius: 4px;
+    box-shadow: 0px 0px 14px 4px rgba(255,255,255,0.3);
+    
+}
+//*transform: scale(1.1);*//
 .post-masonry .post-thumb img {
     width: 100%;
     display: block;

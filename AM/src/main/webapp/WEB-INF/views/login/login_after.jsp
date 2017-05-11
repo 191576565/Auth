@@ -26,7 +26,33 @@
 
 <link rel="stylesheet" href="${ctxPath }/static/css/normalize.css">
 <link rel="stylesheet" href="${ctxPath }/static/css/font-awesome.css">
+<style type="text/css">
+.site-top1{
+	height:110px;
+	background-color: #2e374a;
+	border-bottom: 1px solid #3a4d5e;
+	box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.1);
+}
+.row-1{
+	width:1170px ;
+}
+.col-sm-10-1{
+	width:210px;
+	box-shadow: 1px 2px 3px rgba(1,11,20,0.3);	
+}	
+.pull-right-1{
+	width:310px;
+	margin-top: 5px;
+}
+.fa-pa{
+	transition: color 0.2s linear;
+}
+.fa-pa:hover{
+color:#f59b60;
+ text-shadow: 1px 2px 3px rgba(1,11,20,0.9);	
+}
 
+</style>
 </head>
 <body>
 	<!--[if lt IE 7]>
@@ -41,21 +67,29 @@
 	<div class="bg-overlay"></div>
 
 	<!-- SITE TOP -->
-	<div class="site-top">
+	<div class="site-top site-top1">
 		<div class="site-header clearfix">
 			<div class="container">
-				<div class="row">
-					<div class="col-sm-10">
+				<div class="row row-1">
+					<div class="col-sm-10 col-sm-10-1">
 						<a href="#" class="site-brand pull-left"><img alt="" src="${ctxPath }/static/img/tianjian.png"></a>
 					</div>
-					<div class="col-sm-4 pull-right">
-						<i class="fa fa-user" style="color: white;">&nbsp; <%=((Record) session.getAttribute("userinfo")).getStr("user_name")%></i>&nbsp;
-						<i class="fa fa-cog" style="color: white; cursor: pointer"
-							onclick="modifyuserinfo()">&nbsp;修改用户信息</i>&nbsp; <i
-							class="fa fa-cog" style="color: white; cursor: pointer"
-							onclick="modifyuserpass()">&nbsp;修改密码</i>&nbsp; <a class=""
-							href="ulogin/userexit" style="color: white;"> <i
-							class="fa fa-sign-out">&nbsp; 注销</i>
+					<div class="col-sm-4 pull-right pull-right-1">
+						<a class="" style="color: #7ea4c6;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);">
+							<i class="fa fa-user fa-pa">&nbsp; <%=((Record) session.getAttribute("userinfo")).getStr("user_name")%>
+							</i>&nbsp;
+						</a>
+						<a class="" style="color:#7ea4c6; cursor: pointer;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);">
+							<i class="fa fa-cog fa-pa" onclick="modifyuserinfo()">&nbsp;修改用户信息
+							</i>&nbsp; 
+						</a>
+						<a class="" style="color: #7ea4c6; cursor: pointer;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);">
+							<i class="fa fa-cog fa-pa" onclick="modifyuserpass()">&nbsp;修改密码
+							</i>&nbsp; 
+						</a>
+						<a class="" href="ulogin/userexit" style="color: #7ea4c6;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);"> 
+							<i class="fa fa-sign-out fa-pa">&nbsp; 注销
+							</i>
 						</a>
 					</div>
 				</div>

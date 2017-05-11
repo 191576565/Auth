@@ -20,17 +20,40 @@
     <link href="static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="static/css/animate.css" rel="stylesheet">
     <link href="static/css/style.css?v=4.1.0" rel="stylesheet">
+<style type="text/css">
+.pull-right-1{
+	width:316px;
+	margin-top: 5px;
+}
+.fa-pa{
+	transition: color 0.2s linear;
+}
+.fa-pa:hover{
+	color:#f59b60;
+ 	text-shadow: 1px 2px 3px rgba(1,11,20,0.9);	
+}
+.btn-info1{
+	border: 1px solid #8de5ff;
+	box-shadow: 0px 0px 3px 2px rgba(0,0,0,0.4);
+	transition: all 0.2s linear;
+}
+.btn-info1:hover{
+	border: 1px solid #52b9d8;
+	transform: scale(1.1);
+	box-shadow: 0px 0px 3px 2px rgba(255,255,255,0.4);
+}
+</style>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div id="wrapper">
         <!--左侧导航开始-->
-        <nav class="navbar-default navbar-static-side" role="navigation">
+        <nav class="navbar-default navbar-static-side" role="navigation" style="background-color:rgb(48,57,72);">
             <div class="nav-close"><i class="fa fa-times-circle"></i>
             </div>
             <div class="sidebar-collapse" id="1">
                 <ul class="nav" id="side-menu">
-                    <li class="nav-header">
+                    <li class="nav-header" style="background-color:rgb(48,57,72)";>
                         <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle J_menuItem" href="${ctxPath }/static/welcome.jsp">
                                 <span class="clear">
@@ -92,17 +115,31 @@
         <!--右侧部分开始-->
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;background-color:#2e374a;border-bottom: 1px solid #3a4d5e;
+	box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.1);">
                     <div class="navbar-header">
-                    	<a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#">
-                    		<i class="fa fa-bars"></i> </a>
-                    	<img alt="" src="${ctxPath }/static/img/tianjian.png" style="margin-top: 15px">
+                    		<a class="navbar-minimalize minimalize-styl-2 btn btn-info btn-info1" href="#">
+                    			<i class="fa fa-bars"></i> 
+                   	 	</a>
+                    		<!--<img alt="" src="${ctxPath }/static/img/tianjian.png" style="margin-top: 15px">-->
                     </div>
-                    <div class="col-sm-4 pull-right" style="margin-top:15px">
-                        <i class="fa fa-user" style="color: white;">&nbsp; <%=((Record) session.getAttribute("userinfo")).getStr("user_name")%></i>&nbsp;
-                        <a href="loginafter"><i class="fa fa-home" style="color: white; cursor: pointer">&nbsp;回主界面</i></a>&nbsp; 
-                        <i class="fa fa-cog" style="color: white; cursor: pointer" onclick="modclick()">&nbsp;修改密码</i>&nbsp; 
-                        <a class="" href="ulogin/userexit" style="color: white;"> <i class="fa fa-sign-out">&nbsp; 退出登录</i></a>
+                    <div class="col-sm-4 pull-right pull-right-1" style="margin-top:15px">
+                        <a class="" style="color: #7ea4c6;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);">
+                        		<i class="fa fa-user fa-pa" >&nbsp; <%=((Record) session.getAttribute("userinfo")).getStr("user_name")%>                        		
+                        		</i>&nbsp;
+                        </a>
+                        <a href="loginafter"  class="" style="color:#7ea4c6; cursor: pointer;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);">
+                        		<i class="fa fa-home fa-pa" >&nbsp;回主界面
+                        		</i>
+                        </a>&nbsp;
+                        <a class="" style="color: #7ea4c6; cursor: pointer;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);">
+                       		<i class="fa fa-cog fa-pa"  onclick="modclick()">&nbsp;修改密码
+                       	 	</i>&nbsp; 
+                        </a>
+                        <a class="" href="ulogin/userexit" style="color: #7ea4c6; cursor: pointer;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);"> 
+                        		<i class="fa fa-sign-out fa-pa">&nbsp; 退出登录
+                        		</i>
+                        </a>
                     </div>
                     <!-- <ul class="nav navbar-top-links navbar-right">
                         <li id="idropdown" class="dropdown">
