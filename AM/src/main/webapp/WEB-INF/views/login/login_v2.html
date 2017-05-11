@@ -27,9 +27,11 @@ if (window.top !== window.self) {
 				<form id="loginform">
 					<div><img src="static/img/tianjian.png" style="margin: 0 0 0 50px"/></div>
 					<input type="text" id="username" name="username" class="form-control uname"
-						placeholder="用户" />
+						placeholder="用户" /><img class="usrPic" src="static/img/user.png"
+						style="position: relative;left: 260px;top:-25px;opacity: 0.6;">
 					<input type="password" id="password" name="password"class="form-control pword m-b"
-						 placeholder="密码" />
+						 placeholder="密码" /><img class="usrPic" src="static/img/locked.png"
+						style="position: relative;left: 260px;top:-40px;opacity: 0.6;">
 					<button id="submitbutton" type="button" onclick="submitFunc()"
 						class="btn btn-primary block full-width m-b">登 录</button>
 				</form>

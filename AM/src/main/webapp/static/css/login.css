@@ -28,7 +28,7 @@ body.signin {
 }
 
 .signinpanel .uname {
-    background: url(../img/user.png) no-repeat 95% center;
+    /*background: url(../img/user.png) no-repeat 95% center;*/
     background-color:#F0F4F7;
     color:#a8b3bd;
     font-family: "微软雅黑";
@@ -45,9 +45,12 @@ body.signin {
 background-color: #FFFFFF;	
 }
 .signinpanel .pword {
-    background: url(../img/locked.png) no-repeat 95% center;
+    /*background: url(../img/locked.png) no-repeat 95% center;*/
     background-color:#F0F4F7;
     color:#a8b3bd;
+    font-family: "微软雅黑";
+    font-size:10px;
+    font-weight: lighter;
     transition: background-color 0.2s linear;
 }
 .signinpanel .pword:hover{
