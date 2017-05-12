@@ -72,7 +72,7 @@ select {
 				<th>资源背景色</th>
 				<th>资源图标</th>
 				<th>资源排序</th>
-				<th>操作</th>
+				<th width="130px">操作</th>
 			</tr>
 		</thead>
 		<tbody>
