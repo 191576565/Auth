@@ -85,7 +85,7 @@
 					<label>域编码</label> 
 					<input name="scopeCode" 
 						   type="text" 
-						   class="form-control notNull"
+						   class="form-control notNull cl"
 						   nullName="域编码"
 						   id="ipt_code" 
 						   placeholder="2~32位数字/字母"
@@ -107,7 +107,7 @@
 					<label>域名称</label> 
 					<input name="scopeName" 
 						   type="text" 
-						   class="form-control notNull"
+						   class="form-control notNull cl"
 						   nullName="域名称"
 						   id="ipt_name" 
 						   placeholder="请输入域名称"
@@ -123,7 +123,7 @@
 				</div>
 				<div class="form-group">
 					<label>备注</label>
-					<textarea id="ipt_memo" class="form-control" name="memo" type="input"></textarea>
+					<textarea id="ipt_memo" class="form-control cl" name="memo" type="input"></textarea>
 				</div>
 				
  			</form>
