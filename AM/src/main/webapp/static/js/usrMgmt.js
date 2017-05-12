@@ -62,6 +62,7 @@ function inittable(){
 	    }, {                                                                                                                         
 	    	title: '操 作',
 	    	align: 'center',
+	    	width: '130px',
 	    	formatter: function(value, row, index) {
 		    	 var e = '<a href="#" class="btn btn-info update" onclick="edit(\''+ index +'\')">编辑</a> ';
 		    	 var d = '<a href="#" class="btn btn-danger delete" onclick="del(\''+ index +'\')">删除</a> ';

@@ -214,7 +214,7 @@ function onEdit(index) {
 		content: $('#sys_add_div'),
 		title: '编辑权限组信息',
 		area: '400px',
-		btn: ['保存', '取消'],
+		btn: ['确定', '取消'],
 		yes: function(index, layero) {
 			if (!validate()) {
 				return false;
