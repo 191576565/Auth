@@ -81,7 +81,7 @@
 					<label>域编码</label> 
 					<input name="scopeCode" 
 						   type="text" 
-						   class="form-control notNull"
+						   class="form-control notNull cl"
 						   nullName="域编码"
 						   id="ipt_code" 
 						   placeholder="2~32位数字/字母"
@@ -103,7 +103,7 @@
 					<label>域名称</label> 
 					<input name="scopeName" 
 						   type="text" 
-						   class="form-control notNull"
+						   class="form-control notNull cl"
 						   nullName="域名称"
 						   id="ipt_name" 
 						   placeholder="请输入域名称"
@@ -130,6 +130,7 @@
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="${ctxPath }/static/js/angular.min.js"></script>
     <script src="${ctxPath }/static/js/jquery-form.js"></script>
+    <script src="${ctxPath }/static/js/placeholder_plugin.js"></script>
 
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>

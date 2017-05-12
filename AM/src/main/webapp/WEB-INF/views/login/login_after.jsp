@@ -138,19 +138,19 @@ color:#f59b60;
 				>
 				<div class="form-group">
 					<label>旧密码</label> <input id="oldpassword" name="oldpassword"
-						type="password" placeholder="请输入旧密码" class="form-control"
+						type="password" placeholder="请输入旧密码" class="form-control cl"
 						onblur="oldpcheck()">
 					<p id="oldpmessage" class="error"></p>
 				</div>
 				<div class="form-group">
 					<label>新密码</label> <input id="newpassword" name="newpassword"
-						type="password" placeholder="请输入新密码" class="form-control"
+						type="password" placeholder="请输入新密码" class="form-control cl"
 						onblur="newplencheck()">
 					<p id="newplenmessage" class="error"></p>
 				</div>
 				<div class="form-group">
 					<label>确认密码</label> <input id="renewpassword" name="renewpassword"
-						type="password" placeholder="请确认新密码" class="form-control"
+						type="password" placeholder="请确认新密码" class="form-control cl"
 						onblur="newpcheck()">
 					<p id="newpmessage" class="error"></p>
 				</div>
@@ -229,6 +229,7 @@ color:#f59b60;
 		</div>
 		</div>
 	<script src="${ctxPath }/static/js/jquery.min.js"></script>
+	<script src="static/js/placeholder_plugin.js"></script>
 	<script>
 		window.jQuery
 				|| document
@@ -283,14 +284,12 @@ color:#f59b60;
 		})
 		
 		function modifyuserpass() {
-			$('#form_modfiypass')[0].reset();   
-			$("#oldpmessage").html("");
-			$("#newplenmessage").html("");
-			$("#newpmessage").html("");
+			$('input').placeholder();
+			$('.cl').val('');   
+			$('.error').empty();
 			layer.open({
 				type : 1,
 				content : $('#password_mod'),
-				// skin: 'layui-layer-molv',
 				title : '密码修改',
 				area : '600px',
 				maxmin : false

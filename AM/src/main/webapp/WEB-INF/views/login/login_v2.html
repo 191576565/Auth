@@ -11,6 +11,7 @@
 <link href="static/css/style.css" rel="stylesheet" type="text/css">
 <link href="static/css/login.css" rel="stylesheet" type="text/css">
 <script src="static/js/jquery.min.js?v=2.1.4"></script>
+<script src="static/js/placeholder_plugin.js"></script>
 <script src="static/js/plugins/layer/layer.min.js"></script>
 <script>
 if (window.top !== window.self) {
@@ -65,6 +66,7 @@ if (window.top !== window.self) {
 			});
 		};
 		jQuery(document).ready(function() {
+		$("input").placeholder(); 
 		var tds = $("html");
 		tds.keydown(function(event) {
 			var myEvent = event || window.event; //解决不同浏览器获取事件对象的差异

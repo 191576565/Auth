@@ -116,7 +116,9 @@ $('#btn_del').on('click', function() {
 
 //layer弹出自定义div__新增
 $('#sys_add').on('click', function() {
-	$("#sys_add_div #form")[0].reset();
+	// $("#sys_add_div #form")[0].reset();
+	$('input').placeholder();
+	$('.cl').val('');
 	$("#sys_add_div #form #ipt_memo").html('');
 	$('.error').empty();
 	layer.open({
@@ -149,8 +151,8 @@ $('#sys_add').on('click', function() {
 //layer弹出自定义div__修改
 function onEdit(index) {
 	var info = $('#table').bootstrapTable('getData')[index];
+	$('input').placeholder();
 	var memo = info.memo;
-	console.log(memo);
 	//字符串替换(备注)
 	if (null == memo) {
 		memo = '';
