@@ -42,13 +42,13 @@ function initsystable(){
 		}, {
 			field: 'uuid',
 			title: '操 作',
-			width: '30px',
+			width: '188px',
 			align: 'center',
 			formatter: function(value, row, index) {
-				var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\''+ row.uuid +'\',\''+ row.domain_id +'\',\''+ row.domain_name +'\',\''+ row.sort_id +'\',\''+ row.memo +'\')">编辑</a> ';
-				var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\''+ row.uuid +'\')">删除</a> ';
-				var f = '<a href="#" class="btn btn-success" onclick="onOrg(\''+ row.uuid +'\')">机构</a> ';
-				return f;
+				var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\'' + index + '\')">编辑</a> ';
+				var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\'' + index + '\')">删除</a> ';
+				var f = '<a href="#" class="btn btn-org" onclick="onOrg(\'' + row.uuid + '\')">机构</a> ';
+				return e + d + f;
 			}
 		}, ]
 		

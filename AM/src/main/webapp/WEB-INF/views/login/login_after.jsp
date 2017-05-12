@@ -74,7 +74,7 @@ color:#f59b60;
 					<div class="col-sm-10 col-sm-10-1">
 						<a href="#" class="site-brand pull-left"><img alt="" src="${ctxPath }/static/img/tianjian.png"></a>
 					</div>
-					<div class="col-sm-4 pull-right pull-right-1">
+					<div class="col-sm-4 pull-right pull-right-1" style="width:400px">
 						<a class="" style="color: #7ea4c6;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);">
 							<i class="fa fa-user fa-pa">&nbsp; <%=((Record) session.getAttribute("userinfo")).getStr("user_name")%>
 							</i>&nbsp;

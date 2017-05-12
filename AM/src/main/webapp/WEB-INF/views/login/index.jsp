@@ -123,7 +123,7 @@
                    	 	</a>
                     		<!--<img alt="" src="${ctxPath }/static/img/tianjian.png" style="margin-top: 15px">-->
                     </div>
-                    <div class="col-sm-4 pull-right pull-right-1" style="margin-top:15px">
+                    <div class="col-sm-4 pull-right pull-right-1" style="margin-top:15px; width:400px">
                         <a class="" style="color: #7ea4c6;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);">
                         		<i class="fa fa-user fa-pa" >&nbsp; <%=((Record) session.getAttribute("userinfo")).getStr("user_name")%>                        		
                         		</i>&nbsp;
