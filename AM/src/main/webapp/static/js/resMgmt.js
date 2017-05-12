@@ -109,7 +109,7 @@ $('#res_add').on('click', function() {
 	layer.open({
 		type : 1,
 		content : $('#sys_add_div'),
-		title : '资源信息',
+		title : ['资源信息','color:rgb(99,102,104)'],
 		area :  '640px',
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
@@ -144,7 +144,7 @@ function update(obj){
 	layer.open({
 		type : 1,
 		content : $('#sys_add_div'),
-		title : '资源信息',
+		title : ['资源信息','color:rgb(99,102,104)'],
 		area :  '640px',
 		area :  '640px',
 		btn: ['确定', '取消'],

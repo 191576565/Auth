@@ -51,7 +51,7 @@ $(function() {
 			layer.open({
 				type: 1,
 				content: $('.t'),
-				title: '选择机构',
+				title: ['选择机构','color:rgb(99,102,104)'],
 				area: ['400px', '400px'],
 				maxmin: false,
 				btn: ['确定', '取消'],
@@ -272,7 +272,7 @@ function onEdit(uuid, content) {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: 'URL资源配置',
+		title: ['URL资源配置','color:rgb(99,102,104)'],
 		area: ['768px', '432px'],
 		btn: ['保存', '取消'],
 		yes: function(index) {
@@ -331,7 +331,7 @@ $('#sys_add').on('click', function() {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: 'URL资源配置',
+		title: ['URL资源配置','color:rgb(99,102,104)'],
 		area: ['600px', '450px'],
 		btn: ['保存', '取消'],
 		yes: function(index) {

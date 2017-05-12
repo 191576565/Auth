@@ -64,7 +64,7 @@ $(function() {
 			layer.open({
 				type: 1,
 				content: $('.t'),
-				title: '选择所属用户',
+				title: ['选择所属用户','color:rgb(99,102,104)'],
 				area: ['400px', '600px'],
 				maxmin: false,
 				btn: ['确定', '取消'],
@@ -160,7 +160,7 @@ $('#sys_add').click(function() {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: '权限组信息',
+		title: ['权限组信息','color:rgb(99,102,104)'],
 		area: '400px',
 		btn: ['确定', '取消'],
 		yes: function(index, layero) {
@@ -212,7 +212,7 @@ function onEdit(index) {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: '编辑权限组信息',
+		title: ['编辑权限组信息','color:rgb(99,102,104)'],
 		area: '400px',
 		btn: ['确定', '取消'],
 		yes: function(index, layero) {
@@ -247,7 +247,7 @@ function onEdit(index) {
 function onDel(index) {
 	var info = table.bootstrapTable('getData')[index];
 	layer.confirm('是否删除该权限组？', {　　
-		title: '提示信息',
+		title: ['提示信息','color:rgb(99,102,104)'],
 		btn: ['删除', '取消'] //按钮
 	}, function() {
 		$.post('dpgMgmt/delform', {
@@ -291,7 +291,7 @@ $('#delete').click(function() {
 		layer.msg('请选择要删除的权限组信息');
 	} else {
 		layer.confirm('是否删除选中的权限组？', {
-			title: '提示信息',
+			title: ['提示信息','color:rgb(99,102,104)'],
 			btn: ['删除', '取消'] //按钮
 		}, function() {
 			$.post('dpgMgmt/delform', {

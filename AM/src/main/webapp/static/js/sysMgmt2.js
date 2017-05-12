@@ -128,7 +128,7 @@ $('#sys_add').on('click', function() {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: '系统信息',
+		title: ['系统信息','color:rgb(99,102,104)'],
 		area: ['400px', '400px'],
 		maxmin: true,
 		btn: ['确定', '取消'],
@@ -172,7 +172,7 @@ function onEdit(id,code,name,sort,memo) {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: '系统信息',
+		title: ['系统信息','color:rgb(99,102,104)'],
 		area: ['400px', '400px'],
 		maxmin: true,
 		btn: ['确定', '取消'],

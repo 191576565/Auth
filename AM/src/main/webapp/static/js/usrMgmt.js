@@ -164,7 +164,7 @@ $('#btn_add').on('click', function() {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: '用户信息',
+		title: ['用户信息','color:rgb(99,102,104)'],
 		area: ['960px', '540px'],
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
@@ -214,7 +214,7 @@ function edit(index) {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: '用户信息',
+		title: ['用户信息','color:rgb(99,102,104)'],
 		area: ['960px', '540px'],
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
@@ -294,7 +294,7 @@ $('#btn_del').click(function(){
 	}else{
 		layer.confirm('是否删除所选用户信息？', 
 				{
-			　　　　　　title:'提示信息',
+			　　　 title:['提示信息','color:rgb(99,102,104)'],
 				  btn: ['删除','取消'] //按钮
 				}, 
 				function(){

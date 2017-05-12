@@ -25,6 +25,16 @@
 		<!-- Sweet Alert -->
 		<link href="${ctxPath }/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 		<link href="${ctxPath }/static/css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
+
+		<style type="text/css">
+			label {
+   				display: inline-block;
+   				max-width: 100%;
+				margin-bottom: 5px;
+    			font-weight: 700;
+    			color: #c7c7c7;
+			}
+		</style>
 		
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">

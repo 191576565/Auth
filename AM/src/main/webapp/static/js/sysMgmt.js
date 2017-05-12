@@ -88,7 +88,7 @@ $('#btn_del').on('click', function() {
 		layer.msg('请选择要删除的系统信息');
 	} else {
 		layer.confirm('是否删除选定的系统信息？', {
-				title: '提示信息',
+				title: ['提示信息','color:rgb(99,102,104)'],
 				btn: ['删除', '取消']
 			},
 			function() {
@@ -122,7 +122,7 @@ $('#sys_add').on('click', function() {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: '系统信息',
+		title: ['系统信息','color:rgb(99,102,104)'],
 		area: ['400px', '400px'],
 		btn: ['确定', '取消'],
 		yes: function(index, layero) {
@@ -172,7 +172,7 @@ function onEdit(index) {
 	layer.open({
 		type: 1,
 		content: $('#sys_add_div'),
-		title: '系统信息',
+		title: ['系统信息','color:rgb(99,102,104)'],
 		area: ['400px', '400px'],
 		btn: ['确定', '取消'],
 		yes: function(index, layero) {
@@ -204,7 +204,7 @@ function onDel(index) {
 	var info = $('#table').bootstrapTable('getData')[index];
 	layer.confirm(
 		'是否删除该系统信息？', {　　
-			title: '提示信息',
+			title: ['提示信息','color:rgb(99,102,104)'],
 			btn: ['删除', '取消'] //按钮
 		},
 		function() {

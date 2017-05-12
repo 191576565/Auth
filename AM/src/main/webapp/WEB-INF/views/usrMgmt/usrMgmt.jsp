@@ -26,6 +26,16 @@
 		<link href="${ctxPath }/static/css/plugins/ztree/zTreeStyle.css" rel="stylesheet">
 
 		<link rel="stylesheet" href="${ctxPath }/static/css/bootstrap-multiselect.css"/>
+		<style type="text/css">
+			label {
+   				display: inline-block;
+   				max-width: 100%;
+				margin-bottom: 5px;
+    			font-weight: 700;
+    			color: #c7c7c7;
+			}
+		</style>
+		
 	</head>
 	<body class="panel-body" style="padding-bottom:0px;">
  		<div class="row">

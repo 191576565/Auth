@@ -35,7 +35,7 @@ $(function(){
 			layer.open({
 					type : 1,
 					content : $('.t'),
-					title : '选择上级机构',
+					title : ['选择上级机构','color:rgb(99,102,104)'],
 					area : [ '400px', '400px' ],
 					maxmin: false,
 					btn: ['确定', '取消'],
@@ -107,7 +107,7 @@ $('#org_add').on('click', function() {
 	layer.open({
 		type: 1,
 		content: $('#org_add_div'),
-		title: '机构信息',
+		title: ['机构信息','color:rgb(99,102,104)'],
 		area: ['400px', '400px'],
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
@@ -163,7 +163,7 @@ function upt(obj){
 	layer.open({
 		type: 1,
 		content: $('#org_add_div'),
-		title: '机构信息',
+		title: ['机构信息','color:rgb(99,102,104)'],
 		area: ['400px', '400px'],
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
