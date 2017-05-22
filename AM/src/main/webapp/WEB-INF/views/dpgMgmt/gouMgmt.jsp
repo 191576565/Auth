@@ -33,7 +33,6 @@
    				max-width: 100%;
 				margin-bottom: 5px;
     			font-weight: 700;
-    			color: #c7c7c7;
 			}
 		</style>
 	</head>
@@ -111,6 +110,7 @@
 	<!-- 全局js -->
     <script src="${ctxPath }/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="${ctxPath }/static/js/placeholder_plugin.js"></script>
     
     <!-- Bootstrap-Treeview plugin javascript-->
     <script src="${ctxPath }/static/js/bootstrap-treeview.js" type="text/javascript"></script>
@@ -142,6 +142,7 @@
     	initTable();
 		 //条件搜索
 		 $("#search").bind("click", initTable);
+		 $('input').placeholder();
 	})
     </script>
 	</body>

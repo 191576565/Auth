@@ -31,7 +31,6 @@ label {
    	max-width: 100%;
 	margin-bottom: 5px;
     font-weight: 700;
-    color: #c7c7c7;
 }
 .table-striped>tbody>tr:nth-of-type(odd), .table-bordered>thead>tr>th,
 	.table-bordered>thead>tr>td {

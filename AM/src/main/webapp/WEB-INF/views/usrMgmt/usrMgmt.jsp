@@ -32,7 +32,6 @@
    				max-width: 100%;
 				margin-bottom: 5px;
     			font-weight: 700;
-    			color: #c7c7c7;
 			}
 		</style>
 		
@@ -176,6 +175,7 @@
     <script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="${ctxPath }/static/js/angular.min.js"></script>
     <script src="${ctxPath }/static/js/jquery-form.js"></script>
+    <script src="${ctxPath }/static/js/placeholder_plugin.js"></script>
     <!-- 自定义js -->
     <script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>
 
@@ -200,6 +200,7 @@
 		 inittable();
 		 //条件搜索
 		 $("#search").bind("click", inittable);
+		 $('input').placeholder();
 	})
 	//表单验证
 	var app = angular.module('myApp', []);

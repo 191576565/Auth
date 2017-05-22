@@ -31,7 +31,6 @@
    				max-width: 100%;
 				margin-bottom: 5px;
     			font-weight: 700;
-    			color: #c7c7c7;
 			}
 		</style>
 		
@@ -154,6 +153,7 @@
 		 initsystable();
 		 //条件搜索
 		 $("#search").bind("click", initsystable);
+		 $('input').placeholder();
 	})
 	//表单验证
 	var app = angular.module('myApp', []);

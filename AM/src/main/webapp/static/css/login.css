@@ -32,7 +32,7 @@ body.signin {
     background-color:#F0F4F7;
     color:#a8b3bd;
     font-family: "微软雅黑";
-	font-size:10px;
+	font-size:12px;
 	font-weight: lighter;
     transition: background-color 0.2s linear;
 }
@@ -49,7 +49,7 @@ background-color: #FFFFFF;
     background-color:#F0F4F7;
     color:#a8b3bd;
     font-family: "微软雅黑";
-    font-size:10px;
+    font-size:12px;
     font-weight: lighter;
     transition: background-color 0.2s linear;
 }
@@ -63,7 +63,7 @@ background-color: #FFFFFF;
 	background-color:#405669;
 	color:#fffff;
 	font-family: "微软雅黑";
-	font-size:10px;
+	font-size:12px;
 	line-height: 16px;
 	font-weight: lighter;
 	text-shadow: 1px 2px 3px rgba(1,11,20,0.6);
@@ -91,7 +91,7 @@ background-color: #FFFFFF;
 .copyright{
 	color: #49647c;
 	font-family: "微软雅黑";
-	font-size: 6px;
+	font-size: 12px;
 	font-weight: lighter;
 	text-shadow: 1px 2px 3px rgba(1,11,20,0.9);
 }

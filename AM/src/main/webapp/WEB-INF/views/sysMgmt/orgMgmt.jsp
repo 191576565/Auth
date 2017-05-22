@@ -21,7 +21,6 @@
    				max-width: 100%;
 				margin-bottom: 5px;
     			font-weight: 700;
-    			color: #c7c7c7;
 			}
 		</style>
 	</head>
