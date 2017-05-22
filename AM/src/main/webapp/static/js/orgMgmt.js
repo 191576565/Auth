@@ -143,7 +143,8 @@ function upt(obj){
 	$("#org_add_div #form #ipt_memo").val(info.memo);
 	$("#org_add_div #form #domain_uuid").val(info.domain_uuid);
 	$('.error').empty();
-	
+	//hujian modify
+	var uuid=info.uuid;
 	//获取机构
 	$.getJSON("orgMgmt/getOrg",function(data){
 		$.each(data, function(i, item){
@@ -168,6 +169,7 @@ function upt(obj){
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
 			//防止编辑上级机构选择自身
+			
 			if($('#org_up_uuid').val() == uuid){
 				layer.msg('上级机构不能选择自己');
 				return false;

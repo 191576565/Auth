@@ -229,7 +229,7 @@ color:#f59b60;
 		</div>
 		</div>
 	<script src="${ctxPath }/static/js/jquery.min.js"></script>
-	<script src="static/js/placeholder_plugin.js"></script>
+	<script src="${ctxPath }/static/js/placeholder_plugin.js"></script>
 	<script>
 		window.jQuery
 				|| document

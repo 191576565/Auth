@@ -155,6 +155,7 @@ $('#btn_add').on('click', function() {
 	$("#uuid").val('');
 	$("#scopeCode").val('');
 	$("#scopeCode").attr("disabled",false);
+	$("#scopeCode").removeAttr("readonly");
 	$("#usrName").val('');
 	$("#domain option:first").prop("selected", 'selected');
 	changeDomain($("#domain").val());
