@@ -143,7 +143,13 @@ $('#sys_add').on('click', function() {
 				}
 			});
 		},
-		btn2: function(index, layero) {}
+		btn2: function(index, layero) {},
+		end: function(){
+			layer.closeAll();
+			$('#table').bootstrapTable('refresh', {
+				silent: true
+			});
+		}
 	});
 	return false;
 });

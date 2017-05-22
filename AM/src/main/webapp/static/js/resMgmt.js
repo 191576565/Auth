@@ -100,7 +100,9 @@ function initTable() {
 }
 
 $('#res_add').on('click', function() {
-	$('#form')[0].reset();
+	// $('#form')[0].reset();
+	$('input').placeholder();
+	$('.cl').val('');
 	$('#uuid').val('');
 	$('#res_id').removeAttr('readonly');
 	$('input').removeClass('error');
@@ -133,7 +135,7 @@ $('#res_add').on('click', function() {
 });
 
 function update(obj){
-	
+	$('input').placeholder();
 	$('#res_id').attr('readonly', 'readonly');
 	var info=rs[$(obj).attr('index')];
 	

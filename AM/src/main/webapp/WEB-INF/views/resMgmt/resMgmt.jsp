@@ -100,7 +100,7 @@ select {
 						<label>资源编码</label> 
 						<input name="res_id" 
 							type="text"
-							class="form-control notNull" 
+							class="form-control notNull cl" 
 							id="res_id" 
 							placeholder="1~32位字母/数字"
 							ng-model="res_id" 
@@ -121,7 +121,7 @@ select {
 						<label>资源名称</label> 
 						<input type="text" 
 							placeholder=""
-							class="form-control notNull" 
+							class="form-control notNull cl" 
 							name="res_name" 
 							id="res_name"
 							ng-model="res_name"
@@ -163,32 +163,32 @@ select {
 				<div class="col-sm-12">
 					<div class="form-group col-sm-6">
 						<label>前端URL</label> <input type="text" placeholder=""
-							class="form-control" name="res_url" id="res_url">
+							class="form-control cl" name="res_url" id="res_url">
 					</div>
 					<div class="form-group col-sm-6">
 						<label>后端URL</label> <input type="text" placeholder=""
-							class="form-control" name="res_bg_url" id="res_bg_url">
+							class="form-control cl" name="res_bg_url" id="res_bg_url">
 					</div>
 
 				</div>
 				<div class="col-sm-12">
 					<div class="form-group col-sm-6">
 						<label>资源背景色</label> <input type="text" placeholder=""
-							class="form-control" name="res_color" id="res_color">
+							class="form-control cl" name="res_color" id="res_color">
 					</div>
 					<div class="form-group col-sm-6">
 						<label>资源图标</label> <input type="text" placeholder=""
-							class="form-control" name="res_icon" id="res_icon">
+							class="form-control cl" name="res_icon" id="res_icon">
 					</div>
 				</div>
 				<div class="col-sm-12">
 					<div class="form-group col-sm-6">
 						<label>资源样式</label> <input type="text" placeholder=""
-							class="form-control" name="res_class" id="res_class">
+							class="form-control cl" name="res_class" id="res_class">
 					</div>
 					<div class="form-group col-sm-6">
 						<label>资源排序</label> <input type="text" placeholder=""
-							class="form-control digits" name="sort_id" id="sort_id"
+							class="form-control digits cl" name="sort_id" id="sort_id"
 							required maxlength="4">
 					</div>
 				</div>
@@ -205,6 +205,7 @@ select {
 	<script src="${ctxPath }/static/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="${ctxPath }/static/js/angular.min.js"></script>
 	<script src="${ctxPath }/static/js/jquery-form.js"></script>
+	<script src="${ctxPath }/static/js/placeholder_plugin.js"></script>
 	<!-- 自定义js -->
 	<script src="${ctxPath }/static/js/content.js?v=1.0.0"></script>
 

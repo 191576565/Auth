@@ -141,7 +141,9 @@ function onFun(id) {
 
 //layer弹出自定义div__新增
 $('#sys_add').on('click', function() {
-	$("#sys_add_div #form")[0].reset();
+	// $("#sys_add_div #form")[0].reset();
+	$('input').placeholder();
+	$('.cl').val('');
 	$('.error').empty();
 	layer.open({
 		type: 1,
@@ -173,6 +175,7 @@ $('#sys_add').on('click', function() {
 
 //layer弹出自定义div__修改
 function onEdit(index) {
+	$('input').placeholder();
 	var info = $('#table').bootstrapTable('getData')[index];
 	$("#sys_add_div #form #uuid").val(info.uuid);
 	$("#sys_add_div #form #role_id").val(info.role_id);

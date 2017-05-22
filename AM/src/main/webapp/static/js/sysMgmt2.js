@@ -42,13 +42,13 @@ function initsystable(){
 		}, {
 			field: 'uuid',
 			title: '操 作',
-			width: '188px',
+			width: '60px',
 			align: 'center',
 			formatter: function(value, row, index) {
 				var e = '<a href="#" class="btn btn-info update" onclick="onEdit(\'' + index + '\')">编辑</a> ';
 				var d = '<a href="#" class="btn btn-danger delete" onclick="onDel(\'' + index + '\')">删除</a> ';
 				var f = '<a href="#" class="btn btn-org" onclick="onOrg(\'' + row.uuid + '\')">机构</a> ';
-				return e + d + f;
+				return f;
 			}
 		}, ]
 		
