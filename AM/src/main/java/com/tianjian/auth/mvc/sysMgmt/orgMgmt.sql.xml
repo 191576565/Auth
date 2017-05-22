@@ -73,18 +73,7 @@
 	
 	<sql id="notRootOrgInfo">
 		<![CDATA[ 
-           SELECT T3.UUID AS ID
-        ,T3.ORG_UNIT_DESC AS NAME
-        ,T3.ORG_UP_UUID AS PID
-      FROM SYS_ORG_INFO T3
-      LEFT JOIN SYS_DOMAIN_INFO T2
-          ON T3.DOMAIN_UUID = T2.UUID
-     where     rownum<=2 
-    start with   (   t3.uuid=?
-                and domain_uuid=?
-                 ) 
-    connect by        t3.uuid =  prior org_up_uuid
-    union 
+      
          SELECT T3.UUID AS ID
         ,T3.ORG_UNIT_DESC AS NAME
         ,T3.ORG_UP_UUID AS PID
