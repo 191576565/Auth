@@ -44,6 +44,12 @@ if (window.top !== window.self) {
         </div>
 	</div>
 	<script>
+	function getUrlParam(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	    var r = window.location.search.substr(1).match(reg);
+	    if (r != null) return unescape(r[2]);
+	    return '';
+	}
 		function submitFunc() {
 			if ($('#username').val()=="" || $('#password').val()==""){
 				layer.tips('用户名或密码为空', '#submitbutton');
@@ -53,12 +59,14 @@ if (window.top !== window.self) {
 				type : "post",
 				dataType : "json",
 				data : $('#loginform').serialize(),
-				url : "validLogin",
+				url : "validLogin?callback="+getUrlParam('callback'),
 				async : false,
 				cache : false,
 				success : function(data) {
 					if (data.code == '0') {
 						layer.tips(data.message, '#submitbutton');
+					}else if(data.code == '9'){
+						window.location.href = 'activiti/ssoLogin?callback='+data.message;
 					} else {
 						window.location.href = 'loginafter';
 					}
@@ -78,6 +86,7 @@ if (window.top !== window.self) {
 		});
 		});
 	</script>
+	<script type="text/javascript"></script>
 </body>
 
 </html>

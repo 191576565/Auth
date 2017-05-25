@@ -77,9 +77,10 @@ public class BaseSessionController extends Controller{
 		      
 		        String sessionId = (String) session.getAttribute("usersessionid");
 		        String username = (String) session.getAttribute("user_id");
-
+		        	
 		        if(sessionId!=null){
 			    session.setAttribute("usersessionid", null);
+			    session.invalidate();//17/05/25
 			    UserService.ulogin(username, sessionId, "1");
 			   log.info("用户会话级别session解除绑定：user："+username+"["+sessionId+"]");
 

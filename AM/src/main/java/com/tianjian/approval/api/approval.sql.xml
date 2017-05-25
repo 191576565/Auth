@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-statement namespace="tianjian.approval">
+
+	<sql id="orgUser">
+		<![CDATA[ 
+        	SELECT T.UUID AS ID,T.ORG_UNIT_DESC AS NAME , 'TRUE' AS ISPARENT FROM SYS_ORG_INFO T 
+			WHERE T.ORG_UP_UUID=?
+			UNION ALL
+			SELECT T1.USER_ID AS ID,T1.USER_NAME AS NAME , 'FALSE' AS ISPARENT FROM SYS_USER_INFO T1 WHERE T1.ORG_UUID=?
+    	]]>
+	</sql>
+	
+	<sql id="initOrgUser">
+		<![CDATA[ 
+        	SELECT T.UUID AS ID,T.ORG_UNIT_DESC AS NAME, 'TRUE' AS ISPARENT FROM SYS_ORG_INFO T WHERE T.ORG_UP_UUID='#'
+    	]]>
+	</sql>
+
+	<sql id="getUserName">
+		<![CDATA[
+			SELECT T.USER_NAME FROM SYS_USER_INFO T WHERE T.USER_ID=?
+		]]>
+	</sql>
+</sql-statement>

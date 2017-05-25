@@ -20,6 +20,14 @@ public class GlobalInterceptor implements Interceptor {
 
 	 @Override
 	    public void intercept(Invocation inv) {
+		    /* yeqc 
+		     * 17/05/23
+		     * 为审批流提供接口,设置不拦截的路由
+		     */
+		 	if (inv.getActionKey().equals("/activiti/getUserTree") || inv.getActionKey().equals("/activiti/getUserName") || inv.getActionKey().equals("/activiti/ssoLogin")){
+		 		inv.invoke();
+		 		return;
+		    }
 	        // TODO Auto-generated method stub
 	        Controller contro = (Controller) inv.getController();
 	        BaseSessionController SessionController = new BaseSessionController();
@@ -46,10 +54,11 @@ public class GlobalInterceptor implements Interceptor {
 	        } else {
 	        	inv.invoke();
 	        }
+
 	    }
 	
 	 public static void addExcludedActionKey(String ApiJsonController) {
 		   excludedActionKeys.add(ApiJsonController);
-		  }
+	 }
 
 }

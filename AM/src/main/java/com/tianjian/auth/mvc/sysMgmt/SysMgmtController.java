@@ -8,7 +8,6 @@ import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.constant.ConstantLog;
 import com.tianjian.platform.tools.ToolYeqc;
-
 public class SysMgmtController extends Controller {
 	
 	private static final Log log = Log.getLog(SysMgmtController.class);

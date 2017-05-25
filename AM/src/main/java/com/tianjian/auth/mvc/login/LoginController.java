@@ -41,6 +41,8 @@ public class LoginController extends Controller {
 	}
 	
 	public void init_login() {
+//		String callback = getPara("callback");
+//		System.err.println("--------------------------callback is: "+callback);
 		log.info("welcome to init_login");
 		render("login_v2.html");
 	}
@@ -49,6 +51,7 @@ public class LoginController extends Controller {
 	 * 登录后处理
 	 */
 	public void loginafter(){
+//		System.err.println("---------"+getSession().getId()+"------");
 		String sessionId = (String) getRequest().getSession().getAttribute("usersessionid");
 		Object userinfo = getSessionAttr("userinfo");
 		String userName=((Record) userinfo).getStr("user_id");
@@ -69,6 +72,11 @@ public class LoginController extends Controller {
 		BaseSessionController SessionController=new BaseSessionController();
 		String username=getPara("username");
 		String password=getPara("password");
+		
+		//----------
+		String callback = getPara("callback");
+		//---------
+		
 		//用户登录认证
 		int b=loginservice.validUser(username,password);
 		if(b==3){
@@ -96,6 +104,9 @@ public class LoginController extends Controller {
 			}	
 			
 			UserService.login(username, sessionId, "0");
+			if(!"".equals(callback) && null!=callback){
+				renderJson("{\"code\":\"9\"},\"message\":"+callback);
+			}
 			renderJson("{\"code\":\"1\",\"message\":\"登陆成功\"}");
 		}else{
 			renderJson("{\"code\":\"0\",\"message\":\"用户名或密码错误\"}");

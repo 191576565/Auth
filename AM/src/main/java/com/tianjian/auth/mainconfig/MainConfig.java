@@ -1,8 +1,5 @@
 package com.tianjian.auth.mainconfig;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -44,6 +41,7 @@ import com.tianjian.platform.constant.ConstantInit;
 import com.tianjian.platform.dto.DataBase;
 import com.tianjian.platform.plugin.SqlXmlPlugin;
 import com.tianjian.platform.routes.ApiJsonRoutes;
+import com.tianjian.platform.routes.ApprovalRoutes;
 import com.tianjian.platform.routes.DpgMgmtRoutes;
 import com.tianjian.platform.routes.LoginRoutes;
 import com.tianjian.platform.routes.ResMgmtRoutes;
@@ -87,6 +85,8 @@ public class MainConfig extends JFinalConfig {
 		me.add(new ResMgmtRoutes());
 		me.add(new DpgMgmtRoutes());
 		me.add(new UptPwdRoutes());
+		//审批流路由
+		me.add(new ApprovalRoutes());
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class MainConfig extends JFinalConfig {
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		arp.setShowSql(true);
 
-		arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));//
+		arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));
 		// 数据库类型
 		if (db_type.equals(ConstantInit.db_type_postgresql)) {
 			arp.setDialect(new PostgreSqlDialect());
