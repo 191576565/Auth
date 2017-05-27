@@ -62,7 +62,7 @@ function initsyslogtable(){
 	    	title: '操 作',
 	    	formatter:function(value,row,index){
 	    		
-	    		var e = '<a href="#" class="btn btn-op update edit" onclick="onMore(\''+ row.op_content +'\')">操作明细</a> ';
+	    		var e = '<a href="#" class="btn btn-op update edit" onclick="onMore(\''+ index +'\')">操作明细</a> ';
 	    		return e;
 	    	}
 	    },],
@@ -70,10 +70,11 @@ function initsyslogtable(){
 	});
 };
 
-function onMore(name) {
+function onMore(index) {
+	var info = $('#syslogtable').bootstrapTable('getData')[index];
 	layer.open({
 		type: 1,
-		content: name,
+		content: info.op_content,
 		skin: 'layui-layer-molv',
 		title: '操作信息',
 		area: ['500px', '300px']
