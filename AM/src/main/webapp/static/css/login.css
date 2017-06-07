@@ -30,10 +30,10 @@ body.signin {
 .signinpanel .uname {
     /*background: url(../img/user.png) no-repeat 95% center;*/
     background-color:#F0F4F7;
-    color:#a8b3bd;
+    color:black;
     font-family: "微软雅黑";
-	font-size:12px;
-	font-weight: lighter;
+	font-size:14px;
+	font-weight: light;
     transition: background-color 0.2s linear;
 }
 //*.signinpanel .uname img{
@@ -47,10 +47,10 @@ background-color: #FFFFFF;
 .signinpanel .pword {
     /*background: url(../img/locked.png) no-repeat 95% center;*/
     background-color:#F0F4F7;
-    color:#a8b3bd;
+    color:black;
     font-family: "微软雅黑";
-    font-size:12px;
-    font-weight: lighter;
+    font-size:14px;
+    font-weight: light;
     transition: background-color 0.2s linear;
 }
 .signinpanel .pword:hover{
