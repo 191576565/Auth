@@ -24,7 +24,11 @@ public class GlobalInterceptor implements Interceptor {
 		     * 17/05/23
 		     * 为审批流提供接口,设置不拦截的路由
 		     */
-		 	if (inv.getActionKey().equals("/activiti/getUserTree") || inv.getActionKey().equals("/activiti/getUserName") || inv.getActionKey().equals("/activiti/ssoLogin")){
+		 	if (       inv.getActionKey().equals("/activiti/getUserTree") 
+		 			|| inv.getActionKey().equals("/activiti/getUserName") 
+		 			|| inv.getActionKey().equals("/activiti/ssoLogin")
+		 			|| inv.getActionKey().equals("/activiti/getUserInfo")
+		 			){
 		 		inv.invoke();
 		 		return;
 		    }

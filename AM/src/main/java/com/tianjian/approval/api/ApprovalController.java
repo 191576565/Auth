@@ -63,14 +63,37 @@ public class ApprovalController extends Controller{
 	public void ssoLogin() {
 		GlobalInterceptor.addExcludedActionKey("activiti/ssoLogin");
 //		System.err.println("---------"+getSession().getId()+"------");
+		
 		Record rd = ((Record)getSessionAttr("userinfo"));
-//		System.err.println("------------rd is:"+rd);
+		System.err.println("------------rd is:"+rd);
 		String callback=getRequest().getParameter("callback");
 		if(null == rd || "".equals(rd.get("user_id")) || null==rd.get("user_id")){
 			redirect("/init_login?callback="+callback);
 		}else{
-			redirect(callback+"?userId="+rd.get("user_id")+"&userName="+rd.get("user_name")+"&groupsId="+rd.getStr("role_ids"));
+			List<Record> list = approvalService.getOrg(rd.get("user_id"));
+			Record rd1 = list.get(0);
+			System.err.println("------------rd1 is:"+rd1);
+			redirect(callback+"?userId="+rd.get("user_id")+"&userName="+rd.get("user_name")+"&groupsId="+
+		rd.getStr("role_ids")+"&departmentId="+rd1.get("departmentid")+"&parentDep="+rd1.get("parentdep"));
 		}
+		
+	}
+	
+	/*
+	 * activiti/getUserInfo
+	 * 返回用户信息(带参)
+	 */
+	public void getUserInfo() {
+		GlobalInterceptor.addExcludedActionKey("activiti/getUserInfo");
+		
+//		String callback=getRequest().getParameter("callback");
+		String jsonText="";
+		String userId = getPara("userId");
+		List<Record> list = approvalService.getUserInfo(userId);
+		
+		jsonText = JsonKit.toJson(list);
+		String rs = approvalService.caseCast(jsonText);
+		renderJson(rs);
 		
 	}
 }

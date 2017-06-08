@@ -28,8 +28,16 @@ public class ApprovalService {
 
         for(int i=0;i<sArr.length;i++){
             String s = sArr[i];
-            if(s.length()<10){
-              continue;
+            if(s.substring(1,9).equals("groupsid")){
+              sArr[i] = "\"groupsId"+s.substring(9);
+            }else if(s.substring(1,10).equals("parentdep")){
+              sArr[i] = "\"parentDep"+s.substring(10);
+            }else if(s.substring(1,12).equals("superiordep")){
+              sArr[i] = "\"superiorDep"+s.substring(12);
+        	}else if(s.substring(1,7).equals("userid")){
+              sArr[i] = "\"userId"+s.substring(7);
+        	}else if(s.substring(1,9).equals("username")){
+              sArr[i] = "\"userName"+s.substring(9);
             }else if (s.substring(1,9).equals("isparent")){
               sArr[i] = "\"isParent"+s.substring(9);
             }
@@ -73,5 +81,19 @@ public class ApprovalService {
 			String userName = list.get(0).getStr("user_name");
 			return userName;
 		}
+	}
+	
+	//获取用户所在机构和上级机构
+	public List<Record> getOrg(String userUuid){
+		String sql = ToolGetSql.getSql("tianjian.approval.getOrg");
+		List<Record> list = Db.find(sql, userUuid);
+		return list;
+	}
+	
+	//获取用户信息(带参数)
+	public List<Record> getUserInfo(String userId){
+		String sql = ToolGetSql.getSql("tianjian.approval.getOrg");
+		List<Record> list = Db.find(sql, userId);
+		return list;
 	}
 }
