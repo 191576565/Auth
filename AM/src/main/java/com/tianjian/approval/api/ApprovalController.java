@@ -90,8 +90,9 @@ public class ApprovalController extends Controller{
 		String jsonText="";
 		String userId = getPara("userId");
 		List<Record> list = approvalService.getUserInfo(userId);
+		Record rd = list.get(0);
 		
-		jsonText = JsonKit.toJson(list);
+		jsonText = JsonKit.toJson(rd);
 		String rs = approvalService.caseCast(jsonText);
 		renderJson(rs);
 		
