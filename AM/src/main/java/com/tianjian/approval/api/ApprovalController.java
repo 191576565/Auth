@@ -74,7 +74,7 @@ public class ApprovalController extends Controller{
 			Record rd1 = list.get(0);
 			System.err.println("------------rd1 is:"+rd1);
 			redirect(callback+"?userId="+rd.get("user_id")+"&userName="+rd.get("user_name")+"&groupsId="+
-		rd.getStr("role_ids")+"&departmentId="+rd1.get("departmentid")+"&parentDep="+rd1.get("parentdep"));
+		rd.getStr("role_ids")+"&department="+rd1.get("department"));
 		}
 		
 	}
