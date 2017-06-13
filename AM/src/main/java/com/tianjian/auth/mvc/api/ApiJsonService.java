@@ -60,7 +60,7 @@ public class ApiJsonService extends BaseService{
 			param.put("column", User.user_id);
 			param.put("session", User.user_sid);
 			String sql = getSqlByBeetl("model.user.rpmselect"+type, param);
-			user = (List<Record>) Db.find(sql, username,sessionid);
+			user = (List<Record>) Db.find(sql, username,sessionid,sessionid);
 		}
 		return user;
 	}
