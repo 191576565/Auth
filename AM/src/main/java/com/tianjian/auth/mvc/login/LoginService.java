@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,18 @@ import com.tianjian.auth.mvc.model.UserService;
 import com.tianjian.platform.tools.ToolGetSql;
 
 public class LoginService {
+	
+	/*
+	 *yeqc
+	 *17/06/16 
+	 */
+	public String domainOfUser(String userId){
+		String sql = ToolGetSql.getSql("tianjian.login.domainOfUser");
+		List<Record> list = new ArrayList<Record>();
+		list = Db.find(sql, userId);
+		String domain = list.get(0).getStr("domain_id");
+		return domain;
+	}
 
 	/**
 	 * @Function 用户登录

@@ -65,14 +65,14 @@ public class ApprovalController extends Controller{
 //		System.err.println("---------"+getSession().getId()+"------");
 		
 		Record rd = ((Record)getSessionAttr("userinfo"));
-		System.err.println("------------rd is:"+rd);
+//		System.err.println("------------rd is:"+rd);
 		String callback=getRequest().getParameter("callback");
 		if(null == rd || "".equals(rd.get("user_id")) || null==rd.get("user_id")){
 			redirect("/init_login?callback="+callback);
 		}else{
 			List<Record> list = approvalService.getOrg(rd.get("user_id"));
 			Record rd1 = list.get(0);
-			System.err.println("------------rd1 is:"+rd1);
+//			System.err.println("------------rd1 is:"+rd1);
 			redirect(callback+"?userId="+rd.get("user_id")+"&userName="+rd.get("user_name")+"&groupsId="+
 		rd.getStr("role_ids")+"&department="+rd1.get("department"));
 		}

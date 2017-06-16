@@ -247,6 +247,7 @@ color:#f59b60;
 			$('body').delay(350).css({
 				'overflow-y' : 'visible'
 			});
+			
 		})
 		//]]>
 		$.getJSON("getMenu",function(content){
@@ -254,11 +255,53 @@ color:#f59b60;
 			content.forEach(function(e,i){
 				var arr = (e.res_icon).split(",");
 				array.push(arr);
-				$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb"><a id="'+arr[0]+'" href="'
-						+e.res_url+'?userid=${userid }&sid=${sid }"><img id="st'+i+'" class="effect" src="'
-								+arr[0]+'"></a></div></div>');
+				if(arr[0] == 'static/img/FR1.png'){
+					$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb"><a id="'
+							+arr[0]+'" href="#"><img id="st'+i+'" class="effect frSsoLogin" src="'
+									+arr[0]+'"></a></div></div>');
+				}else{
+					$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb"><a id="'+arr[0]+'" href="'
+							+e.res_url+'?userid=${userid }&sid=${sid }"><img id="st'+i+'" class="effect" src="'
+									+arr[0]+'"></a></div></div>');
+				}
+				
 				s = 's';
 			});
+			$(".frSsoLogin").click(function() {
+				var ip_addr = document.location.hostname;
+				//console.log(ip_addr);
+				//alert("fr单点登录");
+				//yeqc 17/06/13
+				var username = "";        
+				var password = "";
+				$.getJSON("getloginUser",function(u){
+					/* console.log(u[0]); */
+					username = u[0];
+					password = u[1];
+					/* console.log(username+"---"+password); */
+					// window.open("http://localhost:8080/WebReport/ReportServer?op=fs_load&cmd=login&__redirect__=true&fr_username="+username+"&fr_password="+password);
+					jQuery.ajax({    
+						   url:"http://"+ip_addr+":8080/WebReport/ReportServer?op=fs_load&cmd=sso",   
+						   dataType:"jsonp",//跨域采用jsonp方式    
+						   data:{"fr_username":username,"fr_password":password},    
+						   jsonp:"callback",    
+						   timeout:5000,//超时时间（单位：毫秒）    
+						   success:function(data) {    
+						          if (data.status === "success") {    
+
+						          window.location=data.url;//登录成功，直接跳转到平台系统页面   
+						          }     
+						          else if (data.status === "fail"){    
+						          alert("登录失败,用户名或密码错误");//登录失败（用户名或密码错误）    
+						          }    
+						   },    
+						   error:function(){    
+						        alert("服务器响应超时");    
+						   }    
+					});
+				});
+				     
+			}); 
 			$(".effect").mouseover(function() {
 				var a = $(this).parent().attr("id");
 			//	console.log($(this).attr("id"));

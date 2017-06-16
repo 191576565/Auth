@@ -3,6 +3,15 @@
 <!-- 用户sql -->
 <sql-statement namespace="tianjian.login">
 
+	<sql id="domainOfUser">
+		<![CDATA[ 
+        	SELECT T1.DOMAIN_ID FROM SYS_USER_INFO T 
+			LEFT JOIN SYS_DOMAIN_INFO T1 
+			ON T1.UUID = T.DOMAIN_UUID
+			WHERE T.USER_ID=?
+    	]]>
+	</sql>
+
 	<sql id="ucheck">
 		<![CDATA[ 
         	select user_pwd from SYS_USER_INFO where user_id=?

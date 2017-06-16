@@ -7,7 +7,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -18,6 +20,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.kit.HttpKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Record;
+import com.tianjian.auth.mvc.base.BaseSecurityMD5;
 import com.tianjian.auth.mvc.base.BaseSessionController;
 import com.tianjian.auth.mvc.handler.GlobalInterceptor;
 import com.tianjian.auth.mvc.menu.MenuService;
@@ -34,13 +37,32 @@ public class LoginController extends Controller {
 	private LoginService loginservice=new LoginService();
 	private MenuService menuService = new MenuService();
 	private static final Log log = Log.getLog(LoginController.class);
+	private static String g_userName;
+	private static String g_passWord;
 	public void index() {
 		log.info("welcome to login");
 		render("login_v2.html");
 
 	}
 	
+	public void getloginUser(){
+		List<String> list = new ArrayList<String>();
+		list.add(0, g_userName);
+		/*
+		 * 判断是否是FR内置系统管理员,是则加入明文,否则加入密文
+		 */
+		String domain = loginservice.domainOfUser(g_userName);
+		if("root".equals(domain)){
+			list.add(1, g_passWord);
+		}else{
+			String md5Pwd = BaseSecurityMD5.encodeMD5Hex(g_passWord);
+			list.add(1, md5Pwd);
+		}
+		renderJson(list);
+	}
+	
 	public void init_login() {
+		
 //		String callback = getPara("callback");
 //		System.err.println("--------------------------callback is: "+callback);
 		log.info("welcome to init_login");
@@ -72,6 +94,13 @@ public class LoginController extends Controller {
 		BaseSessionController SessionController=new BaseSessionController();
 		String username=getPara("username");
 		String password=getPara("password");
+		
+		/*
+		 * yeqc
+		 * 17/06/13
+		 */
+		g_userName = username;
+		g_passWord = password;
 		
 		//----------
 		String callback = getPara("callback");
