@@ -30,7 +30,7 @@
    				ON T1.UUID = T.ORG_UUID
 			LEFT JOIN SYS_ORG_INFO T2
     			ON T2.UUID = T1.ORG_UP_UUID
-			WHERE T.UUID=?
+			WHERE T.USER_ID=?
 
 		]]>
 	</sql>
