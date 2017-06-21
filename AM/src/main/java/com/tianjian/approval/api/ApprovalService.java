@@ -29,7 +29,14 @@ public class ApprovalService {
         for(int i=0;i<sArr.length;i++){
             String s = sArr[i];
             if(s.substring(1,9).equals("groupsid")){
+              /*
+               * 发现bug
+               * 明天任务:
+               * 这个地方因为已经用逗号分隔过一次
+               * 应该用其它符号分隔然后用去掉就好了
+               */
               sArr[i] = "\"groupsId"+s.substring(9);
+              sArr[i] = sArr[i].replace("*", ",");
             }else if(s.substring(1,10).equals("parentdep")){
               sArr[i] = "\"parentDep"+s.substring(10);
             }else if(s.substring(1,12).equals("superiordep")){
@@ -92,8 +99,22 @@ public class ApprovalService {
 	
 	//获取用户信息(带参数)
 	public List<Record> getUserInfo(String userId){
-		String sql = ToolGetSql.getSql("tianjian.approval.getOrg");
+		String sql = ToolGetSql.getSql("tianjian.approval.getUserInfo");
+		String sql1 = ToolGetSql.getSql("tianjian.approval.getId");
 		List<Record> list = Db.find(sql, userId);
+		String roleId = list.get(0).getStr("groupsid");
+		String[] ids = roleId.split(",");
+		String groupsid = "";
+		for(int i=0; i<ids.length; i++){
+			groupsid += Db.find(sql1,ids[i]).get(0).get("role_id");
+			if(ids.length>1 && i!=ids.length-1){
+				groupsid += "*";
+			}
+			
+		}
+		System.err.println(groupsid);
+		
+		list.get(0).set("groupsid", groupsid);
 		return list;
 	}
 }

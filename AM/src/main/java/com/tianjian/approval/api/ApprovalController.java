@@ -84,6 +84,7 @@ public class ApprovalController extends Controller{
 	 * 返回用户信息(带参)
 	 */
 	public void getUserInfo() {
+		
 		GlobalInterceptor.addExcludedActionKey("activiti/getUserInfo");
 		
 //		String callback=getRequest().getParameter("callback");

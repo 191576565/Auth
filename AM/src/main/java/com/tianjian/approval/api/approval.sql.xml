@@ -35,7 +35,7 @@
 		]]>
 	</sql>
 	
-	<sql id="getOrg">
+	<sql id="getUserInfo">
 		<![CDATA[
 			SELECT T3.USER_ID AS USERID
     ,T3.USER_NAME AS USERNAME
@@ -54,6 +54,13 @@ LEFT JOIN SYS_ORG_INFO T4
     ON T4.UUID = T2.ORG_UP_UUID
 WHERE T.USER_ID = ?
 
+		]]>
+	</sql>
+	
+	<sql id="getId">
+		<![CDATA[
+			SELECT T.ROLE_ID FROM SYS_ROLE_INFO T WHERE UUID=?
+			
 		]]>
 	</sql>
 </sql-statement>
