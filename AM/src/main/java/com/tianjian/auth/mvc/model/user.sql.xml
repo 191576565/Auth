@@ -80,8 +80,8 @@
 		<![CDATA[ 
 with tmp_roles as (
               select t0.user_id                                                           
-              ,dao_concat(t1.role_id )  as role_id  
-              ,dao_concat(t1.role_name)  as role_name
+              ,to_clob(dao_concat(t1.role_id ))  as role_id  
+              ,to_clob(dao_concat(t1.role_name))  as role_name
                 from sys_user_info     t0
               left join sys_role_info     t1  on DBMS_LOB.INSTR(t0.roles  ,t1.uuid)>0             
               group by t0.user_id    )
