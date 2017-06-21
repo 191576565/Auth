@@ -28,7 +28,7 @@
           LEFT JOIN SYS_ORG_INFO      T3  ON T0.ORG_UUID=T3.UUID and t0.domain_uuid=t3.domain_uuid  
           LEFT JOIN SYS_RESOURCE_INFO T4  ON decode(t2.domain_id,'root',1,DBMS_LOB.INSTR(T1.RESOURCES  ,T4.UUID))>0
           LEFT JOIN SYS_RESOURCE_INFO T5  ON T4.RES_UP_UUID=T5.UUID
-          where  user_id =?
+          where  user_id =?   
           group  by
            T2.DOMAIN_ID     ,T2.DOMAIN_NAME     ,T3.ORG_UNIT_ID   ,T3.ORG_UNIT_DESC ,T0.USER_ID  ,T0.USER_NAME,T4.UUID    ,T4.RES_UP_UUID ,T4.RES_ID
            ,T4.RES_NAME     ,T4.RES_URL   ,nvl(T5.RES_ID,'#') ,T4.RES_CLASS   ,T4.RES_COLOR     ,T4.RES_ICON   ,T4.RES_TYPE )
