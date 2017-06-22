@@ -1,5 +1,6 @@
 package com.tianjian.approval.api;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +74,9 @@ public class ApprovalController extends Controller{
 			List<Record> list = approvalService.getOrg(rd.get("user_id"));
 			Record rd1 = list.get(0);
 //			System.err.println("------------department is:"+rd.get("org_unit_id"));
-			redirect(callback+"?userId="+rd.get("user_id")+"&userName="+rd.get("user_name")+"&groupsId="+
+			String userName = URLEncoder.encode(rd.getStr("user_name"));
+			
+			redirect(callback+"?userId="+rd.get("user_id")+"&userName="+userName+"&groupsId="+
 		rd.getStr("role_ids")+"&department="+rd.get("org_unit_id"));
 		}
 		
