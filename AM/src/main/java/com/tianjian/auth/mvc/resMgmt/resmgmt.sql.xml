@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 用户sql -->
 <sql-statement namespace="tianjian.res">
+
+	<sql id="getResData">
+		<![CDATA[ 
+        	SELECT
+    t.uuid,
+    t.res_id,
+    t.res_name,
+    t.res_up_uuid,
+    t.sort_id,
+    t1.res_name AS up_res_name,
+    t.res_url,
+    t.res_bg_url,
+        CASE t.res_type
+            WHEN '0'   THEN '主菜单'
+            WHEN '1'   THEN '子菜单'
+            WHEN '2'   THEN '按钮'
+        END
+    res_type_name,
+    t.res_type,
+    t.res_class,
+    t.res_color,
+    t.res_icon,
+    (SELECT COUNT(*) FROM SYS_RESOURCE_INFO T2 WHERE T2.RES_UP_UUID=T.UUID) AS COUNT_
+    ,t2.lvl
+FROM
+    sys_resource_info t
+    LEFT JOIN sys_resource_info t1 ON t.res_up_uuid = t1.uuid
+         join(   
+   select   sri.uuid,level lvl  from  sys_resource_info   sri
+    start with sri.uuid='root' connect by prior   sri.uuid=    sri.res_up_uuid)  t2   on t.uuid=t2.uuid
+    
+    
+WHERE
+    t.res_up_uuid = ?
+    order by res_id asc
+    	]]>
+	</sql>
 	
 	<sql id="repeatSelect">
 		<![CDATA[ 

@@ -1,6 +1,7 @@
 package com.tianjian.auth.mvc.resMgmt;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jfinal.core.Controller;
@@ -25,6 +26,20 @@ public class ResMgmtController extends Controller {
 
 		List<ResMgmt> all = reservice.get(ResMgmt.sqlId_res_select);
 		renderJson(all);
+	}
+	
+	/*
+	 * 资源懒加载
+	 */
+	public void getResData(){
+		String resUpUuid = getPara("res_up_uuid");
+		List<Record> list = new ArrayList<Record>();
+		if(null==resUpUuid){
+			list = reservice.getResData("root");
+		}else{
+			list = reservice.getResData(resUpUuid);
+		}
+		renderJson(list);
 	}
 
 	/*

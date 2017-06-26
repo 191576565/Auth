@@ -220,15 +220,9 @@ select {
 		src="${ctxPath }/static/js/plugins/treegrid/jquery.treegrid.bootstrap3.js"></script>
 
 	<!-- ztree -->
-	<script
-		src="${ctxPath }/static/js/plugins/zTree/jquery.ztree.all.min.js"></script>
+	<script src="${ctxPath }/static/js/plugins/zTree/jquery.ztree.all.min.js"></script>
 
-	<!--
-    	作者：ys
-    	时间：2017-03-06
-    	描述：页面js
-    -->
-	<script src="${ctxPath }/static/js/resMgmt.js"></script>
+	<script src="${ctxPath }/static/js/resMgmt2.js"></script>
 	<script>
 		//表单验证
 		var app = angular.module('myApp', []);

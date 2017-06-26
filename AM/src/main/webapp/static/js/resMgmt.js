@@ -90,11 +90,16 @@ function initTable() {
 		
 		$('#table').treegrid({
 			treeColumn:0,
+			initialState:'collapsed',//将初始化状态设置为折叠
             expanderExpandedClass: 'glyphicon glyphicon-minus',
             expanderCollapsedClass: 'glyphicon glyphicon-plus'
         });
 		//收起第二级及以下的机构
-    		$('#table tbody tr[lvl=2]').treegrid('collapseRecursive');
+//    		$('#table tbody tr[lvl=2]').treegrid('collapseRecursive');
+		if($('#table tbody tr[lvl=1]').treegrid('isCollapsed')){
+			  // 展开这一层节点
+			$('#table tbody tr[lvl=1]').treegrid('expand');
+		};
     		
 	});
 }

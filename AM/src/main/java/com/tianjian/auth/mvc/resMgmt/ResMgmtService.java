@@ -10,6 +10,15 @@ import com.tianjian.platform.tools.ToolGetSql;
 
 public class ResMgmtService {
 	
+	/*
+	 * 资源-懒加载
+	 */
+	public List<Record> getResData(String resUpUuid){
+		String sql = ToolGetSql.getSql("tianjian.res.getResData");
+		List<Record> list = Db.find(sql, resUpUuid);
+		return list;
+	}
+	
 	//重复性验证
 	public boolean notRepeated(String resId, String resName){
 		String sql = ToolGetSql.getSql("tianjian.res.repeatSelect");
