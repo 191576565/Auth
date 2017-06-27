@@ -17,7 +17,8 @@ var s = {
 };
 
 //解决IE浏览器remove()不能使用的问题
-var navigatorName = "Microsoft Internet Explorer"; 
+var navigatorName = "Microsoft Internet Explorer";
+var navigatorName_ = "Netscape";
 
 
 function zTreeOnDblClickSimple(event, treeId, treeNode) {
@@ -86,7 +87,7 @@ function initTable() {
 				}else{
 					temp='<tr class="treegrid-'+e.uuid+' treegrid-collapsed" lvl="'+e.lvl+'" index="'+index+'"><td style="white-space: nowrap;" id="'+e.res_id+'">'+e.res_id+'</td><td>'+e.res_name+'</td><td>'
 					+e.up_res_name+'</td><td>'+e.res_url+'</td><td>'+e.res_type_name+'</td><td>'+e.res_class+'</td><td>'+e.res_color+'</td><td>'+e.res_icon
-					+'</td><td>'+e.sort_id+'</td><td style="white-space: nowrap;"><button type="button" class="btn btn-info" onclick="update(\''+e.uuid+'\',\''+e.lvl+'\',\''+e.res_id+'\',\''+e.res_name+'\',\''+e.res_type+'\',\''+e.up_res_name+'\',\''+e.res_url+'\',\''+e.res_bg_url+'\',\''+e.res_type_name+'\',\''+e.res_class+'\',\''+e.res_color+'\',\''+e.res_icon+'\',\''+e.sort_id+'\')"  index="'+index+'">编辑</button>&nbsp;<button type="button" class="btn btn-danger" onclick="del(\''+e.uuid+'\',\''+e.res_id+'\',\''+e.res_name+'\')"  index="'+index+'">删除</button></td></tr>';
+					+'</td><td>'+e.sort_id+'</td><td style="white-space: nowrap;"><button type="button" class="btn btn-info" onclick="update(\''+e.uuid+'\',\''+e.lvl+'\',\''+e.res_id+'\',\''+e.res_name+'\',\''+e.res_type+'\',\''+e.res_up_uuid+'\',\''+e.up_res_name+'\',\''+e.res_url+'\',\''+e.res_bg_url+'\',\''+e.res_type_name+'\',\''+e.res_class+'\',\''+e.res_color+'\',\''+e.res_icon+'\',\''+e.sort_id+'\')"  index="'+index+'">编辑</button>&nbsp;<button type="button" class="btn btn-danger" onclick="del(\''+e.uuid+'\',\''+e.res_id+'\',\''+e.res_name+'\')"  index="'+index+'">删除</button></td></tr>';
 					temp=temp.replace(/null/g, '-');
 					$('#table tbody').append(temp);
 				}
@@ -114,12 +115,12 @@ function chg_exp(th,uuid){
 					if(e.count_ >0){
 						temp='<tr class="treegrid-'+e.uuid+' treegrid-parent-'+e.res_up_uuid+'" lvl="'+e.lvl+'" index="'+index+'"><td style="white-space: nowrap;" id="'+e.res_id+'">'+str_space+'<span onclick=chg_exp(this,"'+e.uuid+'") class="treegrid-expander glyphicon glyphicon-plus"></span>'+e.res_id+'</td><td>'+e.res_name+'</td><td>'
 						+e.up_res_name+'</td><td>'+e.res_url+'</td><td>'+e.res_type_name+'</td><td>'+e.res_class+'</td><td>'+e.res_color+'</td><td>'+e.res_icon
-						+'</td><td>'+e.sort_id+'</td><td style="white-space: nowrap;"><button type="button" class="btn btn-info" onclick="update(\''+e.uuid+'\',\''+e.lvl+'\',\''+e.res_id+'\',\''+e.res_name+'\',\''+e.res_type+'\',\''+e.up_res_name+'\',\''+e.res_url+'\',\''+e.res_bg_url+'\',\''+e.res_type_name+'\',\''+e.res_class+'\',\''+e.res_color+'\',\''+e.res_icon+'\',\''+e.sort_id+'\')"  index="'+index+'">编辑</button>&nbsp;<button type="button" class="btn btn-danger" onclick="del(\''+e.uuid+'\',\''+e.res_id+'\',\''+e.res_name+'\')"  index="'+index+'">删除</button></td></tr>';
+						+'</td><td>'+e.sort_id+'</td><td style="white-space: nowrap;"><button type="button" class="btn btn-info" onclick="update(\''+e.uuid+'\',\''+e.lvl+'\',\''+e.res_id+'\',\''+e.res_name+'\',\''+e.res_type+'\',\''+e.res_up_uuid+'\',\''+e.up_res_name+'\',\''+e.res_url+'\',\''+e.res_bg_url+'\',\''+e.res_type_name+'\',\''+e.res_class+'\',\''+e.res_color+'\',\''+e.res_icon+'\',\''+e.sort_id+'\')"  index="'+index+'">编辑</button>&nbsp;<button type="button" class="btn btn-danger" onclick="del(\''+e.uuid+'\',\''+e.res_id+'\',\''+e.res_name+'\')"  index="'+index+'">删除</button></td></tr>';
 						temp=temp.replace(/null/g, '-');
 					}else{
 						temp='<tr class="treegrid-'+e.uuid+' treegrid-parent-'+e.res_up_uuid+'" lvl="'+e.lvl+'" index="'+index+'"><td style="white-space: nowrap;" id="'+e.res_id+'">'+str_space+e.res_id+'</td><td>'+e.res_name+'</td><td>'
 						+e.up_res_name+'</td><td>'+e.res_url+'</td><td>'+e.res_type_name+'</td><td>'+e.res_class+'</td><td>'+e.res_color+'</td><td>'+e.res_icon
-						+'</td><td>'+e.sort_id+'</td><td style="white-space: nowrap;"><button type="button" class="btn btn-info" onclick="update(\''+e.uuid+'\',\''+e.lvl+'\',\''+e.res_id+'\',\''+e.res_name+'\',\''+e.res_type+'\',\''+e.up_res_name+'\',\''+e.res_url+'\',\''+e.res_bg_url+'\',\''+e.res_type_name+'\',\''+e.res_class+'\',\''+e.res_color+'\',\''+e.res_icon+'\',\''+e.sort_id+'\')"  index="'+index+'">编辑</button>&nbsp;<button type="button" class="btn btn-danger" onclick="del(\''+e.uuid+'\',\''+e.res_id+'\',\''+e.res_name+'\')"  index="'+index+'">删除</button></td></tr>';
+						+'</td><td>'+e.sort_id+'</td><td style="white-space: nowrap;"><button type="button" class="btn btn-info" onclick="update(\''+e.uuid+'\',\''+e.lvl+'\',\''+e.res_id+'\',\''+e.res_name+'\',\''+e.res_type+'\',\''+e.res_up_uuid+'\',\''+e.up_res_name+'\',\''+e.res_url+'\',\''+e.res_bg_url+'\',\''+e.res_type_name+'\',\''+e.res_class+'\',\''+e.res_color+'\',\''+e.res_icon+'\',\''+e.sort_id+'\')"  index="'+index+'">编辑</button>&nbsp;<button type="button" class="btn btn-danger" onclick="del(\''+e.uuid+'\',\''+e.res_id+'\',\''+e.res_name+'\')"  index="'+index+'">删除</button></td></tr>';
 						temp=temp.replace(/null/g, '-');
 					}
 					$(th).parent().parent().after(temp);	
@@ -148,10 +149,17 @@ function chg_exp(th,uuid){
 //						console.log(uuid+"  "+str_arr[k]);
 						
 						
-						//IE不支持remove问题
-						if(navigator.appName == navigatorName){
+						
+						if(navigator.appName == navigatorName){//IE不支持remove问题
+							console.log(navigator.appName);
 							trs[i].removeNode(true);
+						}else if(navigator.appName == navigatorName_){//NetScape不支持removeNode和remove问题
+							var _parentElement = trs[i].parentNode;
+							if(_parentElement){
+				                _parentElement.removeChild(trs[i]);  
+							}
 						}else{
+							console.log(navigator.appName);
 							trs[i].remove();
 						}
 						
@@ -175,7 +183,18 @@ function chg_exp(th,uuid){
 					for(var l=0; l<uuidArr.length; l++){
 						if(uuidArr[l]==str_arrn[k] && str_arrn[k-1]=='parent'){
 							uuidArr.push((trc_vn[j-1].split('-'))[1]);
-							trsn[i].remove();
+							if(navigator.appName == navigatorName){//IE不支持remove问题
+								console.log(navigator.appName);
+								trsn[i].removeNode(true);
+							}else if(navigator.appName == navigatorName_){//NetScape不支持removeNode和remove问题
+								var _parentElement = trsn[i].parentNode;
+								if(_parentElement){
+					                _parentElement.removeChild(trsn[i]);  
+								}
+							}else{
+								console.log(navigator.appName);
+								trsn[i].remove();
+							}
 						}
 					}
 				}
@@ -222,6 +241,30 @@ $('#res_add').on('click', function() {
 	});
 });
 
+function uptClear(uuid,lvl,res_id,res_name,res_type,res_up_uuid,up_res_name,res_url,res_bg_url,res_type_name,res_class,res_color,res_icon,sort_id){
+	var pars = [];
+	pars.push(uuid);
+	pars.push(lvl);
+	pars.push(res_id);
+	pars.push(res_name);
+	pars.push(res_type);
+	pars.push(res_up_uuid);
+	pars.push(up_res_name);
+	pars.push(res_url);
+	pars.push(res_bg_url);
+	pars.push(res_type_name);
+	pars.push(res_class);
+	pars.push(res_color);
+	pars.push(res_icon);
+	pars.push(sort_id);
+	for(var i=0; i<pars.length; i++){
+		if(pars[i] == '-'){
+			pars[i] = '';
+		}
+	}
+	return pars;
+}
+
 function update(uuid,lvl,res_id,res_name,res_type,res_up_uuid,up_res_name,res_url,res_bg_url,res_type_name,res_class,res_color,res_icon,sort_id){
 	$('input').placeholder();
 	$('#res_id').attr('readonly', 'readonly');
@@ -230,24 +273,24 @@ function update(uuid,lvl,res_id,res_name,res_type,res_up_uuid,up_res_name,res_ur
 //	for(var key in info){
 //		$('#'+key).val(info[key]);
 //	}
-	
-	
+//	console.log(uptClear(uuid,lvl,res_id,res_name,res_type,res_up_uuid,up_res_name,res_url,res_bg_url,res_type_name,res_class,res_color,res_icon,sort_id));
+	var pars = uptClear(uuid,lvl,res_id,res_name,res_type,res_up_uuid,up_res_name,res_url,res_bg_url,res_type_name,res_class,res_color,res_icon,sort_id);
 //	console.log(uuid);
 	
-	$('#uuid').val(uuid);
-	$('#lvl').val(lvl);
-	$('#res_id').val(res_id);
-	$('#res_name').val(res_name);
-	$('#res_up_uuid').val(res_up_uuid);
-	$('#up_res_name').val(up_res_name);
-	$('#res_type').val(res_type);
-	$('#res_url').val(res_url);
-	$('#res_bg_url').val(res_bg_url);
-	$('#res_type_name').val(res_type_name);
-	$('#res_class').val(res_class);
-	$('#res_color').val(res_color);
-	$('#res_icon').val(res_icon);
-	$('#sort_id').val(sort_id);
+	$('#uuid').val(pars[0]);
+	$('#lvl').val(pars[1]);
+	$('#res_id').val(pars[2]);
+	$('#res_name').val(pars[3]);
+	$('#res_type').val(pars[4]);
+	$('#res_up_uuid').val(pars[5]);
+	$('#up_res_name').val(pars[6]);	
+	$('#res_url').val(pars[7]);
+	$('#res_bg_url').val(pars[8]);
+	$('#res_type_name').val(pars[9]);
+	$('#res_class').val(pars[10]);
+	$('#res_color').val(pars[11]);
+	$('#res_icon').val(pars[12]);
+	$('#sort_id').val(pars[13]);
 	
 	layer.open({
 		type : 1,
