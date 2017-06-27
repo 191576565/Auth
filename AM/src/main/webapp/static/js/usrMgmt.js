@@ -216,7 +216,7 @@ function edit(index) {
 		type: 1,
 		content: $('#sys_add_div'),
 		title: ['用户信息','color:rgb(99,102,104)'],
-		area: ['960px', '540px'],
+		area: ['500px', '500px'],
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
 			if (!validate()) {
