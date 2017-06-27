@@ -15,6 +15,11 @@ var s = {
 		onDblClick: zTreeOnDblClickSimple
 	}
 };
+
+//解决IE浏览器remove()不能使用的问题
+var navigatorName = "Microsoft Internet Explorer"; 
+
+
 function zTreeOnDblClickSimple(event, treeId, treeNode) {
 	$('#res_up_uuid').val(treeNode.id);
 	$('#up_res_name').val(treeNode.name);
@@ -141,7 +146,16 @@ function chg_exp(th,uuid){
 //						console.log("----------------"+(trc_v[j-1].split('-'))[1]);
 						uuidArr.push((trc_v[j-1].split('-'))[1]);//把将要移除的该行的uuid存入数组,用作后续判断剩下的行中是否有元素以该元素作为父元素,若有,则一并移除
 //						console.log(uuid+"  "+str_arr[k]);
-						trs[i].remove();//移除
+						
+						
+						//IE不支持remove问题
+						if(navigator.appName == navigatorName){
+							trs[i].removeNode(true);
+						}else{
+							trs[i].remove();
+						}
+						
+//						trs[i].remove();//移除
 					}
 				}
 			}
