@@ -392,7 +392,37 @@ function validate(){
 			flag = false;
 		}
 	});
+	//引号验证
+	if(!commaValidate()){
+		layer.msg("输入框中不能带有引号(\"or\')");
+		flag = false;
+	}
 	return flag;
+}
+
+//输入框中带有引号("or')的校验
+function commaValidate(){
+	var values = [];
+	values.push($('#res_name').val());
+	values.push($('#res_url').val());
+	values.push($('#res_bg_url').val());
+	values.push($('#res_color').val());
+	values.push($('#res_icon').val());
+	values.push($('#res_class').val());
+	values.push($('#sort_id').val());
+//	console.log(values);
+	for(var i=0; i<values.length; i++){
+		var value = values[i];
+//		console.log(value);
+		var charInValues = value.split('');
+//		console.log(charInValues);
+		for(j=0; j<charInValues.length; j++){
+			if(charInValues[j]=='\"' || charInValues[j]=='\''){
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 
