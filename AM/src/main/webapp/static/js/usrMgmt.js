@@ -116,7 +116,7 @@ $("#role").load(
 	        selectAllText:'全选/取消全选',
 	        allSelectedText:'已选中所有角色',
 			nonSelectedText: '请选择角色',
-			buttonWidth: '170px',
+			buttonWidth: '913px',
 			enableCaseInsensitiveFiltering: true
 		});
 	}
@@ -166,7 +166,7 @@ $('#btn_add').on('click', function() {
 		type: 1,
 		content: $('#sys_add_div'),
 		title: ['用户信息','color:rgb(99,102,104)'],
-		area: ['500px', '500px'],
+		area: ['960px', '540px'],
 		btn: ['确定', '取消'],
 		yes: function(index, layero){
 			if (!validate()) {

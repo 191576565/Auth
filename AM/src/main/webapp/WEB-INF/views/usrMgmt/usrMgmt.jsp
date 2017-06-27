@@ -71,7 +71,6 @@
  		<table id="table"></table>
  		
  		<div class="wrapper" id="sys_add_div" style="display:none;width:100%;margin:0px;"><br />
- 		<div class="col-sm-12"> 
  			<form ng-app="myApp"
  				ng-controller="validateCtrl"
  				id="form" 
@@ -79,17 +78,15 @@
  				action="" 
  				method="post" 
  				novalidate>
- 				<div class="col-sm-12">
- 				<div class="form-group col-sm-6">
+ 				<div class="form-group">
 					<label>所属域</label>
-					<select class="form-control col-sm-6" name="domain" id="domain"></select>
+					<select class="form-control" name="domain" id="domain"></select>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group">
 					<label>所属机构</label>
 					<select class="form-control" nullName="所属机构" name="organization" id="organization"></select>
 				</div>
-				
- 				<div class="form-group col-sm-6">
+ 				<div class="form-group">
  					<input id="uuid" 
  						name="uuid" 
  						type="hidden" 
@@ -116,7 +113,7 @@
 					只能是字母/数字组合</p>
 					<p id="chkUserError" class="error"></p>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group">
 					<label>用户名称</label> 
 					<input name="usrName" 
 						   type="text" 
@@ -135,14 +132,14 @@
 						myForm.usrName.$touched">
 				 	长度应在1~30位之间</p>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group">
 					<input name="usrName" style="display:none"/>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group">
 					<label>角色</label>
 					<select class="form-control" nullName="角色" name="role" id="role" multiple></select>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group">
 					<label>手机号</label> 
 					<input name="phone" 
 						   type="text" 
@@ -156,7 +153,7 @@
 						myForm.phone.$touched">
 					手机号填写错误</p>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group">
 					<label>邮箱</label> 
 					<input name="email" 
 						   type="text" 
@@ -170,9 +167,7 @@
 						myForm.email.$touched">
 					邮箱填写错误</p>
 				</div>
-				</div>
  			</form>
- 			</div>
  		</div>
 
 	<!-- 全局js -->
@@ -189,7 +184,7 @@
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctxPath }/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-    <script src="${ctxPath }/static/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="${ctxPath }/static/js/bootstrap-multiselect.js"></script>
     
     <!-- layer javascript -->
     <script src="${ctxPath }/static/js/plugins/layer/layer.min.js"></script>
