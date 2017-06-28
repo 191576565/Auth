@@ -64,27 +64,29 @@ select {
 		</div>
 	</div>
 	<br>
-	<table id="table"
-		class="table table-striped table-bordered table-hover">
-		<thead>
-			<tr>
-				<!-- <td style='width:40px;'></td> -->
-				<th>资源编码</th>
-				<th>资源名称</th>
-				<th>上级资源</th>
-				<th>资源URL</th>
-				<th>资源类型</th>
-				<th>资源样式</th>
-				<th>资源背景色</th>
-				<th>资源图标</th>
-				<th>资源排序</th>
-				<th width="130px">操作</th>
-			</tr>
-		</thead>
-		<tbody>
-
-		</tbody>
-	</table>
+	<div style="overflow:auto">
+		<table id="table"
+			class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<!-- <td style='width:40px;'></td> -->
+					<th>资源编码</th>
+					<th>资源名称</th>
+					<th>上级资源</th>
+					<th>资源URL</th>
+					<th>资源类型</th>
+					<th>资源样式</th>
+					<th>资源背景色</th>
+					<th>资源图标</th>
+					<th>资源排序</th>
+					<th width="130px">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+	
+			</tbody>
+		</table>
+	</div>
 	<div class="t" style="display: none;">
 		<ul id="res" class="ztree"></ul>
 	</div>
