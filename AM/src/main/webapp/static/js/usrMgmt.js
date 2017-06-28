@@ -268,17 +268,17 @@ function del(index) {
 };
 
 //用户唯一校验
-$("#scopeCode").blur(function(){
-	$.ajax({
-		type:"post",
-		url:"usrMgmt/chkUserId",
-		data: {"scopeCode":$("#scopeCode").val()},
-		success: function(data) {
-			chkUserStr = data.chkUserId?'':'该用户已存在';
-			 $("#chkUserError").html(chkUserStr);
-        }
-	})
-});
+//$("#scopeCode").blur(function(){
+//	$.ajax({
+//		type:"post",
+//		url:"usrMgmt/chkUserId",
+//		data: {"scopeCode":$("#scopeCode").val()},
+//		success: function(data) {
+//			chkUserStr = data.chkUserId?'':'该用户已存在';
+//			 $("#chkUserError").html(chkUserStr);
+//        }
+//	})
+//});
 
 //批量删除
 $('#btn_del').click(function(){
