@@ -81,6 +81,12 @@ public class ApiJsonService extends BaseService{
 		}
 		return updates;
 	}
-	
-	
+	/**
+	 * @ftp 请求数据
+	 * */
+	public static List<Record> getOrginfo(String username){
+		String sql = ToolGetSql.getSql("model.user.ftpSelect");
+		List<Record> orglist = Db.find(sql, username);
+		return orglist;
+	}
 }

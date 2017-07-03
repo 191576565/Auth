@@ -120,6 +120,34 @@ public class ApiJsonController extends Controller {
 		userinfo.put("data", data);
 		renderJson(userinfo);
 	}
-
-	
+	@Clear(GlobalInterceptor.class)
+	public void ftpRequest(){
+		String username = getPara("userid");
+		String usersession = getPara("sid");
+		//String flag = getPara("login");
+		String type = getPara("apitype");
+		List<Record> user = ApiJsonService.getSelectlist(username, usersession, type);
+		if (user == null) {
+			log.info("ftp api请求菜单数据异常，请检查接入格式或用户Session状态！");
+			renderJson("failed", "api请求数据异常，请检查接入格式或用户Session状态！");
+			return;
+		}
+		List<Record> orginfo = ApiJsonService.getOrginfo(username);
+		if (orginfo==null){
+			log.info("ftp api请求机构数据异常，请检查接入格式或用户Session状态！");
+			renderJson("failed", "api请求数据异常，请检查接入格式或用户Session状态！");
+			return;
+		}
+		String code = "200";
+		String msg = username + "用户数据请求成功！";
+		Map<String, Object> ftpdata = new HashMap<String, Object>();
+		ftpdata.put("code", code);
+		ftpdata.put("msg", msg);
+		ftpdata.put("data", user);
+		ftpdata.put("org", orginfo);
+		renderJson(ftpdata);
+//		} else {
+//			
+//		}
+	}
 }

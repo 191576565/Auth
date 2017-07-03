@@ -207,7 +207,17 @@ GROUP BY  t2.UUID,T2.DOMAIN_ID,T2.DOMAIN_NAME ,T3.UUID ,T3.ORG_UNIT_ID,T3.ORG_UN
 		    update ${table} set  loggin_status=? , user_sid = ? where ${column} = ? 
     	]]>
 	</sql>
-	
+	<sql id="ftpSelect">
+		<![CDATA[ 
+        	with  user_org as  (  
+select   t.org_uuid,t.user_id    from sys_user_info t  
+where user_id =?
+)
+select oi.uuid,oi.org_unit_id,oi.org_unit_desc,oi.org_up_uuid from sys_org_info  oi 
+left join user_org    uo  on oi.uuid=uo.org_uuid
+start with oi.uuid =uo.org_uuid    connect by prior oi.uuid =oi.org_up_uuid
+    	]]>
+	</sql>
 	<!-- 查询用户，自定义字段和值 -->
 	<sql id="column">
 		<![CDATA[ 
