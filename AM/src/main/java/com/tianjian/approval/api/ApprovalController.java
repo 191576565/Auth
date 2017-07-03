@@ -1,5 +1,6 @@
 package com.tianjian.approval.api;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,7 @@ public class ApprovalController extends Controller{
 	 * activiti/ssoLogin
 	 * 返回用户信息
 	 */
-	public void ssoLogin() {
+	public void ssoLogin() throws UnsupportedEncodingException {
 		GlobalInterceptor.addExcludedActionKey("activiti/ssoLogin");
 //		System.err.println("---------"+getSession().getId()+"------");
 		
@@ -73,8 +74,8 @@ public class ApprovalController extends Controller{
 		}else{
 			List<Record> list = approvalService.getOrg(rd.get("user_id"));
 			Record rd1 = list.get(0);
-//			System.err.println("------------department is:"+rd.get("org_unit_id"));
-			String userName = URLEncoder.encode(rd.getStr("user_name"));
+//			System.err.println("------------user_name is:"+rd.getStr("user_name"));
+			String userName = URLEncoder.encode(rd.getStr("user_name"),"utf-8");
 			
 			redirect(callback+"?userId="+rd.get("user_id")+"&userName="+userName+"&groupsId="+
 		rd.getStr("role_ids")+"&department="+rd.get("org_unit_id"));
