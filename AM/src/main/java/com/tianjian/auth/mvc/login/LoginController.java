@@ -135,6 +135,7 @@ public class LoginController extends Controller {
 			UserService.login(username, sessionId, "0");
 			if(!"".equals(callback) && null!=callback){
 				renderJson("{\"code\":\"9\"},\"message\":"+callback);
+				return;
 			}
 			renderJson("{\"code\":\"1\",\"message\":\"登陆成功\"}");
 		}else{

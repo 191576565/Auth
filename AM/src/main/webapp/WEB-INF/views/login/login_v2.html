@@ -72,6 +72,40 @@ if (window.top !== window.self) {
 					}
 				}
 			});
+			
+			/*
+				fr单点登录,第二次修改
+				yeqc 17/06/13   17/07/24				
+			*/
+			var ip_addr = document.location.hostname;
+			var username = "";        
+			var password = "";
+			$.getJSON("getloginUser",function(u){
+				/* console.log(u[0]); */
+				username = u[0];
+				password = u[1];
+				/* console.log(username+"---"+password); */
+				// window.open("http://localhost:8080/WebReport/ReportServer?op=fs_load&cmd=login&__redirect__=true&fr_username="+username+"&fr_password="+password);
+				jQuery.ajax({    
+					   url:"http://"+ip_addr+":8080/WebReport/ReportServer?op=fs_load&cmd=sso",   
+					   dataType:"jsonp",//跨域采用jsonp方式    
+					   data:{"fr_username":username,"fr_password":password},    
+					   jsonp:"callback",    
+					   timeout:5000,//超时时间（单位：毫秒）    
+					   success:function(data) {    
+					          if (data.status === "success") {    
+
+					          	console.log("fr单点登录成功");
+					          }     
+					          else if (data.status === "fail"){    
+					          	alert("fr单点登录登录失败,用户名或密码错误");//登录失败（用户名或密码错误）    
+					          }    
+					   },    
+					   error:function(){    
+					        alert("报表服务器内部错误");    
+					   }    
+				});
+			});
 		};
 		jQuery(document).ready(function() {
 		$("input").placeholder(); 
