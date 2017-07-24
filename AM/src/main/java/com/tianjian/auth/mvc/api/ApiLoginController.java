@@ -11,6 +11,8 @@ import com.jfinal.plugin.activerecord.Record;
 import com.tianjian.auth.mvc.handler.GlobalInterceptor;
 import com.tianjian.auth.mvc.login.LoginService;
 import com.tianjian.auth.mvc.model.User;
+import com.tianjian.platform.tools.ToolHttpClient;
+
 
 /**
  *rpm app 登录api
@@ -57,6 +59,18 @@ public class ApiLoginController extends Controller {
 				data = user;
 			}
 			// step 4: format message
+			//207.7.24 增加app报表登录
+			String url="http://localhost:8080/WebReport/ReportServer?op=fs_load&cmd=sso&fr_username="
+					+ username
+					+"&fr_password="
+					+password;
+			String rep=ToolHttpClient.SendHttpPost(url, null, null);
+			if ( rep.contains("success")){
+				msg+=" 报表登录成功";
+			}else{
+				msg+=" 报表登录失败";
+			}
+			//
 			userinfo.put("sid", sid);
 			userinfo.put("code", code);
 			userinfo.put("msg", msg);
