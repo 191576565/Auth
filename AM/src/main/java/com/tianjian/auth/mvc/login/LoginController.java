@@ -48,17 +48,18 @@ public class LoginController extends Controller {
 	public void getloginUser(){
 		List<String> list = new ArrayList<String>();
 		list.add(0, g_userName);
+		list.add(1, g_passWord);
 		/*
 		 * 判断是否是FR内置系统管理员,是则加入明文,否则加入密文
 		 */
-		String domain = loginservice.domainOfUser(g_userName);
-		if("root".equals(domain)){
-			list.add(1, g_passWord);
-		}else{
-			String md5Pwd = BaseSecurityMD5.encodeMD5Hex(g_passWord);
-			list.add(1, md5Pwd);
-		}
-		renderJson(list);
+//		String domain = loginservice.domainOfUser(g_userName);
+//		if("root".equals(domain)){
+//			list.add(1, g_passWord);
+//		}else{
+//			String md5Pwd = BaseSecurityMD5.encodeMD5Hex(g_passWord);
+//			list.add(1, md5Pwd);
+//		}
+//		renderJson(list);
 	}
 	
 	public void init_login() {
