@@ -59,7 +59,7 @@ public class LoginController extends Controller {
 //			String md5Pwd = BaseSecurityMD5.encodeMD5Hex(g_passWord);
 //			list.add(1, md5Pwd);
 //		}
-//		renderJson(list);
+		renderJson(list);
 	}
 	
 	public void init_login() {
