@@ -77,8 +77,13 @@ public class LoginController extends Controller {
 		String sessionId = (String) getRequest().getSession().getAttribute("usersessionid");
 		Object userinfo = getSessionAttr("userinfo");
 		String userName=((Record) userinfo).getStr("user_id");
+		//针对CA增加org_unit_id
+		String domainid=((Record) userinfo).getStr("domain_id");
+		String orgunitid=((Record) userinfo).getStr("org_unit_id");
 		setAttr("userid", userName);
 		setAttr("sid", sessionId);
+		setAttr("domainid", domainid);
+		setAttr("orgunitid", orgunitid);
 		render("login_after.jsp");
 	}
 	 /** 

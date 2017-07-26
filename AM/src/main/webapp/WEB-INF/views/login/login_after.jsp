@@ -261,7 +261,7 @@ color:#f59b60;
 									+arr[0]+'"></a></div></div>');
 				}else{ 
 					$('#1 #2 #3 #4').append('<div class="post-masonry col-md-4 col-sm-6"><div class="post-thumb"><a id="'+arr[0]+'" href="'
-							+e.res_url+'?userid=${userid }&sid=${sid }"><img id="st'+i+'" class="effect" src="'
+							+e.res_url+'?userid=${userid }&sid=${sid }&domainid=${domainid }&orgunitid=${orgunitid }"><img id="st'+i+'" class="effect" src="'
 									+arr[0]+'"></a></div></div>');
 				}
 				
