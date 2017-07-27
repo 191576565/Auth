@@ -113,7 +113,7 @@ public class ApiJsonService extends BaseService{
 		}
 		
 		//重新组合并返回
-		common.put("resItems", user);
+		common.put("rest_items", user);
 		return common;
 	}
 	
