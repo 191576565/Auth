@@ -56,7 +56,7 @@ public class ApiJsonController extends Controller {
 			// 获取json返回对象
 			// Record user1 =
 			// ApiJsonService.getSelect(username,usersession,type);
-			List<Record> user = ApiJsonService.getSelectlist(username, usersession, type);
+			Map<String,Object> user = ApiJsonService.getSelectlist(username, usersession, type);//yeqc 17/07/27  返回嵌套格式的json,减少数据冗余
 			if (user == null) {
 				log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
 				renderJson("failed", "api请求数据异常，请检查接入格式或用户Session状态！");
@@ -97,7 +97,7 @@ public class ApiJsonController extends Controller {
 			// 获取json返回对象
 			// Record user1 =
 			// ApiJsonService.getSelect(username,usersession,type);
-			List<Record> user = ApiJsonService.getSelectlist(username, usersession, type);
+			Map<String,Object> user = ApiJsonService.getSelectlist(username, usersession, type);
 			if (user == null || user.size() == 0) {
 				log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
 				
@@ -126,7 +126,7 @@ public class ApiJsonController extends Controller {
 		String usersession = getPara("sid");
 		//String flag = getPara("login");
 		String type = getPara("apitype");
-		List<Record> user = ApiJsonService.getSelectlist(username, usersession, type);
+		Map<String,Object> user = ApiJsonService.getSelectlist(username, usersession, type);//yeqc 17/07/27  返回嵌套格式的json,减少数据冗余
 		if (user == null) {
 			log.info("ftp api请求菜单数据异常，请检查接入格式或用户Session状态！");
 			renderJson("failed", "api请求数据异常，请检查接入格式或用户Session状态！");
