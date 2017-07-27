@@ -97,17 +97,29 @@ public class ApiJsonController extends Controller {
 			// 获取json返回对象
 			// Record user1 =
 			// ApiJsonService.getSelect(username,usersession,type);
-			Map<String,Object> user = ApiJsonService.getSelectlist(username, usersession, type);
-			if (user == null || user.size() == 0) {
-				log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
-				
-				code = "200";
-				msg =username+ "-数据权限组无该用户或该用户登录状态已改变";
-				//modify 2017.4.26 hujian
-				//msg = "用户在其他终端登录,该终端已下线,请确保您的密码是否已泄露。";
-			} else {
-				data = user;
+			try {
+				Map<String,Object> user = ApiJsonService.getSelectlist(username, usersession, type);
+				if (user == null || user.size() == 0) {
+					log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
+					
+					code = "200";
+					msg =username+ "-数据权限组无该用户或该用户登录状态已改变";
+					//modify 2017.4.26 hujian
+					//msg = "用户在其他终端登录,该终端已下线,请确保您的密码是否已泄露。";
+				} else {
+					data = user;
+				}
+			} catch (Exception e) {
+				code = "400";
+				data = null;
+				msg = "sid验证失败";
+				userinfo.put("code", code);
+				userinfo.put("msg", msg);
+				userinfo.put("data", data);
+				renderJson(userinfo);
 			}
+			
+			
 		} else {
 			int ulogin = ApiJsonService.ulogin(username);
 			log.info("api请求" + ulogin + "个用户退出成功，用户[" + username + "],[" + usersession + "]！");
