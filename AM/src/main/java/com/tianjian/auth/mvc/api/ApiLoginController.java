@@ -35,6 +35,8 @@ public class ApiLoginController extends Controller {
 	public void appValidLogin() {
 		String username = getPara("username");
 		String password = getPara("password");
+		//同一浏览器已登录
+		
 		// 用户登录认证
 		int b = loginservice.validUser(username, password);
 		if (b == 3) {
