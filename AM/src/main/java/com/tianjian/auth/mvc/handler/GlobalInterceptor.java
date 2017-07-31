@@ -55,7 +55,7 @@ public class GlobalInterceptor implements Interceptor {
 			} else {
 				inv.invoke();
 			}
-		} else {
+		} else if (sessionflag == 1) {
 			if ((inv.getActionKey().equals("/")) || inv.getMethod().getName().equals("init_login")) {
 				if (inv.getController().getSession().isNew()) {
 
@@ -66,8 +66,10 @@ public class GlobalInterceptor implements Interceptor {
 				}
 			}
 			inv.invoke();
+		}else if (sessionflag == 3) {
+			inv.getController().redirect("/relogin");
+			return;
 		}
-
 	}
 
 	public static void addExcludedActionKey(String ApiJsonController) {

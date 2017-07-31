@@ -41,14 +41,23 @@ public class LoginController extends Controller {
 
 	public void index() {
 		log.info("welcome to login");
-		// hujian modify
+		// hujian m
 		getResponse().setHeader("Cache-Control", "no-cache");
 		getResponse().setHeader("Pragma", "no-cache");
 		getResponse().setDateHeader("Expires", 0);
 
 		render("login_v2.html");
 	}
-
+	@Clear(GlobalInterceptor.class)
+	public void relogin() {
+		//session 销毁
+		getSession().invalidate();
+		//
+		getResponse().setHeader("Cache-Control", "no-cache");
+		getResponse().setHeader("Pragma", "no-cache");
+		getResponse().setDateHeader("Expires", 0);
+		render("login_v2.html");
+	}
 	public void getloginUser() {
 		List<String> list = new ArrayList<String>();
 		list.add(0, g_userName);

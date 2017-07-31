@@ -108,6 +108,12 @@ public class BaseSessionController extends Controller{
 		        	//usersessionid为空，用户登录，不拦截 ,Api Json 数据不拦截
 		        	return 0;
 		        }
+		        //如果是只允许一个账号在线  备用
+//		        System.out.println("dbsid:"+UserService.login_sid(username));
+//		        System.out.println("sid:"+sessionid);
+//		        if (!(UserService.login_sid(username).equals(sessionid))){
+//		        	return 3;
+//		        }
 		        if(sessionid.equals(usersessionid)){
 		        		 if(UserService.login_status(username)){
 		  		        	session.setAttribute("usersessionid", null);

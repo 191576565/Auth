@@ -102,5 +102,13 @@ public class UserService   {
 		}
 		return true;
 	}
-	
+	/**
+	 * @exception 全局监听器检查用户是登录
+	 * @author      谢 涛
+	 * */
+	public static String  login_sid(String username){
+		User user=User.dao.findFirst("select user_sid from sys_user_info where user_id = ? ",username) ;		
+		String sid=user.get("user_sid");
+		return sid;
+	}
 }
