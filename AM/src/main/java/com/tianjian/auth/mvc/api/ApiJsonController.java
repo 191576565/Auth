@@ -125,7 +125,7 @@ public class ApiJsonController extends Controller {
 			code = "101";
 			msg = "api请求" + ulogin + "个用户退出成功，用户[" + username + "],[" + usersession + "]！";
 			redirect("/ulogin/userexit");
-			return;
+			//return;
 		}
 		userinfo.put("code", code);
 		userinfo.put("msg", msg);
