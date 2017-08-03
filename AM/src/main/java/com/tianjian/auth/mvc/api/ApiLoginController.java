@@ -96,7 +96,9 @@ public class ApiLoginController extends Controller {
 	 */
 	@Clear(GlobalInterceptor.class)
 	public void appLogout() {
-		String sid = getSession().getId();
+		//String sid = getSession().getId();
+		String sid = "1111111111111";
+
 		String username = getPara("username");
 		Map<String, Object> userinfo = new HashMap<String, Object>();
 		String code = "200";

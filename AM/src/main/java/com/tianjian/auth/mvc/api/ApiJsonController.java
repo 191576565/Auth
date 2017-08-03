@@ -16,6 +16,7 @@ import com.tianjian.auth.mvc.base.BaseSessionController;
 import com.tianjian.auth.mvc.handler.GlobalInterceptor;
 import com.tianjian.auth.mvc.login.LoginService;
 import com.tianjian.auth.mvc.model.User;
+import com.tianjian.auth.mvc.model.UserService;
 
 /**
  * @Function Api 交互控制器
@@ -57,6 +58,7 @@ public class ApiJsonController extends Controller {
 			// Record user1 =
 			// ApiJsonService.getSelect(username,usersession,type);
 			Map<String,Object> user = ApiJsonService.getSelectlist(username, usersession, type);//yeqc 17/07/27  返回嵌套格式的json,减少数据冗余
+			
 			if (user == null) {
 				log.info("rpm api请求数据异常，请检查接入格式或用户Session状态！");
 				renderJson("failed", "api请求数据异常，请检查接入格式或用户Session状态！");
@@ -120,11 +122,17 @@ public class ApiJsonController extends Controller {
 			}			
 			
 		} else {
+			//the two just add for once
+			//String sessionId=getRequest().getSession().getId();
+			//int ulogin=UserService.ulogin(username, sessionId, "1");
+			//
 			int ulogin = ApiJsonService.ulogin(username);
+			
 			log.info("api请求" + ulogin + "个用户退出成功，用户[" + username + "],[" + usersession + "]！");
 			code = "101";
 			msg = "api请求" + ulogin + "个用户退出成功，用户[" + username + "],[" + usersession + "]！";
-			redirect("/ulogin/userexit");
+			System.out.println("redirect");
+			//redirect("/ulogin/userexit");
 			//return;
 		}
 		userinfo.put("code", code);

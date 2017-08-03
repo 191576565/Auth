@@ -100,6 +100,7 @@ public class LoginController extends Controller {
 		// 针对CA增加org_unit_id
 		String domainid = ((Record) userinfo).getStr("domain_id");
 		String orgunitid = ((Record) userinfo).getStr("org_unit_id");
+	
 		setAttr("userid", userName);
 		setAttr("sid", sessionId);
 		setAttr("domainid", domainid);
