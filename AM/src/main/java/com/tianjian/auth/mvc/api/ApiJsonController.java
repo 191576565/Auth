@@ -123,10 +123,10 @@ public class ApiJsonController extends Controller {
 			
 		} else {
 			//the two just add for once
-			//String sessionId=getRequest().getSession().getId();
-			//int ulogin=UserService.ulogin(username, sessionId, "1");
+			String sessionId="111111";//getRequest().getSession().getId();
+			int ulogin=UserService.ulogin(username, sessionId, "1");
 			//
-			int ulogin = ApiJsonService.ulogin(username);
+			//int ulogin = ApiJsonService.ulogin(username);
 			
 			log.info("api请求" + ulogin + "个用户退出成功，用户[" + username + "],[" + usersession + "]！");
 			code = "101";
