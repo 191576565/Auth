@@ -42,7 +42,7 @@ public class ApiLoginController extends Controller {
 		if (b == 3) {
 			// app用户Session
 			// setp 1: get session sid
-			String sid = getSession().getId();
+			String sid = username+getSession().getId();
 			// setp 2: update db userinfo applogin
 			apiservice.appLogin(User.model_user_applogin, username, sid, "0");
 			// step 3: get userinfo
