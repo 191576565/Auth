@@ -48,7 +48,7 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div id="wrapper">
         <!--左侧导航开始-->
-        <nav class="navbar-default navbar-static-side" role="navigation" style="background-color:rgb(48,57,72);">
+        <nav class="navbar-default navbar-static-side" role="navigation" style="background-color:rgb(47,56,71);">
             <div class="nav-close"><i class="fa fa-times-circle"></i>
             </div>
             <div class="sidebar-collapse" id="1">

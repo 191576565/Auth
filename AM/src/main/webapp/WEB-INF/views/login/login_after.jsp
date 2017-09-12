@@ -29,7 +29,7 @@
 <style type="text/css">
 .site-top1{
 	height:110px;
-	background-color: #2e374a;
+	background-color: #2d3645;
 	border-bottom: 1px solid #3a4d5e;
 	box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.1);
 }
@@ -66,14 +66,18 @@ color:#f59b60;
 	<div class="content-bg"></div>
 	<div class="bg-overlay"></div>
 
-	<!-- SITE TOP -->
+	<!-- SITE TOP   -->
 	<div class="site-top site-top1">
 		<div class="site-header clearfix">
 			<div class="container">
 				<div class="row row-1">
-					<div class="col-sm-10 col-sm-10-1">
-						<a href="#" class="site-brand pull-left"><img alt="" src="${ctxPath }/static/img/tianjian.png"></a>
+					<div class="col-sm-20 col-sm-10-2" >
+				    <!--	 	<span  style="font-size:25px ;color: #fcfcfc ;font-weight:bold ;">商业银行管理会计应用服务管理平台</span>
+					   -->
+					<a href="#" class="site-brand pull-left"><img alt="" src="${ctxPath }/static/img/tianjian.png"></a> 		
+                  
 					</div>
+					
 					<div class="col-sm-4 pull-right pull-right-1" style="width:400px">
 						<a class="" style="color: #7ea4c6;text-shadow: 1px 2px 3px rgba(1,11,20,0.9);">
 							<i class="fa fa-user fa-pa">&nbsp; <%=((Record) session.getAttribute("userinfo")).getStr("user_name")%>

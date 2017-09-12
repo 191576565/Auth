@@ -1,7 +1,8 @@
 html{height: 100%;}
 body.signin {
     height: auto;
-    background:url("../img/Auth_02.png");
+   /* background:url("../img/Auth_02.png");*/
+    background-color:#2d3645; 
 }
 
 .signinpanel {
@@ -76,7 +77,8 @@ background-color: #FFFFFF;
 	border: 1px solid #8199ad;
 }
 .signinpanel form {
-    background: url("../img/Auth_02.png");
+     /*   background: url("../img/Auth_02.png");*/
+    background-color:#2d3645;    
     border: 1px solid #485a69;
      box-shadow: 0px 0px 16px 2px rgba(1,11,20,0.3);
     -moz-box-shadow: 0px 0px 16px 2px rgba(1,11,20,0.3);
@@ -89,7 +91,8 @@ background-color: #FFFFFF;
 
 .signup-footer{border-top: solid 1px #49647c;padding-top:50px;}
 .copyright{
-	color: #49647c;
+	/*color: #49647c;*/
+	color:#D0D0D0;
 	font-family: "微软雅黑";
 	font-size: 12px;
 	font-weight: lighter;
