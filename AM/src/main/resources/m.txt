@@ -1,1 +1,2 @@
 oracle.jdbcUrl = jdbc:oracle:thin:@120.77.85.12:1521:orcl
+oracle.jdbcUrl = jdbc:oracle:thin:@172.168.171.250:1521:appdev
